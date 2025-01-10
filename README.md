@@ -1,5 +1,7 @@
 # 👋 Hi, I'm Ian Pascoe
 
+![Profile Pic|200x200](./pfp.jpeg)
+
 Principal Software Engineer at RTX and founder of Spirit-Led Software LLC. I'm passionate about building scalable applications and leveraging cutting-edge technologies to solve complex business challenges.
 
 ## 🚀 About Me

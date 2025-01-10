@@ -1,7 +1,8 @@
 # 👋 Hi there, I'm Ian Pascoe
 
-<div style="display: flex; align-items: center; gap: 20px;">
-  <img src="./pfp.jpeg" alt="Profile Pic" height="250" style="border-radius: 25%;">
+<div align="center">
+  <img src="./pfp.jpeg" alt="Profile Pic" height="250" />
+  <br/><br/>
   <p>Principal Software Engineer at RTX and founder of Spirit-Led Software LLC. I'm passionate about building scalable applications and leveraging cutting-edge technologies to solve complex business challenges.</p>
 </div>
 

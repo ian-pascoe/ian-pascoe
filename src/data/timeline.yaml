@@ -1,0 +1,165 @@
+# Ian Pascoe's career, drawn as a transit map.
+#
+# PLACEHOLDER: everything below comes from resume.md and will be replaced by
+# Ian's own timeline. Achievement names are drafts; edit them freely.
+#
+# Dates are "YYYY", "YYYY-MM", or "YYYY-MM-DD". Spans end with `end: present`
+# while they are ongoing. The build validates this file and fails with a clear
+# message if something is missing or misspelled.
+#
+# entries:
+#   - kind: span            a role, company, or degree; drawn as a colored line
+#     id, title, org, start, end, color, code, summary
+#     startLabel            verb for the line's first station, e.g. "Founded" (default "Joined")
+#     link                  optional { href, label }
+#     achievements:         stations along the line (YAML order = map order)
+#       - name              playful achievement name
+#         station           short plain label shown on the map (defaults to name)
+#         detail            the plain fact, one or two sentences
+#         metric            optional headline figure, e.g. "75%"
+#         metricLabel       what the figure measures, e.g. "shorter test runs"
+#         date              optional; undated stations sit within their line
+#         skills            optional list of skill tags
+#         featured          optional; featured stops appear on the first screen
+#         link              optional { href, label }
+#   - kind: event           a single dated moment: certification, launch, degree
+#     id, title, date, org, detail, tag, skills, featured, link
+#     on                    optional span id to place the event on that line;
+#                           without it, the event becomes the station where the
+#                           next line to start departs from
+
+profile:
+  name: Ian Pascoe
+  headline: Platform engineer & tech lead building AI-agent developer tools
+  location: Jacksonville, FL
+  email: hi@ianpascoe.dev
+  links:
+    github: https://github.com/ian-pascoe
+    linkedin: https://www.linkedin.com/in/ian-pascoe
+
+entries:
+  - kind: event
+    id: uri
+    tag: education
+    title: B.A. Computer Science
+    org: University of Rhode Island
+    date: 2019
+    detail: Bachelor of Arts in Computer Science with a minor in Mathematics.
+
+  - kind: span
+    id: rtx
+    code: R
+    color: red
+    title: Principal Software Engineer
+    org: RTX
+    start: 2019-06
+    end: present
+    summary: >-
+      Develops and maintains software with a focus on scalability, security,
+      and performance; runs code reviews and provides technical expertise to
+      the teams that use the group's products.
+    achievements:
+      - name: Suite Speedrun
+        station: Test time −75%
+        metric: 75%
+        metricLabel: shorter test runs
+        detail: Built a custom test automation solution on Cucumber that cut test duration by 75%.
+        skills: [Cucumber, CI/CD]
+        featured: true
+      - name: Hands-Free Deploys
+        station: Deploys −60%
+        metric: 60%
+        metricLabel: faster deployments
+        detail: >-
+          Implemented CI/CD pipelines that automate 100% of the build and
+          deployment process, cutting deployment time by 60% with zero manual
+          errors in the build.
+        skills: [CI/CD, DevSecOps]
+        featured: true
+      - name: Bare-Metal Uptime
+        station: 2 HA clusters
+        metric: +30%
+        metricLabel: stability and uptime
+        detail: >-
+          Stood up 2 highly available Kubernetes clusters on bare metal for
+          DevOps tools, improving stability and uptime by 30%.
+        skills: [Kubernetes]
+      - name: Squad Lead
+        station: Led a team of 5
+        metric: "5"
+        metricLabel: developers led
+        detail: Led a team of 5 developers in implementing DevSecOps practices.
+        skills: [DevSecOps]
+      - name: Mentor Mode
+        station: 2 mentees
+        metric: "2"
+        metricLabel: mentees, now experts
+        detail: Mentored 2 junior developers who are now subject matter experts in their roles.
+      - name: Release Train
+        station: Release pipeline
+        detail: Implemented an automated release pipeline using Jenkins and GitHub.
+        skills: [Jenkins, CI/CD]
+
+  - kind: event
+    id: safe-scrum-master
+    tag: certification
+    on: rtx
+    title: SAFe Agile Scrum Master
+    date: 2023
+    detail: Earned the SAFe Agile Scrum Master certification.
+    skills: [SAFe Agile]
+
+  - kind: span
+    id: spirit-led
+    code: S
+    color: blue
+    title: Owner
+    org: Spirit-Led Software LLC
+    start: 2023-04
+    end: present
+    startLabel: Founded
+    summary: >-
+      Founded the company to build and market full-stack applications, and
+      prototypes new applications and solutions.
+    link:
+      href: https://spiritledsoftware.com
+      label: spiritledsoftware.com
+    achievements:
+      - name: Launch Day
+        station: The AI Study Bible
+        detail: >-
+          Built The AI Study Bible from the ground up with Pulumi, SQLite, and
+          SolidJS, and released it on the web and as a PWA.
+        skills: [SolidJS, AI Agents, Infrastructure as Code]
+        link:
+          href: https://github.com/spiritledsoftware/theaistudybible
+          label: Source on GitHub
+      - name: First 300
+        station: 300+ users
+        metric: 300+
+        metricLabel: users in the first 3 months
+        detail: The AI Study Bible gained over 300 users in its first 3 months.
+        featured: true
+      - name: Paying Customers
+        station: Monetized
+        detail: >-
+          Generated revenue with Google AdMob and subscription pricing, and
+          marketed the apps with Google Ads and Facebook Ads.
+      - name: Signal Boost
+        station: clerk-solidjs
+        detail: >-
+          Created clerk-solidjs, a SolidJS port of the Clerk React SDK built on
+          Solid's signals, and contributes to other open-source projects.
+        skills: [SolidJS, Semantic Versioning]
+        link:
+          href: https://github.com/spiritledsoftware/clerk-solidjs
+          label: Source on GitHub
+
+  - kind: event
+    id: aws-cloud-practitioner
+    tag: certification
+    on: rtx
+    title: AWS Cloud Practitioner
+    date: 2024
+    detail: Earned the AWS Certified Cloud Practitioner certification.
+    skills: [AWS]

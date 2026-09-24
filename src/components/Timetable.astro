@@ -1,0 +1,375 @@
+---
+import { dayCount, lineRange, type Timeline } from "../lib/network";
+import Icon from "./Icon.astro";
+
+interface Props {
+  timeline: Timeline;
+}
+
+const { timeline } = Astro.props;
+const lines = [...timeline.lines].sort((a, b) => b.start.time - a.start.time);
+const origin = timeline.origin;
+---
+
+<section class="timetable wrap" aria-labelledby="timetable-title" id="timetable">
+  <header class="timetable__head">
+    <h2 id="timetable-title">Timetable</h2>
+    <p>Every stop on the network, newest first.</p>
+  </header>
+
+  {
+    lines.map((line) => {
+      const stops = [...line.stations].reverse();
+      return (
+        <section class="tt-line" id={`line-${line.id}`} data-color={line.color} aria-labelledby={`line-${line.id}-title`}>
+          <header class="tt-line__head">
+            <span class="bullet" aria-hidden="true">
+              {line.code}
+            </span>
+            <div>
+              <h3 id={`line-${line.id}-title`}>{line.org}</h3>
+              <p class="tt-line__role">
+                <span>{line.title}</span>
+                <span class="data">{lineRange(line)}</span>
+                {!line.end && (
+                  <span class="data" data-since={line.start.time}>
+                    Day {dayCount(line.start.time, timeline.builtAt).toLocaleString("en-US")}
+                  </span>
+                )}
+              </p>
+              <p class="tt-line__summary">{line.summary}</p>
+              {line.link && (
+                <a class="tt-link" href={line.link.href} rel="noopener">
+                  {line.link.label}
+                  <Icon name="external" />
+                </a>
+              )}
+            </div>
+          </header>
+
+          <ol class="tt-stops" role="list">
+            {stops.map((stop) => (
+              <li class="tt-stop" id={`stop-${stop.id}`} data-kind={stop.kind}>
+                <div class="tt-stop__when">
+                  {stop.date && <time datetime={stop.date.iso}>{stop.date.label}</time>}
+                </div>
+                <div class="tt-stop__mark" aria-hidden="true" />
+                <div class="tt-stop__what">
+                  {stop.metric && (
+                    <p class="tt-stop__metric">
+                      <strong>{stop.metric}</strong> {stop.metricLabel}
+                    </p>
+                  )}
+                  <h4>{stop.name}</h4>
+                  {stop.kind !== "start" && <p class="tt-stop__detail">{stop.detail}</p>}
+                  {(stop.skills.length > 0 || (stop.link && stop.kind !== "start")) && (
+                    <div class="tt-stop__extras">
+                      {stop.skills.length > 0 && (
+                        <ul class="tags" role="list" aria-label="Skills">
+                          {stop.skills.map((skill) => (
+                            <li class="tag">{skill}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {stop.link && stop.kind !== "start" && (
+                        <a class="tt-link" href={stop.link.href} rel="noopener">
+                          {stop.link.label}
+                          <Icon name="external" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      );
+    })
+  }
+
+  {
+    origin && (
+      <section class="tt-origin" id={`stop-${origin.id}`} data-origin-stop aria-labelledby="origin-title">
+        <div class="tt-stop__when">
+          {origin.date && <time datetime={origin.date.iso}>{origin.date.label}</time>}
+        </div>
+        <div class="tt-origin__mark" aria-hidden="true" />
+        <div class="tt-stop__what">
+          <h3 id="origin-title">{origin.org ?? origin.name}</h3>
+          <p class="tt-origin__what">{origin.name}</p>
+          <p class="tt-stop__detail">{origin.detail}</p>
+          <p class="tt-origin__note">Origin station. Every line on the network departs from here.</p>
+        </div>
+      </section>
+    )
+  }
+</section>
+
+<style>
+  .timetable {
+    padding-top: var(--space-9);
+  }
+
+  .timetable__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 4px solid var(--ink);
+  }
+
+  .timetable__head h2 {
+    font-size: var(--step-3);
+    font-weight: 800;
+  }
+
+  .timetable__head p {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .tt-line {
+    padding-top: var(--space-7);
+  }
+
+  .tt-line__head {
+    display: grid;
+    grid-template-columns: 7.5rem 2.75rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+    align-items: start;
+    padding-bottom: var(--space-5);
+  }
+
+  .tt-line__head .bullet {
+    --size: 2.75rem;
+    grid-column: 2;
+  }
+
+  .tt-line__head h3 {
+    font-size: var(--step-3);
+    font-weight: 800;
+  }
+
+  .tt-line__role {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-top: var(--space-2);
+    font-weight: 700;
+  }
+
+  .tt-line__role > * + *::before {
+    content: "·";
+    margin-inline: 0.5em;
+    color: var(--ink-quiet);
+    font-family: var(--font-sign);
+  }
+
+  .tt-line__role .data {
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .tt-line__summary {
+    margin-top: var(--space-3);
+    max-width: 66ch;
+    color: var(--ink-soft);
+  }
+
+  .tt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: var(--space-3);
+    font-weight: 700;
+  }
+
+  .tt-link .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .tt-stops {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tt-stop,
+  .tt-origin {
+    display: grid;
+    grid-template-columns: 7.5rem 2.75rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+  }
+
+  .tt-stop__when {
+    padding-top: 0.2rem;
+    text-align: right;
+    color: var(--ink-soft);
+    font-size: var(--step--1);
+  }
+
+  /* The vertical strip map: one continuous bar in the line's color, a station per row. */
+  .tt-stop__mark {
+    position: relative;
+  }
+
+  .tt-stop__mark::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    translate: -50% 0;
+    background: var(--line-color);
+  }
+
+  .tt-stop__mark::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0.1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    translate: -50% 0;
+    border: 3.5px solid var(--ink);
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .tt-stop[data-kind="start"] .tt-stop__mark::before {
+    bottom: auto;
+    height: 0.8rem;
+  }
+
+  .tt-stop__what {
+    padding-bottom: var(--space-6);
+    min-width: 0;
+  }
+
+  .tt-stop__metric {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--space-3);
+    margin-bottom: var(--space-1);
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .tt-stop__metric strong {
+    color: var(--ink);
+    font-size: var(--step-3);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .tt-stop h4 {
+    font-size: var(--step-1);
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .tt-stop__detail {
+    margin-top: var(--space-2);
+    max-width: 66ch;
+  }
+
+  .tt-stop__extras {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-3);
+  }
+
+  .tt-stop__extras .tt-link {
+    margin-top: 0;
+  }
+
+  .tt-stop:target .tt-stop__what h4,
+  .tt-origin:target h3 {
+    background: var(--paper-sunk);
+    box-shadow: 0 0 0 0.35rem var(--paper-sunk);
+  }
+
+  .tt-origin {
+    padding-top: var(--space-6);
+    margin-top: var(--space-4);
+    border-top: 1px solid var(--rule);
+  }
+
+  .tt-origin__mark {
+    position: relative;
+  }
+
+  .tt-origin__mark::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0.1rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    translate: -50% 0;
+    border: 5px solid var(--ink);
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .tt-origin h3 {
+    font-size: var(--step-2);
+    font-weight: 800;
+  }
+
+  .tt-origin__what {
+    margin-top: var(--space-1);
+    font-weight: 700;
+  }
+
+  .tt-origin__note {
+    margin-top: var(--space-3);
+    color: var(--ink-quiet);
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  @media (max-width: 40rem) {
+    .tt-line__head,
+    .tt-stop,
+    .tt-origin {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+      column-gap: var(--space-3);
+    }
+
+    .tt-line__head .bullet {
+      grid-column: 1;
+      --size: 2.25rem;
+    }
+
+    .tt-stop__when {
+      grid-column: 2;
+      grid-row: 1;
+      text-align: left;
+      padding-top: 0;
+    }
+
+    .tt-stop__when:empty {
+      display: none;
+    }
+
+    .tt-stop__mark,
+    .tt-origin__mark {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .tt-stop__what {
+      grid-column: 2;
+    }
+  }
+</style>

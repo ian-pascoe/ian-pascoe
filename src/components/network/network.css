@@ -1,0 +1,815 @@
+.network {
+  padding-top: var(--space-5);
+}
+
+/* Toolbar */
+.network__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-6);
+}
+
+.network__title {
+  font-size: var(--step-2);
+  font-weight: 800;
+}
+
+.network__note {
+  margin-top: var(--space-2);
+  color: var(--ink-quiet);
+  font-size: var(--step--1);
+  font-weight: 500;
+}
+
+.network__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.line-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.line-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 1rem 0.3rem 0.35rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  font-weight: 700;
+  font-size: var(--step--1);
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.line-key .bullet {
+  --size: 1.9rem;
+}
+
+.line-key:hover {
+  background: var(--paper-sunk);
+}
+
+.line-key[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.ride-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  min-inline-size: 11.5rem;
+  padding: 0.5rem 1.15rem 0.45rem 0.9rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: var(--sign);
+  color: var(--sign-ink);
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.ride-button:hover {
+  background: oklch(28% 0.004 100);
+}
+
+.ride-button .icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+/* Diagram */
+.network__map {
+  margin-top: var(--space-3);
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--font-sign);
+}
+
+.track {
+  fill: none;
+  stroke: var(--line-color);
+  stroke-width: 11;
+  stroke-linejoin: round;
+  transition: stroke 220ms var(--ease-out);
+}
+
+.track.is-dim {
+  stroke: color-mix(in srgb, var(--line-color) 16%, var(--paper));
+}
+
+.stop a {
+  cursor: pointer;
+  outline: none;
+}
+
+.stop__hit {
+  fill: transparent;
+}
+
+.stop__halo {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out);
+}
+
+.stop__dot {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  transition:
+    fill 160ms var(--ease-out),
+    r 220ms var(--ease-out);
+}
+
+.stop.is-featured .stop__dot,
+.stop.is-terminal .stop__dot {
+  stroke-width: 4.5;
+}
+
+.stop__label {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  font-size: 15px;
+  font-weight: 600;
+  dominant-baseline: middle;
+  letter-spacing: 0;
+  transition: translate 220ms var(--ease-out);
+}
+
+.stop.is-featured .stop__label {
+  font-weight: 800;
+}
+
+.stop a:hover .stop__dot {
+  fill: var(--paper-sunk);
+}
+
+.stop a:focus-visible .stop__halo {
+  opacity: 1;
+  stroke-dasharray: 4 3;
+}
+
+.stop.is-selected a .stop__dot {
+  fill: var(--ink);
+  r: 11px;
+}
+
+.stop.is-selected a .stop__halo {
+  opacity: 1;
+  stroke-dasharray: none;
+  r: 19px;
+}
+
+/* The selected ring grows by ~8px; slide the label out along its 45° axis to clear it. */
+.stop.is-selected .stop__label {
+  font-weight: 800;
+  translate: 8px -8px;
+}
+
+.stop.is-selected.is-below .stop__label {
+  translate: 8px 8px;
+}
+
+.stop {
+  transition: opacity 220ms var(--ease-out);
+}
+
+.stop.is-dim {
+  opacity: 0.28;
+}
+
+.stop.is-pending {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.map.is-riding .stop:not(.is-pending) .stop__dot {
+  animation: arrive 420ms var(--ease-out);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes arrive {
+  from {
+    transform: scale(0.2);
+  }
+}
+
+.now {
+  transition: opacity 300ms var(--ease-out);
+}
+
+.now.is-pending {
+  opacity: 0;
+}
+
+.now__capsule {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 4.5;
+}
+
+.now__label {
+  fill: var(--ink);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.now__date {
+  fill: var(--ink-soft);
+  font-family: var(--font-data);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ride-cursor line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 5;
+}
+
+.ride-year {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 6px;
+  paint-order: stroke;
+  font-family: var(--font-data);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.train {
+  fill: var(--line-color);
+  stroke: var(--ink);
+  stroke-width: 3.5;
+}
+
+/* Station information strip */
+.network__strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-6);
+  align-items: start;
+  margin-top: var(--space-4);
+}
+
+.station {
+  padding-top: var(--space-5);
+  border-top: 4px solid var(--ink);
+}
+
+.station__card {
+  display: grid;
+  grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr) auto;
+  gap: var(--space-4) var(--space-7);
+  align-items: start;
+  padding-bottom: var(--space-6);
+}
+
+.station__figure {
+  min-width: 0;
+}
+
+.station__metric {
+  display: block;
+  font-size: clamp(3.5rem, 2rem + 3.6vw, 5.75rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.station__metric--date {
+  font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem);
+  line-height: 0.98;
+}
+
+.station__metric-label {
+  display: block;
+  margin-top: var(--space-3);
+  color: var(--ink-soft);
+  font-weight: 600;
+  line-height: 1.3;
+  max-width: 14ch;
+}
+
+.station__figure .bullet--figure {
+  --size: 5rem;
+}
+
+.station__meta .bullet--small {
+  --size: 1.5rem;
+}
+
+.station__name {
+  font-size: var(--step-3);
+  font-weight: 800;
+}
+
+.station__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.station__where {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.station__where > * + *::before {
+  content: "·";
+  margin-inline: 0.5em;
+  font-family: var(--font-sign);
+}
+
+.station__where .data {
+  font-size: var(--step--1);
+  font-weight: 500;
+}
+
+.station__detail {
+  margin-top: var(--space-4);
+  max-width: 62ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.station__extras {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.station__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 700;
+}
+
+.station__link .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.station__nav {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: stretch;
+}
+
+.station__nav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  padding: 0.45rem 0.9rem 0.4rem;
+  border: 2px solid var(--ink);
+  border-radius: 0.25rem;
+  background: var(--paper);
+  font-weight: 700;
+  font-size: var(--step--1);
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.station__nav button:hover:not(:disabled) {
+  background: var(--paper-sunk);
+}
+
+.station__nav button:disabled {
+  border-color: var(--rule);
+  color: var(--ink-quiet);
+  cursor: default;
+}
+
+.station__nav .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.station__nav .station__close {
+  justify-content: center;
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Now card */
+.now-rail {
+  display: none;
+}
+
+.now-lines {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.now-lines li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--step-1);
+  line-height: 1.3;
+}
+
+.now-lines__days {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  white-space: nowrap;
+}
+
+.featured__title {
+  margin-top: var(--space-5);
+  font-size: var(--step-0);
+  font-weight: 800;
+}
+
+.featured {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featured__stop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.9rem 0.35rem 0.4rem;
+  border: 2px solid var(--ink);
+  border-radius: 0.25rem;
+  background: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.featured__stop:hover {
+  background: var(--paper-sunk);
+}
+
+.featured__stop .bullet {
+  --size: 1.75rem;
+}
+
+.featured__metric {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ride pass ticket */
+.pass {
+  padding-top: var(--space-5);
+}
+
+.pass__lift {
+  display: block;
+  filter: drop-shadow(0 1px 1px oklch(0% 0 0 / 0.14)) drop-shadow(0 10px 14px oklch(0% 0 0 / 0.14));
+}
+
+.pass-ticket {
+  display: grid;
+  width: 15.5rem;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  mask:
+    radial-gradient(circle at 0 62%, transparent 0.6rem, #000 calc(0.6rem + 0.5px)) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 62%, transparent 0.6rem, #000 calc(0.6rem + 0.5px)) right / 51% 100% no-repeat;
+  transition: transform 220ms var(--ease-out);
+}
+
+.pass-ticket:hover {
+  transform: translateY(-2px) rotate(-0.6deg);
+}
+
+.pass-ticket__band {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.6rem 1rem 0.45rem;
+  background: var(--sign);
+  color: var(--sign-ink);
+  font-weight: 800;
+}
+
+.pass-ticket__band .data {
+  font-size: var(--step--1);
+}
+
+.pass-ticket__holes {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.2rem 0.5rem;
+}
+
+.pass-ticket__hint {
+  padding: 0 1rem 0.8rem;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.punch {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex: none;
+}
+
+.punch path {
+  fill: none;
+  stroke: var(--ink-quiet);
+  stroke-width: 1.4;
+  stroke-dasharray: 2 2;
+}
+
+.punch.is-punched path {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-dasharray: none;
+}
+
+/* Ride pass sheet */
+/* Pulled out from the ticket's corner rather than centered over the page. */
+.pass-sheet {
+  inset: auto var(--gutter) var(--space-5) auto;
+  width: min(28rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: 0;
+  padding: 0;
+  border: 3px solid #fff;
+  background: #fff;
+  color: var(--ink);
+  overflow: auto;
+}
+
+.pass-sheet::backdrop {
+  background: oklch(18% 0.004 100 / 0.28);
+}
+
+.pass-sheet__band {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5) var(--space-3);
+  background: var(--sign);
+  color: var(--sign-ink);
+}
+
+.pass-sheet__band h2 {
+  font-size: var(--step-2);
+  font-weight: 800;
+}
+
+.pass-sheet__band .data {
+  font-size: var(--step--1);
+  color: var(--sign-ink-soft);
+}
+
+.pass-sheet__lede {
+  padding: var(--space-4) var(--space-5) 0;
+  color: var(--ink-soft);
+}
+
+.pass-sheet .pass-sheet__list {
+  display: grid;
+  gap: 0;
+  margin: var(--space-3) 0 0;
+  padding: 0 var(--space-5);
+  list-style: none;
+}
+
+.pass-sheet__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.pass-sheet__list li.is-punched {
+  color: var(--ink);
+}
+
+.pass-sheet__list strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.pass-sheet__list .punch {
+  margin-top: 0.1rem;
+}
+
+/* Keeps Close in reach at the foot of a scrolling sheet on short screens. */
+.pass-sheet__foot {
+  position: sticky;
+  bottom: 0;
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-5) var(--space-4);
+  border-top: 1px solid var(--rule);
+  background: #fff;
+}
+
+.pass-sheet__close {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  min-height: 2.75rem;
+  padding: 0.45rem 1rem 0.4rem 0.8rem;
+  border: 2px solid var(--ink);
+  border-radius: 0.25rem;
+  background: var(--paper);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pass-sheet__close .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Punch notification */
+.punch-toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-5);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.75rem 1.2rem 0.65rem 0.9rem;
+  background: var(--sign);
+  color: var(--sign-ink);
+  font-weight: 600;
+  border: 2px solid var(--sign-ink);
+  translate: -50% 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    translate 280ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+
+.punch-toast.is-shown {
+  translate: -50% 0;
+  opacity: 1;
+}
+
+.punch-toast .punch path {
+  fill: var(--sign-ink);
+  stroke: var(--sign-ink);
+}
+
+/* Below desktop width the diagram gives way to the vertical strip map in the timetable. */
+@media (max-width: 60rem) {
+  .network {
+    padding-top: var(--space-2);
+  }
+
+  .network__map,
+  .network__controls {
+    display: none;
+  }
+
+  /* The heading names the diagram, which only desktop shows; keep it for assistive tech. */
+  .network__bar {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .network__strip {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .station__card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  /* The Now card becomes the head of the strip map: an interchange capsule
+     with the current lines hanging from it down the card's left edge. */
+  .station__card.is-now {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+  }
+
+  .station__card.is-now > :not(.now-rail) {
+    grid-column: 2;
+  }
+
+  .now-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    margin-bottom: calc(-1 * var(--space-6));
+  }
+
+  .now-rail__capsule {
+    position: relative;
+    z-index: 1;
+    width: 2.5rem;
+    height: 1.6rem;
+    margin-top: 1.1rem;
+    margin-bottom: -0.8rem;
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+    background: #fff;
+  }
+
+  .now-rail__lines {
+    display: flex;
+    flex: 1;
+    gap: 5px;
+  }
+
+  .now-rail__line {
+    width: 9px;
+    background: var(--line-color);
+  }
+
+  .station__nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .station__nav .station__close {
+    grid-column: 1 / -1;
+  }
+
+  .pass {
+    padding-top: 0;
+  }
+
+  .pass-ticket {
+    width: 100%;
+  }
+
+  .pass-sheet {
+    inset: auto 0 0;
+    width: 100%;
+    max-height: 85dvh;
+  }
+}

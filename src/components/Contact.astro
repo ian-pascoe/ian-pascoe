@@ -1,0 +1,111 @@
+---
+import type { Profile } from "../lib/network";
+import Icon from "./Icon.astro";
+
+interface Props {
+  profile: Profile;
+  year: number;
+}
+
+const { profile, year } = Astro.props;
+---
+
+<footer class="close on-sign" aria-labelledby="contact-title">
+  <div class="close__inner wrap">
+    <h2 id="contact-title" class="close__title">Say hello</h2>
+    <p class="close__lede">Email is the fastest way to reach {profile.name.split(" ")[0]}.</p>
+    <a class="info-sign close__email" href={`mailto:${profile.email}`} data-punch="say-hello">
+      <Icon name="mail" />
+      {profile.email}
+    </a>
+    <ul class="close__links" role="list">
+      <li><a href={profile.links.linkedin} rel="me">LinkedIn</a></li>
+      <li><a href={profile.links.github} rel="me">GitHub</a></li>
+      <li><a href="/resume">Printable resume</a></li>
+      <li class="close__where">{profile.location}</li>
+    </ul>
+  </div>
+  <div class="close__base wrap">
+    <p>© {year} {profile.name}. Diagram not to scale.</p>
+    <p>
+      Built with Astro and Solid, deployed with Alchemy on Cloudflare.
+      <a href="https://github.com/ian-pascoe/ian-pascoe">Source</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .close {
+    position: relative;
+    background: var(--sign);
+    color: var(--sign-ink);
+  }
+
+  .close::before {
+    content: "";
+    position: absolute;
+    inset: 0.5rem 0 auto;
+    height: 2px;
+    background: var(--sign-ink);
+  }
+
+  .close__inner {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-4);
+    padding-block: var(--space-9) var(--space-8);
+  }
+
+  .close__title {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .close__lede {
+    color: var(--sign-ink-soft);
+    font-size: var(--step-1);
+  }
+
+  .close__email {
+    margin-top: var(--space-3);
+    font-size: clamp(1.25rem, 0.8rem + 2vw, 2.25rem);
+    padding: 1rem 1.5rem 0.85rem;
+    overflow-wrap: anywhere;
+  }
+
+  .close__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+    font-weight: 700;
+  }
+
+  .close__links a {
+    color: var(--sign-ink);
+    text-decoration-color: color-mix(in oklch, var(--sign-ink) 45%, transparent);
+  }
+
+  .close__where {
+    color: var(--sign-ink-soft);
+    font-weight: 600;
+  }
+
+  .close__base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding-block: var(--space-5);
+    border-top: 1px solid color-mix(in oklch, var(--sign-ink) 22%, transparent);
+    color: var(--sign-ink-soft);
+    font-size: var(--step--1);
+  }
+
+  .close__base a {
+    color: var(--sign-ink);
+  }
+</style>

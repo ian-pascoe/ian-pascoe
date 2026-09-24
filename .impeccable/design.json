@@ -1,0 +1,545 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-24T20:05:46+00:00",
+  "title": "Design System: Ian Pascoe",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Map Paper",
+        "canonical": "oklch(98.6% 0.002 100)",
+        "tonalRamp": [
+          "oklch(15% 0.002 100)",
+          "oklch(25% 0.002 100)",
+          "oklch(35% 0.002 100)",
+          "oklch(45% 0.002 100)",
+          "oklch(55% 0.002 100)",
+          "oklch(65% 0.002 100)",
+          "oklch(80% 0.002 100)",
+          "oklch(95% 0.002 100)"
+        ]
+      },
+      "paper-sunk": {
+        "role": "neutral",
+        "displayName": "Sunk Paper",
+        "canonical": "oklch(95.8% 0.003 100)",
+        "tonalRamp": [
+          "oklch(15% 0.003 100)",
+          "oklch(25% 0.003 100)",
+          "oklch(35% 0.003 100)",
+          "oklch(45% 0.003 100)",
+          "oklch(55% 0.003 100)",
+          "oklch(65% 0.003 100)",
+          "oklch(80% 0.003 100)",
+          "oklch(95% 0.003 100)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(18% 0.004 100)",
+        "tonalRamp": [
+          "oklch(15% 0.004 100)",
+          "oklch(25% 0.004 100)",
+          "oklch(35% 0.004 100)",
+          "oklch(45% 0.004 100)",
+          "oklch(55% 0.004 100)",
+          "oklch(65% 0.004 100)",
+          "oklch(80% 0.004 100)",
+          "oklch(95% 0.004 100)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "oklch(38% 0.006 100)",
+        "tonalRamp": [
+          "oklch(15% 0.006 100)",
+          "oklch(25% 0.006 100)",
+          "oklch(35% 0.006 100)",
+          "oklch(45% 0.006 100)",
+          "oklch(55% 0.006 100)",
+          "oklch(65% 0.006 100)",
+          "oklch(80% 0.006 100)",
+          "oklch(95% 0.006 100)"
+        ]
+      },
+      "ink-quiet": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "canonical": "oklch(50% 0.006 100)",
+        "tonalRamp": [
+          "oklch(15% 0.006 100)",
+          "oklch(25% 0.006 100)",
+          "oklch(35% 0.006 100)",
+          "oklch(45% 0.006 100)",
+          "oklch(55% 0.006 100)",
+          "oklch(65% 0.006 100)",
+          "oklch(80% 0.006 100)",
+          "oklch(95% 0.006 100)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule Grey",
+        "canonical": "oklch(86% 0.004 100)",
+        "tonalRamp": [
+          "oklch(15% 0.004 100)",
+          "oklch(25% 0.004 100)",
+          "oklch(35% 0.004 100)",
+          "oklch(45% 0.004 100)",
+          "oklch(55% 0.004 100)",
+          "oklch(65% 0.004 100)",
+          "oklch(80% 0.004 100)",
+          "oklch(95% 0.004 100)"
+        ]
+      },
+      "sign": {
+        "role": "primary",
+        "displayName": "Signage Black",
+        "canonical": "oklch(16.5% 0.003 100)",
+        "tonalRamp": [
+          "oklch(15% 0.003 100)",
+          "oklch(25% 0.003 100)",
+          "oklch(35% 0.003 100)",
+          "oklch(45% 0.003 100)",
+          "oklch(55% 0.003 100)",
+          "oklch(65% 0.003 100)",
+          "oklch(80% 0.003 100)",
+          "oklch(95% 0.003 100)"
+        ]
+      },
+      "sign-ink": {
+        "role": "neutral",
+        "displayName": "Sign White",
+        "canonical": "oklch(99% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "sign-ink-soft": {
+        "role": "neutral",
+        "displayName": "Sign White Soft",
+        "canonical": "oklch(84% 0.004 100)",
+        "tonalRamp": [
+          "oklch(15% 0.004 100)",
+          "oklch(25% 0.004 100)",
+          "oklch(35% 0.004 100)",
+          "oklch(45% 0.004 100)",
+          "oklch(55% 0.004 100)",
+          "oklch(65% 0.004 100)",
+          "oklch(80% 0.004 100)",
+          "oklch(95% 0.004 100)"
+        ]
+      },
+      "station-white": {
+        "role": "neutral",
+        "displayName": "Station White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "info-ink": {
+        "role": "neutral",
+        "displayName": "Info Ink",
+        "canonical": "oklch(18% 0.004 100)",
+        "tonalRamp": [
+          "oklch(15% 0.004 100)",
+          "oklch(25% 0.004 100)",
+          "oklch(35% 0.004 100)",
+          "oklch(45% 0.004 100)",
+          "oklch(55% 0.004 100)",
+          "oklch(65% 0.004 100)",
+          "oklch(80% 0.004 100)",
+          "oklch(95% 0.004 100)"
+        ]
+      },
+      "info": {
+        "role": "primary",
+        "displayName": "Information Yellow",
+        "canonical": "#fccc0a",
+        "tonalRamp": [
+          "oklch(15% 0.175 91.4)",
+          "oklch(25% 0.175 91.4)",
+          "oklch(35% 0.175 91.4)",
+          "oklch(45% 0.175 91.4)",
+          "oklch(55% 0.175 91.4)",
+          "oklch(65% 0.175 91.4)",
+          "oklch(80% 0.175 91.4)",
+          "oklch(95% 0.175 91.4)"
+        ]
+      },
+      "line-red": {
+        "role": "secondary",
+        "displayName": "Line Red",
+        "canonical": "#e8322b",
+        "tonalRamp": [
+          "oklch(15% 0.218 28.2)",
+          "oklch(25% 0.218 28.2)",
+          "oklch(35% 0.218 28.2)",
+          "oklch(45% 0.218 28.2)",
+          "oklch(55% 0.218 28.2)",
+          "oklch(65% 0.218 28.2)",
+          "oklch(80% 0.218 28.2)",
+          "oklch(95% 0.218 28.2)"
+        ]
+      },
+      "line-blue": {
+        "role": "secondary",
+        "displayName": "Line Blue",
+        "canonical": "#0039a6",
+        "tonalRamp": [
+          "oklch(15% 0.183 262.0)",
+          "oklch(25% 0.183 262.0)",
+          "oklch(35% 0.183 262.0)",
+          "oklch(45% 0.183 262.0)",
+          "oklch(55% 0.183 262.0)",
+          "oklch(65% 0.183 262.0)",
+          "oklch(80% 0.183 262.0)",
+          "oklch(95% 0.183 262.0)"
+        ]
+      },
+      "line-green": {
+        "role": "secondary",
+        "displayName": "Line Green",
+        "canonical": "#00873b",
+        "tonalRamp": [
+          "oklch(15% 0.151 149.6)",
+          "oklch(25% 0.151 149.6)",
+          "oklch(35% 0.151 149.6)",
+          "oklch(45% 0.151 149.6)",
+          "oklch(55% 0.151 149.6)",
+          "oklch(65% 0.151 149.6)",
+          "oklch(80% 0.151 149.6)",
+          "oklch(95% 0.151 149.6)"
+        ]
+      },
+      "line-orange": {
+        "role": "secondary",
+        "displayName": "Line Orange",
+        "canonical": "#f25c19",
+        "tonalRamp": [
+          "oklch(15% 0.197 40.2)",
+          "oklch(25% 0.197 40.2)",
+          "oklch(35% 0.197 40.2)",
+          "oklch(45% 0.197 40.2)",
+          "oklch(55% 0.197 40.2)",
+          "oklch(65% 0.197 40.2)",
+          "oklch(80% 0.197 40.2)",
+          "oklch(95% 0.197 40.2)"
+        ]
+      },
+      "line-purple": {
+        "role": "secondary",
+        "displayName": "Line Purple",
+        "canonical": "#a52fa0",
+        "tonalRamp": [
+          "oklch(15% 0.198 329.8)",
+          "oklch(25% 0.198 329.8)",
+          "oklch(35% 0.198 329.8)",
+          "oklch(45% 0.198 329.8)",
+          "oklch(55% 0.198 329.8)",
+          "oklch(65% 0.198 329.8)",
+          "oklch(80% 0.198 329.8)",
+          "oklch(95% 0.198 329.8)"
+        ]
+      },
+      "line-brown": {
+        "role": "secondary",
+        "displayName": "Line Brown",
+        "canonical": "#8f5f2f",
+        "tonalRamp": [
+          "oklch(15% 0.089 63.7)",
+          "oklch(25% 0.089 63.7)",
+          "oklch(35% 0.089 63.7)",
+          "oklch(45% 0.089 63.7)",
+          "oklch(55% 0.089 63.7)",
+          "oklch(65% 0.089 63.7)",
+          "oklch(80% 0.089 63.7)",
+          "oklch(95% 0.089 63.7)"
+        ]
+      },
+      "line-teal": {
+        "role": "secondary",
+        "displayName": "Line Teal",
+        "canonical": "#00829a",
+        "tonalRamp": [
+          "oklch(15% 0.1 216.8)",
+          "oklch(25% 0.1 216.8)",
+          "oklch(35% 0.1 216.8)",
+          "oklch(45% 0.1 216.8)",
+          "oklch(55% 0.1 216.8)",
+          "oklch(65% 0.1 216.8)",
+          "oklch(80% 0.1 216.8)",
+          "oklch(95% 0.1 216.8)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Name on the station sign, 'Say hello', 'Station closed'."
+      },
+      "metric": {
+        "displayName": "Metric",
+        "purpose": "Metric-first figure in the station strip; outranks its sentence."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads, timetable line names, station names, inline timetable metrics."
+      },
+      "title-lg": {
+        "displayName": "Title Large",
+        "purpose": "Network bar title, pass-sheet title, origin station."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Timetable stop names."
+      },
+      "body-lead": {
+        "displayName": "Body Lead",
+        "purpose": "Station detail sentence, sign headline; max 62ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text; max 66ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Keys, outline buttons, tags, notes."
+      },
+      "map-label": {
+        "displayName": "Map Label",
+        "purpose": "SVG station names rotated ±45° with a 5px paper halo; 800 when featured or selected."
+      },
+      "data": {
+        "displayName": "Data (mono)",
+        "purpose": "Dates, live day counters, ride year, pass tally only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ticket-lift",
+        "value": "drop-shadow(0 1px 1px oklch(0% 0 0 / 0.14)) drop-shadow(0 10px 14px oklch(0% 0 0 / 0.14))",
+        "purpose": "filter on the ride-pass ticket only; follows its punched notches."
+      },
+      {
+        "name": "sheet-scrim",
+        "value": "oklch(18% 0.004 100 / 0.28)",
+        "purpose": "::backdrop of the ride-pass sheet; flat dim, not a shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "--ease-out; the only easing curve."
+      },
+      {
+        "name": "state-fast",
+        "value": "160ms",
+        "purpose": "Hover fills, key/button background, station dot fill, focus halo, bullet scale."
+      },
+      {
+        "name": "state",
+        "value": "220ms",
+        "purpose": "Track dim, station dim/select growth, label slide, ticket hover nudge."
+      },
+      {
+        "name": "now-fade",
+        "value": "300ms",
+        "purpose": "Now interchange fading in at the end of a ride."
+      },
+      {
+        "name": "toast",
+        "value": "translate 280ms, opacity 200ms; hold 3600ms",
+        "purpose": "Punch toast slide-up and dwell."
+      },
+      {
+        "name": "arrive",
+        "value": "420ms scale(0.2) → 1",
+        "purpose": "Station pop as the ride reaches it."
+      },
+      {
+        "name": "ride-replay",
+        "value": "9000ms linear clock (rAF)",
+        "purpose": "The one authored sequence; runs only on 'Ride from 2019'."
+      },
+      {
+        "name": "ride-reduced",
+        "value": "900ms per station, no movement",
+        "purpose": "prefers-reduced-motion ride: discrete stops; global transitions/animations clamp to 1ms."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "diagram-to-strip",
+        "value": "60rem"
+      },
+      {
+        "name": "timetable-compact",
+        "value": "40rem"
+      },
+      {
+        "name": "sign-stack",
+        "value": "36rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Information Sign",
+      "kind": "button",
+      "refersTo": "info-sign",
+      "description": "The yellow contact action; the only content use of yellow.",
+      "html": "<a class=\"ds-info-sign\" href=\"mailto:hi@ianpascoe.dev\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3.5 6.5h17v11h-17Zm0 .5 8.5 6.5L20.5 7\"/></svg>Email Ian</a>",
+      "css": ".ds-info-sign{display:inline-flex;align-items:center;gap:0.75rem;min-height:3rem;padding:0.7rem 1.25rem 0.6rem;background:var(--info,#fccc0a);color:var(--info-ink,oklch(18% 0.004 100));font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);font-weight:800;font-size:1.25rem;line-height:1;letter-spacing:-0.01em;text-decoration:none;border-radius:0.25rem;transition:background-color 160ms cubic-bezier(0.16,1,0.3,1);}.ds-info-sign svg{width:1.25em;height:1.25em;margin-top:-0.1em;flex:none;}.ds-info-sign:hover{background:color-mix(in oklch,#fccc0a 86%,white);}.ds-info-sign:focus-visible{outline:3px solid oklch(18% 0.004 100);outline-offset:3px;}"
+    },
+    {
+      "name": "Route Bullet",
+      "kind": "chip",
+      "refersTo": "route-bullet",
+      "description": "A line's letter in a filled circle of the line color.",
+      "html": "<span class=\"ds-bullet\" style=\"--bullet-color:#e8322b\">R</span> <span class=\"ds-bullet\" style=\"--bullet-color:#0039a6\">S</span>",
+      "css": ".ds-bullet{--size:2.25rem;display:inline-grid;place-items:center;width:var(--size);height:var(--size);border-radius:50%;background:var(--bullet-color,oklch(18% 0.004 100));color:#fff;font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);font-weight:800;font-size:calc(var(--size)*0.56);line-height:1;padding-top:0.12em;transition:transform 160ms cubic-bezier(0.16,1,0.3,1);}.ds-bullet:hover{transform:scale(1.08);}"
+    },
+    {
+      "name": "Line Key",
+      "kind": "chip",
+      "refersTo": "line-key",
+      "description": "Capsule toggle that isolates one line on the map.",
+      "html": "<button class=\"ds-line-key\" aria-pressed=\"false\"><span class=\"ds-lk-bullet\" style=\"background:#e8322b\">R</span>RTX</button> <button class=\"ds-line-key\" aria-pressed=\"true\"><span class=\"ds-lk-bullet\" style=\"background:#0039a6\">S</span>Spirit-Led Software</button>",
+      "css": ".ds-line-key{display:inline-flex;align-items:center;gap:0.55rem;min-height:2.75rem;padding:0.3rem 1rem 0.3rem 0.35rem;border:2px solid oklch(18% 0.004 100);border-radius:999px;background:oklch(98.6% 0.002 100);color:oklch(18% 0.004 100);font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);font-weight:700;font-size:0.875rem;cursor:pointer;transition:background-color 160ms cubic-bezier(0.16,1,0.3,1),color 160ms cubic-bezier(0.16,1,0.3,1);}.ds-line-key:hover{background:oklch(95.8% 0.003 100);}.ds-line-key[aria-pressed=\"true\"]{background:oklch(18% 0.004 100);color:oklch(98.6% 0.002 100);}.ds-line-key:focus-visible{outline:3px solid oklch(18% 0.004 100);outline-offset:3px;}.ds-lk-bullet{display:inline-grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;color:#fff;font-weight:800;font-size:1.06rem;padding-top:0.12em;}"
+    },
+    {
+      "name": "Sign Button",
+      "kind": "button",
+      "refersTo": "sign-button",
+      "description": "Black sign-fill action: Ride from 2019, Print.",
+      "html": "<button class=\"ds-sign-btn\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 5.5v13l11-6.5Z\" fill=\"currentColor\"/></svg>Ride from 2019</button>",
+      "css": ".ds-sign-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.55rem;min-height:2.75rem;padding:0.5rem 1.15rem 0.45rem 0.9rem;border:0;border-radius:0.25rem;background:oklch(16.5% 0.003 100);color:oklch(99% 0 0);font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);font-weight:800;font-size:1.0625rem;cursor:pointer;transition:background-color 160ms cubic-bezier(0.16,1,0.3,1);}.ds-sign-btn svg{width:1.15rem;height:1.15rem;}.ds-sign-btn:hover{background:oklch(28% 0.004 100);}.ds-sign-btn:focus-visible{outline:3px solid oklch(18% 0.004 100);outline-offset:3px;}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "outline-button",
+      "description": "Station Previous/Next and pass Close.",
+      "html": "<button class=\"ds-outline-btn\">Next stop</button> <button class=\"ds-outline-btn\" disabled>Previous stop</button>",
+      "css": ".ds-outline-btn{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.75rem;padding:0.45rem 0.9rem 0.4rem;border:2px solid oklch(18% 0.004 100);border-radius:0.25rem;background:oklch(98.6% 0.002 100);color:oklch(18% 0.004 100);font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);font-weight:700;font-size:0.875rem;cursor:pointer;transition:background-color 160ms cubic-bezier(0.16,1,0.3,1);}.ds-outline-btn:hover:not(:disabled){background:oklch(95.8% 0.003 100);}.ds-outline-btn:focus-visible{outline:3px solid oklch(18% 0.004 100);outline-offset:3px;}.ds-outline-btn:disabled{border-color:oklch(86% 0.004 100);color:oklch(50% 0.006 100);cursor:default;}"
+    },
+    {
+      "name": "Station Sign Band",
+      "kind": "nav",
+      "refersTo": "sign-band",
+      "description": "Black band with a thin white top rule: name, headline, route bullets, contact and quiet links.",
+      "html": "<header class=\"ds-sign\"><div><div class=\"ds-sign-name\">Ian Pascoe</div><p class=\"ds-sign-head\">Platform engineer &amp; tech lead</p></div><nav class=\"ds-sign-links\"><a href=\"#\">Resume</a><a href=\"#\">GitHub</a><a href=\"#\">LinkedIn</a></nav></header>",
+      "css": ".ds-sign{position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem 3rem;padding:2rem 1.5rem 1.5rem;background:oklch(16.5% 0.003 100);color:oklch(99% 0 0);font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);}.ds-sign::before{content:\"\";position:absolute;inset:0.5rem 0 auto;height:2px;background:oklch(99% 0 0);}.ds-sign-name{font-size:clamp(2.5rem,1.6rem + 3.4vw,4.75rem);font-weight:800;line-height:0.95;letter-spacing:-0.03em;}.ds-sign-head{margin:0.75rem 0 0;color:oklch(84% 0.004 100);font-size:1.25rem;font-weight:500;}.ds-sign-links{display:flex;gap:1.5rem;font-weight:700;}.ds-sign-links a{color:oklch(99% 0 0);text-decoration-color:color-mix(in oklch,oklch(99% 0 0) 45%,transparent);text-underline-offset:0.2em;}.ds-sign-links a:hover{text-decoration-color:oklch(99% 0 0);}.ds-sign-links a:focus-visible{outline:3px solid #fccc0a;outline-offset:3px;}"
+    },
+    {
+      "name": "Network Diagram Fragment",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "11px tracks, 45° merge, white stations with ink rings, capsule Now interchange.",
+      "html": "<svg class=\"ds-map\" viewBox=\"0 0 360 140\"><path class=\"ds-track\" style=\"stroke:#e8322b\" d=\"M20 40H300\"/><path class=\"ds-track\" style=\"stroke:#0039a6\" d=\"M20 110H230L280 60H300\"/><circle class=\"ds-stop\" cx=\"60\" cy=\"40\" r=\"7\"/><circle class=\"ds-stop is-selected\" cx=\"160\" cy=\"40\" r=\"11\"/><circle class=\"ds-stop\" cx=\"120\" cy=\"110\" r=\"7\"/><rect class=\"ds-now\" x=\"292\" y=\"28\" width=\"22\" height=\"44\" rx=\"11\"/><text class=\"ds-now-label\" x=\"322\" y=\"52\">Now</text></svg>",
+      "css": ".ds-map{width:100%;max-width:30rem;background:oklch(98.6% 0.002 100);font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);}.ds-track{fill:none;stroke-width:11;stroke-linejoin:round;}.ds-stop{fill:#fff;stroke:oklch(18% 0.004 100);stroke-width:3.5;cursor:pointer;transition:fill 160ms cubic-bezier(0.16,1,0.3,1);}.ds-stop:hover{fill:oklch(95.8% 0.003 100);}.ds-stop.is-selected{fill:oklch(18% 0.004 100);}.ds-now{fill:#fff;stroke:oklch(18% 0.004 100);stroke-width:4.5;}.ds-now-label{fill:oklch(18% 0.004 100);font-size:20px;font-weight:800;}"
+    },
+    {
+      "name": "Timetable Strip Stop",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Vertical strip map row: mono date, 10px line bar with a ringed station, metric-first content.",
+      "html": "<div class=\"ds-tt\"><time class=\"ds-tt-when\">Mar 2022</time><div class=\"ds-tt-mark\"></div><div><p class=\"ds-tt-metric\"><strong>−75%</strong> test run time</p><h4 class=\"ds-tt-name\">Test time cut</h4><span class=\"ds-tag\">Pytest</span></div></div>",
+      "css": ".ds-tt{display:grid;grid-template-columns:7.5rem 2.75rem minmax(0,1fr);column-gap:1rem;font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);color:oklch(18% 0.004 100);}.ds-tt-when{padding-top:0.2rem;text-align:right;color:oklch(38% 0.006 100);font-family:'Overpass Mono Variable','Overpass Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:0.875rem;}.ds-tt-mark{position:relative;min-height:7rem;}.ds-tt-mark::before{content:\"\";position:absolute;left:50%;top:0;bottom:0;width:10px;translate:-50% 0;background:#e8322b;}.ds-tt-mark::after{content:\"\";position:absolute;left:50%;top:0.1rem;width:1.25rem;height:1.25rem;translate:-50% 0;border:3.5px solid oklch(18% 0.004 100);border-radius:50%;background:#fff;box-sizing:border-box;}.ds-tt-metric{margin:0 0 0.25rem;color:oklch(38% 0.006 100);font-weight:600;}.ds-tt-metric strong{color:oklch(18% 0.004 100);font-size:2.25rem;font-weight:800;line-height:1;letter-spacing:-0.03em;}.ds-tt-name{margin:0 0 0.75rem;font-size:1.25rem;font-weight:800;}.ds-tag{display:inline-block;padding:0.2rem 0.55rem 0.1rem;border:1.5px solid oklch(18% 0.004 100);border-radius:999px;font-size:0.875rem;font-weight:600;line-height:1.4;}"
+    },
+    {
+      "name": "Ride Pass Ticket",
+      "kind": "card",
+      "refersTo": "pass-ticket",
+      "description": "The only shadowed element: notched white pass with a black band and conductor punches.",
+      "html": "<button class=\"ds-pass-lift\"><span class=\"ds-pass\"><span class=\"ds-pass-band\"><span>Ride pass</span><span class=\"ds-mono\">2/7</span></span><span class=\"ds-pass-holes\"><svg class=\"ds-punch is-punched\" viewBox=\"0 0 20 20\"><path d=\"M10 3.5a6.5 6.5 0 1 1 0 13a6.5 6.5 0 1 1 0-13Z\"/></svg><svg class=\"ds-punch is-punched\" viewBox=\"0 0 20 20\"><path d=\"M10 2.5 17.5 10 10 17.5 2.5 10Z\"/></svg><svg class=\"ds-punch\" viewBox=\"0 0 20 20\"><path d=\"M4 4h12v12H4Z\"/></svg><svg class=\"ds-punch\" viewBox=\"0 0 20 20\"><path d=\"M10 2.8 17.6 16.4H2.4Z\"/></svg></span><span class=\"ds-pass-hint\">See what earns a punch</span></span></button>",
+      "css": ".ds-pass-lift{display:block;padding:0;border:0;background:none;cursor:pointer;filter:drop-shadow(0 1px 1px oklch(0% 0 0 / 0.14)) drop-shadow(0 10px 14px oklch(0% 0 0 / 0.14));}.ds-pass{display:grid;width:15.5rem;background:#fff;text-align:left;font-family: var(--font-sign, 'Overpass Variable', Overpass, sans-serif);color:oklch(18% 0.004 100);mask:radial-gradient(circle at 0 62%,transparent 0.6rem,#000 calc(0.6rem + 0.5px)) left/51% 100% no-repeat,radial-gradient(circle at 100% 62%,transparent 0.6rem,#000 calc(0.6rem + 0.5px)) right/51% 100% no-repeat;transition:transform 220ms cubic-bezier(0.16,1,0.3,1);}.ds-pass-lift:hover .ds-pass{transform:translateY(-2px) rotate(-0.6deg);}.ds-pass-lift:focus-visible{outline:3px solid oklch(18% 0.004 100);outline-offset:3px;}.ds-pass-band{display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 1rem 0.45rem;background:oklch(16.5% 0.003 100);color:oklch(99% 0 0);font-weight:800;}.ds-mono{font-family:'Overpass Mono Variable','Overpass Mono',ui-monospace,monospace;font-size:0.875rem;font-variant-numeric:tabular-nums;}.ds-pass-holes{display:flex;justify-content:space-between;padding:1rem 1.2rem 0.5rem;}.ds-punch{width:1.4rem;height:1.4rem;}.ds-punch path{fill:none;stroke:oklch(50% 0.006 100);stroke-width:1.4;stroke-dasharray:2 2;}.ds-punch.is-punched path{fill:oklch(18% 0.004 100);stroke:oklch(18% 0.004 100);stroke-dasharray:none;}.ds-pass-hint{padding:0 1rem 0.8rem;color:oklch(38% 0.006 100);font-size:0.875rem;font-weight:600;text-align:center;text-decoration:underline;text-underline-offset:0.2em;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Career Transit Map",
+    "overview": "The site is a transit authority's printed network map for one person's career. Roles are colored lines, dated achievements are stations, and the present is a capsule interchange where every current line meets. Everything is flat ink on paper-white map stock, lettered in a single grotesque, the way Unimark-era subway signage was: black station-sign bands with a thin white rule, round route bullets, thick tracks with 45° bends, white stations ringed in black.\n\nDensity is that of a good wayfinding system: generous white ground around a small number of very legible, very heavy marks. Hierarchy comes from weight (800 for every name and number), size, and thick black rules, never from tint, texture or depth. The one lifted object in the world is the ride-pass ticket; the one warm color outside the lines is information yellow on the contact sign.\n\nMotion belongs to the diagram. There is one authored sequence, the ride replay that redraws the network in time order, and it only runs when asked. Everything else is a short ease-out state change. Nothing moves or sounds on its own.",
+    "keyCharacteristics": [
+      "Paper-white ground, signage-black bands and rules, pure white station discs.",
+      "Seven reserved line colors, applied only to routes through a `data-color` hook.",
+      "One family, Overpass, set heavy; Overpass Mono only for clocks: dates, day counters, the ride year, the pass tally.",
+      "Circles, capsules and 4px sign corners; 45° diagonals in the diagram and its labels.",
+      "Flat everywhere except the ride-pass ticket's lift.",
+      "Desktop draws a horizontal network diagram; below 60rem the same data becomes a vertical strip map."
+    ],
+    "rules": [
+      {
+        "name": "The Information Yellow Rule",
+        "body": "Yellow is the contact sign. The only content surface it fills is the email action; beyond that it appears only in system states (text selection, the skip link, the focus ring on black signs). Never use it for a highlight, badge, chart or decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lines Are Lines Rule",
+        "body": "A line color only ever paints a route: a track, a route bullet, a strip-map bar, the train. Never set text, a background panel, a border or a hover state in a line color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Ink Rule",
+        "body": "Color is applied as flat, opaque fills. No gradients, glows, glass or tinted overlays. Dimming is done by mixing a line toward paper (16%) or dropping a station to 28% opacity.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Is a Clock Rule",
+        "body": "Overpass Mono sets dates, live day counters, the ride year and the pass tally. Every other string, including large metrics, is Overpass with tabular numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The Metric Outranks Its Sentence Rule",
+        "body": "Where a stop has a number, the number is the largest thing in its block (Metric in the strip, Headline in the timetable) and the sentence sits under it at Body size.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Weight for Names Rule",
+        "body": "Names of people, places, lines and stations are 800. Weight 400 is for sentences only.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Ticket Rule",
+        "body": "Only the ride-pass ticket casts a shadow. Cards, strips, buttons, the sheet and the toast are flat.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** route every new line color through `[data-color]` and `--line-color`; add a new hue only as a new `--line-*` token.",
+      "**Do** keep stations as white discs with black rings and bends at exactly 45°.",
+      "**Do** put the one contact action in the yellow information sign, and keep it reachable at the top and bottom of the page.",
+      "**Do** let the metric lead: figure first at Metric or Headline size, sentence under it.",
+      "**Do** set dates and live counters in Overpass Mono with tabular numerals; everything else in Overpass.",
+      "**Do** open sections with a heading over a 4px ink rule.",
+      "**Do** keep state transitions short ease-out (`cubic-bezier(0.16, 1, 0.3, 1)`, 160–220ms) and collapse them under `prefers-reduced-motion`.",
+      "**Do** degrade the diagram to the vertical strip map below 60rem rather than shrinking it."
+    ],
+    "donts": [
+      "**Don't** use yellow for anything but the contact sign and system states (selection, skip link, focus on black).",
+      "**Don't** paint text, panels, borders or hover fills in a line color.",
+      "**Don't** add shadows, gradients, glows or glass; the ride-pass ticket keeps the only lift.",
+      "**Don't** introduce a second typeface or a display serif; the whole site is sign lettering.",
+      "**Don't** animate anything on load or on a timer; the ride replay runs only when the visitor presses Ride.",
+      "**Don't** use rounded card corners beyond the 0.25rem sign corner; objects are circles, capsules or square."
+    ]
+  }
+}

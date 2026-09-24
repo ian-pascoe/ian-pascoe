@@ -1,0 +1,25 @@
+---
+import Contact from "../components/Contact.astro";
+import SignBand from "../components/SignBand.astro";
+import SkillIndex from "../components/SkillIndex.astro";
+import Timetable from "../components/Timetable.astro";
+import TransitMap from "../components/network/TransitMap.tsx";
+import Base from "../layouts/Base.astro";
+import { loadTimeline } from "../lib/timeline";
+
+const timeline = loadTimeline();
+const { profile } = timeline;
+---
+
+<Base
+  title={`${profile.name} · ${profile.headline}`}
+  description={`${profile.name}'s career as a transit map: roles are lines, achievements are stations. ${profile.headline}.`}
+>
+  <SignBand profile={profile} lines={timeline.lines} />
+  <main id="main">
+    <TransitMap client:load timeline={timeline} />
+    <Timetable timeline={timeline} />
+    <SkillIndex timeline={timeline} />
+  </main>
+  <Contact profile={profile} year={new Date(timeline.builtAt).getUTCFullYear()} />
+</Base>

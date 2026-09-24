@@ -1,0 +1,27 @@
+---
+const PATHS = {
+  mail: "M3.5 6.5h17v11h-17Zm0 .5 8.5 6.5L20.5 7",
+  left: "M14.5 6 8.5 12l6 6",
+  print: "M7 9V3.5h10V9M7 17H4.5V9h15v8H17M7 14h10v6.5H7Z",
+  external: "M9 6h9v9M18 6 7 17",
+};
+
+interface Props {
+  name: keyof typeof PATHS;
+}
+
+const { name } = Astro.props;
+---
+
+<svg
+  class="icon"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d={PATHS[name]}></path>
+</svg>

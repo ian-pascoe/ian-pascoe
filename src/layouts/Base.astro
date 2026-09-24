@@ -1,0 +1,59 @@
+---
+import "@fontsource-variable/overpass";
+import "@fontsource-variable/overpass-mono";
+import "../styles/global.css";
+import type { PunchId } from "../lib/ridepass";
+
+interface Props {
+  title: string;
+  description: string;
+  pagePunch?: PunchId;
+  bodyClass?: string;
+}
+
+const { title, description, pagePunch, bodyClass } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#151515" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    {
+      beaconToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: beaconToken })}
+        />
+      )
+    }
+  </head>
+  <body data-page-punch={pagePunch} class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <script>
+      import { wirePunches } from "../lib/ridepass";
+      import { dayCount } from "../lib/network";
+
+      wirePunches();
+      for (const el of document.querySelectorAll<HTMLElement>("[data-since]")) {
+        const days = dayCount(Number(el.dataset.since), Date.now());
+        el.textContent = `Day ${days.toLocaleString("en-US")}`;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,317 @@
+---
+import Icon from "../components/Icon.astro";
+import Base from "../layouts/Base.astro";
+import { allStations, lineRange } from "../lib/network";
+import { loadTimeline } from "../lib/timeline";
+
+const timeline = loadTimeline();
+const { profile, origin } = timeline;
+const lines = [...timeline.lines].sort((a, b) => b.start.time - a.start.time);
+const stations = allStations(timeline);
+const certifications = stations.filter((s) => s.tag === "certification").sort((a, b) => b.key - a.key);
+const education = stations.filter((s) => s.tag === "education");
+const skills = [...new Set(stations.flatMap((s) => s.skills))].sort((a, b) =>
+  a.localeCompare(b, "en", { sensitivity: "base" }),
+);
+const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
+---
+
+<Base
+  title={`${profile.name} · Resume`}
+  description={`Resume of ${profile.name}: ${profile.headline}.`}
+  pagePunch="timetable"
+  bodyClass="resume-page"
+>
+  <div class="toolbar wrap">
+    <a class="toolbar__back" href="/">
+      <Icon name="left" />
+      Back to the map
+    </a>
+    <button type="button" class="toolbar__print" data-print>
+      <Icon name="print" />
+      Print or save as PDF
+    </button>
+  </div>
+
+  <main id="main" class="sheet">
+    <header class="sheet__head">
+      <h1>{profile.name}</h1>
+      <p class="sheet__headline">{profile.headline}</p>
+      <ul class="sheet__contact" role="list">
+        <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+        <li><a href={profile.links.linkedin}>{bare(profile.links.linkedin)}</a></li>
+        <li><a href={profile.links.github}>{bare(profile.links.github)}</a></li>
+        <li>{profile.location}</li>
+      </ul>
+    </header>
+
+    <section aria-labelledby="experience">
+      <h2 id="experience">Experience</h2>
+      {
+        lines.map((line) => (
+          <article class="role" data-color={line.color}>
+            <header class="role__head">
+              <span class="bullet" aria-hidden="true">
+                {line.code}
+              </span>
+              <h3>
+                {line.title}, {line.org}
+              </h3>
+              <p class="role__when data">{lineRange(line)}</p>
+            </header>
+            <p class="role__summary">{line.summary}</p>
+            <ul class="role__points">
+              {line.stations
+                .filter((s) => s.kind === "achievement")
+                .map((s) => (
+                  <li>{s.detail}</li>
+                ))}
+            </ul>
+          </article>
+        ))
+      }
+    </section>
+
+    {
+      (education.length > 0 || origin) && (
+        <section aria-labelledby="education">
+          <h2 id="education">Education</h2>
+          {(education.length ? education : [origin!]).map((s) => (
+            <div class="row">
+              <p>
+                <strong>{s.name}</strong>
+                {s.org && <>, {s.org}</>}. {s.detail}
+              </p>
+              {s.date && <p class="row__when data">{s.date.label}</p>}
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      certifications.length > 0 && (
+        <section aria-labelledby="certifications">
+          <h2 id="certifications">Certifications</h2>
+          {certifications.map((s) => (
+            <div class="row">
+              <p>
+                <strong>{s.name}</strong>
+              </p>
+              {s.date && <p class="row__when data">{s.date.label}</p>}
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      skills.length > 0 && (
+        <section aria-labelledby="skills">
+          <h2 id="skills">Skills</h2>
+          <ul class="skills" role="list">
+            {skills.map((skill) => (
+              <li>{skill}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+</Base>
+
+<script>
+  document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+</script>
+
+<style is:global>
+  .resume-page {
+    background: var(--paper-sunk);
+  }
+</style>
+
+<style>
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    max-width: 54rem;
+    padding-block: var(--space-5);
+  }
+
+  .toolbar__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 700;
+  }
+
+  .toolbar__print {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.1rem 0.45rem 0.9rem;
+    border: 0;
+    border-radius: 0.25rem;
+    background: var(--sign);
+    color: var(--sign-ink);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .toolbar .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .sheet {
+    max-width: 54rem;
+    margin: 0 auto var(--space-8);
+    padding: clamp(1.5rem, 1rem + 3vw, 4rem);
+    background: #fff;
+    border: 1px solid var(--rule);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .sheet__head {
+    padding-bottom: var(--space-4);
+    border-bottom: 4px solid var(--ink);
+  }
+
+  .sheet__head h1 {
+    font-size: var(--step-3);
+    font-weight: 800;
+  }
+
+  .sheet__headline {
+    margin-top: var(--space-1);
+    font-size: var(--step-1);
+    font-weight: 600;
+  }
+
+  .sheet__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink-soft);
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  .sheet__contact a {
+    color: var(--ink);
+  }
+
+  .sheet section {
+    margin-top: var(--space-6);
+  }
+
+  .sheet h2 {
+    padding-bottom: var(--space-2);
+    border-bottom: 1.5px solid var(--ink);
+    font-size: var(--step-1);
+    font-weight: 800;
+  }
+
+  .role {
+    margin-top: var(--space-4);
+    break-inside: avoid;
+  }
+
+  .role__head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .role__head .bullet {
+    --size: 1.6rem;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .role__head h3 {
+    font-size: 1.0625rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .role__when,
+  .row__when {
+    color: var(--ink-soft);
+    font-size: var(--step--1);
+    white-space: nowrap;
+  }
+
+  .role__summary {
+    margin-top: var(--space-2);
+    color: var(--ink-soft);
+  }
+
+  .role__points {
+    margin: var(--space-2) 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .role__points li + li {
+    margin-top: 0.2rem;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-top: var(--space-3);
+  }
+
+  .sheet .skills {
+    display: flex;
+    flex-wrap: wrap;
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills li + li::before {
+    content: "·";
+    margin-inline: 0.5em;
+    color: var(--ink-quiet);
+  }
+
+  @page {
+    size: letter;
+    margin: 0.6in;
+  }
+
+  @media print {
+    :global(.skip-link),
+    .toolbar {
+      display: none;
+    }
+
+    :global(.resume-page) {
+      background: #fff;
+    }
+
+    .sheet {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 10.5pt;
+    }
+
+    .sheet a {
+      text-decoration: none;
+    }
+  }
+</style>

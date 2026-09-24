@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.alchemy/
+.env
+.env.*
+.DS_Store
+.impeccable/review/
+.impeccable/config.local.json
+.impeccable/questions/

@@ -2,13 +2,19 @@
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
 import Base from "../layouts/Base.astro";
-import { mediaIndex, roomRange } from "../lib/exhibition";
+import { STATUSES, mediaIndex, roomRange, type Work } from "../lib/exhibition";
 import { symbolMark } from "../lib/marks";
 import { loadTimeline } from "../lib/timeline";
 
 const exhibition = loadTimeline();
 const { profile, rooms, firstYear, lastYear } = exhibition;
 const skills = mediaIndex(exhibition).map((m) => m.skill);
+// Certifications read as one line at the foot of the resume, not as works in their rooms.
+const isCertification = (w: Work) => w.drawing.kind === "document" && w.drawing.tag === "certification";
+const certifications = exhibition.tour.filter(isCertification);
+const sections = rooms
+  .map((room) => ({ room, works: room.works.filter((w) => !isCertification(w)) }))
+  .filter(({ room, works }) => room.role || works.length > 0);
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 ---
 
@@ -45,7 +51,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     </header>
 
     {
-      rooms.map((room) => (
+      sections.map(({ room, works }) => (
         <section class="room" aria-labelledby={`c-${room.id}`}>
           <header class="room__head">
             <h2 id={`c-${room.id}`}>
@@ -56,7 +62,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
           </header>
           {room.summary && <p class="room__summary">{room.summary}</p>}
           <ol class="works" role="list">
-            {room.works.map((work) => (
+            {works.map((work) => (
               <li class="entry">
                 <span class="entry__number tabular">{work.number}</span>
                 <p class="entry__text">
@@ -75,7 +81,11 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
                     </span>
                   )}
                 </p>
-                {work.date && <span class="entry__when tabular">{work.date.label}</span>}
+                {(work.date || work.status) && (
+                  <span class="entry__when tabular">
+                    {[work.date?.label, work.status && STATUSES[work.status]].filter(Boolean).join(" · ")}
+                  </span>
+                )}
               </li>
             ))}
           </ol>
@@ -90,6 +100,24 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
             <h2 id="c-skills">Skills</h2>
           </header>
           <p class="skills">{skills.join(" · ")}</p>
+        </section>
+      )
+    }
+
+    {
+      certifications.length > 0 && (
+        <section class="room" aria-labelledby="c-certifications">
+          <header class="room__head">
+            <h2 id="c-certifications">Certifications</h2>
+          </header>
+          <p class="skills">
+            {certifications.map((w, i) => (
+              <>
+                {i > 0 && " · "}
+                <span class="tabular">{w.number}</span> {w.title} ({w.date!.year})
+              </>
+            ))}
+          </p>
         </section>
       )
     }

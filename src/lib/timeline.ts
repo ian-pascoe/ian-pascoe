@@ -1,7 +1,7 @@
 import { parse } from "yaml";
 import { z } from "zod";
 import raw from "../data/timeline.yaml?raw";
-import { PAINTS, type Drawing, type Exhibition, type PartialDate, type Room, type Work } from "./exhibition";
+import { PAINTS, STATUSES, type Drawing, type Exhibition, type PartialDate, type Room, type Status, type Work } from "./exhibition";
 import { MARK_NAMES } from "./marks";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -54,6 +54,7 @@ const AchievementSchema = z
     skills: Skills,
     featured: z.boolean().default(false),
     link: LinkSchema.optional(),
+    status: z.enum(Object.keys(STATUSES) as [Status, ...Status[]]).optional(),
   })
   .strict()
   .refine((a) => (a.metric === undefined) === (a.metricLabel === undefined), {
@@ -129,7 +130,11 @@ function drawMetric(metric: string, where: string): Drawing {
   if (count && Number(count[1]) >= 1 && Number(count[1]) <= 1000) {
     return { kind: "count", value: Number(count[1]), plus: Boolean(count[2]) };
   }
-  return fail(`${where}: metric "${metric}" can't be drawn; use a reduction like "75%", an increase like "+30%", or a count from 1 to 1000 like "5" or "300+"`);
+  const rank = /^(\d{1,3})(?:st|nd|rd|th) of (\d{1,3})$/.exec(text);
+  if (rank && Number(rank[1]) >= 1 && Number(rank[1]) <= Number(rank[2]) && Number(rank[2]) <= 100) {
+    return { kind: "count", value: Number(rank[2]), plus: false, place: Number(rank[1]) };
+  }
+  return fail(`${where}: metric "${metric}" can't be drawn; use a reduction like "75%", an increase like "+30%", a count from 1 to 1000 like "5" or "300+", or a ranking out of at most 100 like "1st of 15"`);
 }
 
 export function loadTimeline(source: string = raw, now: number = Date.now()): Exhibition {
@@ -190,6 +195,7 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
         skills: a.skills,
         featured: a.featured,
         link: a.link,
+        status: a.status,
         key: keys[index]!,
         number: "",
       })),

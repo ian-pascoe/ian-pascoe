@@ -34,15 +34,20 @@ export interface Profile {
 /**
  * How a work is drawn. Every drawing is an exact picture of its fact:
  * a reduction keeps what remains of 100 squares, an increase adds to 100,
- * a count draws one dot per unit, a document is a seal (bearing its issuer's
- * mark when it has one), a text piece sets the subject in type.
+ * a count draws one dot per unit (a ranking gilds the dot at its place),
+ * a document is a seal (bearing its issuer's mark when it has one), a text
+ * piece sets the subject in type.
  */
 export type Drawing =
   | { kind: "reduction"; percent: number }
   | { kind: "increase"; percent: number }
-  | { kind: "count"; value: number; plus: boolean }
+  | { kind: "count"; value: number; plus: boolean; place?: number }
   | { kind: "document"; tag: string; mark?: MarkName }
   | { kind: "text"; subject: string };
+
+/** A work that isn't simply done: still being made, or taken down. */
+export const STATUSES = { "in-progress": "In progress", retired: "Retired" } as const;
+export type Status = keyof typeof STATUSES;
 
 export interface Work {
   id: string;
@@ -58,6 +63,7 @@ export interface Work {
   skills: string[];
   featured: boolean;
   link?: Link;
+  status?: Status;
   /** Ordering key in epoch ms; interpolated inside the room when undated. */
   key: number;
   /** Catalogue number: the room's opening year and the work's place in it. */

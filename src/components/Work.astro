@@ -1,5 +1,5 @@
 ---
-import type { Room, Work } from "../lib/exhibition";
+import { STATUSES, type Room, type Work } from "../lib/exhibition";
 import { skillMark } from "../lib/marks";
 import Drawing from "./Drawing.astro";
 import Icon from "./Icon.astro";
@@ -43,6 +43,7 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
       <cite>{work.title}</cite>{work.date && <>, <time datetime={work.date.iso}>{work.date.label}</time></>}
     </h3>
     <p class="work__detail">{work.detail}</p>
+    {work.status && <p class="work__status">{STATUSES[work.status]}</p>}
     {
       work.skills.length > 0 && (
         <ul class="work__medium" role="list" aria-label="Medium">
@@ -227,6 +228,13 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
   .work__detail {
     color: var(--vinyl-soft);
     line-height: 1.5;
+  }
+
+  .work__status {
+    font-size: var(--step--1);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .work__medium,

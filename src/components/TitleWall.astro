@@ -1,6 +1,6 @@
 ---
 import portrait from "../assets/portrait.jpg";
-import type { Exhibition } from "../lib/exhibition";
+import { STATUSES, type Exhibition } from "../lib/exhibition";
 import { symbolMark } from "../lib/marks";
 import Drawing from "./Drawing.astro";
 import Icon from "./Icon.astro";
@@ -115,6 +115,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
                   </span>
                   <span class="highlight__measure">
                     {work.metric ? `${work.metric} ${work.metricLabel}` : work.detail}
+                    {work.status && ` (${STATUSES[work.status]})`}
                   </span>
                   <span class="highlight__org">
                     <Mark name={symbolMark(room.mark)} />

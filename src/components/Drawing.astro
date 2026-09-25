@@ -20,6 +20,13 @@ const squares = (count: number) =>
 
 let shape: { viewBox: string; label: string; aspect: string } | null = null;
 let body = "";
+const ordinal = (n: number) => {
+  const suffix = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return `${n}${suffix[(v - 20) % 10] ?? suffix[v] ?? suffix[0]}`;
+};
+// A ranking gilds the dot at its place.
+const ranked = drawing.kind === "count" && drawing.place ? `, the ${ordinal(drawing.place)} in gold` : "";
 
 if (drawing.kind === "reduction") {
   const remain = 100 - drawing.percent;
@@ -49,7 +56,7 @@ if (drawing.kind === "reduction") {
         `<rect class="${i < 100 ? "d-ink" : "d-gilt"}" x="${s.x}" y="${s.y}" width="${CELL}" height="${CELL}"/>`,
     )
     .join("");
-} else if (drawing.kind === "count" && drawing.value <= 12) {
+} else if (drawing.kind === "count" && drawing.value <= 16) {
   const perRow = drawing.value > 6 ? Math.ceil(drawing.value / 2) : drawing.value;
   const rows = Math.ceil(drawing.value / perRow);
   const d = 24;
@@ -61,13 +68,13 @@ if (drawing.kind === "reduction") {
   const padY = Math.max(0, (width / 1.6 - height) / 2);
   shape = {
     viewBox: `${-padX} ${-padY} ${width + padX * 2} ${height + padY * 2}`,
-    label: `Drawing: ${drawing.value} dots, one for each.`,
+    label: `Drawing: ${drawing.value} dots, one for each${ranked}.`,
     aspect: `${width + padX * 2} / ${height + padY * 2}`,
   };
   body = Array.from({ length: drawing.value }, (_, i) => {
     const cx = (i % perRow) * (d + gap) + d / 2;
     const cy = Math.floor(i / perRow) * (d + gap) + d / 2;
-    return `<circle class="d-ink" cx="${cx}" cy="${cy}" r="${d / 2}"/>`;
+    return `<circle class="${i + 1 === drawing.place ? "d-gilt" : "d-ink"}" cx="${cx}" cy="${cy}" r="${d / 2}"/>`;
   }).join("");
 } else if (drawing.kind === "count") {
   const cols = drawing.value <= 100 ? 10 : 20;
@@ -77,14 +84,14 @@ if (drawing.kind === "reduction") {
   const r = 2.3;
   shape = {
     viewBox: `0 0 ${cols * pitch} ${rows * pitch}`,
-    label: `Drawing: ${drawing.value} dots, one for each${drawing.plus ? ", and an open ring for more" : ""}.`,
+    label: `Drawing: ${drawing.value} dots, one for each${ranked}${drawing.plus ? ", and an open ring for more" : ""}.`,
     aspect: `${cols} / ${rows}`,
   };
   body = Array.from({ length: slots }, (_, i) => {
     const cx = (i % cols) * pitch + pitch / 2;
     const cy = Math.floor(i / cols) * pitch + pitch / 2;
     return i < drawing.value
-      ? `<circle class="d-ink" cx="${cx}" cy="${cy}" r="${r}"/>`
+      ? `<circle class="${i + 1 === drawing.place ? "d-gilt" : "d-ink"}" cx="${cx}" cy="${cy}" r="${r}"/>`
       : `<circle class="d-open" cx="${cx}" cy="${cy}" r="${r - 0.45}"/>`;
   }).join("");
 }

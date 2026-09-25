@@ -37,14 +37,15 @@ A career told as a record of unlocked achievements, each tied to a concrete, dat
 - The repo is Ian's public GitHub profile repo (`ian-pascoe/ian-pascoe`). `README.md` must stay at the repo root, is maintained by hand, and is independent of the site build. Site code also lives at the repo root.
 - Timeline content is authored by Ian in one schema-validated file, `src/data/timeline.yaml`. Invalid data fails the build.
 - The entry model has two kinds. **Spans** (roles, education, companies) have start and end dates, and parallel spans run on separate tracks. **Events** (certifications, launches, milestones) are single dated points. Achievements are listed inside entries; an achievement may have its own date, and without one it belongs to its parent span.
-- Until Ian supplies his timeline, the placeholder content is the events in `resume.md` only. No GitHub or npm data is added.
+- Content comes from Ian's own answers, recorded in `src/data/timeline.yaml`, the only source for the site and `/resume`. GitHub stars and npm downloads appear only as hand-written, rounded-down figures in a work's detail; the build fetches no data.
+- Public-content rules from Ian: Windchill, AWS, and Industry Øne may be named; savings may appear as percentages, never as dollar amounts; team sizes are never published. His aim toward RTX Technical Fellow stays off the site.
 - Visitor achievements: about 6–8, earned by exploring, with progress stored only in the visitor's browser (localStorage). No content is ever locked behind an achievement.
-- Achievements carry a playful name drafted by the site author for Ian to edit, always shown beside the plain fact, plus skill tags. Skills are presented only through the achievements that prove them. Placeholder tags come only from `resume.md`'s own skill lists and are marked as drafts.
+- Achievements carry a playful name, always shown beside the plain fact, plus skill tags. Skills are presented only through the achievements that prove them.
 - Entries flagged `featured: true` (about 3) appear on the first screen.
 - The timeline opens at the present, with an optional replay from the beginning that never starts on its own. Without JavaScript, the full timeline renders as a readable list.
 - `/resume` is generated from the same timeline data and prints cleanly to PDF.
 - Static site only: no contact form and no server-side state.
-- Phone number and street address removed from git history (2026-09-24 rewrite of `resume.md`, force-pushed to `main`); never republish them.
+- Phone number and street address removed from git history (2026-09-24 rewrite of the former `resume.md`, force-pushed to `main`); never republish them.
 
 ## Brand Commitments
 
@@ -56,12 +57,12 @@ A career told as a record of unlocked achievements, each tied to a concrete, dat
 
 ## Evidence on Hand
 
-- `resume.md`: roles, dates, and metrics (75% shorter test runs, 60% faster deploys, 30% better uptime, a team of 5, 2 mentees, 300+ users in the first 3 months), certifications, and education. This is placeholder material.
+- `src/data/timeline.yaml`: roles, dates, metrics, certifications, and education, confirmed by Ian on 2026-09-25. It replaced `resume.md`, which was deleted.
 - `README.md`: current profile summary and flagship projects.
 - `pfp.jpeg`: portrait photo.
-- Known conflicts, to be resolved by Ian's timeline: the RTX title (`resume.md` says "Principal Software Engineer"; `README.md` says "Technical Lead & Platform Engineer" / "Principal Specialist"), and the AI Study Bible stack (the two files disagree).
-- Dead links in `resume.md`: `theaistudybible.com` (no DNS) and `github.com/spirit-led-software/clerk-solidjs` (404). Working replacements are under `github.com/spiritledsoftware/`.
-- Absences: no testimonials, no press, and no dates for the AI Study Bible launch or clerk-solidjs in the resume. Do not fabricate any of these.
+- Official RTX title: "Principal Specialist of Business Information Systems and Transformation".
+- Industry Øne: public via the DAF award (PR Newswire, 2026-02-27) and the program unveiling (PR Newswire, 2026-05-20, 15 organisations including RTX). "First of 15 to deploy" is Ian's claim, confirmed to him by Istari, and not in any public source.
+- Absences: no testimonials, no dates for the older RTX works, and no date for the AI Study Bible's first 300 users. Do not fabricate any of these.
 
 ## Product Principles
 

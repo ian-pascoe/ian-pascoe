@@ -15,7 +15,7 @@ Hiring managers and recruiters opening a link Ian sent, usually on a laptop duri
 
 ## Proof and content
 
-Placeholder content comes only from `resume.md`, via `src/data/timeline.yaml`. Metrics shown: 75% shorter test runs, 60% faster deploys, 100% automated build and deploy, 2 HA Kubernetes clusters (+30% uptime), a team of 5, 2 mentees, 300+ users in 3 months. Playful achievement names are drafts for Ian to edit and act as the works' titles. No open-to-work line. Quality bar Ian named: the engineer portfolios at sitebuilderreport.com/inspiration/software-engineer-portfolios (clean, legible, confident type, generous space).
+Content comes only from Ian's own timeline in `src/data/timeline.yaml`. Headline metrics: 1st of 15 Industry Øne organisations to deploy, 75% less time to a ready Windchill environment, 75% shorter test runs, 60% faster deploys, +30% uptime, 300+ users in 3 months; open-source traction for clerk-solidjs, Caplets, opencode-adaptive-thinking, and lspctl. No dollar amounts or team sizes. No open-to-work line. Quality bar Ian named: the engineer portfolios at sitebuilderreport.com/inspiration/software-engineer-portfolios (clean, legible, confident type, generous space).
 
 ## Direction contract
 
@@ -35,7 +35,3 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 The light moving through the rooms on the guided tour, from the 2019 degree to today's work, each piece lit as its label is read.
 
-## Unresolved
-
-- Real timeline data from Ian replaces the placeholder.
-- The RTX title conflict (resume vs README) stays as in `resume.md` until Ian's data arrives.

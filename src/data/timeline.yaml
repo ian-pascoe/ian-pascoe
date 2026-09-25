@@ -12,7 +12,7 @@
 # entries:
 #   - kind: span            a role, company, or degree; hung as its own room
 #     id, title, org, start, end, summary
-#     paint                 the room's wall color: oxblood, green, slate,
+#     paint                 the room's wall color: oxblood, blue, slate,
 #                           ochre, plum, or stone
 #     mark                  optional logo lettered on the room sign; one of
 #                           the names in src/lib/marks.ts (rtx, spirit-led, uri, ...)
@@ -152,7 +152,7 @@ entries:
 
   - kind: span
     id: spirit-led
-    paint: green
+    paint: blue
     mark: spirit-led
     title: Owner
     org: Spirit-Led Software LLC

@@ -214,34 +214,34 @@
           "oklch(95% 0.012 40)"
         ]
       },
-      "paint-green": {
+      "paint-blue": {
         "role": "secondary",
-        "displayName": "Museum Green",
-        "canonical": "oklch(34% 0.05 162)",
+        "displayName": "Spirit-Led Navy",
+        "canonical": "oklch(35.1% 0.079 255)",
         "tonalRamp": [
-          "oklch(15% 0.05 162)",
-          "oklch(25% 0.05 162)",
-          "oklch(35% 0.05 162)",
-          "oklch(45% 0.05 162)",
-          "oklch(55% 0.05 162)",
-          "oklch(65% 0.05 162)",
-          "oklch(80% 0.05 162)",
-          "oklch(95% 0.05 162)"
+          "oklch(15% 0.079 255)",
+          "oklch(25% 0.079 255)",
+          "oklch(35% 0.079 255)",
+          "oklch(45% 0.079 255)",
+          "oklch(55% 0.079 255)",
+          "oklch(65% 0.079 255)",
+          "oklch(80% 0.079 255)",
+          "oklch(95% 0.079 255)"
         ]
       },
-      "vinyl-green": {
+      "vinyl-blue": {
         "role": "secondary",
-        "displayName": "Green Vinyl",
-        "canonical": "oklch(97.5% 0.01 140)",
+        "displayName": "Navy Vinyl",
+        "canonical": "oklch(98.2% 0.006 248)",
         "tonalRamp": [
-          "oklch(15% 0.01 140)",
-          "oklch(25% 0.01 140)",
-          "oklch(35% 0.01 140)",
-          "oklch(45% 0.01 140)",
-          "oklch(55% 0.01 140)",
-          "oklch(65% 0.01 140)",
-          "oklch(80% 0.01 140)",
-          "oklch(95% 0.01 140)"
+          "oklch(15% 0.006 248)",
+          "oklch(25% 0.006 248)",
+          "oklch(35% 0.006 248)",
+          "oklch(45% 0.006 248)",
+          "oklch(55% 0.006 248)",
+          "oklch(65% 0.006 248)",
+          "oklch(80% 0.006 248)",
+          "oklch(95% 0.006 248)"
         ]
       },
       "paint-slate": {
@@ -420,12 +420,12 @@
         "vinyl-rule": "oklch(46% 0.08 22)",
         "use": "RTX room"
       },
-      "green": {
-        "paint": "oklch(34% 0.05 162)",
-        "vinyl": "oklch(97.5% 0.01 140)",
-        "vinyl-soft": "oklch(87% 0.03 150)",
-        "vinyl-quiet": "oklch(78% 0.035 152)",
-        "vinyl-rule": "oklch(46% 0.05 160)",
+      "blue": {
+        "paint": "oklch(35.1% 0.079 255)",
+        "vinyl": "oklch(98.2% 0.006 248)",
+        "vinyl-soft": "oklch(87% 0.03 250)",
+        "vinyl-quiet": "oklch(78% 0.04 252)",
+        "vinyl-rule": "oklch(47% 0.075 255)",
         "use": "Spirit-Led Software room"
       },
       "slate": {

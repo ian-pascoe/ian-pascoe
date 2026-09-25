@@ -15,7 +15,7 @@ export interface PartialDate {
   iso: string;
 }
 
-export const PAINTS = ["oxblood", "green", "slate", "ochre", "plum", "stone"] as const;
+export const PAINTS = ["oxblood", "blue", "slate", "ochre", "plum", "stone"] as const;
 export type Paint = (typeof PAINTS)[number];
 
 export interface Link {

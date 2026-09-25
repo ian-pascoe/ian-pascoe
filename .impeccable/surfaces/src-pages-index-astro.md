@@ -21,7 +21,7 @@ Content comes only from Ian's own timeline in `src/data/timeline.yaml`. Headline
 
 THESIS: Ian's career hung as a museum retrospective. Every achievement is a work on the wall, drawn exactly from its fact, with a museum label. It refuses the portfolio default of hero, about, experience cards and a dotted timeline, and the dark developer template.
 
-OWN-WORLD: Warm gallery-white walls and one painted room per role (RTX oxblood, Spirit-Led museum green), black vinyl lettering on white and white vinyl on paint. One family, Libre Franklin (MoMA's Franklin Gothic lineage), titles of works in italic. Works are precise geometric data drawings, framed with a white mat and thin black moulding. Light is the only effect: a warm spotlight pool. No cards, gradients as fill, glass or badges.
+OWN-WORLD: Warm gallery-white walls and one painted room per role (RTX oxblood, Spirit-Led navy from spiritledsoftware.com), black vinyl lettering on white and white vinyl on paint. One family, Libre Franklin (MoMA's Franklin Gothic lineage), titles of works in italic. Works are precise geometric data drawings, framed with a white mat and thin black moulding. Light is the only effect: a warm spotlight pool. No cards, gradients as fill, glass or badges.
 
 STORY: The visitor reads the title wall (name, headline, now, highlights), walks the rooms and reads each label's figure and fact, and emails Ian from the visitor desk. Explorers take the guided tour from 2019 and collect stamps in a gallery passport.
 

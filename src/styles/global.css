@@ -71,12 +71,13 @@
   --vinyl-rule: oklch(46% 0.08 22);
 }
 
-[data-paint="green"] {
-  --paint: oklch(34% 0.05 162);
-  --vinyl: oklch(97.5% 0.01 140);
-  --vinyl-soft: oklch(87% 0.03 150);
-  --vinyl-quiet: oklch(78% 0.035 152);
-  --vinyl-rule: oklch(46% 0.05 160);
+/* Spirit-Led Software's own navy, --primary on spiritledsoftware.com. */
+[data-paint="blue"] {
+  --paint: oklch(35.1% 0.079 255);
+  --vinyl: oklch(98.2% 0.006 248);
+  --vinyl-soft: oklch(87% 0.03 250);
+  --vinyl-quiet: oklch(78% 0.04 252);
+  --vinyl-rule: oklch(47% 0.075 255);
 }
 
 [data-paint="slate"] {

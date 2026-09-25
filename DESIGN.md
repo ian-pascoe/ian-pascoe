@@ -16,8 +16,8 @@ colors:
   ghost: "oklch(62% 0.006 60)"
   paint-oxblood: "oklch(33% 0.09 22)"
   vinyl-oxblood: "oklch(97.5% 0.012 40)"
-  paint-green: "oklch(34% 0.05 162)"
-  vinyl-green: "oklch(97.5% 0.01 140)"
+  paint-blue: "oklch(35.1% 0.079 255)"
+  vinyl-blue: "oklch(98.2% 0.006 248)"
   paint-slate: "oklch(35% 0.04 250)"
   vinyl-slate: "oklch(97.5% 0.008 250)"
   paint-plum: "oklch(32% 0.07 330)"
@@ -198,7 +198,7 @@ A warm, low-chroma gallery neutral set carries the site; saturated colour lives 
 ### Secondary (room paints)
 Each room is painted by `data-paint`, which sets five tokens at once: `--paint` (the wall), `--vinyl` (lettering), `--vinyl-soft` (secondary text), `--vinyl-quiet` (credits, meta), `--vinyl-rule` (hairlines). Components read only these five, so the same label, button and rule render correctly on any paint.
 - **Oxblood** (paint-oxblood, lettered in vinyl-oxblood): the RTX room.
-- **Museum Green** (paint-green, lettered in vinyl-green): the Spirit-Led Software room.
+- **Spirit-Led Navy** (paint-blue, lettered in vinyl-blue): the Spirit-Led Software room, in the navy of spiritledsoftware.com.
 - **Stone** (paint-stone, lettered in ink): the default paint for rooms made from events alone (the University of Rhode Island room).
 - **Slate**, **Plum** (dark, white vinyl) and **Ochre** (light, ink vinyl): available paints in the schema, unused by the current data.
 - **Night** (paint-ink, lettered in vinyl-ink): the guided-tour bar; floating signage, never a room.

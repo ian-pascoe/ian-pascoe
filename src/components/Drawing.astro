@@ -98,9 +98,33 @@ if (drawing.kind === "reduction") {
 
 const year = date?.year ?? "";
 const sealId = nextSealId();
-// A text piece is sized so its longest run (split at spaces, kept whole across hyphens' halves) fits the mat.
-const longestRun =
-  drawing.kind === "text" ? Math.max(...drawing.subject.split(/\s+|(?<=-)/).map((w) => w.length)) : 0;
+// A text piece is set as large as fits its 4:3 mat in both directions. Each line length from
+// the longest unbreakable run (words break only at spaces and after hyphens) upward is
+// wrapped greedily; the size kept is the largest whose lines fit the width and the height.
+const CHAR = 0.62; // mean glyph advance at weight 800, in em
+const LINE = 0.92; // line height, in em
+function textFit(subject: string): number {
+  const runs = subject
+    .split(/\s+/)
+    .flatMap((word, w) => word.split(/(?<=-)/).map((part, p) => ({ length: part.length, glue: w > 0 && p === 0 ? 1 : 0 })));
+  const total = runs.reduce((sum, run) => sum + run.glue + run.length, 0);
+  let best = 0;
+  for (let chars = Math.max(6, ...runs.map((r) => r.length)); chars <= Math.max(6, total); chars++) {
+    let lines = 1;
+    let used = 0;
+    for (const run of runs) {
+      if (used > 0 && used + run.glue + run.length > chars) {
+        lines++;
+        used = run.length;
+      } else {
+        used += used > 0 ? run.glue + run.length : run.length;
+      }
+    }
+    best = Math.max(best, Math.min(1 / (chars * CHAR), 0.75 / (lines * LINE)));
+  }
+  return best;
+}
+const fit = drawing.kind === "text" ? textFit(drawing.subject) : 0;
 const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${drawing.tag} · ${year} · ` : "";
 // Wordmarks don't fit inside the ring; only a symbol goes in the seal.
 const issuerName = drawing.kind === "document" ? symbolMark(drawing.mark) : undefined;
@@ -157,7 +181,7 @@ const issuer = issuerName && MARKS[issuerName];
 }
 {
   drawing.kind === "text" && (
-    <p class="drawing drawing--text" style={`--run: ${Math.max(longestRun, 6)}`}>
+    <p class="drawing drawing--text" style={`--fit: ${fit.toFixed(4)}`}>
       <span>{drawing.subject}</span>
     </p>
   )
@@ -236,7 +260,7 @@ const issuer = issuerName && MARKS[issuerName];
   }
 
   .drawing--text span {
-    font-size: min(4rem, calc(100cqi / (var(--run) * 0.62)));
+    font-size: min(4rem, calc(100cqi * var(--fit)));
     font-weight: 800;
     line-height: 0.92;
     letter-spacing: -0.03em;

@@ -145,18 +145,16 @@ const planLinks = new Map(
   [...document.querySelectorAll<HTMLElement>("[data-plan]")].map((a) => [a.dataset.plan!, a]),
 );
 const sections = [...document.querySelectorAll<HTMLElement>("[data-room-section]")];
-if ("IntersectionObserver" in window && sections.length > 0) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        for (const [id, link] of planLinks) {
-          if (id === (entry.target as HTMLElement).dataset.roomSection) link.setAttribute("aria-current", "location");
-          else link.removeAttribute("aria-current");
-        }
+const observer = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      for (const [id, link] of planLinks) {
+        if (id === (entry.target as HTMLElement).dataset.roomSection) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       }
-    },
-    { rootMargin: "-40% 0px -55% 0px" },
-  );
-  for (const section of sections) observer.observe(section);
-}
+    }
+  },
+  { rootMargin: "-40% 0px -55% 0px" },
+);
+for (const section of sections) observer.observe(section);

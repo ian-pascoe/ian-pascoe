@@ -16,7 +16,7 @@ const headingId = `room-${room.id}-heading`;
   <div class="wrap">
     <header class="room__wall">
       <h2 class="room__name" id={headingId}>
-        {room.mark && <Mark name={room.mark} class="room__mark" />}
+        <Mark name={room.mark} class="room__mark" />
         <span class="room__number tabular"><span class="visually-hidden">Room </span>{room.number}</span>
         <span class="visually-hidden">: </span>
         <span class="room__org">{room.org}</span>

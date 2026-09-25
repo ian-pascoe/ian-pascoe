@@ -2,28 +2,29 @@
 import { MARKS, type MarkName } from "../lib/marks";
 
 interface Props {
-  name: MarkName;
+  /** Renders nothing when absent, so callers can pass an optional mark straight through. */
+  name?: MarkName;
   class?: string;
-  /** Announce the mark by its label; otherwise it is decoration beside text that names it. */
-  labelled?: boolean;
 }
 
-const { name, class: className, labelled = false } = Astro.props;
-const mark = MARKS[name];
-const [, , w, h] = mark.viewBox.split(" ");
+const { name, class: className } = Astro.props;
+const mark = name && MARKS[name];
+const [, , w, h] = mark ? mark.viewBox.split(" ") : [];
 ---
 
-<svg
-  class:list={["mark", `mark--${mark.shape}`, className]}
-  viewBox={mark.viewBox}
-  style={`aspect-ratio: ${w} / ${h}`}
-  fill="currentColor"
-  role={labelled ? "img" : undefined}
-  aria-label={labelled ? mark.label : undefined}
-  aria-hidden={labelled ? undefined : "true"}
-  focusable="false"
-  set:html={mark.body}
-/>
+{
+  mark && (
+    <svg
+      class:list={["mark", `mark--${mark.shape}`, className]}
+      viewBox={mark.viewBox}
+      style={`aspect-ratio: ${w} / ${h}`}
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      set:html={mark.body}
+    />
+  )
+}
 
 <style>
   .mark {

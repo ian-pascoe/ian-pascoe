@@ -17,27 +17,24 @@ const index = mediaIndex(Astro.props.exhibition);
   </header>
   <dl class="media__list">
     {
-      index.map(({ skill, works }) => {
-        const mark = skillMark(skill);
-        return (
-          <div class="media__entry">
-            <dt>
-              {mark && <Mark name={mark} class="media__mark" />}
-              {skill}
-            </dt>
-            <dd>
-              {works.map((work, i) => (
-                <>
-                  {i > 0 && ", "}
-                  <a href={`#${work.id}`} data-light-link={work.id}>
-                    <cite>{work.title}</cite>
-                  </a>
-                </>
-              ))}
-            </dd>
-          </div>
-        );
-      })
+      index.map(({ skill, works }) => (
+        <div class="media__entry">
+          <dt>
+            <Mark name={skillMark(skill)} class="media__mark" />
+            {skill}
+          </dt>
+          <dd>
+            {works.map((work, i) => (
+              <>
+                {i > 0 && ", "}
+                <a href={`#${work.id}`} data-light-link={work.id}>
+                  <cite>{work.title}</cite>
+                </a>
+              </>
+            ))}
+          </dd>
+        </div>
+      ))
     }
   </dl>
 </section>

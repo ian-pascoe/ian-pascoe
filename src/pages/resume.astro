@@ -49,7 +49,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
         <section class="room" aria-labelledby={`c-${room.id}`}>
           <header class="room__head">
             <h2 id={`c-${room.id}`}>
-              {symbolMark(room.mark) && <Mark name={room.mark!} />}
+              <Mark name={symbolMark(room.mark)} />
               {room.role ? `${room.role}, ${room.org}` : room.org}
             </h2>
             <p class="room__when tabular">{roomRange(room)}</p>

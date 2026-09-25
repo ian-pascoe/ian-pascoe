@@ -55,7 +55,6 @@ export interface Work {
   metricLabel?: string;
   drawing: Drawing;
   date?: PartialDate;
-  tag?: string;
   skills: string[];
   featured: boolean;
   link?: Link;

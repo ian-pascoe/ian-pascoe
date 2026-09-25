@@ -46,15 +46,12 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
     {
       work.skills.length > 0 && (
         <ul class="work__medium" role="list" aria-label="Medium">
-          {work.skills.map((skill) => {
-            const mark = skillMark(skill);
-            return (
-              <li>
-                {mark && <Mark name={mark} />}
-                {skill}
-              </li>
-            );
-          })}
+          {work.skills.map((skill) => (
+            <li>
+              <Mark name={skillMark(skill)} />
+              {skill}
+            </li>
+          ))}
         </ul>
       )
     }
@@ -64,7 +61,7 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
     {
       work.link && (
         <a class="work__link" href={work.link.href} rel="noopener">
-          {onGitHub && <Mark name="github" />}
+          <Mark name={onGitHub ? "github" : undefined} />
           {work.link.label}
           <Icon name="external" />
         </a>

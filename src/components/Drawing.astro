@@ -1,6 +1,6 @@
 ---
 import type { Drawing, PartialDate } from "../lib/exhibition";
-import { MARKS } from "../lib/marks";
+import { MARKS, symbolMark } from "../lib/marks";
 import { nextSealId } from "../lib/seal-id";
 
 interface Props {
@@ -13,6 +13,7 @@ const { drawing, date } = Astro.props;
 // One square per percent of the whole: 10 columns, 10 units per square.
 const CELL = 10;
 const PITCH = 12.5;
+const SIDE = 10 * PITCH - (PITCH - CELL);
 
 const squares = (count: number) =>
   Array.from({ length: count }, (_, i) => ({ x: (i % 10) * PITCH, y: Math.floor(i / 10) * PITCH }));
@@ -22,9 +23,8 @@ let body = "";
 
 if (drawing.kind === "reduction") {
   const remain = 100 - drawing.percent;
-  const size = 10 * PITCH - (PITCH - CELL);
   shape = {
-    viewBox: `0 0 ${size} ${size}`,
+    viewBox: `0 0 ${SIDE} ${SIDE}`,
     label: `Drawing: 100 squares, ${drawing.percent} taken away, ${remain} remain.`,
     aspect: "1 / 1",
   };
@@ -38,9 +38,8 @@ if (drawing.kind === "reduction") {
 } else if (drawing.kind === "increase") {
   const total = 100 + drawing.percent;
   const rows = Math.ceil(total / 10);
-  const width = 10 * PITCH - (PITCH - CELL);
   shape = {
-    viewBox: `0 0 ${width} ${rows * PITCH - (PITCH - CELL)}`,
+    viewBox: `0 0 ${SIDE} ${rows * PITCH - (PITCH - CELL)}`,
     label: `Drawing: 100 squares with ${drawing.percent} more added in gold.`,
     aspect: `10 / ${rows}`,
   };
@@ -91,15 +90,14 @@ if (drawing.kind === "reduction") {
 }
 
 const year = date?.year ?? "";
-// Seal text paths need a document-unique id; several seals can share a page.
 const sealId = nextSealId();
 // A text piece is sized so its longest run (split at spaces, kept whole across hyphens' halves) fits the mat.
 const longestRun =
   drawing.kind === "text" ? Math.max(...drawing.subject.split(/\s+|(?<=-)/).map((w) => w.length)) : 0;
 const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${drawing.tag} · ${year} · ` : "";
-// A seal bears its issuer's mark in the middle when the mark is a symbol; wordmarks don't fit the ring.
-const sealMark = drawing.kind === "document" && drawing.mark ? MARKS[drawing.mark] : undefined;
-const issuer = sealMark?.shape === "symbol" ? sealMark : undefined;
+// Wordmarks don't fit inside the ring; only a symbol goes in the seal.
+const issuerName = drawing.kind === "document" ? symbolMark(drawing.mark) : undefined;
+const issuer = issuerName && MARKS[issuerName];
 ---
 
 {

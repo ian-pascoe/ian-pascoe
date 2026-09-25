@@ -81,7 +81,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
             current.map((room) => (
               <li>
                 <a href={`#room-${room.id}`}>
-                  {symbolMark(room.mark) && <Mark name={room.mark!} />}
+                  <Mark name={symbolMark(room.mark)} />
                   {room.role}, {room.org}
                 </a>
                 <span class="portrait__since tabular"> · since {room.start.year}</span>
@@ -117,7 +117,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
                     {work.metric ? `${work.metric} ${work.metricLabel}` : work.detail}
                   </span>
                   <span class="highlight__org">
-                    {symbolMark(room.mark) && <Mark name={room.mark!} />}
+                    <Mark name={symbolMark(room.mark)} />
                     {room.org}
                   </span>
                 </span>

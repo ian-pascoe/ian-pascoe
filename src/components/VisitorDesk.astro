@@ -12,7 +12,6 @@ interface Props {
 
 const { profile, year } = Astro.props;
 const firstName = profile.name.split(" ")[0];
-// Each stamp's emblem pictures what earns it.
 const EMBLEMS: Record<StampId, IconName> = {
   "first-look": "look",
   "two-rooms": "rooms",
@@ -272,7 +271,7 @@ const EMBLEMS: Record<StampId, IconName> = {
     color: var(--vinyl-quiet);
   }
 
-  /* Stamped: solid red ink, pressed at an angle. State is the mark, not a color swap. */
+  /* Stamped: solid red ink, pressed at an angle. */
   .stamp.is-stamped .stamp__mark {
     color: var(--stamp-ink);
     transform: rotate(var(--tilt));

@@ -206,7 +206,6 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
       detail: event.detail,
       drawing: { kind: "document", tag: event.tag ?? "milestone", mark: event.mark },
       date: event.date,
-      tag: event.tag,
       skills: event.skills,
       featured: event.featured,
       link: event.link,

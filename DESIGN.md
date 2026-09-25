@@ -183,7 +183,7 @@ Structure comes from the voids between rooms, not from boxes. There are no cards
 - Warm gallery-white walls with painted rooms; vinyl lettering flips from ink-on-white to white-on-paint via one token set.
 - One family (Libre Franklin Variable, weights 200–850, true italic); titles of works always italic.
 - Works are exact SVG drawings of their facts, framed with a black moulding border, a white mat, and a hung shadow.
-- The museum label is the unit of content: figure, italic title with date, detail, medium, credit line.
+- The museum label is the unit of content: figure, italic title with date, a one-sentence detail only when the figure and title leave something unsaid, medium, catalogue number.
 - Light is the only state: lit pool up, room darkened, other labels dimmed; deep-linkable by `#work-id`.
 - Square corners everywhere; rules are 1px hairlines in the room's own rule colour.
 
@@ -241,7 +241,7 @@ Each room is painted by `data-paint`, which sets five tokens at once: `--paint` 
 - **Title** (700, `--step-1`, 1.3): room role, section headings (Highlights, passport).
 - **Body** (400, `--step-0`, 1.55): wall text and label detail, capped at `--measure` (62ch) or 38rem on the title wall.
 - **Work Title** (600 italic `cite`, `--step-0`, 1.35): the title of a work, followed by its date in roman 400.
-- **Label** (600–650, `--step--1`): medium and credit lines, floor plan, tour step, passport note.
+- **Label** (600–650, `--step--1`): medium and catalogue-number lines, floor plan, tour step, passport note.
 
 Base headings are 750 at line-height 1.08 and −0.015em, with `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
 
@@ -254,7 +254,7 @@ Base headings are 750 at line-height 1.08 and −0.015em, with `text-wrap: balan
 
 The page is a sequence of full-bleed walls, each holding a centred `.wrap` (max 90rem, `--gutter` side padding). Order: sticky masthead, title wall, one painted room per role, index of media, visitor desk. Rooms are separated by paint and by generous vertical space (`--space-9` above, `--space-9 + --space-4` below), not by dividers.
 
-- **Title wall:** 7fr / 4fr grid; title, wall text, actions and links left; the framed portrait with its label right; three highlights hang small below on one line.
+- **Title wall:** 7fr / 4fr grid; title, headline, actions and links left (no explanatory wall text; the drawings explain themselves); the framed portrait with its label right; three highlights hang small below on one line.
 - **Room wall text:** 5fr / 6fr grid, room sign left, role, dates and summary right, closed by a 1px `--vinyl-rule` line.
 - **The hang line:** works fill `repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr))`; each work spans two subgrid rows, frame then label, and every frame centres vertically in the first row so all frames in a row share one eye level and all labels start on one line. Frame widths vary by drawing kind (12–16rem; featured 16–18.5rem).
 - **Compact rooms** (one or two works, above 52rem) hang the works beside the wall text in the same 5fr / 6fr grid.
@@ -288,20 +288,20 @@ Printed like the gallery's own signage: flat, square, heavy.
 - **Primary:** `--vinyl` fill, `--paint` text, 700 weight, 3rem min height, `0 --space-5` padding, optional leading 1.2em icon. On a white wall this is ink on gallery white; inside a room it inverts to the room's vinyl.
 - **Hover:** fill mixes toward the paint (`color-mix(in oklch, var(--vinyl) 86%, var(--paint))`), 180ms.
 - **Quiet:** transparent with vinyl border and text; hover adds a 10% vinyl wash.
-- **Sizes:** the title-wall and desk email are 3.5rem tall with `--space-6` padding at `--step-1`; the masthead email is 2.5rem at `--step--1`.
+- **Sizes:** the title-wall email is 3.5rem tall with `--space-6` padding at `--step-1`; the masthead email is 2.5rem at `--step--1`. The desk has no button: its display-size italic address is the action.
 - **Focus:** 2px `--vinyl` outline, 3px offset (6px on frames).
 
 ### Framed Work (signature)
 A button that is a picture: moulding border, white mat, and an exact SVG drawing of the fact, `cursor: zoom-in`.
 - **Reduction:** 100 ink squares on a 10×10 grid; the squares taken away remain as thin `--ghost` outlines.
 - **Increase:** 100 ink squares plus the added percent as extra gilt rows.
-- **Count:** one ink dot per unit (large dots up to 12; a 10- or 20-column dot field beyond, with an open ring for "+").
+- **Count:** one ink dot per unit (large dots up to 16; a 10- or 20-column dot field beyond, with an open ring for "+"). A ranking ("1st of 15") is a count whose dot at that place is gilt.
 - **Document:** a seal with the tag set twice around a circle on a text path and the year in the centre. When the event names an issuer whose mark is a symbol, the mark fills the centre and the year sits small beneath it.
-- **Text piece:** the subject set in 800 weight, sized by container query to fit its longest run.
+- **Text piece:** the subject set in 800 weight, sized to the largest size whose wrapped lines fit the 4:3 mat in both width and height.
 - Hover lifts the frame 2px; opening it lights it (see Elevation). Each drawing carries an `aria-label` that states the fact.
 
 ### Museum Label
-Sits under its frame on the hang line, max 24rem: figure (metric + measure) → italic title, date → detail in `--vinyl-soft` → medium (a list of skills, 600, `--step--1`, each led by its 1.25em mark) → credit line (org, range, "No. 2019.1", `--vinyl-quiet`) → optional external link with a 1em arrow.
+Sits under its frame on the hang line, max 24rem: figure (metric + measure) → italic title, date → optional one-sentence detail in `--vinyl-soft` (omitted when the figure says it all) → status ("In progress", "Retired"; uppercase label, no box) → medium (a list of skills, 600, `--step--1`, each led by its 1.25em mark) → catalogue number ("No. 2019.1", `--vinyl-quiet`; the room already names the org and years) → optional external link with a 1em arrow.
 
 ### Room Sign
 Room number in weight 200 and `--vinyl-quiet`, set beside the room name in 800 at `--step-4`; the org's mark is lettered in vinyl above the name (1.6em for a symbol, 1.1em for a wordmark). Role, dates ("Joined Jun 2019 · Day 2,674") and summary on the right.
@@ -316,10 +316,10 @@ A fixed bar painted `ink`, centred at the bottom (max 44rem) with the float shad
 A 1px-ruled panel at the desk with a grid of 5.25rem circular stamps. Each stamp carries a line-icon emblem of what earns it (an eye, two rooms, a framed mat, the picture light, the checklist, a frame on its wire, a letter). Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown, with a 520ms press-in. The masthead tally shows a dashed ring that turns stamp red after the first stamp and briefly slides the new stamp's name out beside the count.
 
 ### Marks
-Organisation logos and skill glyphs live in `src/lib/marks.ts` and render through `Mark.astro`: one flat silhouette filled with `currentColor`, so every mark takes the vinyl of the wall it sits on, like the lettering around it. Never set a mark in its brand colours. A **symbol** (RTX burst, Spirit-Led dove, AWS, GitHub, LinkedIn, the tool logos, and generic glyphs for skills without one) may sit inside a line of text or a seal; a **wordmark** (the University of Rhode Island) appears only on its room sign. Marks appear on room signs, before skills on the medium line and in the index of media (2rem, in a left margin), before the org on the portrait label, highlights and resume headings, before GitHub and LinkedIn links, and before "Source on GitHub". Marks beside text that names them are `aria-hidden`.
+Organisation logos and skill glyphs live in `src/lib/marks.ts` and render through `Mark.astro`: one flat silhouette filled with `currentColor`, so every mark takes the vinyl of the wall it sits on, like the lettering around it. Never set a mark in its brand colours. A **symbol** (RTX burst, Spirit-Led dove, AWS, GitHub, LinkedIn, the tool logos, and generic glyphs for skills without one) may sit inside a line of text or a seal; a **wordmark** (the University of Rhode Island) appears only on its room sign. Marks appear on room signs, before skills on the medium line and in the index of media (1.25em, one wrapped line of skills, each linking to its latest work), before the org on the portrait label, highlights and resume headings, before GitHub and LinkedIn links, and before "Source on GitHub". Marks beside text that names them are `aria-hidden`.
 
 ### Checklist Sheet (resume)
-The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as numbered rows (number, fact, date). Prints to letter at 10pt with no shadow and no toolbar.
+The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as numbered rows (number, fact, a quiet line of media, date). Prints to letter at 10pt with no shadow and no toolbar.
 
 ### Closed for Installation (404)
 An empty frame (dashed-rule mat) hung from an SVG wire: a thin `--ink-quiet` line from one ink hook to the frame's corners, with a room-sign-scale heading and primary/quiet buttons.

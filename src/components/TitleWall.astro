@@ -19,7 +19,6 @@ const featured = tour
   .filter((w) => w.featured)
   .reverse()
   .map((work) => ({ work, room: roomById.get(work.roomId)! }));
-const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(rooms.map((r) => r.org));
 ---
 
 <section class="title-wall" id="top" data-room-section="top" aria-labelledby="exhibition-title">
@@ -30,14 +29,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
         <span class="title-wall__show">Selected Work, <span class="tabular">{firstYear}–{lastYear}</span></span>
       </h1>
 
-      <div class="title-wall__copy">
-        <p class="title-wall__lead">{profile.headline}.</p>
-        <p>
-          This exhibition hangs {tour.length} works across {rooms.length} rooms: {roomNames}. Every work is drawn
-          exactly from its fact. A reduction shows what remains of the whole, an increase adds to it in gold, and a
-          count gives one dot to each.
-        </p>
-      </div>
+      <p class="title-wall__lead">{profile.headline}.</p>
 
       <div class="title-wall__actions">
         <a class="button title-wall__email" href={`mailto:${profile.email}`} data-stamp="say-hello">
@@ -51,7 +43,6 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
       </div>
 
       <ul class="title-wall__links" role="list">
-        <li><a href={`mailto:${profile.email}`} data-stamp="say-hello">{profile.email}</a></li>
         <li><a href="/resume">Checklist of works <span class="title-wall__aside">(resume)</span></a></li>
         <li>
           <a class="title-wall__social" href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a>
@@ -114,7 +105,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
                     <cite>{work.title}</cite>
                   </span>
                   <span class="highlight__measure">
-                    {work.metric ? `${work.metric} ${work.metricLabel}` : work.detail}
+                    {work.metric ? `${work.metric} ${work.metricLabel}` : (work.detail ?? work.title)}
                     {work.status && ` (${STATUSES[work.status]})`}
                   </span>
                   <span class="highlight__org">
@@ -168,18 +159,12 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
     color: var(--ink-soft);
   }
 
-  .title-wall__copy {
-    display: grid;
-    gap: var(--space-4);
-    max-width: 38rem;
-    color: var(--ink-soft);
-  }
-
   .title-wall__lead {
     font-size: var(--step-2);
     font-weight: 650;
     line-height: 1.22;
     letter-spacing: -0.012em;
+    max-width: 38rem;
     color: var(--ink);
   }
 
@@ -389,7 +374,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
       order: 2;
     }
 
-    .title-wall__copy {
+    .title-wall__lead {
       order: 3;
     }
 

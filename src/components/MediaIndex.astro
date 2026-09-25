@@ -11,32 +11,23 @@ const index = mediaIndex(Astro.props.exhibition);
 ---
 
 <section class="media wrap" id="media" data-room-section="media" aria-labelledby="media-heading">
-  <header class="media__head">
-    <h2 id="media-heading">Index of media</h2>
-    <p>Each skill, with the works that prove it.</p>
-  </header>
-  <dl class="media__list">
+  <h2 id="media-heading" class="media__head">Index of media</h2>
+  <ul class="media__list" role="list">
     {
-      index.map(({ skill, works }) => (
-        <div class="media__entry">
-          <dt>
-            <Mark name={skillMark(skill)} class="media__mark" />
-            {skill}
-          </dt>
-          <dd>
-            {works.map((work, i) => (
-              <>
-                {i > 0 && ", "}
-                <a href={`#${work.id}`} data-light-link={work.id}>
-                  <cite>{work.title}</cite>
-                </a>
-              </>
-            ))}
-          </dd>
-        </div>
-      ))
+      index.map(({ skill, works }) => {
+        // Each medium points at the latest work that proves it; every label lists its own media.
+        const latest = works.reduce((a, b) => (b.key > a.key ? b : a));
+        return (
+          <li>
+            <a href={`#${latest.id}`} data-light-link={latest.id} aria-label={`${skill}, latest in ${latest.title}`}>
+              <Mark name={skillMark(skill)} />
+              {skill}
+            </a>
+          </li>
+        );
+      })
     }
-  </dl>
+  </ul>
 </section>
 
 <style>
@@ -47,58 +38,32 @@ const index = mediaIndex(Astro.props.exhibition);
   }
 
   .media__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-2) var(--space-5);
     padding-bottom: var(--space-4);
     border-bottom: 1px solid var(--rule);
-  }
-
-  .media__head h2 {
     font-size: var(--step-3);
     font-weight: 750;
     letter-spacing: -0.025em;
   }
 
-  .media__head p {
-    color: var(--ink-soft);
-  }
-
   .media__list {
-    columns: 3 16rem;
-    column-gap: var(--space-7);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
   }
 
-  /* Each medium's glyph hangs in a margin to the left of its name and works. */
-  .media__entry {
-    position: relative;
-    display: grid;
-    gap: var(--space-1);
-    padding-block: var(--space-4);
-    padding-left: calc(2rem + var(--space-4));
-    border-bottom: 1px solid var(--rule);
-    break-inside: avoid;
+  .media__list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-weight: 650;
+    text-decoration: none;
   }
 
-  .media__entry :global(.media__mark) {
-    position: absolute;
-    top: var(--space-4);
-    left: 0;
-    width: 2rem;
-    height: 2rem;
+  .media__list a:hover {
+    text-decoration: underline;
   }
 
-  .media__entry dt {
-    font-weight: 700;
-  }
-
-  .media__entry dd {
-    color: var(--ink-soft);
-  }
-
-  .media__entry cite {
-    font-style: italic;
+  .media__list :global(.mark) {
+    height: 1.25em;
   }
 </style>

@@ -80,6 +80,9 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
                       <cite>{work.title}</cite>
                     </span>
                   )}
+                  {work.kind === "achievement" && work.skills.length > 0 && (
+                    <span class="entry__medium">{work.skills.join(" · ")}</span>
+                  )}
                 </p>
                 {(work.date || work.status) && (
                   <span class="entry__when tabular">
@@ -275,6 +278,12 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
   .entry__title {
     font-size: var(--step--1);
     color: var(--ink-quiet);
+  }
+
+  .entry__medium {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
   }
 
   .skills {

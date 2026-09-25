@@ -2,7 +2,6 @@
 import type { Profile } from "../lib/exhibition";
 import { ICONS, type IconName } from "../lib/icons";
 import { STAMPS, type StampId } from "../lib/passport";
-import Icon from "./Icon.astro";
 import Mark from "./Mark.astro";
 
 interface Props {
@@ -28,14 +27,8 @@ const EMBLEMS: Record<StampId, IconName> = {
     <div class="desk__contact">
       <h2 id="desk-heading" class="desk__heading">Questions about the work? Ask {firstName}.</h2>
       <a class="desk__address" href={`mailto:${profile.email}`} data-stamp="say-hello">{profile.email}</a>
-      <div class="desk__actions">
-        <a class="button desk__email" href={`mailto:${profile.email}`} data-stamp="say-hello">
-          <Icon name="mail" />
-          Email {firstName}
-        </a>
-        <a class="button button--quiet" href="/resume">Checklist of works</a>
-      </div>
       <ul class="desk__links" role="list">
+        <li><a href="/resume">Checklist of works</a></li>
         <li>
           <a href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a>
         </li>
@@ -53,9 +46,7 @@ const EMBLEMS: Record<StampId, IconName> = {
           0 of {STAMPS.length} stamps
         </p>
       </header>
-      <p class="passport__note">
-        Stamps for looking around. They live only in this browser, and nothing on the site is locked behind them.
-      </p>
+      <p class="passport__note">Stamps for looking around, kept only in this browser.</p>
       <ol class="passport__stamps" role="list">
         {
           STAMPS.map((s, i) => (
@@ -83,7 +74,7 @@ const EMBLEMS: Record<StampId, IconName> = {
     </section>
   </div>
   <p class="desk__colophon wrap">
-    © {year} {profile.name}. Every figure comes from his own record; nothing is invented.
+    © {year} {profile.name}
   </p>
 </footer>
 
@@ -120,19 +111,6 @@ const EMBLEMS: Record<StampId, IconName> = {
     letter-spacing: -0.02em;
     line-height: 1.1;
     overflow-wrap: anywhere;
-  }
-
-  .desk__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-2);
-  }
-
-  .desk__email {
-    min-height: 3.5rem;
-    padding-inline: var(--space-6);
-    font-size: var(--step-1);
   }
 
   .desk__links {

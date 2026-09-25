@@ -42,7 +42,7 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
     <h3 class="work__title">
       <cite>{work.title}</cite>{work.date && <>, <time datetime={work.date.iso}>{work.date.label}</time></>}
     </h3>
-    <p class="work__detail">{work.detail}</p>
+    {work.detail && <p class="work__detail">{work.detail}</p>}
     {work.status && <p class="work__status">{STATUSES[work.status]}</p>}
     {
       work.skills.length > 0 && (
@@ -56,9 +56,7 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
         </ul>
       )
     }
-    <p class="work__foot">
-      {room.org}, {range} · No. <span class="tabular">{work.number}</span>
-    </p>
+    <p class="work__foot">No. <span class="tabular">{work.number}</span></p>
     {
       work.link && (
         <a class="work__link" href={work.link.href} rel="noopener">

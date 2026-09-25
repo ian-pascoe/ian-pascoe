@@ -55,7 +55,8 @@ export interface Work {
   kind: "achievement" | "event";
   /** The work's title: the playful achievement name or the event title. */
   title: string;
-  detail: string;
+  /** The plain fact beyond the figure and title; absent when those already say it all. */
+  detail?: string;
   metric?: string;
   metricLabel?: string;
   drawing: Drawing;

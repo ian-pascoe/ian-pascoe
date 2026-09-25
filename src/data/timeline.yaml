@@ -20,7 +20,8 @@
 #     link                  optional { href, label }
 #     achievements:         the works hung in the room (YAML order = hanging order)
 #       - name              the work's title (playful)
-#         detail            the plain fact, one or two sentences
+#         detail            optional; the plain fact the figure and title don't
+#                           already say, in one sentence
 #         metric            optional figure; it decides the drawing:
 #                             "75%"  drawn as a reduction (100 squares, 75 taken away)
 #                             "+30%" drawn as an increase (100 squares plus 30)
@@ -60,7 +61,7 @@ entries:
     org: University of Rhode Island
     mark: uri
     date: 2019
-    detail: Bachelor of Arts in Computer Science with a minor in Mathematics.
+    detail: Minor in Mathematics.
 
   - kind: span
     id: rtx
@@ -71,71 +72,59 @@ entries:
     start: 2019-06
     end: present
     summary: >-
-      Platform and automation engineering for PTC Windchill on AWS:
-      Terraform, self-service provisioning, CI/CD, test automation, Docker,
-      and Kubernetes.
+      Platform and automation engineering for PTC Windchill on AWS.
       Technical lead for the team since 2026.
     achievements:
       - name: Suite Speedrun
         metric: 75%
         metricLabel: shorter test runs
         detail: >-
-          Built a test automation framework from scratch in Java: Cucumber
-          scenarios drive Selenium through a complete page object model, with
-          Spring for dependency injection and ReportPortal for results. It cut
-          test duration by 75%.
+          A Java framework built from scratch: Cucumber scenarios drive
+          Selenium through a full page object model, with Spring for dependency
+          injection and ReportPortal for results.
         skills: [Java, Cucumber, Selenium, Spring, ReportPortal, CI/CD]
       - name: Hands-Free Deploys
         metric: 60%
         metricLabel: faster deployments
-        detail: >-
-          Implemented CI/CD pipelines that automate 100% of the build and
-          deployment process, cutting deployment time by 60% with zero manual
-          errors in the build.
+        detail: CI/CD pipelines that automate every build and deployment, with zero manual build errors.
         skills: [CI/CD, DevSecOps]
       - name: Bare-Metal Uptime
         metric: +30%
         metricLabel: stability and uptime
-        detail: >-
-          Stood up 2 highly available Kubernetes clusters on bare metal for
-          DevOps tools, improving stability and uptime by 30%.
+        detail: Two highly available Kubernetes clusters on bare metal for the DevOps tools.
         skills: [Kubernetes]
       - name: Mentor Mode
         metric: "2"
-        metricLabel: mentees, now experts
-        detail: Mentored 2 junior developers who are now subject matter experts in their roles.
+        metricLabel: junior developers mentored into experts
       - name: Release Train
         subject: Release pipeline
-        detail: Implemented an automated release pipeline using Jenkins and GitHub.
+        detail: Automated releases with Jenkins and GitHub.
         skills: [Jenkins, CI/CD]
       - name: Zero-Touch Rehost
         date: 2025-11
         metric: 75%
         metricLabel: less time to a ready Windchill environment
         detail: >-
-          Built a self-service platform on AWS: launch an EC2 instance and it
-          prepares the machine and rehosts a Windchill environment onto it with
-          no hands-on work. A day of manual effort now runs unattended in about
-          two hours, coordinated by EventBridge, Step Functions, Lambda, SSM,
-          and Jenkins.
+          Launch an EC2 instance and the platform prepares it and rehosts a
+          Windchill environment onto it, unattended: about two hours instead of
+          a day of manual work.
         skills: [AWS, Windchill, Step Functions, Lambda, EventBridge, SSM, Jenkins, Infrastructure as Code]
         featured: true
       - name: Change of Hats
         date: 2026-04
         subject: Scrum Master → Tech Lead
         detail: >-
-          Scrum Master for the team from 2023, then its technical lead:
-          unblocking engineers and owning architecture decisions.
+          Scrum Master from 2023, then technical lead: unblocking engineers and
+          owning architecture decisions.
         skills: [SAFe Agile, Software Architecture]
       - name: First to Deploy
         date: 2026-06
         metric: 1st of 15
         metricLabel: Industry Øne organisations to deploy
         detail: >-
-          Led RTX's deployment for Industry Øne, the Department of the Air
-          Force program run by Istari Digital that connects engineering data
-          across the defense industrial base without centralizing it. Built on
-          AWS with Terraform.
+          Led RTX's deployment for Industry Øne, the Air Force program run by
+          Istari Digital that connects engineering data across the defense
+          industrial base.
         skills: [AWS, Terraform]
         featured: true
         link:
@@ -145,9 +134,7 @@ entries:
         date: 2026-09
         subject: Windchill on EKS
         status: in-progress
-        detail: >-
-          Leading the move of the program's Windchill environments from virtual
-          machines to Docker containers on AWS EKS, provisioned with Terraform.
+        detail: Leading the move of Windchill from virtual machines to Docker containers on EKS.
         skills: [Docker, Kubernetes, AWS, Terraform, Windchill]
 
   - kind: event
@@ -156,7 +143,6 @@ entries:
     on: rtx
     title: SAFe Agile Scrum Master
     date: 2023
-    detail: Earned the SAFe Agile Scrum Master certification.
     skills: [SAFe Agile]
 
   - kind: span
@@ -168,9 +154,7 @@ entries:
     start: 2023-04
     end: present
     startLabel: Founded
-    summary: >-
-      Founded to build and ship full-stack products; now builds open-source
-      developer tools for AI coding agents.
+    summary: Full-stack products first; now open-source tools for AI coding agents.
     link:
       href: https://spiritledsoftware.com
       label: spiritledsoftware.com
@@ -180,9 +164,8 @@ entries:
         subject: The AI Study Bible
         status: retired
         detail: >-
-          Built and ran an AI Bible-study app, launched as RevelationsAI with a
-          Flutter mobile app and rebuilt in 2024 as The AI Study Bible on
-          TanStack Start, React, SST (AWS Lambda and Cloudflare), Turso, and
+          An AI Bible-study app, launched as RevelationsAI with a Flutter mobile
+          app and rebuilt in 2024 on TanStack Start, React, SST, Turso, and
           Stripe. Retired in 2025.
         skills: [AI Agents, AWS, Infrastructure as Code]
         link:
@@ -190,20 +173,18 @@ entries:
           label: Source on GitHub
       - name: First 300
         metric: 300+
-        metricLabel: users in the first 3 months
-        detail: The AI Study Bible gained over 300 users in its first 3 months.
+        metricLabel: AI Study Bible users in its first 3 months
         featured: true
       - name: Paying Customers
         subject: Stripe subscriptions
-        detail: Took payments through Stripe subscriptions and signed its first paying subscribers.
+        detail: First paying subscribers, through Stripe.
         skills: [Stripe]
       - name: Signal Boost
         date: 2024-07
         subject: clerk-solidjs
         detail: >-
-          Created and maintains clerk-solidjs, the community Clerk
-          authentication SDK for SolidJS, built on Solid's signals: 29k+ npm
-          downloads and 50 GitHub stars.
+          Community Clerk auth SDK for SolidJS, built on signals: 29k+ npm
+          downloads, 50 GitHub stars.
         skills: [SolidJS, Semantic Versioning]
         link:
           href: https://github.com/spiritledsoftware/clerk-solidjs
@@ -212,8 +193,8 @@ entries:
         date: 2026-04
         subject: opencode-adaptive-thinking
         detail: >-
-          OpenCode plugin that sets the model's reasoning effort to fit each
-          task: 20 GitHub stars and about 400 npm downloads a month.
+          OpenCode plugin that fits reasoning effort to each task: 20 GitHub
+          stars, about 400 npm downloads a month.
         skills: [AI Agents]
         link:
           href: https://github.com/ian-pascoe/opencode-adaptive-thinking
@@ -222,9 +203,8 @@ entries:
         date: 2026-05
         subject: Caplets
         detail: >-
-          Gateway that gives AI agents the capabilities of MCP servers and
-          OpenAPI and GraphQL APIs without flooding their context with tool
-          definitions.
+          Gives AI agents MCP, OpenAPI, and GraphQL capabilities without
+          flooding their context with tool definitions.
         skills: [AI Agents, MCP]
         link:
           href: https://caplets.dev
@@ -233,9 +213,8 @@ entries:
         date: 2026-08
         subject: lspctl
         detail: >-
-          Agent-first command-line client for language servers, written in
-          Rust, that gives coding agents definitions, references, and
-          diagnostics.
+          Agent-first language-server CLI in Rust: definitions, references, and
+          diagnostics for coding agents.
         skills: [Rust, AI Agents]
         link:
           href: https://github.com/spiritledsoftware/lspctl
@@ -248,5 +227,4 @@ entries:
     mark: aws
     title: AWS Cloud Practitioner
     date: 2024
-    detail: Earned the AWS Certified Cloud Practitioner certification.
     skills: [AWS]

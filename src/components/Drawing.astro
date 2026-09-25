@@ -6,9 +6,13 @@ import { nextSealId } from "../lib/seal-id";
 interface Props {
   drawing: Drawing;
   date?: PartialDate;
+  id?: string;
+  /** The figure and what it measures, e.g. "2 junior developers mentored into experts". */
+  fact?: string;
 }
 
-const { drawing, date } = Astro.props;
+const { drawing, date, id, fact } = Astro.props;
+const of = fact ? `: ${fact}` : "";
 
 // One square per percent of the whole: 10 columns, 10 units per square.
 const CELL = 10;
@@ -32,7 +36,7 @@ if (drawing.kind === "reduction") {
   const remain = 100 - drawing.percent;
   shape = {
     viewBox: `0 0 ${SIDE} ${SIDE}`,
-    label: `Drawing: 100 squares, ${drawing.percent} taken away, ${remain} remain.`,
+    label: `Drawing: 100 squares, ${drawing.percent} taken away, ${remain} remain${of}.`,
     aspect: "1 / 1",
   };
   body = squares(100)
@@ -47,7 +51,7 @@ if (drawing.kind === "reduction") {
   const rows = Math.ceil(total / 10);
   shape = {
     viewBox: `0 0 ${SIDE} ${rows * PITCH - (PITCH - CELL)}`,
-    label: `Drawing: 100 squares with ${drawing.percent} more added in gold.`,
+    label: `Drawing: 100 squares with ${drawing.percent} more added in gold${of}.`,
     aspect: `10 / ${rows}`,
   };
   body = squares(total)
@@ -68,7 +72,7 @@ if (drawing.kind === "reduction") {
   const padY = Math.max(0, (width / 1.6 - height) / 2);
   shape = {
     viewBox: `${-padX} ${-padY} ${width + padX * 2} ${height + padY * 2}`,
-    label: `Drawing: ${drawing.value} dots, one for each${ranked}.`,
+    label: `Drawing: ${drawing.value} dots${ranked}${of}.`,
     aspect: `${width + padX * 2} / ${height + padY * 2}`,
   };
   body = Array.from({ length: drawing.value }, (_, i) => {
@@ -84,7 +88,7 @@ if (drawing.kind === "reduction") {
   const r = 2.3;
   shape = {
     viewBox: `0 0 ${cols * pitch} ${rows * pitch}`,
-    label: `Drawing: ${drawing.value} dots, one for each${ranked}${drawing.plus ? ", and an open ring for more" : ""}.`,
+    label: `Drawing: ${drawing.value} dots${ranked}${drawing.plus ? ", and an open ring for more" : ""}${of}.`,
     aspect: `${cols} / ${rows}`,
   };
   body = Array.from({ length: slots }, (_, i) => {
@@ -134,6 +138,7 @@ const issuer = issuerName && MARKS[issuerName];
 {
   shape && (
     <svg
+      id={id}
       class="drawing"
       viewBox={shape.viewBox}
       style={`aspect-ratio: ${shape.aspect}`}
@@ -146,6 +151,7 @@ const issuer = issuerName && MARKS[issuerName];
 {
   drawing.kind === "document" && (
     <svg
+      id={id}
       class="drawing drawing--seal"
       viewBox="0 0 120 120"
       style="aspect-ratio: 1 / 1"
@@ -165,7 +171,9 @@ const issuer = issuerName && MARKS[issuerName];
       {
         issuer ? (
           <>
-            <svg class="d-mark" x="37" y="27" width="46" height="46" viewBox={issuer.viewBox} set:html={issuer.body} />
+            <svg class="d-mark" x="37" y="27" width="46" height="46" viewBox={issuer.viewBox}>
+              <use href={`/marks.svg#${issuerName}`} />
+            </svg>
             <text class="d-year d-year--under" x="60" y="87" text-anchor="middle">
               {year}
             </text>
@@ -181,9 +189,9 @@ const issuer = issuerName && MARKS[issuerName];
 }
 {
   drawing.kind === "text" && (
-    <p class="drawing drawing--text" style={`--fit: ${fit.toFixed(4)}`}>
+    <span id={id} class="drawing drawing--text" style={`--fit: ${fit.toFixed(4)}`}>
       <span>{drawing.subject}</span>
-    </p>
+    </span>
   )
 }
 
@@ -206,6 +214,8 @@ const issuer = issuerName && MARKS[issuerName];
 
   .drawing :global(.d-gilt) {
     fill: var(--gilt);
+    stroke: var(--gilt-edge);
+    stroke-width: 0.9;
   }
 
   .drawing :global(.d-open) {
@@ -260,7 +270,7 @@ const issuer = issuerName && MARKS[issuerName];
   }
 
   .drawing--text span {
-    font-size: min(4rem, calc(100cqi * var(--fit)));
+    font-size: clamp(0.6875rem, 100cqi * var(--fit), 4rem);
     font-weight: 800;
     line-height: 0.92;
     letter-spacing: -0.03em;

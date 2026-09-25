@@ -252,12 +252,12 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
     room.works.forEach((work, i) => (work.number = `${room.start.year}.${i + 1}`));
   });
 
-  const tour = rooms.flatMap((r) => r.works).sort((a, b) => a.key - b.key);
-  const years = [...rooms.map((r) => r.start.year), ...tour.flatMap((w) => (w.date ? [w.date.year] : []))];
+  const works = rooms.flatMap((r) => r.works).sort((a, b) => a.key - b.key);
+  const years = [...rooms.map((r) => r.start.year), ...works.flatMap((w) => (w.date ? [w.date.year] : []))];
   const current = rooms.some((r) => r.role && !r.end);
   const lastYear = current
     ? new Date(now).getUTCFullYear()
     : Math.max(...rooms.map((r) => r.end?.year ?? r.start.year));
 
-  return { profile, rooms, tour, firstYear: Math.min(...years), lastYear, builtAt: now };
+  return { profile, rooms, works, firstYear: Math.min(...years), lastYear, builtAt: now };
 }

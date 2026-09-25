@@ -13,6 +13,7 @@
   --mat: oklch(99.3% 0.003 85);
   --moulding: oklch(17% 0.005 60);
   --gilt: oklch(72% 0.11 78);
+  --gilt-edge: oklch(52% 0.1 75);
   --hung:
     0 1px 1px oklch(0% 0 0 / 0.22),
     0 14px 28px -10px oklch(0% 0 0 / 0.38);
@@ -65,6 +66,7 @@
 
 [data-paint="oxblood"] {
   --paint: oklch(33% 0.09 22);
+  --paint-lit: oklch(26% 0.068 22);
   --vinyl: oklch(97.5% 0.012 40);
   --vinyl-soft: oklch(87% 0.03 30);
   --vinyl-quiet: oklch(78% 0.04 28);
@@ -74,6 +76,7 @@
 /* Spirit-Led Software's own navy, --primary on spiritledsoftware.com. */
 [data-paint="blue"] {
   --paint: oklch(35.1% 0.079 255);
+  --paint-lit: oklch(27.5% 0.06 255);
   --vinyl: oklch(98.2% 0.006 248);
   --vinyl-soft: oklch(87% 0.03 250);
   --vinyl-quiet: oklch(78% 0.04 252);
@@ -82,6 +85,7 @@
 
 [data-paint="slate"] {
   --paint: oklch(35% 0.04 250);
+  --paint-lit: oklch(27.4% 0.032 250);
   --vinyl: oklch(97.5% 0.008 250);
   --vinyl-soft: oklch(87% 0.02 250);
   --vinyl-quiet: oklch(78% 0.03 250);
@@ -90,6 +94,7 @@
 
 [data-paint="plum"] {
   --paint: oklch(32% 0.07 330);
+  --paint-lit: oklch(25.3% 0.053 330);
   --vinyl: oklch(97.5% 0.01 330);
   --vinyl-soft: oklch(87% 0.03 330);
   --vinyl-quiet: oklch(78% 0.04 330);
@@ -98,6 +103,7 @@
 
 [data-paint="ochre"] {
   --paint: oklch(78% 0.1 80);
+  --paint-lit: oklch(68% 0.09 80);
   --vinyl: var(--ink);
   --vinyl-soft: oklch(30% 0.03 70);
   --vinyl-quiet: oklch(38% 0.04 70);
@@ -106,6 +112,7 @@
 
 [data-paint="stone"] {
   --paint: oklch(90.5% 0.014 80);
+  --paint-lit: oklch(80% 0.016 80);
   --vinyl: var(--ink);
   --vinyl-soft: oklch(34% 0.01 70);
   --vinyl-quiet: oklch(43% 0.012 70);
@@ -123,6 +130,24 @@
 [data-paint] {
   background: var(--paint);
   color: var(--vinyl);
+}
+
+/* House lights down: a lit room darkens around its one lit work, keeping its own hue.
+   Dark paints keep their lettering; light paints re-letter one step darker so every line still reads. */
+[data-paint][data-lit] {
+  --paint: var(--paint-lit);
+}
+
+[data-paint="ochre"][data-lit] {
+  --vinyl-soft: oklch(22% 0.03 70);
+  --vinyl-quiet: oklch(26% 0.035 70);
+  --vinyl-rule: oklch(58% 0.08 78);
+}
+
+[data-paint="stone"][data-lit] {
+  --vinyl-soft: oklch(28% 0.01 70);
+  --vinyl-quiet: oklch(33% 0.012 70);
+  --vinyl-rule: oklch(70% 0.014 80);
 }
 
 *,
@@ -220,7 +245,7 @@ a:hover {
 
 @media (max-width: 40rem) {
   :root {
-    --masthead: 5.6rem;
+    --masthead: 6.5rem;
   }
 }
 
@@ -238,6 +263,11 @@ a:hover {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/* Without JavaScript the tour and the passport can't run, so they don't hang. */
+html:not(.js) :is([data-tour-start], [data-passport-indicator], .passport) {
+  display: none;
 }
 
 .skip-link {

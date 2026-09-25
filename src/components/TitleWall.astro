@@ -11,11 +11,11 @@ interface Props {
 }
 
 const { exhibition } = Astro.props;
-const { profile, rooms, tour, firstYear, lastYear } = exhibition;
+const { profile, rooms, works, firstYear, lastYear } = exhibition;
 const firstName = profile.name.split(" ")[0];
 const current = rooms.filter((r) => r.role && !r.end);
 const roomById = new Map(rooms.map((r) => [r.id, r]));
-const featured = tour
+const featured = works
   .filter((w) => w.featured)
   .reverse()
   .map((work) => ({ work, room: roomById.get(work.roomId)! }));
@@ -38,12 +38,12 @@ const featured = tour
         </a>
         <button type="button" class="button button--quiet" data-tour-start>
           <Icon name="light" />
-          Take the tour from {firstYear}
+          Take the tour
         </button>
       </div>
 
       <ul class="title-wall__links" role="list">
-        <li><a href="/resume">Checklist of works <span class="title-wall__aside">(resume)</span></a></li>
+        <li><a class="title-wall__link" href="/resume">Resume</a></li>
         <li>
           <a class="title-wall__social" href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a>
         </li>
@@ -66,7 +66,6 @@ const featured = tour
         />
       </div>
       <figcaption class="portrait__label">
-        <p class="portrait__name">{profile.name}</p>
         <ul role="list" class="portrait__roles">
           {
             current.map((room) => (
@@ -191,11 +190,7 @@ const featured = tour
     font-weight: 600;
   }
 
-  .title-wall__aside {
-    font-weight: 400;
-    color: var(--ink-quiet);
-  }
-
+  .title-wall__link,
   .title-wall__social {
     display: inline-flex;
     align-items: center;
@@ -233,12 +228,6 @@ const featured = tour
     max-width: 24rem;
     font-size: var(--step--1);
     color: var(--ink-soft);
-  }
-
-  .portrait__name {
-    font-size: var(--step-0);
-    font-weight: 700;
-    color: var(--ink);
   }
 
   .portrait__roles {
@@ -356,7 +345,7 @@ const featured = tour
       padding-top: var(--space-7);
     }
 
-    /* Phones: the portrait hangs right after the title, before the wall text. */
+    /* Phones: the headline follows the title; the portrait and its roles hang next, before the actions. */
     .title-wall__inner {
       grid-template-columns: 1fr;
       gap: var(--space-6);
@@ -370,11 +359,11 @@ const featured = tour
       order: 1;
     }
 
-    .portrait {
+    .title-wall__lead {
       order: 2;
     }
 
-    .title-wall__lead {
+    .portrait {
       order: 3;
     }
 
@@ -394,6 +383,37 @@ const featured = tour
 
     .highlights {
       margin-top: var(--space-8);
+    }
+  }
+
+  /* Phones: highlights hang beside their labels, like the rooms; links get thumb-sized hit areas. */
+  @media (max-width: 40rem) {
+    .highlights__list {
+      grid-template-columns: 1fr;
+    }
+
+    .highlight,
+    .highlight__link {
+      grid-row: auto;
+      grid-template-rows: none;
+    }
+
+    .highlight__link {
+      grid-template-columns: 7.25rem minmax(0, 1fr);
+      column-gap: var(--space-5);
+      align-items: start;
+    }
+
+    .highlight__frame,
+    .highlight--count .highlight__frame {
+      width: 100%;
+      border-width: 0.2rem;
+    }
+
+    .title-wall__link,
+    .title-wall__social {
+      padding-block: 0.7rem;
+      margin-block: -0.7rem;
     }
   }
 </style>

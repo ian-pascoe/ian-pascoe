@@ -1,5 +1,5 @@
 ---
-import type { Exhibition } from "../lib/exhibition";
+import { shortOrg, type Exhibition } from "../lib/exhibition";
 import { STAMPS } from "../lib/passport";
 import Icon from "./Icon.astro";
 
@@ -9,13 +9,6 @@ interface Props {
 
 const { exhibition } = Astro.props;
 const { profile, rooms } = exhibition;
-
-// Plan labels: drop the legal suffix; long multi-word names become their initials.
-const planName = (org: string) => {
-  const name = org.replace(/,?\s+(LLC|Inc\.?|Ltd\.?|Corp\.?)$/i, "");
-  const words = name.split(/\s+/);
-  return words.length >= 3 ? words.filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join("") : name;
-};
 ---
 
 <header class="masthead">
@@ -33,15 +26,22 @@ const planName = (org: string) => {
           </a>
         </li>
         {
-          rooms.map((room) => (
-            <li style={`--grow: ${Math.max(2, room.works.length)}`}>
-              <a class="plan__room" href={`#room-${room.id}`} data-plan={room.id} data-paint={room.paint}>
-                <span class="plan__number tabular">{room.number}</span>
-                <span class="plan__label">{planName(room.org)}</span>
-                <span class="visually-hidden">, {room.org}</span>
-              </a>
-            </li>
-          ))
+          rooms.map((room) => {
+            // Phones keep only the first word of a room's name ("Spirit-Led").
+            const [first, ...rest] = shortOrg(room.org).split(" ");
+            return (
+              <li style={`--grow: ${Math.max(2, room.works.length)}`}>
+                <a class="plan__room" href={`#room-${room.id}`} data-plan={room.id} data-paint={room.paint}>
+                  <span class="plan__number tabular" aria-hidden="true">{room.number}</span>
+                  <span class="plan__label" aria-hidden="true">
+                    {first}
+                    {rest.length > 0 && <span class="plan__rest"> {rest.join(" ")}</span>}
+                  </span>
+                  <span class="visually-hidden">Room {room.number}: {room.org}</span>
+                </a>
+              </li>
+            );
+          })
         }
         <li style="--grow: 2">
           <a class="plan__room plan__room--edge" href="#desk" data-plan="desk">
@@ -56,11 +56,13 @@ const planName = (org: string) => {
         <circle cx="50" cy="50" r="42" />
         <circle cx="50" cy="50" r="24" />
       </svg>
-      <span class="masthead__flash" data-passport-flash aria-live="polite"></span>
       <span class="masthead__tally tabular">
         <span class="visually-hidden">Gallery passport: </span><span data-passport-tally>0</span>/{STAMPS.length}
       </span>
     </a>
+    {/* A new stamp hangs its name under the masthead for a moment; the status line tells screen readers once. */}
+    <p class="masthead__flash" data-passport-flash aria-hidden="true"></p>
+    <p class="visually-hidden" role="status" data-passport-status></p>
 
     <a class="button masthead__email" href={`mailto:${profile.email}`} data-stamp="say-hello">
       <Icon name="mail" />
@@ -79,6 +81,7 @@ const planName = (org: string) => {
   }
 
   .masthead__inner {
+    position: relative;
     display: grid;
     grid-template-areas: "mark plan passport email";
     grid-template-columns: auto minmax(0, 1fr) auto auto;
@@ -117,9 +120,10 @@ const planName = (org: string) => {
     height: 2.25rem;
   }
 
+  /* Each room is as wide as its hang, and never narrower than its own name. */
   .plan li {
     flex: var(--grow) 1 0;
-    min-width: 2.25rem;
+    min-width: max-content;
   }
 
   .plan li:first-child,
@@ -199,7 +203,11 @@ const planName = (org: string) => {
     text-overflow: ellipsis;
   }
 
-  /* The passport tally; a new stamp flashes its name here instead of covering the page. */
+  /* The room swatches carry their paint's lettering; the focus ring stays gallery ink on the masthead wall. */
+  .plan__room:focus-visible {
+    outline-color: var(--ink);
+  }
+
   .masthead__passport {
     grid-area: passport;
     display: inline-flex;
@@ -235,16 +243,37 @@ const planName = (org: string) => {
     stroke-dasharray: none;
   }
 
+  /* A new stamp's name hangs under the masthead like a ticket, then goes; nothing in the bar moves. */
   .masthead__flash {
-    max-width: 0;
-    overflow: hidden;
+    position: absolute;
+    grid-area: passport;
+    top: calc(100% + 1px + var(--space-2));
+    right: 0;
+    width: max-content;
+    padding: var(--space-2) var(--space-3);
+    background: var(--ink);
+    color: var(--wall);
+    box-shadow: var(--float);
+    font-size: var(--step--1);
+    font-weight: 650;
     white-space: nowrap;
-    color: var(--ink);
-    transition: max-width var(--slow) var(--ease);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(calc(-1 * var(--space-2)));
+    transition:
+      opacity var(--slow) var(--ease),
+      transform var(--slow) var(--ease),
+      visibility 0s linear var(--slow);
   }
 
-  .masthead__passport.is-flashing .masthead__flash {
-    max-width: 16rem;
+  .masthead__flash.is-shown {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity var(--slow) var(--ease),
+      transform var(--slow) var(--ease);
   }
 
   .masthead__email {
@@ -266,32 +295,75 @@ const planName = (org: string) => {
 
     .plan__room {
       justify-content: center;
+      min-width: 2.25rem;
     }
   }
 
-  /* Phones: the plan takes its own row under the name and the email button. */
+  /* Phones: the plan takes its own row under the name and the email button. Every target is thumb-sized. */
   @media (max-width: 40rem) {
     .masthead__inner {
       grid-template-areas:
         "mark passport email"
         "plan plan plan";
       grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: var(--space-2) var(--space-3);
+      gap: var(--space-1) var(--space-3);
       height: auto;
-      padding-block: var(--space-2) var(--space-3);
+      padding-block: var(--space-1) var(--space-2);
+    }
+
+    .masthead__mark,
+    .masthead__passport,
+    .masthead__email {
+      min-height: 2.75rem;
+    }
+
+    .masthead__mark {
+      align-content: center;
+    }
+
+    .masthead__flash {
+      grid-area: plan;
+      top: calc(100% + var(--space-2) + 1px + var(--space-2));
     }
 
     .plan {
       width: 100%;
     }
 
-    .masthead__passport.is-flashing .masthead__flash {
-      max-width: 8.5rem;
-      text-overflow: ellipsis;
+    .plan ol {
+      height: 2.75rem;
     }
 
-    .plan ol {
-      height: 1.85rem;
+    /* Rooms are named, not numbered, where the plan has the whole row. */
+    .plan__room {
+      padding-inline: var(--space-2);
+    }
+
+    .plan__room:not(.plan__room--edge) .plan__label {
+      display: inline;
+    }
+
+    .plan__number,
+    .plan__rest {
+      display: none;
+    }
+  }
+
+  /* The narrowest phones fall back to room numbers. */
+  @media (max-width: 22.5rem) {
+    .plan__room:not(.plan__room--edge) .plan__label {
+      display: none;
+    }
+
+    .plan__number {
+      display: inline;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .plan__room[aria-current="location"] {
+      background: Highlight;
+      color: HighlightText;
     }
   }
 </style>

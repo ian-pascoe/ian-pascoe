@@ -9,12 +9,12 @@ import Base from "../layouts/Base.astro";
 import { loadTimeline } from "../lib/timeline";
 
 const exhibition = loadTimeline();
-const { profile, rooms, tour, firstYear, lastYear } = exhibition;
+const { profile, rooms, works, firstYear, lastYear } = exhibition;
 ---
 
 <Base
   title={`${profile.name} · ${profile.headline}`}
-  description={`${profile.name}: Selected Work, ${firstYear}–${lastYear}. ${profile.headline}; ${tour.length} works, each drawn exactly from its fact.`}
+  description={`${profile.name}: Selected Work, ${firstYear}–${lastYear}. ${profile.headline}; ${works.length} works, each drawn exactly from its fact.`}
 >
   <Masthead exhibition={exhibition} />
   <main id="main">
@@ -24,7 +24,6 @@ const { profile, rooms, tour, firstYear, lastYear } = exhibition;
   </main>
   <VisitorDesk profile={profile} year={new Date(exhibition.builtAt).getUTCFullYear()} />
   <TourBar />
-  <script type="application/json" id="tour-order" set:html={JSON.stringify(tour.map((w) => w.id))} />
   <script>
     import "../scripts/gallery";
   </script>

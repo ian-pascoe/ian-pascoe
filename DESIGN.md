@@ -11,19 +11,26 @@ colors:
   mat: "oklch(99.3% 0.003 85)"
   moulding: "oklch(17% 0.005 60)"
   gilt: "oklch(72% 0.11 78)"
+  gilt-edge: "oklch(52% 0.1 75)"
   light: "oklch(97% 0.05 85)"
   stamp-ink: "oklch(66% 0.17 30)"
   ghost: "oklch(62% 0.006 60)"
   paint-oxblood: "oklch(33% 0.09 22)"
+  paint-oxblood-lit: "oklch(26% 0.068 22)"
   vinyl-oxblood: "oklch(97.5% 0.012 40)"
   paint-blue: "oklch(35.1% 0.079 255)"
+  paint-blue-lit: "oklch(27.5% 0.06 255)"
   vinyl-blue: "oklch(98.2% 0.006 248)"
   paint-slate: "oklch(35% 0.04 250)"
+  paint-slate-lit: "oklch(27.4% 0.032 250)"
   vinyl-slate: "oklch(97.5% 0.008 250)"
   paint-plum: "oklch(32% 0.07 330)"
+  paint-plum-lit: "oklch(25.3% 0.053 330)"
   vinyl-plum: "oklch(97.5% 0.01 330)"
   paint-ochre: "oklch(78% 0.1 80)"
+  paint-ochre-lit: "oklch(68% 0.09 80)"
   paint-stone: "oklch(90.5% 0.014 80)"
+  paint-stone-lit: "oklch(80% 0.016 80)"
   paint-ink: "oklch(17% 0.005 60)"
   vinyl-ink: "oklch(97.5% 0.006 85)"
 typography:
@@ -92,6 +99,17 @@ typography:
     fontSize: "0.875rem"
     fontWeight: 650
     lineHeight: 1.4
+  desk-address:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "clamp(1.5rem, 0.9rem + 2.4vw, 2.75rem)"
+    fontWeight: 300
+    lineHeight: 1.1
+    letterSpacing: "-0.02em"
+  checklist-body:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.45
 rounded:
   none: "0px"
 spacing:
@@ -204,7 +222,7 @@ Each room is painted by `data-paint`, which sets five tokens at once: `--paint` 
 - **Night** (paint-ink, lettered in vinyl-ink): the guided-tour bar; floating signage, never a room.
 
 ### Tertiary
-- **Gilt** (gilt): the added rows of an increase drawing and the text-selection highlight. Nothing else.
+- **Gilt** (gilt): the added rows of an increase drawing, the gilded dot of a ranking, and the text-selection highlight, each gilt shape edged in **Gilt Edge** (gilt-edge) so it holds 3:1 on the mat. Nothing else.
 - **Stamp Red** (stamp-ink): passport stamps once earned, and the masthead passport mark after the first stamp.
 - **Picture Light** (light): the warm pool behind works, mixed at 44% into a radial gradient.
 
@@ -258,8 +276,8 @@ The page is a sequence of full-bleed walls, each holding a centred `.wrap` (max 
 - **Room wall text:** 5fr / 6fr grid, room sign left, role, dates and summary right, closed by a 1px `--vinyl-rule` line.
 - **The hang line:** works fill `repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr))`; each work spans two subgrid rows, frame then label, and every frame centres vertically in the first row so all frames in a row share one eye level and all labels start on one line. Frame widths vary by drawing kind (12–16rem; featured 16–18.5rem).
 - **Compact rooms** (one or two works, above 52rem) hang the works beside the wall text in the same 5fr / 6fr grid.
-- **Visitor desk:** 5fr / 6fr, contact left, passport right; one column below 56rem.
-- **Breakpoints:** 60rem (plan drops room names to numerals), 56rem (title wall and desk stack; portrait follows the title), 52rem (rooms stack, tighter padding), 40rem (masthead grows to two rows, 5.6rem; works hang beside their labels in a 7.25rem column, so a room reads as a list), 36rem (tour bar wraps).
+- **Visitor desk:** 7fr / 5fr, contact left and leading, the smaller passport right; one column below 56rem.
+- **Breakpoints:** 60rem (plan drops room names to numerals), 56rem (title wall and desk stack; the headline follows the title, then the portrait, then the actions), 52rem (rooms stack, tighter padding), 40rem (masthead grows to two rows, 6.5rem, every target 2.75rem; the plan names its rooms by first word; works and highlights hang beside their labels in a 7.25rem column, so a room reads as a list), 36rem (tour bar keeps one row, arrow-only buttons), 22.5rem (plan falls back to numerals).
 - **Rhythm:** a 0.25rem-based scale (`--space-1`..`--space-9`: 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4.5, 7rem). Label internals use `--space-1`/`--space-2`; room and wall gaps use `--space-7`/`--space-8`.
 
 ## Elevation & Depth
@@ -269,10 +287,10 @@ Depth is physical and sparse. The wall is flat; only objects that really hang or
 ### Shadow Vocabulary
 - **Hung** (`--hung`: `0 1px 1px oklch(0% 0 0 / 0.22), 0 14px 28px -10px oklch(0% 0 0 / 0.38)`): every frame, the portrait, the resume sheet and the 404 frame.
 - **Float** (`--float`: `0 18px 40px -12px oklch(0% 0 0 / 0.55)`): the guided-tour bar, the only thing that floats over the rooms.
-- **Lit**: the opened work lifts (`translateY(-3px) scale(1.015)`) and its shadow deepens; its siblings flatten to a 1px contact shadow.
+- **Lit**: the opened work lifts (`translateY(-3px) scale(1.015)`) and its shadow deepens; its siblings flatten to a 1px contact shadow and dim to `brightness(0.8)`.
 
 ### Named Rules
-**The Light Is the State Rule.** Opening a work raises its picture-light pool from 0.28 to full opacity, darkens its room (`color-mix(in oklch, var(--paint) 72%, oklch(8% 0.01 60))`), removes the other pools, and drops the other labels to 0.5 opacity. No outlines, no colour swaps, no overlays. The state is a `#work-id` hash, so it is linkable; without JavaScript a `:target` work still gets its full pool.
+**The Light Is the State Rule.** Opening a work raises its picture-light pool from 0.28 to full opacity, turns its room to the paint's own lit value (`--paint-lit`: the same hue, about 72% of the lightness; light paints also re-letter their soft and quiet vinyl one step darker), removes the other pools, dims the other frames, and drops the other labels to `--vinyl-quiet`. Every lettering step keeps 4.5:1 on every lit paint. No outlines, no hue shifts, no overlays (forced-colors mode alone outlines the lit frame in `Highlight`). The state is a `#work-id` hash, so it is linkable; without JavaScript a `:target` work still gets its full pool.
 
 **The Hanging Things Only Rule.** Shadows belong to hung objects and the tour bar. Text, rules, buttons and panels sit flat on the wall.
 
@@ -298,28 +316,28 @@ A button that is a picture: moulding border, white mat, and an exact SVG drawing
 - **Count:** one ink dot per unit (large dots up to 16; a 10- or 20-column dot field beyond, with an open ring for "+"). A ranking ("1st of 15") is a count whose dot at that place is gilt.
 - **Document:** a seal with the tag set twice around a circle on a text path and the year in the centre. When the event names an issuer whose mark is a symbol, the mark fills the centre and the year sits small beneath it.
 - **Text piece:** the subject set in 800 weight, sized to the largest size whose wrapped lines fit the 4:3 mat in both width and height.
-- Hover lifts the frame 2px; opening it lights it (see Elevation). Each drawing carries an `aria-label` that states the fact.
+- Hover lifts the frame 2px; opening it lights it (see Elevation). Each drawing carries an `aria-label` that states the fact in words ("Drawing: 15 dots, the 1st in gold: 1st of 15 Industry Øne organisations to deploy."). The frame is a toggle named "Light {title}" and described by its drawing.
 
 ### Museum Label
-Sits under its frame on the hang line, max 24rem: figure (metric + measure) → italic title, date → optional one-sentence detail in `--vinyl-soft` (omitted when the figure says it all) → status ("In progress", "Retired"; uppercase label, no box) → medium (a list of skills, 600, `--step--1`, each led by its 1.25em mark) → catalogue number ("No. 2019.1", `--vinyl-quiet`; the room already names the org and years) → optional external link with a 1em arrow.
+Sits under its frame, max 24rem. A room's grid gives every hang three shared rows (frame, figure, text), so frames share an eye line and titles share a line even when a neighbour has no figure: figure (metric + measure) → italic title, date → optional one-sentence detail in `--vinyl-soft` (omitted when the figure says it all) → status ("In progress", "Retired"; uppercase label, no box) → medium (a list of skills, 600, `--step--1`, each led by its 1.25em mark) → catalogue number ("No. 2019.1", `--vinyl-quiet`; the room already names the org and years) → optional external link with a 1em arrow.
 
 ### Room Sign
 Room number in weight 200 and `--vinyl-quiet`, set beside the room name in 800 at `--step-4`; the org's mark is lettered in vinyl above the name (1.6em for a symbol, 1.1em for a wordmark). Role, dates ("Joined Jun 2019 · Day 2,674") and summary on the right.
 
 ### Navigation (floor plan)
-The sticky masthead (`--masthead` 3.75rem, gallery white, 1px rule below) holds the wordmark (name 800, "Selected Work" italic), a floor plan of the rooms, the passport tally and the email button. The plan is a row of 2.25rem boxes sized by each room's work count: Entrance, numbered rooms, Desk. The room the visitor is in gets `aria-current="location"` and fills with that room's paint and vinyl (Entrance and Desk fill ink). Below 60rem rooms show numerals only; below 40rem the plan takes its own full-width row, 1.85rem tall.
+The sticky masthead (`--masthead` 3.75rem, gallery white, 1px rule below) holds the wordmark (name 800, "Selected Work" italic), a floor plan of the rooms, the passport tally and the email button. The plan is a row of 2.25rem boxes sized by each room's work count and never narrower than its own name: Entrance, numbered rooms, Desk. The room the visitor is in gets `aria-current="location"` and fills with that room's paint and vinyl (Entrance and Desk fill ink; the index of media counts as the Desk). The plan's focus ring is always gallery ink, whatever the swatch's paint. Below 60rem rooms show numerals only; below 40rem the plan takes its own full-width row, 2.75rem tall, naming each room by its first word ("Spirit-Led"), and below 22.5rem it falls back to numerals.
 
 ### Guided Tour Bar
-A fixed bar painted `ink`, centred at the bottom (max 44rem) with the float shadow: step counter ("3 of 13 · 2021") above the italic title, then Previous, Next/Finish (solid vinyl) and a square close. Enters with a 520ms rise; arrow keys step, Escape ends. It never starts on its own.
+A fixed bar painted `ink`, centred at the bottom (max 44rem) with the float shadow: the room and step ("Room 1 · RTX · 3 of 11") above the italic title and its date, then Previous, Next/Finish (solid vinyl) and a square close; on phones one 64px row of arrow-only buttons. The tour walks the rooms in their hanging order, each room's works in time order, so the light only ever moves forward through the building. Enters with a 520ms rise; arrow keys step, Escape ends and leaves focus on the frame where the tour stopped. It never starts on its own and earns only its own stamp.
 
 ### Gallery Passport
-A 1px-ruled panel at the desk with a grid of 5.25rem circular stamps. Each stamp carries a line-icon emblem of what earns it (an eye, two rooms, a framed mat, the picture light, the checklist, a frame on its wire, a letter). Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown, with a 520ms press-in. The masthead tally shows a dashed ring that turns stamp red after the first stamp and briefly slides the new stamp's name out beside the count.
+A 1px-ruled panel at the desk with a grid of 4.25rem circular stamps. Each stamp carries a line-icon emblem of what earns it (an eye, two rooms, a framed mat, the picture light, the checklist, a frame on its wire, a letter). Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown (the date also in words for screen readers), with a 520ms press-in. Only what the visitor opens counts toward the looking stamps; the tour and deep links don't, and "Every wall" needs a room of two or more works. The masthead tally shows a dashed ring that turns stamp red after the first stamp; a new stamp's name hangs under the masthead as a small ink ticket for 3.8s (out of flow, so the plan never moves), and one status line announces it to screen readers. Without JavaScript the passport and the tour don't hang.
 
 ### Marks
-Organisation logos and skill glyphs live in `src/lib/marks.ts` and render through `Mark.astro`: one flat silhouette filled with `currentColor`, so every mark takes the vinyl of the wall it sits on, like the lettering around it. Never set a mark in its brand colours. A **symbol** (RTX burst, Spirit-Led dove, AWS, GitHub, LinkedIn, the tool logos, and generic glyphs for skills without one) may sit inside a line of text or a seal; a **wordmark** (the University of Rhode Island) appears only on its room sign. Marks appear on room signs, before skills on the medium line and in the index of media (1.25em, one wrapped line of skills, each linking to its latest work), before the org on the portrait label, highlights and resume headings, before GitHub and LinkedIn links, and before "Source on GitHub". Marks beside text that names them are `aria-hidden`.
+Organisation logos and skill glyphs live in `src/lib/marks.ts`, are published once as the `/marks.svg` sprite (`src/pages/marks.svg.ts`), and render through `Mark.astro` as a `<use>` of their symbol: one flat silhouette filled with `currentColor`, so every mark takes the vinyl of the wall it sits on, like the lettering around it. Never set a mark in its brand colours. A **symbol** (RTX burst, Spirit-Led dove, AWS, GitHub, LinkedIn, the tool logos, and generic glyphs for skills without one) may sit inside a line of text or a seal; a **wordmark** (the University of Rhode Island) appears only on its room sign. Marks appear on room signs, before skills on the medium line and in the index of media (1.25em, one wrapped line of skills, each linking to its latest work), before the org on the portrait label, highlights and resume headings, before GitHub and LinkedIn links, and before "Source on GitHub". Marks beside text that names them are `aria-hidden`.
 
 ### Checklist Sheet (resume)
-The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as numbered rows (number, fact, a quiet line of media, date). Prints to letter at 10pt with no shadow and no toolbar.
+The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as rows (fact, a quiet line of media, and the date on the right where a resume keeps it; catalogue numbers stay in the exhibition), prose capped at 38em (about 75 characters). Prints to letter at 10pt with no shadow and no toolbar.
 
 ### Closed for Installation (404)
 An empty frame (dashed-rule mat) hung from an SVG wire: a thin `--ink-quiet` line from one ink hook to the frame's corners, with a room-sign-scale heading and primary/quiet buttons.

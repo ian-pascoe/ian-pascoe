@@ -21,8 +21,9 @@ const [, , w, h] = mark ? mark.viewBox.split(" ") : [];
       fill="currentColor"
       aria-hidden="true"
       focusable="false"
-      set:html={mark.body}
-    />
+    >
+      <use href={`/marks.svg#${name}`} />
+    </svg>
   )
 }
 

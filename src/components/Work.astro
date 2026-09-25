@@ -11,8 +11,7 @@ interface Props {
 }
 
 const { work, room } = Astro.props;
-const labelId = `${work.id}-label`;
-const range = room.role ? `${room.start.year}–${room.end ? room.end.year : "now"}` : String(room.start.year);
+const drawingId = `${work.id}-drawing`;
 const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" : false;
 ---
 
@@ -22,15 +21,14 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
   data-work={work.id}
   data-room={room.id}
   data-title={work.title}
-  data-when={work.date?.label ?? range}
+  data-when={work.date?.label ?? ""}
 >
-  <button type="button" class="work__frame" aria-pressed="false" aria-describedby={labelId} data-light={work.id}>
+  <button type="button" class="work__frame" aria-pressed="false" aria-label={`Light ${work.title}`} aria-describedby={drawingId} data-light={work.id}>
     <span class="work__mat">
-      <Drawing drawing={work.drawing} date={work.date} />
+      <Drawing drawing={work.drawing} date={work.date} id={drawingId} fact={work.metric && `${work.metric} ${work.metricLabel}`} />
     </span>
-    <span class="visually-hidden">Light {work.title}</span>
   </button>
-  <div class="work__label" id={labelId}>
+  <div class="work__label">
     {
       work.metric && (
         <p class="work__figure">
@@ -39,44 +37,49 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
         </p>
       )
     }
-    <h3 class="work__title">
-      <cite>{work.title}</cite>{work.date && <>, <time datetime={work.date.iso}>{work.date.label}</time></>}
-    </h3>
-    {work.detail && <p class="work__detail">{work.detail}</p>}
-    {work.status && <p class="work__status">{STATUSES[work.status]}</p>}
-    {
-      work.skills.length > 0 && (
-        <ul class="work__medium" role="list" aria-label="Medium">
-          {work.skills.map((skill) => (
-            <li>
-              <Mark name={skillMark(skill)} />
-              {skill}
-            </li>
-          ))}
-        </ul>
-      )
-    }
-    <p class="work__foot">No. <span class="tabular">{work.number}</span></p>
-    {
-      work.link && (
-        <a class="work__link" href={work.link.href} rel="noopener">
-          <Mark name={onGitHub ? "github" : undefined} />
-          {work.link.label}
-          <Icon name="external" />
-        </a>
-      )
-    }
+    <div class="work__text">
+      <h3 class="work__title">
+        <cite>{work.title}</cite>{work.date && <>, <time datetime={work.date.iso}>{work.date.label}</time></>}
+      </h3>
+      {work.detail && <p class="work__detail">{work.detail}</p>}
+      {work.status && <p class="work__status">{STATUSES[work.status]}</p>}
+      {
+        work.skills.length > 0 && (
+          <ul class="work__medium" role="list" aria-label="Medium">
+            {work.skills.map((skill) => (
+              <li>
+                <Mark name={skillMark(skill)} />
+                {skill}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <p class="work__foot">No. <span class="tabular">{work.number}</span></p>
+      {
+        work.link && (
+          <a class="work__link" href={work.link.href} rel="noopener">
+            <Mark name={onGitHub ? "github" : undefined} />
+            {work.link.label}
+            <Icon name="external" />
+          </a>
+        )
+      }
+    </div>
   </div>
 </li>
 
 <style>
+  /* Three shared rows per hang: frames on one eye line, figures on one line, titles on one line.
+     The room's grid has no row gap (it would open up empty figure rows), so each hang keeps its own space below. */
   .work {
     position: relative;
     display: grid;
-    grid-row: span 2;
+    grid-row: span 3;
     grid-template-rows: subgrid;
-    row-gap: var(--space-5);
+    row-gap: 0;
     align-content: start;
+    margin-bottom: var(--hang-gap, var(--space-8));
   }
 
   /* The light pool a lit work stands in. */
@@ -98,14 +101,16 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
     justify-self: start;
     display: block;
     width: min(100%, var(--frame, 15rem));
+    margin-bottom: var(--space-5);
     padding: 0;
     border: 0.3rem solid var(--moulding);
     background: var(--mat);
     box-shadow: var(--hung);
-    cursor: zoom-in;
+    cursor: pointer;
     transition:
       transform var(--slow) var(--ease),
-      box-shadow var(--slow) var(--ease);
+      box-shadow var(--slow) var(--ease),
+      filter var(--slow) var(--ease);
   }
 
   .work__frame:hover {
@@ -154,45 +159,29 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
     --frame: 16rem;
   }
 
-  /* Phones: each work hangs beside its label, so a room reads as a list. */
-  @media (max-width: 40rem) {
-    .work {
-      grid-row: auto;
-      grid-template-rows: none;
-      grid-template-columns: 7.25rem minmax(0, 1fr);
-      column-gap: var(--space-5);
-      align-items: start;
-    }
-
-    .work__frame {
-      align-self: start;
-      width: 100%;
-      border-width: 0.2rem;
-    }
-
-    .work::before {
-      inset: -1.5rem -1rem;
-    }
-
-    .work__metric {
-      font-size: var(--step-2);
-    }
-  }
-
   .work__label {
     position: relative;
     z-index: 1;
     display: grid;
-    align-content: start;
-    gap: var(--space-2);
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
     max-width: 24rem;
-    transition: opacity var(--slow) var(--ease);
   }
 
   .work__figure {
+    grid-row: 1;
+    align-self: end;
     display: grid;
     gap: var(--space-1);
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-3);
+  }
+
+  .work__text {
+    grid-row: 2;
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
   }
 
   .work__metric {
@@ -285,18 +274,69 @@ const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" :
     box-shadow:
       0 1px 1px oklch(0% 0 0 / 0.2),
       0 22px 40px -12px oklch(0% 0 0 / 0.5);
-    cursor: zoom-out;
   }
 
   :global([data-lit]) .work:not(.is-lit)::before {
     opacity: 0;
   }
 
+  /* The other works fall into shadow: their frames dim and lose their hung shadow, and their labels drop
+     to the quiet lettering, which each paint keeps readable when lit. */
   :global([data-lit]) .work:not(.is-lit) .work__frame {
     box-shadow: 0 1px 1px oklch(0% 0 0 / 0.3);
+    filter: brightness(0.8);
   }
 
-  :global([data-lit]) .work:not(.is-lit) .work__label {
-    opacity: 0.5;
+  :global([data-lit]) .work:not(.is-lit) :is(.work__label, .work__detail, .work__medium) {
+    color: var(--vinyl-quiet);
+  }
+
+  /* Phones: each work hangs beside its label, so a room reads as a list. */
+  @media (max-width: 40rem) {
+    .work {
+      grid-row: auto;
+      grid-template-rows: none;
+      grid-template-columns: 7.25rem minmax(0, 1fr);
+      column-gap: var(--space-5);
+      align-items: start;
+    }
+
+    .work__frame {
+      align-self: start;
+      width: 100%;
+      margin-bottom: 0;
+      border-width: 0.2rem;
+    }
+
+    .work::before {
+      inset: -1.5rem -1rem;
+    }
+
+    .work__label {
+      grid-row: auto;
+      grid-template-rows: none;
+    }
+
+    .work__figure,
+    .work__text {
+      grid-row: auto;
+    }
+
+    .work__metric {
+      font-size: var(--step-2);
+    }
+
+    /* A thumb-sized hit area without moving the lettering. */
+    .work__link {
+      padding-block: 0.7rem;
+      margin-block: -0.7rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .work.is-lit .work__frame {
+      outline: 3px solid Highlight;
+      outline-offset: 6px;
+    }
   }
 </style>

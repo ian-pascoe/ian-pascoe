@@ -8,7 +8,7 @@ export const STAMPS = [
   { id: "two-rooms", name: "Two rooms", how: "Open works in two different rooms." },
   { id: "every-wall", name: "Every wall", how: "Open every work in one room." },
   { id: "full-tour", name: "The full tour", how: "Take the tour from the first work to the last." },
-  { id: "checklist", name: "The checklist", how: "Open the printable checklist of works." },
+  { id: "checklist", name: "The checklist", how: "Open the printable resume." },
   { id: "backstage", name: "Backstage", how: "Find the room that is closed for installation." },
   { id: "say-hello", name: "Say hello", how: "Start an email to Ian." },
 ] as const;

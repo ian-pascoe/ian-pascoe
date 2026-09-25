@@ -11,7 +11,7 @@ const { profile, rooms, firstYear, lastYear } = exhibition;
 const skills = mediaIndex(exhibition).map((m) => m.skill);
 // Certifications read as one line at the foot of the resume, not as works in their rooms.
 const isCertification = (w: Work) => w.drawing.kind === "document" && w.drawing.tag === "certification";
-const certifications = exhibition.tour.filter(isCertification);
+const certifications = exhibition.works.filter(isCertification);
 const sections = rooms
   .map((room) => ({ room, works: room.works.filter((w) => !isCertification(w)) }))
   .filter(({ room, works }) => room.role || works.length > 0);
@@ -64,7 +64,6 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
           <ol class="works" role="list">
             {works.map((work) => (
               <li class="entry">
-                <span class="entry__number tabular">{work.number}</span>
                 <p class="entry__text">
                   {work.metric ? (
                     <strong>
@@ -117,7 +116,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
             {certifications.map((w, i) => (
               <>
                 {i > 0 && " · "}
-                <span class="tabular">{w.number}</span> {w.title} ({w.date!.year})
+                {w.title} ({w.date!.year})
               </>
             ))}
           </p>
@@ -251,6 +250,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
   }
 
   .room__summary {
+    max-width: 38em;
     margin-top: var(--space-3);
     color: var(--ink-soft);
   }
@@ -259,17 +259,21 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     margin-top: var(--space-2);
   }
 
+  /* A row is the work, then its date where a resume keeps dates: on the right. */
   .entry {
     display: grid;
-    grid-template-columns: 3.25rem minmax(0, 1fr) auto;
-    gap: var(--space-3);
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-5);
     align-items: baseline;
     padding-block: var(--space-2);
     border-bottom: 1px solid var(--rule);
     break-inside: avoid;
   }
 
-  .entry__number,
+  .entry__text {
+    max-width: 38em;
+  }
+
   .entry__when {
     font-size: var(--step--1);
     color: var(--ink-quiet);
@@ -288,6 +292,19 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 
   .skills {
     margin-top: var(--space-3);
+  }
+
+  @media (max-width: 40rem) {
+    .sheet__contact a {
+      display: inline-block;
+      padding-block: 0.7rem;
+      margin-block: -0.7rem;
+    }
+
+    .toolbar__back {
+      padding-block: 0.7rem;
+      margin-block: -0.7rem;
+    }
   }
 
   @page {

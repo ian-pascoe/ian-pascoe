@@ -28,7 +28,7 @@ const EMBLEMS: Record<StampId, IconName> = {
       <h2 id="desk-heading" class="desk__heading">Questions about the work? Ask {firstName}.</h2>
       <a class="desk__address" href={`mailto:${profile.email}`} data-stamp="say-hello">{profile.email}</a>
       <ul class="desk__links" role="list">
-        <li><a href="/resume">Checklist of works</a></li>
+        <li><a href="/resume">Resume</a></li>
         <li>
           <a href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a>
         </li>
@@ -42,7 +42,7 @@ const EMBLEMS: Record<StampId, IconName> = {
     <section class="passport" id="passport" aria-labelledby="passport-heading">
       <header class="passport__head">
         <h3 id="passport-heading">Your gallery passport</h3>
-        <p class="passport__count tabular" data-passport-count aria-live="polite">
+        <p class="passport__count tabular" data-passport-count>
           0 of {STAMPS.length} stamps
         </p>
       </header>
@@ -65,7 +65,7 @@ const EMBLEMS: Record<StampId, IconName> = {
                 </text>
                 <text class="stamp__date" x="50" y="67" text-anchor="middle" data-stamp-date />
               </svg>
-              <p class="stamp__name">{s.name}</p>
+              <p class="stamp__name">{s.name}<span class="visually-hidden" data-stamp-when></span></p>
               <p class="stamp__how" data-stamp-how>{s.how}</p>
             </li>
           ))
@@ -82,12 +82,14 @@ const EMBLEMS: Record<StampId, IconName> = {
   .desk {
     padding-block: var(--space-9) var(--space-6);
     border-top: 2px solid var(--ink);
-    scroll-margin-top: var(--masthead);
+    /* A jump to the desk lands with the question near the top, not below a band of empty wall. */
+    scroll-margin-top: calc(var(--masthead) - var(--space-8));
   }
 
+  /* The contact leads; the passport is the smaller side table. */
   .desk__inner {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: var(--space-8);
     align-items: start;
   }
@@ -164,7 +166,7 @@ const EMBLEMS: Record<StampId, IconName> = {
 
   .passport__stamps {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
     gap: var(--space-5) var(--space-4);
     margin-top: var(--space-3);
   }
@@ -176,8 +178,8 @@ const EMBLEMS: Record<StampId, IconName> = {
   }
 
   .stamp__mark {
-    width: 5.25rem;
-    height: 5.25rem;
+    width: 4.25rem;
+    height: 4.25rem;
     margin-bottom: var(--space-2);
     color: var(--vinyl-quiet);
     transition:
@@ -295,6 +297,15 @@ const EMBLEMS: Record<StampId, IconName> = {
 
     .passport {
       padding: var(--space-5);
+    }
+  }
+
+  /* Phones: thumb-sized hit areas without moving the lettering. */
+  @media (max-width: 40rem) {
+    .desk__links a,
+    .desk__address {
+      padding-block: 0.7rem;
+      margin-block: -0.7rem;
     }
   }
 </style>

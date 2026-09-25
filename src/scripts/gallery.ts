@@ -1,14 +1,15 @@
 /**
  * The rooms' one state change is light: opening a work lights it and dims the
  * rest of its room, as a deep-linkable #hash. The floor plan follows the
- * visitor, and the guided tour walks the light through every work in time order.
+ * visitor, and the guided tour walks the light through the rooms in order,
+ * each room's works in time order.
  */
 import { stamp } from "../lib/passport";
 
 const OPENED_KEY = "ianpascoe.passport.opened.v1";
 const works = [...document.querySelectorAll<HTMLElement>("[data-work]")];
 const byId = new Map(works.map((w) => [w.dataset.work!, w]));
-const tourOrder: string[] = JSON.parse(document.getElementById("tour-order")?.textContent ?? "[]");
+const tourOrder = works.map((w) => w.dataset.work!);
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
 let lit: HTMLElement | null = null;
@@ -23,6 +24,7 @@ const opened = new Set<string>(
   })(),
 );
 
+/** Stamps count only what the visitor opens: not the tour, not a deep link. */
 function recordOpened(work: HTMLElement): void {
   opened.add(work.dataset.work!);
   try {
@@ -33,12 +35,12 @@ function recordOpened(work: HTMLElement): void {
   stamp("first-look");
   const roomsOpened = new Set([...opened].flatMap((id) => byId.get(id)?.dataset.room ?? []));
   if (roomsOpened.size >= 2) stamp("two-rooms");
-  const roomId = work.dataset.room;
-  if (works.filter((w) => w.dataset.room === roomId).every((w) => opened.has(w.dataset.work!))) stamp("every-wall");
+  const inRoom = works.filter((w) => w.dataset.room === work.dataset.room);
+  if (inRoom.length > 1 && inRoom.every((w) => opened.has(w.dataset.work!))) stamp("every-wall");
 }
 
-function light(id: string | null, options: { scroll?: boolean; hash?: boolean } = {}): void {
-  const { scroll = false, hash = true } = options;
+function light(id: string | null, options: { scroll?: boolean; hash?: boolean; record?: boolean } = {}): void {
+  const { scroll = false, hash = true, record = true } = options;
   if (lit) {
     lit.classList.remove("is-lit");
     lit.querySelector("[data-light]")?.setAttribute("aria-pressed", "false");
@@ -50,7 +52,7 @@ function light(id: string | null, options: { scroll?: boolean; hash?: boolean } 
     lit.querySelector("[data-light]")?.setAttribute("aria-pressed", "true");
     lit.closest("[data-room-section]")?.setAttribute("data-lit", "");
     if (scroll) lit.scrollIntoView({ block: "center", behavior: reduceMotion.matches ? "auto" : "smooth" });
-    recordOpened(lit);
+    if (record) recordOpened(lit);
   }
   if (hash) history.replaceState(null, "", lit ? `#${lit.dataset.work}` : `${location.pathname}${location.search}`);
 }
@@ -67,10 +69,13 @@ function showStep(index: number): void {
   step = index;
   const id = tourOrder[step]!;
   const work = byId.get(id);
-  light(id, { scroll: true });
+  light(id, { scroll: true, record: false });
   if (!work || !stepEl || !titleEl || !prevButton || !nextLabel) return;
-  stepEl.textContent = `${step + 1} of ${tourOrder.length} · ${work.dataset.when}`;
-  titleEl.replaceChildren(Object.assign(document.createElement("cite"), { textContent: work.dataset.title }));
+  const room = work.closest<HTMLElement>("[data-room-section]");
+  const inRoom = works.filter((w) => w.dataset.room === work.dataset.room);
+  stepEl.textContent = `${room?.dataset.roomLabel ?? ""} · ${inRoom.indexOf(work) + 1} of ${inRoom.length}`;
+  const when = work.dataset.when ? `, ${work.dataset.when}` : "";
+  titleEl.replaceChildren(Object.assign(document.createElement("cite"), { textContent: work.dataset.title }), when);
   prevButton.disabled = step === 0;
   nextLabel.textContent = step === tourOrder.length - 1 ? "Finish" : "Next";
 }
@@ -85,10 +90,12 @@ function startTour(): void {
 function endTour(finished: boolean): void {
   if (!bar || step < 0) return;
   if (finished) stamp("full-tour");
+  // Focus stays where the visitor is standing: on the frame the tour stopped at.
+  const here = byId.get(tourOrder[step]!)?.querySelector<HTMLElement>("[data-light]");
   bar.hidden = true;
   step = -1;
   light(null);
-  document.querySelector<HTMLElement>("[data-tour-start]")?.focus({ preventScroll: true });
+  here?.focus({ preventScroll: true });
 }
 
 function advance(by: 1 | -1): void {
@@ -135,7 +142,7 @@ document.addEventListener("keydown", (event) => {
 
 const fromHash = () => {
   const id = decodeURIComponent(location.hash.slice(1));
-  if (byId.has(id)) light(id, { hash: false });
+  if (byId.has(id)) light(id, { hash: false, record: false });
 };
 window.addEventListener("hashchange", fromHash);
 fromHash();
@@ -149,8 +156,11 @@ const observer = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
+      const target = entry.target as HTMLElement;
+      // The index of media hangs in the lobby by the desk.
+      const area = target.dataset.planArea ?? target.dataset.roomSection;
       for (const [id, link] of planLinks) {
-        if (id === (entry.target as HTMLElement).dataset.roomSection) link.setAttribute("aria-current", "location");
+        if (id === area) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
       }
     }

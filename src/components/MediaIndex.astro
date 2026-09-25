@@ -10,8 +10,8 @@ interface Props {
 const index = mediaIndex(Astro.props.exhibition);
 ---
 
-<section class="media wrap" id="media" data-room-section="media" aria-labelledby="media-heading">
-  <h2 id="media-heading" class="media__head">Index of media</h2>
+<section class="media wrap" id="media" data-room-section="media" data-plan-area="desk" aria-labelledby="media-heading">
+  <h2 id="media-heading" class="media__head">Index of media <span class="media__aside">(skills)</span></h2>
   <ul class="media__list" role="list">
     {
       index.map(({ skill, works }) => {
@@ -57,6 +57,22 @@ const index = mediaIndex(Astro.props.exhibition);
     gap: 0.45em;
     font-weight: 650;
     text-decoration: none;
+  }
+
+  .media__aside {
+    font-weight: 300;
+    color: var(--ink-quiet);
+  }
+
+  /* Phones: each link is a thumb-sized row; the list keeps its rhythm. */
+  @media (max-width: 40rem) {
+    .media__list {
+      gap: 0 var(--space-6);
+    }
+
+    .media__list a {
+      min-height: 2.75rem;
+    }
   }
 
   .media__list a:hover {

@@ -1,5 +1,5 @@
 ---
-import { dayCount, roomRange, type Room } from "../lib/exhibition";
+import { dayCount, roomRange, shortOrg, type Room } from "../lib/exhibition";
 import Icon from "./Icon.astro";
 import Mark from "./Mark.astro";
 import Work from "./Work.astro";
@@ -12,7 +12,14 @@ const { room } = Astro.props;
 const headingId = `room-${room.id}-heading`;
 ---
 
-<section class:list={["room", { "room--compact": room.works.length <= 2 }]} id={`room-${room.id}`} data-paint={room.paint} data-room-section={room.id} aria-labelledby={headingId}>
+<section
+  class:list={["room", { "room--compact": room.works.length <= 2 }]}
+  id={`room-${room.id}`}
+  data-paint={room.paint}
+  data-room-section={room.id}
+  data-room-label={`Room ${room.number} · ${shortOrg(room.org)}`}
+  aria-labelledby={headingId}
+>
   <div class="wrap">
     <header class="room__wall">
       <h2 class="room__name" id={headingId}>
@@ -69,12 +76,9 @@ const headingId = `room-${room.id}-heading`;
   .room {
     padding-block: var(--space-9) calc(var(--space-9) + var(--space-4));
     scroll-margin-top: var(--masthead);
+    /* The light pools bleed past the gutter; the wall ends at the viewport. */
+    overflow-x: clip;
     transition: background-color var(--slow) var(--ease);
-  }
-
-  /* House lights down: the whole room darkens around the one lit work. */
-  .room[data-lit] {
-    background: color-mix(in oklch, var(--paint) 72%, oklch(8% 0.01 60));
   }
 
   .room__wall {
@@ -151,13 +155,16 @@ const headingId = `room-${room.id}-heading`;
     height: 1em;
   }
 
-  /* One hang line: frames in a row center on the same eye level. */
+  /* One hang line: frames in a row center on the same eye level. Each work keeps --hang-gap below itself;
+     the last hang's gap folds back into the room's own padding. */
   .room__works {
+    --hang-gap: var(--space-8);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
     grid-auto-rows: auto;
-    gap: var(--space-8) var(--space-7);
+    gap: 0 var(--space-7);
     margin-top: var(--space-8);
+    margin-bottom: calc(-1 * var(--hang-gap));
   }
 
   /* A room with one or two works hangs them beside its wall text. */
@@ -192,8 +199,17 @@ const headingId = `room-${room.id}-heading`;
     }
 
     .room__works {
-      gap: var(--space-7) var(--space-6);
+      --hang-gap: var(--space-7);
+      column-gap: var(--space-6);
       margin-top: var(--space-7);
+    }
+  }
+
+  /* Phones: a thumb-sized hit area without moving the lettering. */
+  @media (max-width: 40rem) {
+    .room__link {
+      padding-block: 0.7rem;
+      margin-block: -0.7rem;
     }
   }
 </style>

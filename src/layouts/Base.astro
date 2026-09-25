@@ -58,10 +58,11 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
           slot.classList.toggle("is-stamped", Boolean(at));
           slot.classList.toggle("just-stamped", id === fresh);
           const date = slot.querySelector("[data-stamp-date]");
-          if (date && at) {
-            date.textContent = new Date(at)
-              .toLocaleDateString("en-US", { day: "numeric", month: "short" })
-              .toUpperCase();
+          const when = slot.querySelector("[data-stamp-when]");
+          if (at) {
+            const day = new Date(at).toLocaleDateString("en-US", { day: "numeric", month: "short" });
+            if (date) date.textContent = day.toUpperCase();
+            if (when) when.textContent = `, stamped ${day}`;
           }
         }
         const total = Object.keys(passport).length;
@@ -72,18 +73,23 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
         document.querySelector("[data-passport-indicator]")?.classList.toggle("has-stamps", total > 0);
       };
 
-      const indicator = document.querySelector<HTMLElement>("[data-passport-indicator]");
-      const flash = indicator?.querySelector("[data-passport-flash]");
+      const flash = document.querySelector<HTMLElement>("[data-passport-flash]");
+      const status = document.querySelector<HTMLElement>("[data-passport-status]");
       let flashTimer = 0;
       window.addEventListener(STAMP_EVENT, (event) => {
         const id = (event as CustomEvent<{ id: StampId }>).detail.id;
         renderPassport(id);
         const name = STAMPS.find((s) => s.id === id)?.name;
-        if (!indicator || !flash || !name) return;
+        if (!flash || !status || !name) return;
+        const total = Object.keys(readPassport()).length;
         flash.textContent = `Stamped: ${name}`;
-        indicator.classList.add("is-flashing");
+        status.textContent = `Stamped: ${name}. ${total} of ${STAMPS.length} stamps.`;
+        flash.classList.add("is-shown");
         window.clearTimeout(flashTimer);
-        flashTimer = window.setTimeout(() => indicator.classList.remove("is-flashing"), 3800);
+        flashTimer = window.setTimeout(() => {
+          flash.classList.remove("is-shown");
+          status.textContent = "";
+        }, 3800);
       });
 
       renderPassport();

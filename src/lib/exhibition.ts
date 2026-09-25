@@ -94,8 +94,8 @@ export interface Exhibition {
   profile: Profile;
   /** Rooms in walking order: current roles, then past roles, then single events. */
   rooms: Room[];
-  /** Every work, oldest first: the order of the guided tour. */
-  tour: Work[];
+  /** Every work, oldest first. */
+  works: Work[];
   firstYear: number;
   lastYear: number;
   builtAt: number;
@@ -109,6 +109,13 @@ export function dayCount(fromTime: number, now: number): number {
 export function roomRange(room: Room): string {
   if (!room.role) return room.start.label;
   return `${room.start.label} – ${room.end ? room.end.label : "now"}`;
+}
+
+/** An org's short name for tight signage: drop the legal suffix; long multi-word names become their initials. */
+export function shortOrg(org: string): string {
+  const name = org.replace(/,?\s+(LLC|Inc\.?|Ltd\.?|Corp\.?)$/i, "");
+  const words = name.split(/\s+/);
+  return words.length >= 3 ? words.filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join("") : name;
 }
 
 /** Skills sorted by name, each with the works that prove it. */

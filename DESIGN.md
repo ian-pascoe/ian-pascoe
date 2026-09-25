@@ -278,7 +278,7 @@ Depth is physical and sparse. The wall is flat; only objects that really hang or
 
 ## Shapes
 
-Every corner is square (`border-radius: 0`); the only curves are circles in the drawings: count dots, the document seal, passport stamps. Frames are a solid moulding border (0.3rem on works, 0.35rem on portrait and 404 frame, 0.25rem on highlights, 0.2rem on phones) around a white mat padded 12–14%. Hairlines are 1px in the room's rule colour; floor-plan rooms are 1.5px ink boxes sharing walls, with 1.5px doorways cut between them. Icons are 24px line drawings, stroke 1.75, square caps and mitred joins.
+Every corner is square (`border-radius: 0`); the only curves are circles in the drawings: count dots, the document seal, passport stamps. Frames are a solid moulding border (0.3rem on works, 0.35rem on portrait and 404 frame, 0.25rem on highlights, 0.2rem on phones) around a white mat padded 12–14%. Hairlines are 1px in the room's rule colour; floor-plan rooms are 1.5px ink boxes sharing walls, with 1.5px doorways cut between them. Icons are 24px line drawings, stroke 1.75, square caps and mitred joins (`src/lib/icons.ts`); marks are flat filled silhouettes (see Marks).
 
 ## Components
 
@@ -296,15 +296,15 @@ A button that is a picture: moulding border, white mat, and an exact SVG drawing
 - **Reduction:** 100 ink squares on a 10×10 grid; the squares taken away remain as thin `--ghost` outlines.
 - **Increase:** 100 ink squares plus the added percent as extra gilt rows.
 - **Count:** one ink dot per unit (large dots up to 12; a 10- or 20-column dot field beyond, with an open ring for "+").
-- **Document:** a seal with the tag set twice around a circle on a text path and the year in the centre.
+- **Document:** a seal with the tag set twice around a circle on a text path and the year in the centre. When the event names an issuer whose mark is a symbol, the mark fills the centre and the year sits small beneath it.
 - **Text piece:** the subject set in 800 weight, sized by container query to fit its longest run.
 - Hover lifts the frame 2px; opening it lights it (see Elevation). Each drawing carries an `aria-label` that states the fact.
 
 ### Museum Label
-Sits under its frame on the hang line, max 24rem: figure (metric + measure) → italic title, date → detail in `--vinyl-soft` → medium (skills, 600, `--step--1`) → credit line (org, range, "No. 2019.1", `--vinyl-quiet`) → optional external link with a 1em arrow.
+Sits under its frame on the hang line, max 24rem: figure (metric + measure) → italic title, date → detail in `--vinyl-soft` → medium (a list of skills, 600, `--step--1`, each led by its 1.25em mark) → credit line (org, range, "No. 2019.1", `--vinyl-quiet`) → optional external link with a 1em arrow.
 
 ### Room Sign
-Room number in weight 200 and `--vinyl-quiet`, set beside the room name in 800 at `--step-4`; role, dates ("Joined Jun 2019 · Day 2,674") and summary on the right.
+Room number in weight 200 and `--vinyl-quiet`, set beside the room name in 800 at `--step-4`; the org's mark is lettered in vinyl above the name (1.6em for a symbol, 1.1em for a wordmark). Role, dates ("Joined Jun 2019 · Day 2,674") and summary on the right.
 
 ### Navigation (floor plan)
 The sticky masthead (`--masthead` 3.75rem, gallery white, 1px rule below) holds the wordmark (name 800, "Selected Work" italic), a floor plan of the rooms, the passport tally and the email button. The plan is a row of 2.25rem boxes sized by each room's work count: Entrance, numbered rooms, Desk. The room the visitor is in gets `aria-current="location"` and fills with that room's paint and vinyl (Entrance and Desk fill ink). Below 60rem rooms show numerals only; below 40rem the plan takes its own full-width row, 1.85rem tall.
@@ -313,7 +313,10 @@ The sticky masthead (`--masthead` 3.75rem, gallery white, 1px rule below) holds 
 A fixed bar painted `ink`, centred at the bottom (max 44rem) with the float shadow: step counter ("3 of 13 · 2021") above the italic title, then Previous, Next/Finish (solid vinyl) and a square close. Enters with a 520ms rise; arrow keys step, Escape ends. It never starts on its own.
 
 ### Gallery Passport
-A 1px-ruled panel at the desk with a grid of 5.25rem circular stamps. Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown, with a 520ms press-in. The masthead tally shows a dashed ring that turns stamp red after the first stamp and briefly slides the new stamp's name out beside the count.
+A 1px-ruled panel at the desk with a grid of 5.25rem circular stamps. Each stamp carries a line-icon emblem of what earns it (an eye, two rooms, a framed mat, the picture light, the checklist, a frame on its wire, a letter). Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown, with a 520ms press-in. The masthead tally shows a dashed ring that turns stamp red after the first stamp and briefly slides the new stamp's name out beside the count.
+
+### Marks
+Organisation logos and skill glyphs live in `src/lib/marks.ts` and render through `Mark.astro`: one flat silhouette filled with `currentColor`, so every mark takes the vinyl of the wall it sits on, like the lettering around it. Never set a mark in its brand colours. A **symbol** (RTX burst, Spirit-Led dove, AWS, GitHub, LinkedIn, the tool logos, and generic glyphs for skills without one) may sit inside a line of text or a seal; a **wordmark** (the University of Rhode Island) appears only on its room sign. Marks appear on room signs, before skills on the medium line and in the index of media (2rem, in a left margin), before the org on the portrait label, highlights and resume headings, before GitHub and LinkedIn links, and before "Source on GitHub". Marks beside text that names them are `aria-hidden`.
 
 ### Checklist Sheet (resume)
 The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as numbered rows (number, fact, date). Prints to letter at 10pt with no shadow and no toolbar.

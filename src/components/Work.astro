@@ -1,7 +1,9 @@
 ---
 import type { Room, Work } from "../lib/exhibition";
+import { skillMark } from "../lib/marks";
 import Drawing from "./Drawing.astro";
 import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
 
 interface Props {
   work: Work;
@@ -11,6 +13,7 @@ interface Props {
 const { work, room } = Astro.props;
 const labelId = `${work.id}-label`;
 const range = room.role ? `${room.start.year}–${room.end ? room.end.year : "now"}` : String(room.start.year);
+const onGitHub = work.link ? new URL(work.link.href).hostname === "github.com" : false;
 ---
 
 <li
@@ -40,13 +43,28 @@ const range = room.role ? `${room.start.year}–${room.end ? room.end.year : "no
       <cite>{work.title}</cite>{work.date && <>, <time datetime={work.date.iso}>{work.date.label}</time></>}
     </h3>
     <p class="work__detail">{work.detail}</p>
-    {work.skills.length > 0 && <p class="work__medium">{work.skills.join(", ")}</p>}
+    {
+      work.skills.length > 0 && (
+        <ul class="work__medium" role="list" aria-label="Medium">
+          {work.skills.map((skill) => {
+            const mark = skillMark(skill);
+            return (
+              <li>
+                {mark && <Mark name={mark} />}
+                {skill}
+              </li>
+            );
+          })}
+        </ul>
+      )
+    }
     <p class="work__foot">
       {room.org}, {range} · No. <span class="tabular">{work.number}</span>
     </p>
     {
       work.link && (
         <a class="work__link" href={work.link.href} rel="noopener">
+          {onGitHub && <Mark name="github" />}
           {work.link.label}
           <Icon name="external" />
         </a>
@@ -221,8 +239,21 @@ const range = room.role ? `${room.start.year}–${room.end ? room.end.year : "no
   }
 
   .work__medium {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
     font-weight: 600;
     color: var(--vinyl-soft);
+  }
+
+  .work__medium li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .work__medium :global(.mark) {
+    height: 1.25em;
   }
 
   .work__link {
@@ -234,7 +265,8 @@ const range = room.role ? `${room.start.year}–${room.end ? room.end.year : "no
     font-weight: 650;
   }
 
-  .work__link :global(.icon) {
+  .work__link :global(.icon),
+  .work__link :global(.mark) {
     width: 1em;
     height: 1em;
   }

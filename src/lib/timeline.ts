@@ -2,6 +2,7 @@ import { parse } from "yaml";
 import { z } from "zod";
 import raw from "../data/timeline.yaml?raw";
 import { PAINTS, type Drawing, type Exhibition, type PartialDate, type Room, type Work } from "./exhibition";
+import { MARK_NAMES } from "./marks";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -69,6 +70,7 @@ const SpanSchema = z
     paint: z.enum(PAINTS),
     title: z.string().min(1),
     org: z.string().min(1),
+    mark: z.enum(MARK_NAMES).optional(),
     start: DateSchema,
     end: z.union([z.literal("present"), DateSchema]),
     startLabel: z.string().min(1).optional(),
@@ -85,6 +87,7 @@ const EventSchema = z
     title: z.string().min(1),
     date: DateSchema,
     org: z.string().min(1).optional(),
+    mark: z.enum(MARK_NAMES).optional(),
     detail: z.string().min(1),
     tag: z.enum(["education", "certification", "launch", "milestone"]).optional(),
     on: z.string().optional(),
@@ -167,6 +170,7 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
       number: 0,
       paint: span.paint,
       org: span.org,
+      mark: span.mark,
       role: span.title,
       start: span.start,
       end,
@@ -200,7 +204,7 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
       kind: "event",
       title: event.title,
       detail: event.detail,
-      drawing: { kind: "document", tag: event.tag ?? "milestone" },
+      drawing: { kind: "document", tag: event.tag ?? "milestone", mark: event.mark },
       date: event.date,
       tag: event.tag,
       skills: event.skills,
@@ -225,6 +229,7 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
         return created;
       })();
     room.works.push({ ...work, roomId });
+    room.mark ??= event.mark;
     if (event.date.time < room.start.time) room.start = event.date;
     if (event.date.time > room.end!.time) room.end = event.date;
   }

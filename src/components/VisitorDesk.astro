@@ -1,7 +1,9 @@
 ---
 import type { Profile } from "../lib/exhibition";
-import { STAMPS } from "../lib/passport";
+import { ICONS, type IconName } from "../lib/icons";
+import { STAMPS, type StampId } from "../lib/passport";
 import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
 
 interface Props {
   profile: Profile;
@@ -10,6 +12,16 @@ interface Props {
 
 const { profile, year } = Astro.props;
 const firstName = profile.name.split(" ")[0];
+// Each stamp's emblem pictures what earns it.
+const EMBLEMS: Record<StampId, IconName> = {
+  "first-look": "look",
+  "two-rooms": "rooms",
+  "every-wall": "frame",
+  "full-tour": "light",
+  checklist: "checklist",
+  backstage: "installing",
+  "say-hello": "mail",
+};
 ---
 
 <footer class="desk" id="desk" data-room-section="desk" aria-labelledby="desk-heading">
@@ -25,8 +37,12 @@ const firstName = profile.name.split(" ")[0];
         <a class="button button--quiet" href="/resume">Checklist of works</a>
       </div>
       <ul class="desk__links" role="list">
-        <li><a href={profile.links.github} rel="noopener">GitHub</a></li>
-        <li><a href={profile.links.linkedin} rel="noopener">LinkedIn</a></li>
+        <li>
+          <a href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a>
+        </li>
+        <li>
+          <a href={profile.links.linkedin} rel="noopener"><Mark name="linkedin" />LinkedIn</a>
+        </li>
         <li>{profile.location}</li>
       </ul>
     </div>
@@ -51,12 +67,13 @@ const firstName = profile.name.split(" ")[0];
                 </defs>
                 <circle class="stamp__outer" cx="50" cy="50" r="46" />
                 <circle class="stamp__inner" cx="50" cy="50" r="27" />
+                <path class="stamp__emblem" d={ICONS[EMBLEMS[s.id]]} transform="translate(38 28)" />
                 <text class="stamp__ring">
                   <textPath href={`#stamp-ring-${s.id}`} textLength="218" lengthAdjust="spacing">
                     {`${s.name.toUpperCase()} · ${s.name.toUpperCase()} · `}
                   </textPath>
                 </text>
-                <text class="stamp__date" x="50" y="55" text-anchor="middle" data-stamp-date />
+                <text class="stamp__date" x="50" y="67" text-anchor="middle" data-stamp-date />
               </svg>
               <p class="stamp__name">{s.name}</p>
               <p class="stamp__how" data-stamp-how>{s.how}</p>
@@ -125,6 +142,16 @@ const firstName = profile.name.split(" ")[0];
     gap: var(--space-2) var(--space-5);
     font-weight: 600;
     color: var(--vinyl-soft);
+  }
+
+  .desk__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .desk__links :global(.mark) {
+    height: 1.15em;
   }
 
   .passport {
@@ -199,6 +226,20 @@ const firstName = profile.name.split(" ")[0];
     opacity: 0.45;
   }
 
+  .stamp__emblem {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    opacity: 0.7;
+  }
+
+  .stamp.is-stamped .stamp__emblem {
+    stroke-width: 2.25;
+    opacity: 1;
+  }
+
   .stamp.is-stamped :is(.stamp__outer, .stamp__inner) {
     opacity: 1;
   }
@@ -216,7 +257,7 @@ const firstName = profile.name.split(" ")[0];
   }
 
   .stamp__date {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 800;
   }
 

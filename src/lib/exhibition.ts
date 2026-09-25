@@ -1,5 +1,7 @@
 /** The exhibition's data model, shared by the build and the browser. */
 
+import type { MarkName } from "./marks";
+
 /** A date with the precision it was written in: year, month, or day. */
 export interface PartialDate {
   year: number;
@@ -32,14 +34,14 @@ export interface Profile {
 /**
  * How a work is drawn. Every drawing is an exact picture of its fact:
  * a reduction keeps what remains of 100 squares, an increase adds to 100,
- * a count draws one dot per unit, a document is a seal, a text piece sets
- * the subject in type.
+ * a count draws one dot per unit, a document is a seal (bearing its issuer's
+ * mark when it has one), a text piece sets the subject in type.
  */
 export type Drawing =
   | { kind: "reduction"; percent: number }
   | { kind: "increase"; percent: number }
   | { kind: "count"; value: number; plus: boolean }
-  | { kind: "document"; tag: string }
+  | { kind: "document"; tag: string; mark?: MarkName }
   | { kind: "text"; subject: string };
 
 export interface Work {
@@ -69,6 +71,8 @@ export interface Room {
   number: number;
   paint: Paint;
   org: string;
+  /** The org's mark, lettered on the room sign. */
+  mark?: MarkName;
   /** Ian's role in the room, e.g. "Principal Software Engineer"; absent for event rooms. */
   role?: string;
   start: PartialDate;

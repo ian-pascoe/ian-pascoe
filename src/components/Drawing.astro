@@ -1,5 +1,6 @@
 ---
 import type { Drawing, PartialDate } from "../lib/exhibition";
+import { MARKS } from "../lib/marks";
 import { nextSealId } from "../lib/seal-id";
 
 interface Props {
@@ -96,6 +97,9 @@ const sealId = nextSealId();
 const longestRun =
   drawing.kind === "text" ? Math.max(...drawing.subject.split(/\s+|(?<=-)/).map((w) => w.length)) : 0;
 const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${drawing.tag} · ${year} · ` : "";
+// A seal bears its issuer's mark in the middle when the mark is a symbol; wordmarks don't fit the ring.
+const sealMark = drawing.kind === "document" && drawing.mark ? MARKS[drawing.mark] : undefined;
+const issuer = sealMark?.shape === "symbol" ? sealMark : undefined;
 ---
 
 {
@@ -112,7 +116,13 @@ const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${d
 }
 {
   drawing.kind === "document" && (
-    <svg class="drawing drawing--seal" viewBox="0 0 120 120" style="aspect-ratio: 1 / 1" role="img" aria-label={`Drawing: a seal for ${drawing.tag}, ${year}.`}>
+    <svg
+      class="drawing drawing--seal"
+      viewBox="0 0 120 120"
+      style="aspect-ratio: 1 / 1"
+      role="img"
+      aria-label={`Drawing: a seal for ${drawing.tag}, ${year}${issuer ? `, bearing the ${issuer.label} mark` : ""}.`}
+    >
       <defs>
         <path id={sealId} d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1 -94 0" />
       </defs>
@@ -123,9 +133,20 @@ const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${d
           {sealText.toUpperCase()}
         </textPath>
       </text>
-      <text class="d-year" x="60" y="69" text-anchor="middle">
-        {year}
-      </text>
+      {
+        issuer ? (
+          <>
+            <svg class="d-mark" x="37" y="27" width="46" height="46" viewBox={issuer.viewBox} set:html={issuer.body} />
+            <text class="d-year d-year--under" x="60" y="87" text-anchor="middle">
+              {year}
+            </text>
+          </>
+        ) : (
+          <text class="d-year" x="60" y="69" text-anchor="middle">
+            {year}
+          </text>
+        )
+      }
     </svg>
   )
 }
@@ -189,6 +210,16 @@ const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${d
     font-weight: 750;
     letter-spacing: -0.02em;
     fill: currentColor;
+  }
+
+  .d-mark {
+    fill: currentColor;
+  }
+
+  .d-year--under {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
   .drawing--text {

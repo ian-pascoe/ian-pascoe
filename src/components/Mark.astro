@@ -1,0 +1,36 @@
+---
+import { MARKS, type MarkName } from "../lib/marks";
+
+interface Props {
+  name: MarkName;
+  class?: string;
+  /** Announce the mark by its label; otherwise it is decoration beside text that names it. */
+  labelled?: boolean;
+}
+
+const { name, class: className, labelled = false } = Astro.props;
+const mark = MARKS[name];
+const [, , w, h] = mark.viewBox.split(" ");
+---
+
+<svg
+  class:list={["mark", `mark--${mark.shape}`, className]}
+  viewBox={mark.viewBox}
+  style={`aspect-ratio: ${w} / ${h}`}
+  fill="currentColor"
+  role={labelled ? "img" : undefined}
+  aria-label={labelled ? mark.label : undefined}
+  aria-hidden={labelled ? undefined : "true"}
+  focusable="false"
+  set:html={mark.body}
+/>
+
+<style>
+  .mark {
+    display: inline-block;
+    flex: none;
+    height: 1em;
+    width: auto;
+    overflow: visible;
+  }
+</style>

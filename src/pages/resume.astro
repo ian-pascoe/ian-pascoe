@@ -1,7 +1,9 @@
 ---
 import Icon from "../components/Icon.astro";
+import Mark from "../components/Mark.astro";
 import Base from "../layouts/Base.astro";
 import { mediaIndex, roomRange } from "../lib/exhibition";
+import { symbolMark } from "../lib/marks";
 import { loadTimeline } from "../lib/timeline";
 
 const exhibition = loadTimeline();
@@ -33,8 +35,8 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
       <p class="sheet__headline">{profile.headline}</p>
       <ul class="sheet__contact" role="list">
         <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
-        <li><a href={profile.links.linkedin}>{bare(profile.links.linkedin)}</a></li>
-        <li><a href={profile.links.github}>{bare(profile.links.github)}</a></li>
+        <li><a href={profile.links.linkedin}><Mark name="linkedin" />{bare(profile.links.linkedin)}</a></li>
+        <li><a href={profile.links.github}><Mark name="github" />{bare(profile.links.github)}</a></li>
         <li>{profile.location}</li>
       </ul>
       <p class="sheet__show">
@@ -47,6 +49,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
         <section class="room" aria-labelledby={`c-${room.id}`}>
           <header class="room__head">
             <h2 id={`c-${room.id}`}>
+              {symbolMark(room.mark) && <Mark name={room.mark!} />}
               {room.role ? `${room.role}, ${room.org}` : room.org}
             </h2>
             <p class="room__when tabular">{roomRange(room)}</p>
@@ -174,6 +177,12 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     color: var(--ink);
   }
 
+  .sheet__contact :global(.mark) {
+    height: 1.1em;
+    margin-right: 0.35em;
+    vertical-align: -0.2em;
+  }
+
   .sheet__show {
     font-size: var(--step--1);
     color: var(--ink-quiet);
@@ -196,6 +205,12 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
   .room__head h2 {
     font-size: var(--step-1);
     font-weight: 750;
+  }
+
+  .room__head :global(.mark) {
+    height: 1.2em;
+    margin-right: 0.4em;
+    vertical-align: -0.22em;
   }
 
   .room__when {

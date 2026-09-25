@@ -13,6 +13,8 @@
 #     id, title, org, start, end, summary
 #     paint                 the room's wall color: oxblood, green, slate,
 #                           ochre, plum, or stone
+#     mark                  optional logo lettered on the room sign; one of
+#                           the names in src/lib/marks.ts (rtx, spirit-led, uri, ...)
 #     startLabel            verb for how the room opens, e.g. "Founded" (default "Joined")
 #     link                  optional { href, label }
 #     achievements:         the works hung in the room (YAML order = hanging order)
@@ -26,11 +28,14 @@
 #         subject           short plain name of what was made; without a
 #                           metric the work is this phrase set as a text piece
 #         date              optional; undated works hang within their room
-#         skills            optional list of skill tags (the work's medium)
+#         skills            optional list of skill tags (the work's medium);
+#                           tags named in src/lib/marks.ts get their glyph
 #         featured          optional; featured works hang on the title wall too
 #         link              optional { href, label }
 #   - kind: event           a single dated moment: certification, launch, degree
 #     id, title, date, org, detail, tag, skills, featured, link
+#     mark                  optional issuer logo, set in the middle of the
+#                           seal; in an event's own room, also on the room sign
 #     on                    optional span id to hang the event in that room;
 #                           without it the event gets a room of its own, named
 #                           after its org
@@ -50,12 +55,14 @@ entries:
     tag: education
     title: B.A. Computer Science
     org: University of Rhode Island
+    mark: uri
     date: 2019
     detail: Bachelor of Arts in Computer Science with a minor in Mathematics.
 
   - kind: span
     id: rtx
     paint: oxblood
+    mark: rtx
     title: Principal Software Engineer
     org: RTX
     start: 2019-06
@@ -113,6 +120,7 @@ entries:
   - kind: span
     id: spirit-led
     paint: green
+    mark: spirit-led
     title: Owner
     org: Spirit-Led Software LLC
     start: 2023-04
@@ -158,6 +166,7 @@ entries:
     id: aws-cloud-practitioner
     tag: certification
     on: rtx
+    mark: aws
     title: AWS Cloud Practitioner
     date: 2024
     detail: Earned the AWS Certified Cloud Practitioner certification.

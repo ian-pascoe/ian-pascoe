@@ -1,5 +1,7 @@
 ---
 import { mediaIndex, type Exhibition } from "../lib/exhibition";
+import { skillMark } from "../lib/marks";
+import Mark from "./Mark.astro";
 
 interface Props {
   exhibition: Exhibition;
@@ -15,21 +17,27 @@ const index = mediaIndex(Astro.props.exhibition);
   </header>
   <dl class="media__list">
     {
-      index.map(({ skill, works }) => (
-        <div class="media__entry">
-          <dt>{skill}</dt>
-          <dd>
-            {works.map((work, i) => (
-              <>
-                {i > 0 && ", "}
-                <a href={`#${work.id}`} data-light-link={work.id}>
-                  <cite>{work.title}</cite>
-                </a>
-              </>
-            ))}
-          </dd>
-        </div>
-      ))
+      index.map(({ skill, works }) => {
+        const mark = skillMark(skill);
+        return (
+          <div class="media__entry">
+            <dt>
+              {mark && <Mark name={mark} class="media__mark" />}
+              {skill}
+            </dt>
+            <dd>
+              {works.map((work, i) => (
+                <>
+                  {i > 0 && ", "}
+                  <a href={`#${work.id}`} data-light-link={work.id}>
+                    <cite>{work.title}</cite>
+                  </a>
+                </>
+              ))}
+            </dd>
+          </div>
+        );
+      })
     }
   </dl>
 </section>
@@ -66,12 +74,23 @@ const index = mediaIndex(Astro.props.exhibition);
     column-gap: var(--space-7);
   }
 
+  /* Each medium's glyph hangs in a margin to the left of its name and works. */
   .media__entry {
+    position: relative;
     display: grid;
     gap: var(--space-1);
-    padding-block: var(--space-3);
+    padding-block: var(--space-4);
+    padding-left: calc(2rem + var(--space-4));
     border-bottom: 1px solid var(--rule);
     break-inside: avoid;
+  }
+
+  .media__entry :global(.media__mark) {
+    position: absolute;
+    top: var(--space-4);
+    left: 0;
+    width: 2rem;
+    height: 2rem;
   }
 
   .media__entry dt {

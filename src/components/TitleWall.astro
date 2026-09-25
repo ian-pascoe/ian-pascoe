@@ -1,8 +1,10 @@
 ---
 import portrait from "../assets/portrait.jpg";
 import type { Exhibition } from "../lib/exhibition";
+import { symbolMark } from "../lib/marks";
 import Drawing from "./Drawing.astro";
 import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
 
 interface Props {
   exhibition: Exhibition;
@@ -12,7 +14,11 @@ const { exhibition } = Astro.props;
 const { profile, rooms, tour, firstYear, lastYear } = exhibition;
 const firstName = profile.name.split(" ")[0];
 const current = rooms.filter((r) => r.role && !r.end);
-const featured = tour.filter((w) => w.featured).reverse();
+const roomById = new Map(rooms.map((r) => [r.id, r]));
+const featured = tour
+  .filter((w) => w.featured)
+  .reverse()
+  .map((work) => ({ work, room: roomById.get(work.roomId)! }));
 const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(rooms.map((r) => r.org));
 ---
 
@@ -47,8 +53,12 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
       <ul class="title-wall__links" role="list">
         <li><a href={`mailto:${profile.email}`} data-stamp="say-hello">{profile.email}</a></li>
         <li><a href="/resume">Checklist of works <span class="title-wall__aside">(resume)</span></a></li>
-        <li><a href={profile.links.github} rel="noopener">GitHub</a></li>
-        <li><a href={profile.links.linkedin} rel="noopener">LinkedIn</a></li>
+        <li>
+          <a class="title-wall__social" href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a>
+        </li>
+        <li>
+          <a class="title-wall__social" href={profile.links.linkedin} rel="noopener"><Mark name="linkedin" />LinkedIn</a>
+        </li>
       </ul>
     </div>
 
@@ -71,6 +81,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
             current.map((room) => (
               <li>
                 <a href={`#room-${room.id}`}>
+                  {symbolMark(room.mark) && <Mark name={room.mark!} />}
                   {room.role}, {room.org}
                 </a>
                 <span class="portrait__since tabular"> · since {room.start.year}</span>
@@ -90,7 +101,7 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
           Highlights
         </h2>
         <ul class="highlights__list" role="list">
-          {featured.map((work) => (
+          {featured.map(({ work, room }) => (
             <li class={`highlight highlight--${work.drawing.kind}`}>
               <a class="highlight__link" href={`#${work.id}`} data-light-link={work.id}>
                 <span class="highlight__frame" aria-hidden="true">
@@ -105,7 +116,10 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
                   <span class="highlight__measure">
                     {work.metric ? `${work.metric} ${work.metricLabel}` : work.detail}
                   </span>
-                  <span class="highlight__org">{rooms.find((r) => r.id === work.roomId)?.org}</span>
+                  <span class="highlight__org">
+                    {symbolMark(room.mark) && <Mark name={room.mark!} />}
+                    {room.org}
+                  </span>
                 </span>
               </a>
             </li>
@@ -196,6 +210,16 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
     color: var(--ink-quiet);
   }
 
+  .title-wall__social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .title-wall__social :global(.mark) {
+    height: 1.15em;
+  }
+
   .portrait {
     display: grid;
     gap: var(--space-5);
@@ -239,6 +263,13 @@ const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(room
   .portrait__roles a {
     font-weight: 600;
     color: var(--ink);
+  }
+
+  .portrait__roles :global(.mark),
+  .highlight__org :global(.mark) {
+    height: 1.25em;
+    margin-right: 0.35em;
+    vertical-align: -0.3em;
   }
 
   .portrait__since,

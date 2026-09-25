@@ -1,0 +1,211 @@
+---
+import type { Drawing, PartialDate } from "../lib/exhibition";
+import { nextSealId } from "../lib/seal-id";
+
+interface Props {
+  drawing: Drawing;
+  date?: PartialDate;
+}
+
+const { drawing, date } = Astro.props;
+
+// One square per percent of the whole: 10 columns, 10 units per square.
+const CELL = 10;
+const PITCH = 12.5;
+
+const squares = (count: number) =>
+  Array.from({ length: count }, (_, i) => ({ x: (i % 10) * PITCH, y: Math.floor(i / 10) * PITCH }));
+
+let shape: { viewBox: string; label: string; aspect: string } | null = null;
+let body = "";
+
+if (drawing.kind === "reduction") {
+  const remain = 100 - drawing.percent;
+  const size = 10 * PITCH - (PITCH - CELL);
+  shape = {
+    viewBox: `0 0 ${size} ${size}`,
+    label: `Drawing: 100 squares, ${drawing.percent} taken away, ${remain} remain.`,
+    aspect: "1 / 1",
+  };
+  body = squares(100)
+    .map((s, i) =>
+      i < remain
+        ? `<rect class="d-ink" x="${s.x}" y="${s.y}" width="${CELL}" height="${CELL}"/>`
+        : `<rect class="d-ghost" x="${s.x + 0.5}" y="${s.y + 0.5}" width="${CELL - 1}" height="${CELL - 1}"/>`,
+    )
+    .join("");
+} else if (drawing.kind === "increase") {
+  const total = 100 + drawing.percent;
+  const rows = Math.ceil(total / 10);
+  const width = 10 * PITCH - (PITCH - CELL);
+  shape = {
+    viewBox: `0 0 ${width} ${rows * PITCH - (PITCH - CELL)}`,
+    label: `Drawing: 100 squares with ${drawing.percent} more added in gold.`,
+    aspect: `10 / ${rows}`,
+  };
+  body = squares(total)
+    .map(
+      (s, i) =>
+        `<rect class="${i < 100 ? "d-ink" : "d-gilt"}" x="${s.x}" y="${s.y}" width="${CELL}" height="${CELL}"/>`,
+    )
+    .join("");
+} else if (drawing.kind === "count" && drawing.value <= 12) {
+  const perRow = drawing.value > 6 ? Math.ceil(drawing.value / 2) : drawing.value;
+  const rows = Math.ceil(drawing.value / perRow);
+  const d = 24;
+  const gap = 12;
+  const width = perRow * d + (perRow - 1) * gap;
+  const height = rows * d + (rows - 1) * gap;
+  // Pad short rows so the frame keeps a settled landscape proportion.
+  const padX = Math.max(0, (height * 1.6 - width) / 2);
+  const padY = Math.max(0, (width / 1.6 - height) / 2);
+  shape = {
+    viewBox: `${-padX} ${-padY} ${width + padX * 2} ${height + padY * 2}`,
+    label: `Drawing: ${drawing.value} dots, one for each.`,
+    aspect: `${width + padX * 2} / ${height + padY * 2}`,
+  };
+  body = Array.from({ length: drawing.value }, (_, i) => {
+    const cx = (i % perRow) * (d + gap) + d / 2;
+    const cy = Math.floor(i / perRow) * (d + gap) + d / 2;
+    return `<circle class="d-ink" cx="${cx}" cy="${cy}" r="${d / 2}"/>`;
+  }).join("");
+} else if (drawing.kind === "count") {
+  const cols = drawing.value <= 100 ? 10 : 20;
+  const slots = drawing.value + (drawing.plus ? 1 : 0);
+  const rows = Math.ceil(slots / cols);
+  const pitch = 7;
+  const r = 2.3;
+  shape = {
+    viewBox: `0 0 ${cols * pitch} ${rows * pitch}`,
+    label: `Drawing: ${drawing.value} dots, one for each${drawing.plus ? ", and an open ring for more" : ""}.`,
+    aspect: `${cols} / ${rows}`,
+  };
+  body = Array.from({ length: slots }, (_, i) => {
+    const cx = (i % cols) * pitch + pitch / 2;
+    const cy = Math.floor(i / cols) * pitch + pitch / 2;
+    return i < drawing.value
+      ? `<circle class="d-ink" cx="${cx}" cy="${cy}" r="${r}"/>`
+      : `<circle class="d-open" cx="${cx}" cy="${cy}" r="${r - 0.45}"/>`;
+  }).join("");
+}
+
+const year = date?.year ?? "";
+// Seal text paths need a document-unique id; several seals can share a page.
+const sealId = nextSealId();
+// A text piece is sized so its longest run (split at spaces, kept whole across hyphens' halves) fits the mat.
+const longestRun =
+  drawing.kind === "text" ? Math.max(...drawing.subject.split(/\s+|(?<=-)/).map((w) => w.length)) : 0;
+const sealText = drawing.kind === "document" ? `${drawing.tag} · ${year} · ${drawing.tag} · ${year} · ` : "";
+---
+
+{
+  shape && (
+    <svg
+      class="drawing"
+      viewBox={shape.viewBox}
+      style={`aspect-ratio: ${shape.aspect}`}
+      role="img"
+      aria-label={shape.label}
+      set:html={body}
+    />
+  )
+}
+{
+  drawing.kind === "document" && (
+    <svg class="drawing drawing--seal" viewBox="0 0 120 120" style="aspect-ratio: 1 / 1" role="img" aria-label={`Drawing: a seal for ${drawing.tag}, ${year}.`}>
+      <defs>
+        <path id={sealId} d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1 -94 0" />
+      </defs>
+      <circle class="d-line" cx="60" cy="60" r="56" />
+      <circle class="d-hair" cx="60" cy="60" r="39" />
+      <text class="d-ring-text">
+        <textPath href={`#${sealId}`} textLength="291" lengthAdjust="spacing">
+          {sealText.toUpperCase()}
+        </textPath>
+      </text>
+      <text class="d-year" x="60" y="69" text-anchor="middle">
+        {year}
+      </text>
+    </svg>
+  )
+}
+{
+  drawing.kind === "text" && (
+    <p class="drawing drawing--text" style={`--run: ${Math.max(longestRun, 6)}`}>
+      <span>{drawing.subject}</span>
+    </p>
+  )
+}
+
+<style>
+  .drawing {
+    width: 100%;
+    height: auto;
+    color: var(--moulding);
+  }
+
+  .drawing :global(.d-ink) {
+    fill: currentColor;
+  }
+
+  .drawing :global(.d-ghost) {
+    fill: none;
+    stroke: var(--ghost);
+    stroke-width: 0.9;
+  }
+
+  .drawing :global(.d-gilt) {
+    fill: var(--gilt);
+  }
+
+  .drawing :global(.d-open) {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 0.9;
+  }
+
+  .d-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+  }
+
+  .d-hair {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 0.8;
+  }
+
+  .d-ring-text {
+    font-family: var(--font);
+    font-size: 7.4px;
+    font-weight: 650;
+    fill: currentColor;
+  }
+
+  .d-year {
+    font-family: var(--font);
+    font-size: 25px;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    fill: currentColor;
+  }
+
+  .drawing--text {
+    container-type: inline-size;
+    display: grid;
+    align-content: end;
+    aspect-ratio: 4 / 3;
+    color: var(--moulding);
+  }
+
+  .drawing--text span {
+    font-size: min(4rem, calc(100cqi / (var(--run) * 0.62)));
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    overflow-wrap: normal;
+    hyphens: manual;
+    text-wrap: balance;
+  }
+</style>

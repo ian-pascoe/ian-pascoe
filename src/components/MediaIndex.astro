@@ -1,0 +1,88 @@
+---
+import { mediaIndex, type Exhibition } from "../lib/exhibition";
+
+interface Props {
+  exhibition: Exhibition;
+}
+
+const index = mediaIndex(Astro.props.exhibition);
+---
+
+<section class="media wrap" id="media" data-room-section="media" aria-labelledby="media-heading">
+  <header class="media__head">
+    <h2 id="media-heading">Index of media</h2>
+    <p>Each skill, with the works that prove it.</p>
+  </header>
+  <dl class="media__list">
+    {
+      index.map(({ skill, works }) => (
+        <div class="media__entry">
+          <dt>{skill}</dt>
+          <dd>
+            {works.map((work, i) => (
+              <>
+                {i > 0 && ", "}
+                <a href={`#${work.id}`} data-light-link={work.id}>
+                  <cite>{work.title}</cite>
+                </a>
+              </>
+            ))}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<style>
+  .media {
+    display: grid;
+    gap: var(--space-6);
+    padding-block: var(--space-9);
+  }
+
+  .media__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .media__head h2 {
+    font-size: var(--step-3);
+    font-weight: 750;
+    letter-spacing: -0.025em;
+  }
+
+  .media__head p {
+    color: var(--ink-soft);
+  }
+
+  .media__list {
+    columns: 3 16rem;
+    column-gap: var(--space-7);
+  }
+
+  .media__entry {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+    break-inside: avoid;
+  }
+
+  .media__entry dt {
+    font-weight: 700;
+  }
+
+  .media__entry dd {
+    color: var(--ink-soft);
+  }
+
+  .media__entry cite {
+    font-style: italic;
+  }
+</style>

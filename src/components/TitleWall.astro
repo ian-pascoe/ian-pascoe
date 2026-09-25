@@ -1,0 +1,382 @@
+---
+import portrait from "../assets/portrait.jpg";
+import type { Exhibition } from "../lib/exhibition";
+import Drawing from "./Drawing.astro";
+import Icon from "./Icon.astro";
+
+interface Props {
+  exhibition: Exhibition;
+}
+
+const { exhibition } = Astro.props;
+const { profile, rooms, tour, firstYear, lastYear } = exhibition;
+const firstName = profile.name.split(" ")[0];
+const current = rooms.filter((r) => r.role && !r.end);
+const featured = tour.filter((w) => w.featured).reverse();
+const roomNames = new Intl.ListFormat("en", { type: "conjunction" }).format(rooms.map((r) => r.org));
+---
+
+<section class="title-wall" id="top" data-room-section="top" aria-labelledby="exhibition-title">
+  <div class="title-wall__inner wrap">
+    <div class="title-wall__text">
+      <h1 id="exhibition-title" class="title-wall__title">
+        <span class="title-wall__name">{profile.name}</span>
+        <span class="title-wall__show">Selected Work, <span class="tabular">{firstYear}–{lastYear}</span></span>
+      </h1>
+
+      <div class="title-wall__copy">
+        <p class="title-wall__lead">{profile.headline}.</p>
+        <p>
+          This exhibition hangs {tour.length} works across {rooms.length} rooms: {roomNames}. Every work is drawn
+          exactly from its fact. A reduction shows what remains of the whole, an increase adds to it in gold, and a
+          count gives one dot to each.
+        </p>
+      </div>
+
+      <div class="title-wall__actions">
+        <a class="button title-wall__email" href={`mailto:${profile.email}`} data-stamp="say-hello">
+          <Icon name="mail" />
+          Email {firstName}
+        </a>
+        <button type="button" class="button button--quiet" data-tour-start>
+          <Icon name="light" />
+          Take the tour from {firstYear}
+        </button>
+      </div>
+
+      <ul class="title-wall__links" role="list">
+        <li><a href={`mailto:${profile.email}`} data-stamp="say-hello">{profile.email}</a></li>
+        <li><a href="/resume">Checklist of works <span class="title-wall__aside">(resume)</span></a></li>
+        <li><a href={profile.links.github} rel="noopener">GitHub</a></li>
+        <li><a href={profile.links.linkedin} rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+
+    <figure class="portrait">
+      <div class="portrait__frame">
+        <img
+          src={portrait.src}
+          alt={`Portrait of ${profile.name}`}
+          width={portrait.width}
+          height={portrait.height}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <figcaption class="portrait__label">
+        <p class="portrait__name">{profile.name}</p>
+        <ul role="list" class="portrait__roles">
+          {
+            current.map((room) => (
+              <li>
+                <a href={`#room-${room.id}`}>
+                  {room.role}, {room.org}
+                </a>
+                <span class="portrait__since tabular"> · since {room.start.year}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="portrait__meta">{profile.location}</p>
+      </figcaption>
+    </figure>
+  </div>
+
+  {
+    featured.length > 0 && (
+      <div class="highlights wrap" aria-labelledby="highlights-heading">
+        <h2 id="highlights-heading" class="highlights__heading">
+          Highlights
+        </h2>
+        <ul class="highlights__list" role="list">
+          {featured.map((work) => (
+            <li class={`highlight highlight--${work.drawing.kind}`}>
+              <a class="highlight__link" href={`#${work.id}`} data-light-link={work.id}>
+                <span class="highlight__frame" aria-hidden="true">
+                  <span class="highlight__mat">
+                    <Drawing drawing={work.drawing} date={work.date} />
+                  </span>
+                </span>
+                <span class="highlight__label">
+                  <span class="highlight__title">
+                    <cite>{work.title}</cite>
+                  </span>
+                  <span class="highlight__measure">
+                    {work.metric ? `${work.metric} ${work.metricLabel}` : work.detail}
+                  </span>
+                  <span class="highlight__org">{rooms.find((r) => r.id === work.roomId)?.org}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .title-wall {
+    padding-block: var(--space-7) var(--space-9);
+    scroll-margin-top: var(--masthead);
+  }
+
+  .title-wall__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .title-wall__text {
+    display: grid;
+    gap: var(--space-6);
+    align-content: center;
+  }
+
+  .title-wall__title {
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--step-5);
+    font-weight: 850;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+  }
+
+  .title-wall__show {
+    font-size: 0.56em;
+    line-height: 1.05;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: -0.03em;
+    color: var(--ink-soft);
+  }
+
+  .title-wall__copy {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 38rem;
+    color: var(--ink-soft);
+  }
+
+  .title-wall__lead {
+    font-size: var(--step-2);
+    font-weight: 650;
+    line-height: 1.22;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  .title-wall__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .title-wall__email {
+    min-height: 3.5rem;
+    padding-inline: var(--space-6);
+    font-size: var(--step-1);
+  }
+
+  .title-wall__actions .button--quiet {
+    min-height: 3.5rem;
+  }
+
+  .title-wall__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    font-weight: 600;
+  }
+
+  .title-wall__aside {
+    font-weight: 400;
+    color: var(--ink-quiet);
+  }
+
+  .portrait {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+
+  .portrait__frame {
+    width: min(100%, 24rem);
+    padding: 9%;
+    border: 0.35rem solid var(--moulding);
+    background: var(--mat);
+    box-shadow: var(--hung);
+  }
+
+  .portrait__frame img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .portrait__label {
+    display: grid;
+    gap: var(--space-1);
+    max-width: 24rem;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+
+  .portrait__name {
+    font-size: var(--step-0);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .portrait__roles {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .portrait__roles a {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .portrait__since,
+  .portrait__meta {
+    color: var(--ink-quiet);
+  }
+
+  .highlights {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+  }
+
+  .highlights__heading {
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+
+  /* The featured works hang small on the title wall: drawing first, label under it, one hang line. */
+  .highlights__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-6) var(--space-7);
+  }
+
+  .highlight {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+  }
+
+  .highlight__link {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: var(--space-4);
+    text-decoration: none;
+  }
+
+  .highlight__frame {
+    align-self: center;
+    display: block;
+    width: 9.5rem;
+    border: 0.25rem solid var(--moulding);
+    background: var(--mat);
+    box-shadow: var(--hung);
+    transition: transform var(--slow) var(--ease);
+  }
+
+  .highlight--count .highlight__frame {
+    width: 11rem;
+  }
+
+  .highlight__link:hover .highlight__frame {
+    transform: translateY(-2px);
+  }
+
+  .highlight__mat {
+    display: block;
+    padding: 13%;
+  }
+
+  .highlight__label {
+    display: grid;
+    align-content: start;
+    gap: var(--space-1);
+    max-width: 20rem;
+  }
+
+  .highlight__title {
+    font-weight: 600;
+  }
+
+  .highlight__title cite {
+    font-style: italic;
+  }
+
+  .highlight__measure {
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .highlight__org {
+    font-size: var(--step--1);
+    color: var(--ink-quiet);
+  }
+
+  .highlight__link:hover .highlight__title {
+    text-decoration: underline;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (max-width: 56rem) {
+    .title-wall {
+      padding-top: var(--space-7);
+    }
+
+    /* Phones: the portrait hangs right after the title, before the wall text. */
+    .title-wall__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .title-wall__text {
+      display: contents;
+    }
+
+    .title-wall__title {
+      order: 1;
+    }
+
+    .portrait {
+      order: 2;
+    }
+
+    .title-wall__copy {
+      order: 3;
+    }
+
+    .title-wall__actions {
+      order: 4;
+    }
+
+    .title-wall__links {
+      order: 5;
+    }
+
+    .portrait {
+      grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+      align-items: end;
+      gap: var(--space-5);
+    }
+
+    .highlights {
+      margin-top: var(--space-8);
+    }
+  }
+</style>

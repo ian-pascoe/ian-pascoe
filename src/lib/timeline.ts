@@ -1,7 +1,7 @@
 import { parse } from "yaml";
 import { z } from "zod";
 import raw from "../data/timeline.yaml?raw";
-import { LINE_COLORS, type Line, type PartialDate, type Station, type Timeline } from "./network";
+import { PAINTS, type Drawing, type Exhibition, type PartialDate, type Room, type Work } from "./exhibition";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -45,7 +45,7 @@ const AchievementSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9-]+$/).optional(),
     name: z.string().min(1),
-    station: z.string().min(1).optional(),
+    subject: z.string().min(1).optional(),
     detail: z.string().min(1),
     metric: z.union([z.string(), z.number()]).transform(String).optional(),
     metricLabel: z.string().min(1).optional(),
@@ -57,14 +57,16 @@ const AchievementSchema = z
   .strict()
   .refine((a) => (a.metric === undefined) === (a.metricLabel === undefined), {
     message: "metric and metricLabel go together; set both or neither",
+  })
+  .refine((a) => a.metric !== undefined || a.subject !== undefined, {
+    message: "a work needs a metric or a subject to be drawn",
   });
 
 const SpanSchema = z
   .object({
     kind: z.literal("span"),
     id: z.string().regex(/^[a-z0-9-]+$/, "ids use lowercase letters, digits, and dashes"),
-    code: z.string().regex(/^[A-Z0-9]$/, "code is one capital letter or digit, shown in the route bullet"),
-    color: z.enum(LINE_COLORS),
+    paint: z.enum(PAINTS),
     title: z.string().min(1),
     org: z.string().min(1),
     start: DateSchema,
@@ -103,13 +105,35 @@ function fail(message: string): never {
   throw new Error(`src/data/timeline.yaml: ${message}`);
 }
 
-export function loadTimeline(source: string = raw, now: number = Date.now()): Timeline {
+const slug = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/** Reads a metric as the drawing that pictures it exactly. */
+function drawMetric(metric: string, where: string): Drawing {
+  const text = metric.trim().replace("−", "-");
+  const percent = /^(\+)?(\d{1,3})%$/.exec(text);
+  if (percent) {
+    const value = Number(percent[2]);
+    if (percent[1]) return { kind: "increase", percent: value };
+    if (value > 100) fail(`${where}: a reduction of "${metric}" is more than everything; use "+${value}%" for an increase`);
+    return { kind: "reduction", percent: value };
+  }
+  const count = /^(\d{1,4})(\+)?$/.exec(text);
+  if (count && Number(count[1]) >= 1 && Number(count[1]) <= 1000) {
+    return { kind: "count", value: Number(count[1]), plus: Boolean(count[2]) };
+  }
+  return fail(`${where}: metric "${metric}" can't be drawn; use a reduction like "75%", an increase like "+30%", or a count from 1 to 1000 like "5" or "300+"`);
+}
+
+export function loadTimeline(source: string = raw, now: number = Date.now()): Exhibition {
   const result = FileSchema.safeParse(parse(source));
   if (!result.success) fail(`invalid timeline\n${z.prettifyError(result.error)}`);
   const { profile, entries } = result.data;
 
-  const spans = entries.filter((e) => e.kind === "span");
-  const events = entries.filter((e) => e.kind === "event");
   const ids = new Set<string>();
   const claim = (id: string) => {
     if (ids.has(id)) fail(`duplicate id "${id}"; give one of them an explicit id`);
@@ -117,114 +141,113 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ti
     return id;
   };
 
-  const lines: Line[] = spans
-    .map((span) => {
-      const end = span.end === "present" ? null : span.end;
-      if (end && end.time < span.start.time) fail(`span "${span.id}" ends before it starts`);
-      const lineEnd = end?.time ?? now;
+  const rooms: Room[] = [];
+  for (const span of entries.filter((e) => e.kind === "span")) {
+    const end = span.end === "present" ? null : span.end;
+    if (end && end.time < span.start.time) fail(`span "${span.id}" ends before it starts`);
+    const roomEnd = end?.time ?? now;
 
-      const start: Station = {
-        id: claim(`${span.id}-start`),
-        kind: "start",
-        lineId: span.id,
-        name: `${span.startLabel ?? "Joined"} ${span.org}`,
-        label: span.startLabel ?? "Joined",
-        detail: span.summary,
-        org: span.org,
-        date: span.start,
-        skills: [],
-        featured: false,
-        link: span.link,
-        key: span.start.time,
-      };
-
-      // Undated achievements are spread evenly between the dated anchors around them.
-      const achievements = span.achievements.map((a) => ({ a, key: a.date?.time }));
-      const anchors = [
-        { index: -1, key: span.start.time },
-        ...achievements.flatMap((x, index) => (x.key === undefined ? [] : [{ index, key: x.key }])),
-        { index: achievements.length, key: lineEnd },
-      ];
-      for (let i = 0; i < anchors.length - 1; i++) {
-        const from = anchors[i]!;
-        const to = anchors[i + 1]!;
-        const gap = to.index - from.index;
-        for (let j = from.index + 1; j < to.index; j++) {
-          achievements[j]!.key = from.key + ((to.key - from.key) * (j - from.index)) / gap;
-        }
+    // Undated works are spread evenly between the dated anchors around them.
+    const keys: (number | undefined)[] = span.achievements.map((a) => a.date?.time);
+    const anchors = [
+      { index: -1, key: span.start.time },
+      ...keys.flatMap((key, index) => (key === undefined ? [] : [{ index, key }])),
+      { index: keys.length, key: roomEnd },
+    ];
+    for (let i = 0; i < anchors.length - 1; i++) {
+      const from = anchors[i]!;
+      const to = anchors[i + 1]!;
+      for (let j = from.index + 1; j < to.index; j++) {
+        keys[j] = from.key + ((to.key - from.key) * (j - from.index)) / (to.index - from.index);
       }
+    }
 
-      const stations: Station[] = achievements.map(({ a, key }) => ({
-        id: claim(
-          a.id ??
-            `${span.id}-${a.name
-              .toLowerCase()
-              .normalize("NFKD")
-              .replace(/[^a-z0-9]+/g, "-")
-              .replace(/^-|-$/g, "")}`,
-        ),
+    rooms.push({
+      id: claim(span.id),
+      number: 0,
+      paint: span.paint,
+      org: span.org,
+      role: span.title,
+      start: span.start,
+      end,
+      startLabel: span.startLabel ?? "Joined",
+      summary: span.summary,
+      link: span.link,
+      works: span.achievements.map((a, index) => ({
+        id: claim(a.id ?? `${span.id}-${slug(a.name)}`),
+        roomId: span.id,
         kind: "achievement",
-        lineId: span.id,
-        name: a.name,
-        label: a.station ?? a.name,
+        title: a.name,
         detail: a.detail,
         metric: a.metric,
         metricLabel: a.metricLabel,
-        org: span.org,
+        drawing: a.metric ? drawMetric(a.metric, `"${a.name}"`) : { kind: "text", subject: a.subject! },
         date: a.date,
         skills: a.skills,
         featured: a.featured,
         link: a.link,
-        key: key!,
-      }));
+        key: keys[index]!,
+        number: "",
+      })),
+    });
+  }
 
-      return {
-        id: claim(span.id),
-        code: span.code,
-        color: span.color,
-        title: span.title,
-        org: span.org,
-        start: span.start,
-        end,
-        summary: span.summary,
-        link: span.link,
-        stations: [start, ...stations],
-      } satisfies Line;
-    })
-    .sort((a, b) => a.start.time - b.start.time);
-
-  const lineById = new Map(lines.map((l) => [l.id, l]));
-  let origin: Station | null = null;
-  const loose: Station[] = [];
-
-  for (const event of events) {
-    const station: Station = {
+  const roomById = new Map(rooms.map((r) => [r.id, r]));
+  for (const event of entries.filter((e) => e.kind === "event")) {
+    const work: Work = {
       id: claim(event.id),
+      roomId: "",
       kind: "event",
-      lineId: event.on ?? null,
-      name: event.title,
-      label: event.org ?? event.title,
+      title: event.title,
       detail: event.detail,
-      org: event.org,
-      tag: event.tag,
+      drawing: { kind: "document", tag: event.tag ?? "milestone" },
       date: event.date,
+      tag: event.tag,
       skills: event.skills,
       featured: event.featured,
       link: event.link,
       key: event.date.time,
+      number: "",
     };
     if (event.on) {
-      const line = lineById.get(event.on) ?? fail(`event "${event.id}" is on unknown span "${event.on}"`);
-      line.stations.push({ ...station, label: event.title });
+      const room = roomById.get(event.on) ?? fail(`event "${event.id}" is on unknown span "${event.on}"`);
+      room.works.push({ ...work, roomId: room.id });
       continue;
     }
-    const departing = lines.find((l) => l.start.time >= event.date.time);
-    if (departing && departing === lines[0] && !origin) origin = station;
-    else loose.push(station);
+    // An event outside any role hangs in a room named for its org, shared with its org's other events.
+    const roomId = event.org ? slug(event.org) : event.id;
+    const room =
+      roomById.get(roomId) ??
+      (() => {
+        const created: Room = { id: claim(roomId), number: 0, paint: "stone", org: event.org ?? event.title, start: event.date, end: event.date, works: [] };
+        rooms.push(created);
+        roomById.set(roomId, created);
+        return created;
+      })();
+    room.works.push({ ...work, roomId });
+    if (event.date.time < room.start.time) room.start = event.date;
+    if (event.date.time > room.end!.time) room.end = event.date;
   }
 
-  for (const line of lines) line.stations.sort((a, b) => a.key - b.key);
+  // Walking order: current roles by tenure, then past roles, then single-event rooms, newest first.
+  const rank = (room: Room) => (room.role ? (room.end ? 1 : 0) : 2);
+  rooms.sort((a, b) => {
+    if (rank(a) !== rank(b)) return rank(a) - rank(b);
+    if (rank(a) === 0) return a.start.time - b.start.time;
+    return (b.end?.time ?? now) - (a.end?.time ?? now);
+  });
+  rooms.forEach((room, index) => {
+    room.number = index + 1;
+    room.works.sort((a, b) => a.key - b.key);
+    room.works.forEach((work, i) => (work.number = `${room.start.year}.${i + 1}`));
+  });
 
-  return { profile, lines, loose, origin, builtAt: now };
+  const tour = rooms.flatMap((r) => r.works).sort((a, b) => a.key - b.key);
+  const years = [...rooms.map((r) => r.start.year), ...tour.flatMap((w) => (w.date ? [w.date.year] : []))];
+  const current = rooms.some((r) => r.role && !r.end);
+  const lastYear = current
+    ? new Date(now).getUTCFullYear()
+    : Math.max(...rooms.map((r) => r.end?.year ?? r.start.year));
+
+  return { profile, rooms, tour, firstYear: Math.min(...years), lastYear, builtAt: now };
 }
-

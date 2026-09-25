@@ -7,7 +7,7 @@ related_targets: ["src/pages/resume.astro","src/pages/404.astro"]
 
 ## Scope
 
-Home route `/` of ianpascoe.dev, plus its sibling surfaces `/resume` (printable timetable) and the 404 page. Mode: Persuade. Build path: code-led (Ian rejected image-generated comps; no comp is a reference for this build).
+Home route `/` of ianpascoe.dev, plus its sibling surfaces `/resume` (printable checklist of works) and the 404 page. Mode: Persuade. Build path: code-led (Ian rejected image-generated comps; no comp is a reference for this build). This is a redesign: the Career Transit Map world is discarded.
 
 ## Audience, job, action
 
@@ -15,28 +15,27 @@ Hiring managers and recruiters opening a link Ian sent, usually on a laptop duri
 
 ## Proof and content
 
-Placeholder content comes only from `resume.md`, via `src/data/timeline.yaml`. Metrics shown: 75% shorter test runs, 60% faster deploys, 100% automated build and deploy, 2 HA Kubernetes clusters (+30% uptime), a team of 5, 2 mentees, 300+ users in 3 months. Playful achievement names are drafts for Ian to edit. No open-to-work line.
+Placeholder content comes only from `resume.md`, via `src/data/timeline.yaml`. Metrics shown: 75% shorter test runs, 60% faster deploys, 100% automated build and deploy, 2 HA Kubernetes clusters (+30% uptime), a team of 5, 2 mentees, 300+ users in 3 months. Playful achievement names are drafts for Ian to edit and act as the works' titles. No open-to-work line. Quality bar Ian named: the engineer portfolios at sitebuilderreport.com/inspiration/software-engineer-portfolios (clean, legible, confident type, generous space).
 
 ## Direction contract
 
-THESIS: Ian's career as a transit system diagram. Roles are colored lines, achievements are stations, and the present is the interchange where every current line meets. It refuses the portfolio default: a hero with a round photo and "Hi, I'm", then a vertical dotted timeline of cards.
+THESIS: Ian's career hung as a museum retrospective. Every achievement is a work on the wall, drawn exactly from its fact, with a museum label. It refuses the portfolio default of hero, about, experience cards and a dotted timeline, and the dark developer template.
 
-OWN-WORLD: Flat, Unimark-era subway signage on paper-white. A black sign band with a thin white rule; white Overpass lettering; round route bullets; thick lines with 45-degree bends; white stations with black rings; a capsule interchange for "Now". Line colors: RTX red, Spirit-Led blue. Information yellow is reserved for contact. No gradients, glow, or glass, and no shadows except the ticket's lift.
+OWN-WORLD: Warm gallery-white walls and one painted room per role (RTX oxblood, Spirit-Led museum green), black vinyl lettering on white and white vinyl on paint. One family, Libre Franklin (MoMA's Franklin Gothic lineage), titles of works in italic. Works are precise geometric data drawings, framed with a white mat and thin black moulding. Light is the only effect: a warm spotlight pool. No cards, gradients as fill, glass or badges.
 
-STORY: The visitor reads the sign (name, role, lines served), sees the shape of the career in one diagram, opens a station to get the fact behind it, and emails Ian. Explorers ride the network from 2019 and collect punches on a ride pass.
+STORY: The visitor reads the title wall (name, headline, now, highlights), walks the rooms and reads each label's figure and fact, and emails Ian from the visitor desk. Explorers take the guided tour from 2019 and collect stamps in a gallery passport.
 
-FIRST VIEWPORT: On desktop, a full-width black station sign across the top ~22%: portrait tile, "Ian Pascoe" at display size, headline, R and S route bullets, the yellow "Email Ian" sign and quiet links. Below it, the full-width network diagram (~45%), and under that the station-information strip, which by default shows "Now" with live day counters. "Ride from 2019" sits at the diagram's top right, the ride pass at its bottom right. On mobile, the sign band followed by the vertical strip map, newest first.
+FIRST VIEWPORT: Sticky masthead: wordmark left, the floor plan of the rooms centre, Email Ian right. Title wall: "Ian Pascoe" with "Selected Work, 2019–2026" at wall scale on the left, intro wall text and Email Ian plus resume, GitHub and LinkedIn below it. The framed portrait hangs right, its label giving today's roles. Three featured works hang small below as highlights. On mobile the portrait follows the title and the plan collapses into a strip.
 
-FORM: Career Transit Map, item 1 on my ordered list, chosen by Ian as IMPECCABLE'S PICK. Seed key 20c5a16a. Signature interaction: selecting a station isolates its line, dims the rest, and fills the station strip with the metric figure, name, fact, and skills. "Ride from 2019" redraws the network in time order, announcing each station as it arrives, and never runs on its own. Kept from the declined challengers: selecting isolates a line; the metric outranks its sentence; flat ink with no glow; one dataset drives both the diagram and the timetable; current lines count their days live.
+FORM: The Retrospective, item 4 on my ordered list, assigned by the roll (seed b2aeb874) and chosen by Ian. Signature interaction: the floor plan lights the room you are in; opening a work raises its light and dims the room, as a deep-linkable state; "Take the tour from 2019" steps the light through every work in time order and never starts on its own. Raises kept: one hang line; objects drawn from their real facts; all words live text; structure from voids between rooms; named deep-linkable states with light as the state change.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
 ## Memorable moment
 
-The network drawing itself from the University of Rhode Island in 2019 to the "Now" interchange, with a station announcement at each stop.
+The light moving through the rooms on the guided tour, from the 2019 degree to today's work, each piece lit as its label is read.
 
 ## Unresolved
 
 - Real timeline data from Ian replaces the placeholder.
 - The RTX title conflict (resume vs README) stays as in `resume.md` until Ian's data arrives.
-- Git history rewrite for old contact data is pending Ian's explicit "A".

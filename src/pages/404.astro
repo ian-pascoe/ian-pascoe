@@ -3,102 +3,122 @@ import Base from "../layouts/Base.astro";
 import { loadTimeline } from "../lib/timeline";
 
 const { profile } = loadTimeline();
+const firstName = profile.name.split(" ")[0];
 ---
 
-<Base title={`Station closed · ${profile.name}`} description="This page is not on the map." pagePunch="off-the-map">
-  <main id="main" class="closed">
-    <header class="closed__sign on-sign">
-      <div class="wrap closed__sign-inner">
-        <p class="closed__code data">404</p>
-        <h1>Station closed</h1>
+<Base
+  title={`Closed for installation · ${profile.name}`}
+  description="This room is closed for installation."
+  pageStamp="backstage"
+>
+  <main id="main" class="closed wrap">
+    <figure class="closed__work">
+      <svg class="closed__wire" viewBox="0 0 200 40" aria-hidden="true">
+        <path d="M2 40 100 3l98 37" />
+        <circle cx="100" cy="3" r="2.6" />
+      </svg>
+      <div class="closed__frame">
+        <div class="closed__mat"></div>
       </div>
-    </header>
-    <div class="wrap closed__body">
-      <p class="closed__lede">There's no stop at this address. It may have moved, or it was never on the map.</p>
-      <p class="closed__punch">You found a station that isn't on the map, so your ride pass got a punch for it.</p>
+    </figure>
+    <div class="closed__label">
+      <h1>Gallery closed for installation</h1>
+      <p class="closed__detail">
+        Nothing hangs at this address (error 404). It may have moved, or it was never part of the exhibition.
+      </p>
+      <p class="closed__note">
+        You found the room that's closed, so your gallery passport has a stamp for it.
+      </p>
       <div class="closed__actions">
-        <a class="closed__home" href="/">Back to the network map</a>
-        <a href={`mailto:${profile.email}`} data-punch="say-hello">Email {profile.name.split(" ")[0]}</a>
+        <a class="button" href="/">Return to the exhibition</a>
+        <a class="button button--quiet" href={`mailto:${profile.email}`} data-stamp="say-hello">Email {firstName}</a>
       </div>
     </div>
   </main>
 </Base>
 
 <style>
-  .closed__sign {
-    position: relative;
-    background: var(--sign);
-    color: var(--sign-ink);
-  }
-
-  .closed__sign::before {
-    content: "";
-    position: absolute;
-    inset: 0.5rem 0 auto;
-    height: 2px;
-    background: var(--sign-ink);
-  }
-
-  .closed__sign-inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-4) var(--space-6);
-    padding-block: var(--space-8) var(--space-6);
-  }
-
-  .closed__code {
+  .closed {
     display: grid;
-    place-items: center;
-    width: 5.5rem;
-    height: 5.5rem;
-    border-radius: 50%;
-    background: var(--sign-ink);
-    color: var(--sign);
-    font-size: 1.6rem;
-    font-weight: 700;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-8);
+    align-items: center;
+    min-height: 100svh;
+    padding-block: var(--space-8);
   }
 
-  .closed__sign h1 {
+  .closed__work {
+    display: grid;
+    justify-items: center;
+  }
+
+  /* The hanging wire, taut from one hook to the frame's corners. */
+  .closed__wire {
+    width: min(64%, 14rem);
+    overflow: visible;
+  }
+
+  .closed__wire path {
+    fill: none;
+    stroke: var(--ink-quiet);
+    stroke-width: 1.5;
+  }
+
+  .closed__wire circle {
+    fill: var(--ink);
+  }
+
+  .closed__frame {
+    width: min(100%, 22rem);
+    border: 0.35rem solid var(--moulding);
+    background: var(--mat);
+    box-shadow: var(--hung);
+  }
+
+  .closed__mat {
+    aspect-ratio: 4 / 5;
+    margin: 12%;
+    border: 1px dashed var(--rule);
+  }
+
+  .closed__label {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 34rem;
+  }
+
+  .closed__label h1 {
     font-size: var(--step-4);
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-weight: 850;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
   }
 
-  .closed__body {
-    padding-block: var(--space-7) var(--space-9);
-  }
-
-  .closed__lede {
-    max-width: 38ch;
-    font-size: var(--step-2);
-    font-weight: 700;
-    line-height: 1.3;
-  }
-
-  .closed__punch {
-    margin-top: var(--space-4);
-    max-width: 60ch;
+  .closed__detail {
+    font-size: var(--step-1);
     color: var(--ink-soft);
+  }
+
+  .closed__note {
+    color: var(--ink-quiet);
   }
 
   .closed__actions {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-4) var(--space-6);
-    margin-top: var(--space-6);
-    font-weight: 700;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
   }
 
-  .closed__home {
-    display: inline-flex;
-    align-items: center;
-    min-height: 3rem;
-    padding: 0.7rem 1.25rem 0.6rem;
-    border-radius: 0.25rem;
-    background: var(--sign);
-    color: var(--sign-ink);
-    text-decoration: none;
+  @media (max-width: 52rem) {
+    .closed {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-content: center;
+    }
+
+    .closed__frame {
+      width: min(70%, 16rem);
+    }
   }
 </style>

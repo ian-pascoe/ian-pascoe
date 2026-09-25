@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-- Astro with static output; SolidJS only for the interactive timeline island.
+- Astro with static output; no UI framework. The exhibition's light, floor plan, and guided tour are one small vanilla TypeScript module.
 - Deployed with alchemy v2 (beta, pinned to an exact version, lockfile committed) to Cloudflare via `Cloudflare.Website.Astro`, static assets only.
 - Production domain: `ianpascoe.dev` (Cloudflare Registrar and Cloudflare DNS), with `www` redirecting to the apex.
 - Bun as package manager and runtime.

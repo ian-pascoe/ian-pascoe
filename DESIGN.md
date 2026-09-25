@@ -1,87 +1,99 @@
 ---
 name: Ian Pascoe
-description: A career drawn as a flat, Unimark-era subway diagram on paper-white map stock.
+description: A career hung as a museum retrospective; warm gallery walls, painted rooms, vinyl lettering, and framed data drawings.
 colors:
-  paper: "oklch(98.6% 0.002 100)"
-  paper-sunk: "oklch(95.8% 0.003 100)"
-  ink: "oklch(18% 0.004 100)"
-  ink-soft: "oklch(38% 0.006 100)"
-  ink-quiet: "oklch(50% 0.006 100)"
-  rule: "oklch(86% 0.004 100)"
-  sign: "oklch(16.5% 0.003 100)"
-  sign-ink: "oklch(99% 0 0)"
-  sign-ink-soft: "oklch(84% 0.004 100)"
-  station-white: "#ffffff"
-  info: "#fccc0a"
-  info-ink: "oklch(18% 0.004 100)"
-  line-red: "#e8322b"
-  line-blue: "#0039a6"
-  line-green: "#00873b"
-  line-orange: "#f25c19"
-  line-purple: "#a52fa0"
-  line-brown: "#8f5f2f"
-  line-teal: "#00829a"
+  wall: "oklch(96.6% 0.006 85)"
+  wall-sunk: "oklch(93.4% 0.008 85)"
+  ink: "oklch(19% 0.006 60)"
+  ink-soft: "oklch(38% 0.008 60)"
+  ink-quiet: "oklch(49% 0.008 60)"
+  rule: "oklch(84% 0.008 80)"
+  mat: "oklch(99.3% 0.003 85)"
+  moulding: "oklch(17% 0.005 60)"
+  gilt: "oklch(72% 0.11 78)"
+  light: "oklch(97% 0.05 85)"
+  stamp-ink: "oklch(66% 0.17 30)"
+  ghost: "oklch(62% 0.006 60)"
+  paint-oxblood: "oklch(33% 0.09 22)"
+  vinyl-oxblood: "oklch(97.5% 0.012 40)"
+  paint-green: "oklch(34% 0.05 162)"
+  vinyl-green: "oklch(97.5% 0.01 140)"
+  paint-slate: "oklch(35% 0.04 250)"
+  vinyl-slate: "oklch(97.5% 0.008 250)"
+  paint-plum: "oklch(32% 0.07 330)"
+  vinyl-plum: "oklch(97.5% 0.01 330)"
+  paint-ochre: "oklch(78% 0.1 80)"
+  paint-stone: "oklch(90.5% 0.014 80)"
+  paint-ink: "oklch(17% 0.005 60)"
+  vinyl-ink: "oklch(97.5% 0.006 85)"
 typography:
   display:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
-    fontSize: "clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem)"
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "clamp(3rem, 1.6rem + 5vw, 6rem)"
+    fontWeight: 850
+    lineHeight: 0.92
+    letterSpacing: "-0.035em"
+  display-show:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "0.56em"
+    fontWeight: 300
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
+  room-sign:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "clamp(2.5rem, 1.7rem + 3vw, 4.5rem)"
     fontWeight: 800
     lineHeight: 0.95
     letterSpacing: "-0.03em"
-  metric:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
-    fontSize: "clamp(3.5rem, 2rem + 3.6vw, 5.75rem)"
-    fontWeight: 800
-    lineHeight: 0.88
-    letterSpacing: "-0.035em"
+  room-numeral:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "clamp(2.5rem, 1.7rem + 3vw, 4.5rem)"
+    fontWeight: 200
+    lineHeight: 0.95
+    letterSpacing: "-0.03em"
     fontFeature: "tnum"
   headline:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
-    fontSize: "2.25rem"
-    fontWeight: 800
-    lineHeight: 1.05
-    letterSpacing: "-0.02em"
-  title-lg:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem)"
+    fontWeight: 750
+    lineHeight: 1.08
+    letterSpacing: "-0.025em"
+  metric:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem)"
+    fontWeight: 750
+    lineHeight: 0.95
+    letterSpacing: "-0.025em"
+    fontFeature: "tnum"
+  lead:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
     fontSize: "1.625rem"
-    fontWeight: 800
-    lineHeight: 1.05
-    letterSpacing: "-0.02em"
+    fontWeight: 650
+    lineHeight: 1.22
+    letterSpacing: "-0.012em"
   title:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
     fontSize: "1.25rem"
-    fontWeight: 800
-    lineHeight: 1.25
-  body-lead:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 400
-    lineHeight: 1.45
+    fontWeight: 700
+    lineHeight: 1.3
   body:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
-    lineHeight: 1.5
-  label:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 700
-    lineHeight: 1.4
-  map-label:
-    fontFamily: "Overpass Variable, Overpass, sans-serif"
-    fontSize: "15px"
+    lineHeight: 1.55
+  work-title:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
+    fontSize: "1.0625rem"
     fontWeight: 600
+    lineHeight: 1.35
     letterSpacing: "0"
-  data:
-    fontFamily: "Overpass Mono Variable, Overpass Mono, ui-monospace, monospace"
+  label:
+    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
     fontSize: "0.875rem"
-    fontWeight: 500
-    letterSpacing: "0"
-    fontFeature: "tnum"
+    fontWeight: 650
+    lineHeight: 1.4
 rounded:
-  sign: "0.25rem"
-  capsule: "999px"
-  round: "50%"
+  none: "0px"
 spacing:
   space-1: "0.25rem"
   space-2: "0.5rem"
@@ -92,261 +104,240 @@ spacing:
   space-7: "3rem"
   space-8: "4.5rem"
   space-9: "7rem"
+  gutter: "clamp(1.25rem, 0.6rem + 3vw, 3.5rem)"
+  measure: "62ch"
 components:
-  sign-band:
-    backgroundColor: "{colors.sign}"
-    textColor: "{colors.sign-ink}"
-    typography: "{typography.display}"
-    padding: "2rem 0 1.5rem"
-  info-sign:
-    backgroundColor: "{colors.info}"
-    textColor: "{colors.info-ink}"
-    rounded: "{rounded.sign}"
-    padding: "0.7rem 1.25rem 0.6rem"
-    height: "3rem"
-  info-sign-hover:
-    backgroundColor: "color-mix(in oklch, #fccc0a 86%, white)"
-    textColor: "{colors.info-ink}"
-  route-bullet:
-    backgroundColor: "{colors.line-red}"
-    textColor: "{colors.station-white}"
-    rounded: "{rounded.round}"
-    size: "2.25rem"
-  line-key:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
-    rounded: "{rounded.capsule}"
-    padding: "0.3rem 1rem 0.3rem 0.35rem"
-    height: "2.75rem"
-  line-key-hover:
-    backgroundColor: "{colors.paper-sunk}"
-    textColor: "{colors.ink}"
-  line-key-pressed:
+  button-primary:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-  sign-button:
-    backgroundColor: "{colors.sign}"
-    textColor: "{colors.sign-ink}"
-    rounded: "{rounded.sign}"
-    padding: "0.5rem 1.15rem 0.45rem 0.9rem"
-    height: "2.75rem"
-  sign-button-hover:
-    backgroundColor: "oklch(28% 0.004 100)"
-    textColor: "{colors.sign-ink}"
-  outline-button:
-    backgroundColor: "{colors.paper}"
+    textColor: "{colors.wall}"
+    rounded: "{rounded.none}"
+    padding: "0 1.5rem"
+    height: "3rem"
+  button-primary-large:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.wall}"
+    typography: "{typography.title}"
+    rounded: "{rounded.none}"
+    padding: "0 2rem"
+    height: "3.5rem"
+  button-quiet:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: "0 1.5rem"
+    height: "3rem"
+  button-masthead:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.wall}"
+    rounded: "{rounded.none}"
+    padding: "0 1rem"
+    height: "2.5rem"
+  work-frame:
+    backgroundColor: "{colors.mat}"
+    rounded: "{rounded.none}"
+    padding: "14%"
+    width: "15rem"
+  plan-room:
+    backgroundColor: "{colors.wall}"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
-    rounded: "{rounded.sign}"
-    padding: "0.45rem 0.9rem 0.4rem"
+    rounded: "{rounded.none}"
+    padding: "0 0.5rem"
+    height: "2.25rem"
+  plan-room-current:
+    backgroundColor: "{colors.paint-oxblood}"
+    textColor: "{colors.vinyl-oxblood}"
+  tour-bar:
+    backgroundColor: "{colors.paint-ink}"
+    textColor: "{colors.vinyl-ink}"
+    rounded: "{rounded.none}"
+    padding: "0.75rem 0.75rem 0.75rem 1.5rem"
+    width: "44rem"
+  tour-button-next:
+    backgroundColor: "{colors.vinyl-ink}"
+    textColor: "{colors.paint-ink}"
+    rounded: "{rounded.none}"
+    padding: "0 1rem"
     height: "2.75rem"
-  outline-button-hover:
-    backgroundColor: "{colors.paper-sunk}"
+  checklist-sheet:
+    backgroundColor: "{colors.mat}"
     textColor: "{colors.ink}"
-  outline-button-disabled:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink-quiet}"
-  featured-stop:
-    backgroundColor: "{colors.station-white}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.sign}"
-    padding: "0.35rem 0.9rem 0.35rem 0.4rem"
-    height: "2.75rem"
-  tag:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.capsule}"
-    padding: "0.2rem 0.55rem 0.1rem"
-  pass-ticket:
-    backgroundColor: "{colors.station-white}"
-    textColor: "{colors.ink}"
-    width: "15.5rem"
-  pass-ticket-band:
-    backgroundColor: "{colors.sign}"
-    textColor: "{colors.sign-ink}"
-    padding: "0.6rem 1rem 0.45rem"
-  punch-toast:
-    backgroundColor: "{colors.sign}"
-    textColor: "{colors.sign-ink}"
-    padding: "0.75rem 1.2rem 0.65rem 0.9rem"
+    rounded: "{rounded.none}"
+    padding: "clamp(1.5rem, 1rem + 3vw, 4rem)"
+    width: "54rem"
 ---
 
 # Design System: Ian Pascoe
 
 ## Overview
 
-**Creative North Star: "The Career Transit Map"**
+**Creative North Star: "The Retrospective"**
 
-The site is a transit authority's printed network map for one person's career. Roles are colored lines, dated achievements are stations, and the present is a capsule interchange where every current line meets. Everything is flat ink on paper-white map stock, lettered in a single grotesque, the way Unimark-era subway signage was: black station-sign bands with a thin white rule, round route bullets, thick tracks with 45° bends, white stations ringed in black.
+The site is a museum retrospective of one engineer's career. The visitor stands in front of a title wall, walks through one painted room per role, reads a museum label beside every framed work, and leaves a question at the visitor desk. Every achievement is a *work*: an exact geometric drawing of its own fact (a reduction, an increase, a count, a seal, a text piece), matted in white, framed in thin black moulding, and hung on one line at eye level. The words are all live text in one family, Libre Franklin, set like vinyl lettering on a gallery wall.
 
-Density is that of a good wayfinding system: generous white ground around a small number of very legible, very heavy marks. Hierarchy comes from weight (800 for every name and number), size, and thick black rules, never from tint, texture or depth. The one lifted object in the world is the ride-pass ticket; the one warm color outside the lines is information yellow on the contact sign.
+The mood is calm, generous and exact, the house style of a serious modern-art museum rather than a developer template. Walls are warm gallery white; rooms are painted deep, saturated colours with white vinyl lettering on them. Nothing is decorated. Depth comes from real objects hanging on a wall (a two-layer hung shadow) and from light: a warm picture-light pool behind each work that brightens when the work is opened while the rest of its room goes dark. Light is the only state change the rooms have.
 
-Motion belongs to the diagram. There is one authored sequence, the ride replay that redraws the network in time order, and it only runs when asked. Everything else is a short ease-out state change. Nothing moves or sounds on its own.
+Structure comes from the voids between rooms, not from boxes. There are no cards, no rounded corners, no gradients as fill, no glass and no badges. Motion is slow and settled (a 520ms ease-out for light, 180ms for small feedback) and nothing ever moves on its own: the guided tour starts only when the visitor asks for it.
 
 **Key Characteristics:**
-- Paper-white ground, signage-black bands and rules, pure white station discs.
-- Seven reserved line colors, applied only to routes through a `data-color` hook.
-- One family, Overpass, set heavy; Overpass Mono only for clocks: dates, day counters, the ride year, the pass tally.
-- Circles, capsules and 4px sign corners; 45° diagonals in the diagram and its labels.
-- Flat everywhere except the ride-pass ticket's lift.
-- Desktop draws a horizontal network diagram; below 60rem the same data becomes a vertical strip map.
+- Warm gallery-white walls with painted rooms; vinyl lettering flips from ink-on-white to white-on-paint via one token set.
+- One family (Libre Franklin Variable, weights 200–850, true italic); titles of works always italic.
+- Works are exact SVG drawings of their facts, framed with a black moulding border, a white mat, and a hung shadow.
+- The museum label is the unit of content: figure, italic title with date, detail, medium, credit line.
+- Light is the only state: lit pool up, room darkened, other labels dimmed; deep-linkable by `#work-id`.
+- Square corners everywhere; rules are 1px hairlines in the room's own rule colour.
 
 ## Colors
 
-Neutral paper and signage black carry the page; saturated transit hues are reserved for lines, and a single yellow marks the way to contact.
+A warm, low-chroma gallery neutral set carries the site; saturated colour lives only in the paint of rooms, the gilt of increases, and the red of passport stamps.
 
 ### Primary
-- **Signage Black** (`sign`): the station-sign bands (header, contact footer, 404 sign), the ride button, the ticket and sheet bands, the punch toast. Near-black with a whisper of warmth; it is the brand surface.
-- **Information Yellow** (`info`): the "Email Ian" sign in the header and the large email sign in the footer. Set with `info-ink` lettering.
+- **Gallery Ink** (ink): the vinyl lettering on white walls, solid button fill on walls, the 2px rule that opens the visitor desk, and the lit edge of the floor plan's Entrance and Desk.
+- **Moulding Black** (moulding): the frame border around every work, the portrait, and the 404 frame, and the ink of every data drawing inside the mat.
 
-### Secondary
-- **Line Red** (`line-red`), **Line Blue** (`line-blue`), **Line Green** (`line-green`), **Line Orange** (`line-orange`), **Line Purple** (`line-purple`), **Line Brown** (`line-brown`), **Line Teal** (`line-teal`): the route palette. Each line in the timeline data names one color; `[data-color]` maps it to `--line-color` and `--bullet-color`, which feed tracks, route bullets, timetable strip bars, the mobile Now rail, and the ride train. The current data uses red (RTX) and blue (Spirit-Led Software).
+### Secondary (room paints)
+Each room is painted by `data-paint`, which sets five tokens at once: `--paint` (the wall), `--vinyl` (lettering), `--vinyl-soft` (secondary text), `--vinyl-quiet` (credits, meta), `--vinyl-rule` (hairlines). Components read only these five, so the same label, button and rule render correctly on any paint.
+- **Oxblood** (paint-oxblood, lettered in vinyl-oxblood): the RTX room.
+- **Museum Green** (paint-green, lettered in vinyl-green): the Spirit-Led Software room.
+- **Stone** (paint-stone, lettered in ink): the default paint for rooms made from events alone (the University of Rhode Island room).
+- **Slate**, **Plum** (dark, white vinyl) and **Ochre** (light, ink vinyl): available paints in the schema, unused by the current data.
+- **Night** (paint-ink, lettered in vinyl-ink): the guided-tour bar; floating signage, never a room.
+
+### Tertiary
+- **Gilt** (gilt): the added rows of an increase drawing and the text-selection highlight. Nothing else.
+- **Stamp Red** (stamp-ink): passport stamps once earned, and the masthead passport mark after the first stamp.
+- **Picture Light** (light): the warm pool behind works, mixed at 44% into a radial gradient.
 
 ### Neutral
-- **Map Paper** (`paper`): page ground, line-key and outline-button fill, halo stroke behind SVG labels.
-- **Sunk Paper** (`paper-sunk`): hover fill for keys, buttons and featured stops; station-dot hover; `:target` highlight pad.
-- **Station White** (`station-white`): station discs, the Now capsule, the ride-pass ticket and sheet, featured-stop tiles, resume sheet, route-bullet lettering. Brighter than the paper, so stations read as punched-out white.
-- **Ink** (`ink`): body text, 4px section rules, station rings, button and key borders, focus outline.
-- **Soft Ink** (`ink-soft`): secondary lines (headline on paper, summaries, metric labels, dates, day counters).
-- **Quiet Ink** (`ink-quiet`): tertiary notes, disabled text, dotted index leaders, unpunched punch outlines.
-- **Rule Grey** (`rule`): 1px hairlines between list rows and in the pass sheet; disabled button border.
-- **Sign White** (`sign-ink`) and **Sign White Soft** (`sign-ink-soft`): lettering and the thin top rule on black signs; secondary sign copy.
+- **Gallery White** (wall): the page wall, the masthead background, and every unlit floor-plan room.
+- **Sunk Wall** (wall-sunk): the wall behind the resume sheet, floor-plan hover, scrollbar track.
+- **Mat White** (mat): the mat inside every frame and the resume sheet itself.
+- **Ink Soft** (ink-soft) and **Ink Quiet** (ink-quiet): secondary and tertiary text on walls; wall defaults of `--vinyl-soft` / `--vinyl-quiet`.
+- **Wall Rule** (rule): 1px hairlines on white walls; the dashed empty mat on the 404 frame.
+- **Ghost** (ghost): the thin outlines of the squares a reduction has taken away.
 
 ### Named Rules
-**The Information Yellow Rule.** Yellow is the contact sign. The only content surface it fills is the email action; beyond that it appears only in system states (text selection, the skip link, the focus ring on black signs). Never use it for a highlight, badge, chart or decoration.
+**The Paint Carries Its Lettering Rule.** Never set a colour on text inside a room directly; read `--vinyl`, `--vinyl-soft`, `--vinyl-quiet`, `--vinyl-rule`, and let `data-paint` decide. A new paint must supply all five.
 
-**The Lines Are Lines Rule.** A line color only ever paints a route: a track, a route bullet, a strip-map bar, the train. Never set text, a background panel, a border or a hover state in a line color.
+**The Gilt Is Growth Rule.** Gilt means "more than before": increase squares and selection only. It is never a button, a link, or a heading colour.
 
-**The Flat Ink Rule.** Color is applied as flat, opaque fills. No gradients, glows, glass or tinted overlays. Dimming is done by mixing a line toward paper (16%) or dropping a station to 28% opacity.
+**The Red Is Earned Rule.** Stamp red appears only once a visitor has earned a stamp. Unearned stamps are dashed, quiet vinyl.
 
 ## Typography
 
-**Display Font:** Overpass Variable (with Overpass, sans-serif), self-hosted via `@fontsource-variable/overpass`
-**Body Font:** Overpass Variable, the same family
-**Label/Mono Font:** Overpass Mono Variable (with Overpass Mono, ui-monospace, monospace), via `@fontsource-variable/overpass-mono`
+**Display Font:** Libre Franklin Variable (with Libre Franklin, Franklin Gothic, sans-serif)
+**Body Font:** Libre Franklin Variable, the same family
+**Label/Mono Font:** none; numerals use `tabular-nums lining-nums` via `.tabular`
 
-**Character:** Overpass descends from Highway Gothic, so the whole site reads as sign lettering: heavy, open, slightly condensed. The mono is its clock: it appears only where a number ticks or a date stamps.
+**Character:** One Franklin Gothic–lineage grotesque does everything, as in a museum's own signage: very heavy for names on the wall, feather-light for numerals and the show title, true italic for titles of works. Hierarchy comes from weight and size contrast, never from a second family.
 
 ### Hierarchy
-- **Display** (800, `--step-4` clamp 2.5–4.75rem, 0.95): the name on the station sign, "Say hello" in the footer, "Station closed" on the 404.
-- **Metric** (800, clamp 3.5–5.75rem, 0.88, tabular): the figure in the station strip ("−75%", "Now"). A date-only figure steps down to clamp 2.5–3.75rem.
-- **Headline** (800, `--step-3` 2.25rem, 1.05): section heads (Timetable, Index of skills), timetable line names, station names, inline timetable metrics.
-- **Title Large** (800, `--step-2` 1.625rem): the "Network map" bar title, pass-sheet title, origin station, 404 lede (700).
-- **Title** (800, `--step-1` 1.25rem, 1.25): timetable stop names.
-- **Body Lead** (400, `--step-1`, 1.45, max 62ch): station detail sentence; sign headline (500).
-- **Body** (400, `--step-0` 1.0625rem, 1.5, max 66ch): summaries, stop details, running text.
-- **Label** (600–700, `--step--1` 0.875rem): keys, outline buttons, tags, notes.
-- **Map Label** (600, 15px; 800 when featured or selected): SVG station names, rotated ±45°, with a 5px paper halo stroke.
-- **Data** (Overpass Mono 500, tabular-nums, letter-spacing 0): `<time>` and `.data` only.
+- **Display** (850, `--step-5`, 0.92): the exhibition title on the title wall (the name).
+- **Display Show** (300 italic, 0.56em of display, 1.05): "Selected Work, 2019–2026" beneath the name.
+- **Room Sign** (800, `--step-4`, 0.95, −0.03em) with **Room Numeral** (200, same size, `--vinyl-quiet`): the room's number set light beside its name. Page titles on the resume and 404 use `--step-4` at 850.
+- **Headline** (750, `--step-3`): the visitor-desk question and the Index of media heading.
+- **Metric** (750, `--step-3`, 0.95, tabular): the figure that heads a museum label ("75%"); drops to `--step-2` on phones.
+- **Lead** (650, `--step-2`, 1.22): the headline sentence on the title wall.
+- **Title** (700, `--step-1`, 1.3): room role, section headings (Highlights, passport).
+- **Body** (400, `--step-0`, 1.55): wall text and label detail, capped at `--measure` (62ch) or 38rem on the title wall.
+- **Work Title** (600 italic `cite`, `--step-0`, 1.35): the title of a work, followed by its date in roman 400.
+- **Label** (600–650, `--step--1`): medium and credit lines, floor plan, tour step, passport note.
 
-Scale steps: `--step--1` 0.875rem, `--step-0` 1.0625rem, `--step-1` 1.25rem, `--step-2` 1.625rem, `--step-3` 2.25rem, `--step-4` fluid. Headings 1–3 get `letter-spacing: -0.02em` and `text-wrap: balance`; paragraphs `text-wrap: pretty`.
+Base headings are 750 at line-height 1.08 and −0.015em, with `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
 
 ### Named Rules
-**The Mono Is a Clock Rule.** Overpass Mono sets dates, live day counters, the ride year and the pass tally. Every other string, including large metrics, is Overpass with tabular numerals.
+**The Italic Is a Title Rule.** Italic marks the title of a work (`<cite>`), the show line and the email address at the desk. Never italicise for emphasis.
 
-**The Metric Outranks Its Sentence Rule.** Where a stop has a number, the number is the largest thing in its block (Metric in the strip, Headline in the timetable) and the sentence sits under it at Body size.
-
-**The One Weight for Names Rule.** Names of people, places, lines and stations are 800. Weight 400 is for sentences only.
+**The One Family Rule.** Libre Franklin is the only family, including inside SVG drawings and stamps (`font-family: var(--font)`). Weight is the only voice change.
 
 ## Layout
 
-A single centered column (`.wrap`, max `88rem`) with a fluid gutter (`clamp(1.25rem, 0.6rem + 2.8vw, 3rem)`). Full-bleed black sign bands open and close the page; everything between sits on paper.
+The page is a sequence of full-bleed walls, each holding a centred `.wrap` (max 90rem, `--gutter` side padding). Order: sticky masthead, title wall, one painted room per role, index of media, visitor desk. Rooms are separated by paint and by generous vertical space (`--space-9` above, `--space-9 + --space-4` below), not by dividers.
 
-Page order: station sign → network bar (title, line keys, ride button) → diagram → station strip (grid: card + ride-pass column) → Timetable → Index of skills → contact sign. Sections open with a heading row over a 4px ink rule; section tops use `--space-9` (7rem) for Timetable and `--space-8` for the index.
-
-The spacing scale is `--space-1` through `--space-9` (0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4.5, 7rem). Component gaps sit at 2–5; section breathing at 7–9.
-
-Responsive behavior:
-- **≤60rem:** the SVG diagram and its controls hide; the Now card becomes the head of a vertical strip map (a capsule with the current lines hanging down its left edge); the station card collapses to one column; the ride pass spans full width and its sheet docks to the bottom edge. The sign band drops the actions under the name.
-- **≤40rem:** timetable rows collapse from `7.5rem | 2.75rem | 1fr` (date | strip | content) to `2.25rem | 1fr`, dates moving above the stop.
-- **≤36rem:** the sign band stacks fully and the yellow sign stretches to full width.
-
-The skill index flows in CSS columns (`columns: 3 18rem`) with dotted leaders between skill and stops, like a map's street index.
+- **Title wall:** 7fr / 4fr grid; title, wall text, actions and links left; the framed portrait with its label right; three highlights hang small below on one line.
+- **Room wall text:** 5fr / 6fr grid, room sign left, role, dates and summary right, closed by a 1px `--vinyl-rule` line.
+- **The hang line:** works fill `repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr))`; each work spans two subgrid rows, frame then label, and every frame centres vertically in the first row so all frames in a row share one eye level and all labels start on one line. Frame widths vary by drawing kind (12–16rem; featured 16–18.5rem).
+- **Compact rooms** (one or two works, above 52rem) hang the works beside the wall text in the same 5fr / 6fr grid.
+- **Visitor desk:** 5fr / 6fr, contact left, passport right; one column below 56rem.
+- **Breakpoints:** 60rem (plan drops room names to numerals), 56rem (title wall and desk stack; portrait follows the title), 52rem (rooms stack, tighter padding), 40rem (masthead grows to two rows, 5.6rem; works hang beside their labels in a 7.25rem column, so a room reads as a list), 36rem (tour bar wraps).
+- **Rhythm:** a 0.25rem-based scale (`--space-1`..`--space-9`: 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4.5, 7rem). Label internals use `--space-1`/`--space-2`; room and wall gaps use `--space-7`/`--space-8`.
 
 ## Elevation & Depth
 
-The world is flat. Depth is conveyed by ink weight, the black-on-paper sign bands, and white stations standing on colored tracks. There is exactly one lifted object: the ride-pass ticket, which hangs off the page like a paper pass.
+Depth is physical and sparse. The wall is flat; only objects that really hang or float cast shadows, and light is the only thing that changes elevation.
 
 ### Shadow Vocabulary
-- **Ticket lift** (`filter: drop-shadow(0 1px 1px oklch(0% 0 0 / 0.14)) drop-shadow(0 10px 14px oklch(0% 0 0 / 0.14))`): the ride-pass ticket only. A drop-shadow filter so it follows the punched notches.
-- **Sheet scrim** (`::backdrop` `oklch(18% 0.004 100 / 0.28)`): the modal ride-pass sheet dims the page flatly; the sheet itself carries a 3px white border, not a shadow.
+- **Hung** (`--hung`: `0 1px 1px oklch(0% 0 0 / 0.22), 0 14px 28px -10px oklch(0% 0 0 / 0.38)`): every frame, the portrait, the resume sheet and the 404 frame.
+- **Float** (`--float`: `0 18px 40px -12px oklch(0% 0 0 / 0.55)`): the guided-tour bar, the only thing that floats over the rooms.
+- **Lit**: the opened work lifts (`translateY(-3px) scale(1.015)`) and its shadow deepens; its siblings flatten to a 1px contact shadow.
 
 ### Named Rules
-**The One Ticket Rule.** Only the ride-pass ticket casts a shadow. Cards, strips, buttons, the sheet and the toast are flat.
+**The Light Is the State Rule.** Opening a work raises its picture-light pool from 0.28 to full opacity, darkens its room (`color-mix(in oklch, var(--paint) 72%, oklch(8% 0.01 60))`), removes the other pools, and drops the other labels to 0.5 opacity. No outlines, no colour swaps, no overlays. The state is a `#work-id` hash, so it is linkable; without JavaScript a `:target` work still gets its full pool.
+
+**The Hanging Things Only Rule.** Shadows belong to hung objects and the tour bar. Text, rules, buttons and panels sit flat on the wall.
 
 ## Shapes
 
-Three corner values, each tied to a real transit object:
-- **Round** (50%): route bullets, stations, the portrait medallion, the 404 code disc, punch "circle".
-- **Capsule** (999px): the Now interchange, line keys, skill tags, the mobile Now rail head.
-- **Sign corner** (0.25rem): the yellow info sign, ride and print buttons, outline buttons, featured-stop tiles.
-
-Everything else is square: bands, rules, the ticket and sheet bodies. The ticket is clipped by a mask with two 0.6rem semicircle notches at 62% height, like a tear-off pass.
-
-In the diagram, tracks are 11px strokes with round joins; a line leaves its row and joins the Now row on a true 45° diagonal (horizontal run equals vertical drop). Station labels rotate ±45°. Strip-map bars are 10px (timetable) and 9px (mobile Now rail). Rules are 4px ink for section heads and the station strip, 1–1.5px for row hairlines.
+Every corner is square (`border-radius: 0`); the only curves are circles in the drawings: count dots, the document seal, passport stamps. Frames are a solid moulding border (0.3rem on works, 0.35rem on portrait and 404 frame, 0.25rem on highlights, 0.2rem on phones) around a white mat padded 12–14%. Hairlines are 1px in the room's rule colour; floor-plan rooms are 1.5px ink boxes sharing walls, with 1.5px doorways cut between them. Icons are 24px line drawings, stroke 1.75, square caps and mitred joins.
 
 ## Components
 
-### Station Sign Band
-Black full-bleed band with a 2px white rule set 0.5rem below its top edge, as on a platform sign. Holds the round portrait (4px white ring), the Display name, the headline in soft white, the route bullets of current lines, location, and the contact actions. The contact footer and the 404 page reuse the same band.
-
-### Information Sign (contact)
-- **Shape:** sign corner (0.25rem), min-height 3rem, icon + label, weight 800 at `--step-1`.
-- **Color:** yellow fill, ink lettering. Footer variant scales type to clamp 1.25–2.25rem with 1rem × 1.5rem padding.
-- **Hover:** fill mixes 14% toward white over 160ms.
-
-### Route Bullet
-A filled circle in the line color with the line's letter in white 800 at 56% of the diameter. Size is set by `--size`: 2.25rem default, 2.75rem timetable head, 5rem station figure, 1.9rem in keys, 1.75rem featured, 1.5rem meta, 1.35rem index, 1.6rem resume. Sign bullets scale to 1.08 on hover.
-
 ### Buttons
-- **Ride / Print (sign button):** black fill, white 800 text, 0.25rem corners, min-height 2.75rem, inline SVG icon; hover lifts to `oklch(28% 0.004 100)`.
-- **Outline button (station nav, pass close):** paper fill, 2px ink border, 0.25rem corners, Label type; hover fills sunk paper; disabled switches to rule border and quiet text. The "close" variant is a borderless underlined text button.
-- **Line key (toggle):** capsule with 2px ink border holding a bullet and the org name; `aria-pressed="true"` inverts to ink fill with paper text. Isolates that line on the map.
+Printed like the gallery's own signage: flat, square, heavy.
+- **Shape:** square (0px), 2px border in `--vinyl`.
+- **Primary:** `--vinyl` fill, `--paint` text, 700 weight, 3rem min height, `0 --space-5` padding, optional leading 1.2em icon. On a white wall this is ink on gallery white; inside a room it inverts to the room's vinyl.
+- **Hover:** fill mixes toward the paint (`color-mix(in oklch, var(--vinyl) 86%, var(--paint))`), 180ms.
+- **Quiet:** transparent with vinyl border and text; hover adds a 10% vinyl wash.
+- **Sizes:** the title-wall and desk email are 3.5rem tall with `--space-6` padding at `--step-1`; the masthead email is 2.5rem at `--step--1`.
+- **Focus:** 2px `--vinyl` outline, 3px offset (6px on frames).
 
-### Network Diagram
-- **Tracks:** 11px strokes in `--line-color`, round joins, 45° merges; dimmed lines mix to 16% color over paper.
-- **Stations:** white discs with a 3.5px ink ring (4.5px for featured and terminal). Hover fills sunk paper; focus shows a dashed ink halo; selected fills ink, grows to r 11px with a solid halo at r 19px, and its label slides 8px out along the 45° axis.
-- **Now interchange:** a white capsule with a 4.5px ink ring where current lines terminate, labeled "Now" at 26px 800 with a mono date.
-- **Ride replay:** a dashed 1.5px ink cursor sweeps left to right with the year in mono 18px; a train (line-colored disc, ink ring) rides each line; stations pop in with a 420ms scale-from-0.2 "arrive".
+### Framed Work (signature)
+A button that is a picture: moulding border, white mat, and an exact SVG drawing of the fact, `cursor: zoom-in`.
+- **Reduction:** 100 ink squares on a 10×10 grid; the squares taken away remain as thin `--ghost` outlines.
+- **Increase:** 100 ink squares plus the added percent as extra gilt rows.
+- **Count:** one ink dot per unit (large dots up to 12; a 10- or 20-column dot field beyond, with an open ring for "+").
+- **Document:** a seal with the tag set twice around a circle on a text path and the year in the centre.
+- **Text piece:** the subject set in 800 weight, sized by container query to fit its longest run.
+- Hover lifts the frame 2px; opening it lights it (see Elevation). Each drawing carries an `aria-label` that states the fact.
 
-### Station Strip
-Opens under a 4px ink rule. Three columns: the metric-first figure (Metric type over a soft label, or a 5rem route bullet), then name (Headline), line/date meta, the detail sentence (Body Lead) and tags/links, then Previous/Next/Close outline buttons. By default it shows the Now card: current lines as rows with live mono day counters, then featured-stop tiles (white, 2px ink border, bullet + metric + name).
+### Museum Label
+Sits under its frame on the hang line, max 24rem: figure (metric + measure) → italic title, date → detail in `--vinyl-soft` → medium (skills, 600, `--step--1`) → credit line (org, range, "No. 2019.1", `--vinyl-quiet`) → optional external link with a 1em arrow.
 
-### Timetable (vertical strip map)
-Each line opens with a bullet, org name, role · range · live day count, and summary. Its stops hang on one continuous 10px bar in the line color, each marked by a 1.25rem white disc with a 3.5px ink ring; dates right-align in mono to the left of the bar. The origin station below uses a larger 1.6rem disc with a 5px ring. A `:target` stop name gets a flat sunk-paper pad.
+### Room Sign
+Room number in weight 200 and `--vinyl-quiet`, set beside the room name in 800 at `--step-4`; role, dates ("Joined Jun 2019 · Day 2,674") and summary on the right.
 
-### Index of Skills
-A three-column map index: skill in 800, a 2px dotted quiet-ink leader, then right-aligned stops each with a 1.35rem bullet.
+### Navigation (floor plan)
+The sticky masthead (`--masthead` 3.75rem, gallery white, 1px rule below) holds the wordmark (name 800, "Selected Work" italic), a floor plan of the rooms, the passport tally and the email button. The plan is a row of 2.25rem boxes sized by each room's work count: Entrance, numbered rooms, Desk. The room the visitor is in gets `aria-current="location"` and fills with that room's paint and vinyl (Entrance and Desk fill ink). Below 60rem rooms show numerals only; below 40rem the plan takes its own full-width row, 1.85rem tall.
 
-### Tags
-Capsules with a 1.5px ink border, Label type at 600, no fill.
+### Guided Tour Bar
+A fixed bar painted `ink`, centred at the bottom (max 44rem) with the float shadow: step counter ("3 of 13 · 2021") above the italic title, then Previous, Next/Finish (solid vinyl) and a square close. Enters with a 520ms rise; arrow keys step, Escape ends. It never starts on its own.
 
-### Ride Pass (ticket, sheet, punches, toast)
-- **Ticket:** 15.5rem white pass with a black band (title + mono tally), a row of seven conductor punches, and an underlined hint; the only shadowed element. Hover nudges it up 2px and −0.6°.
-- **Punches:** 1.4rem shapes (circle, diamond, square, star, triangle, cross, hexagon) drawn as dashed 1.4px quiet-ink outlines; punched ones fill solid ink.
-- **Sheet:** a modal `<dialog>` pulled from the ticket's corner (bottom-right; bottom sheet on mobile), white with a 3px white border, black band header, hairline-ruled punch list, sticky footer with the Close button.
-- **Toast:** black band with a 2px white border, slides up 1rem and fades in on a new punch, holds 3.6s.
+### Gallery Passport
+A 1px-ruled panel at the desk with a grid of 5.25rem circular stamps. Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown, with a 520ms press-in. The masthead tally shows a dashed ring that turns stamp red after the first stamp and briefly slides the new stamp's name out beside the count.
 
-### Links and Focus
-Text links inherit color, underline at 0.08em thickness (0.14em on hover), 0.2em offset. On black signs the underline is 45% white until hover. Focus is a 3px ink outline at 3px offset; on signs it turns yellow.
+### Checklist Sheet (resume)
+The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as numbered rows (number, fact, date). Prints to letter at 10pt with no shadow and no toolbar.
+
+### Closed for Installation (404)
+An empty frame (dashed-rule mat) hung from an SVG wire: a thin `--ink-quiet` line from one ink hook to the frame's corners, with a room-sign-scale heading and primary/quiet buttons.
+
+### Motion
+`--ease` is `cubic-bezier(0.16, 1, 0.3, 1)`; `--fast` 180ms for link underlines, button fills and tour buttons; `--slow` 520ms for light, frames, room darkening and plan fills. Under `prefers-reduced-motion` every transition and animation collapses to 1ms and tour scrolling jumps instead of gliding.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** route every new line color through `[data-color]` and `--line-color`; add a new hue only as a new `--line-*` token.
-- **Do** keep stations as white discs with black rings and bends at exactly 45°.
-- **Do** put the one contact action in the yellow information sign, and keep it reachable at the top and bottom of the page.
-- **Do** let the metric lead: figure first at Metric or Headline size, sentence under it.
-- **Do** set dates and live counters in Overpass Mono with tabular numerals; everything else in Overpass.
-- **Do** open sections with a heading over a 4px ink rule.
-- **Do** keep state transitions short ease-out (`cubic-bezier(0.16, 1, 0.3, 1)`, 160–220ms) and collapse them under `prefers-reduced-motion`.
-- **Do** degrade the diagram to the vertical strip map below 60rem rather than shrinking it.
+- **Do** turn every new achievement into a framed work with an exact drawing of its fact and a full museum label; the drawing's `aria-label` must say the fact in words.
+- **Do** paint a new room with `data-paint` and let components read `--paint` and the four vinyl tokens; the button, label, rule and focus ring follow automatically.
+- **Do** keep all frames in a row on one hang line with the two-row subgrid (frame centred, label top-aligned).
+- **Do** express state as light: pool opacity, room darkening, label dimming, 520ms `--ease`.
+- **Do** italicise titles of works with `<cite>` and keep dates roman.
+- **Do** use square corners, 1px vinyl hairlines, and the `--space-*` scale.
 
 ### Don't:
-- **Don't** use yellow for anything but the contact sign and system states (selection, skip link, focus on black).
-- **Don't** paint text, panels, borders or hover fills in a line color.
-- **Don't** add shadows, gradients, glows or glass; the ride-pass ticket keeps the only lift.
-- **Don't** introduce a second typeface or a display serif; the whole site is sign lettering.
-- **Don't** animate anything on load or on a timer; the ride replay runs only when the visitor presses Ride.
-- **Don't** use rounded card corners beyond the 0.25rem sign corner; objects are circles, capsules or square.
+- **Don't** add a second typeface, including for code or numerals; use `.tabular` instead.
+- **Don't** box content in rounded, shadowed cards; only hung objects (frames, the checklist sheet) and the floating tour bar cast shadows.
+- **Don't** use gradients as fill; the only gradient is the radial picture-light pool behind a work.
+- **Don't** use gilt or stamp red outside increases, selection and earned stamps.
+- **Don't** animate anything on page load or start the tour automatically; nothing moves or plays on its own.
+- **Don't** put glass, blur, badges or pill shapes on the walls.

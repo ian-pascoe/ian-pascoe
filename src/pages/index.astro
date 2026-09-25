@@ -1,25 +1,31 @@
 ---
-import Contact from "../components/Contact.astro";
-import SignBand from "../components/SignBand.astro";
-import SkillIndex from "../components/SkillIndex.astro";
-import Timetable from "../components/Timetable.astro";
-import TransitMap from "../components/network/TransitMap.tsx";
+import Masthead from "../components/Masthead.astro";
+import MediaIndex from "../components/MediaIndex.astro";
+import Room from "../components/Room.astro";
+import TitleWall from "../components/TitleWall.astro";
+import TourBar from "../components/TourBar.astro";
+import VisitorDesk from "../components/VisitorDesk.astro";
 import Base from "../layouts/Base.astro";
 import { loadTimeline } from "../lib/timeline";
 
-const timeline = loadTimeline();
-const { profile } = timeline;
+const exhibition = loadTimeline();
+const { profile, rooms, tour, firstYear, lastYear } = exhibition;
 ---
 
 <Base
   title={`${profile.name} · ${profile.headline}`}
-  description={`${profile.name}'s career as a transit map: roles are lines, achievements are stations. ${profile.headline}.`}
+  description={`${profile.name}: Selected Work, ${firstYear}–${lastYear}. ${profile.headline}; ${tour.length} works, each drawn exactly from its fact.`}
 >
-  <SignBand profile={profile} lines={timeline.lines} />
+  <Masthead exhibition={exhibition} />
   <main id="main">
-    <TransitMap client:load timeline={timeline} />
-    <Timetable timeline={timeline} />
-    <SkillIndex timeline={timeline} />
+    <TitleWall exhibition={exhibition} />
+    {rooms.map((room) => <Room room={room} />)}
+    <MediaIndex exhibition={exhibition} />
   </main>
-  <Contact profile={profile} year={new Date(timeline.builtAt).getUTCFullYear()} />
+  <VisitorDesk profile={profile} year={new Date(exhibition.builtAt).getUTCFullYear()} />
+  <TourBar />
+  <script type="application/json" id="tour-order" set:html={JSON.stringify(tour.map((w) => w.id))} />
+  <script>
+    import "../scripts/gallery";
+  </script>
 </Base>

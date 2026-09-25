@@ -1,0 +1,297 @@
+---
+import type { Exhibition } from "../lib/exhibition";
+import { STAMPS } from "../lib/passport";
+import Icon from "./Icon.astro";
+
+interface Props {
+  exhibition: Exhibition;
+}
+
+const { exhibition } = Astro.props;
+const { profile, rooms } = exhibition;
+
+// Plan labels: drop the legal suffix; long multi-word names become their initials.
+const planName = (org: string) => {
+  const name = org.replace(/,?\s+(LLC|Inc\.?|Ltd\.?|Corp\.?)$/i, "");
+  const words = name.split(/\s+/);
+  return words.length >= 3 ? words.filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join("") : name;
+};
+---
+
+<header class="masthead">
+  <div class="masthead__inner wrap">
+    <a class="masthead__mark" href="#top">
+      <span class="masthead__name">{profile.name}</span>
+      <span class="masthead__show">Selected Work</span>
+    </a>
+
+    <nav class="plan" aria-label="Floor plan">
+      <ol role="list">
+        <li style="--grow: 2">
+          <a class="plan__room plan__room--entrance plan__room--edge" href="#top" data-plan="top">
+            <span class="plan__label">Entrance</span>
+          </a>
+        </li>
+        {
+          rooms.map((room) => (
+            <li style={`--grow: ${Math.max(2, room.works.length)}`}>
+              <a class="plan__room" href={`#room-${room.id}`} data-plan={room.id} data-paint={room.paint}>
+                <span class="plan__number tabular">{room.number}</span>
+                <span class="plan__label">{planName(room.org)}</span>
+                <span class="visually-hidden">, {room.org}</span>
+              </a>
+            </li>
+          ))
+        }
+        <li style="--grow: 2">
+          <a class="plan__room plan__room--edge" href="#desk" data-plan="desk">
+            <span class="plan__label">Desk</span>
+          </a>
+        </li>
+      </ol>
+    </nav>
+
+    <a class="masthead__passport" href="#passport" data-passport-indicator>
+      <svg class="masthead__stamp" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="42" />
+        <circle cx="50" cy="50" r="24" />
+      </svg>
+      <span class="masthead__flash" data-passport-flash aria-live="polite"></span>
+      <span class="masthead__tally tabular">
+        <span class="visually-hidden">Gallery passport: </span><span data-passport-tally>0</span>/{STAMPS.length}
+      </span>
+    </a>
+
+    <a class="button masthead__email" href={`mailto:${profile.email}`} data-stamp="say-hello">
+      <Icon name="mail" />
+      <span>Email <span class="masthead__long">{profile.name.split(" ")[0]}</span></span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .masthead {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--wall);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .masthead__inner {
+    display: grid;
+    grid-template-areas: "mark plan passport email";
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: var(--space-6);
+    height: var(--masthead);
+  }
+
+  .masthead__mark {
+    grid-area: mark;
+    display: grid;
+    line-height: 1.05;
+    text-decoration: none;
+  }
+
+  .masthead__name {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .masthead__show {
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  /* The floor plan: rooms drawn as boxes sharing walls, doorways cut between them. */
+  .plan {
+    grid-area: plan;
+    justify-self: center;
+    width: min(100%, 50rem);
+  }
+
+  .plan ol {
+    display: flex;
+    height: 2.25rem;
+  }
+
+  .plan li {
+    flex: var(--grow) 1 0;
+    min-width: 2.25rem;
+  }
+
+  .plan li:first-child,
+  .plan li:last-child {
+    flex: 0 0 auto;
+  }
+
+  .plan__room {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 100%;
+    margin-left: -1.5px;
+    padding: 0 var(--space-2);
+    border: 1.5px solid var(--ink);
+    font-size: var(--step--1);
+    font-weight: 650;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    transition:
+      background-color var(--slow) var(--ease),
+      color var(--slow) var(--ease);
+  }
+
+  .plan__room[data-paint] {
+    background: var(--wall);
+    color: var(--ink);
+  }
+
+  .plan__room::before {
+    content: "";
+    position: absolute;
+    left: -1.5px;
+    top: 28%;
+    width: 1.5px;
+    height: 44%;
+    background: inherit;
+  }
+
+  .plan li:first-child .plan__room {
+    margin-left: 0;
+  }
+
+  .plan li:first-child .plan__room::before {
+    left: 30%;
+    top: auto;
+    bottom: -1.5px;
+    width: 40%;
+    height: 1.5px;
+  }
+
+  .plan__room--entrance {
+    background: var(--wall);
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .plan__room:hover {
+    background: var(--wall-sunk);
+  }
+
+  .plan__room[aria-current="location"] {
+    background: var(--paint);
+    color: var(--vinyl);
+  }
+
+  .plan__room--edge[aria-current="location"] {
+    background: var(--ink);
+    color: var(--wall);
+  }
+
+  .plan__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* The passport tally; a new stamp flashes its name here instead of covering the page. */
+  .masthead__passport {
+    grid-area: passport;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.5rem;
+    font-size: var(--step--1);
+    font-weight: 650;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+
+  .masthead__stamp {
+    width: 1.35rem;
+    height: 1.35rem;
+    transform: rotate(-8deg);
+  }
+
+  .masthead__stamp circle {
+    fill: none;
+    stroke: var(--ink-quiet);
+    stroke-width: 6;
+    stroke-dasharray: 9 7;
+    transition: stroke var(--slow) var(--ease);
+  }
+
+  .masthead__stamp circle + circle {
+    stroke-width: 4;
+  }
+
+  .masthead__passport.has-stamps .masthead__stamp circle {
+    stroke: var(--stamp-ink);
+    stroke-dasharray: none;
+  }
+
+  .masthead__flash {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--ink);
+    transition: max-width var(--slow) var(--ease);
+  }
+
+  .masthead__passport.is-flashing .masthead__flash {
+    max-width: 16rem;
+  }
+
+  .masthead__email {
+    grid-area: email;
+    justify-self: end;
+    min-height: 2.5rem;
+    padding-inline: var(--space-4);
+    font-size: var(--step--1);
+  }
+
+  @media (max-width: 60rem) {
+    .masthead__show {
+      display: none;
+    }
+
+    .plan__room:not(.plan__room--edge) .plan__label {
+      display: none;
+    }
+
+    .plan__room {
+      justify-content: center;
+    }
+  }
+
+  /* Phones: the plan takes its own row under the name and the email button. */
+  @media (max-width: 40rem) {
+    .masthead__inner {
+      grid-template-areas:
+        "mark passport email"
+        "plan plan plan";
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: var(--space-2) var(--space-3);
+      height: auto;
+      padding-block: var(--space-2) var(--space-3);
+    }
+
+    .plan {
+      width: 100%;
+    }
+
+    .masthead__passport.is-flashing .masthead__flash {
+      max-width: 8.5rem;
+      text-overflow: ellipsis;
+    }
+
+    .plan ol {
+      height: 1.85rem;
+    }
+  }
+</style>

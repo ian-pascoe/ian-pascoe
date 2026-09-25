@@ -1,17 +1,17 @@
 ---
-import "@fontsource-variable/overpass";
-import "@fontsource-variable/overpass-mono";
+import "@fontsource-variable/libre-franklin/wght.css";
+import "@fontsource-variable/libre-franklin/wght-italic.css";
 import "../styles/global.css";
-import type { PunchId } from "../lib/ridepass";
+import type { StampId } from "../lib/passport";
 
 interface Props {
   title: string;
   description: string;
-  pagePunch?: PunchId;
+  pageStamp?: StampId;
   bodyClass?: string;
 }
 
-const { title, description, pagePunch, bodyClass } = Astro.props;
+const { title, description, pageStamp, bodyClass } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 ---
@@ -21,11 +21,12 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#151515" />
+    <meta name="theme-color" content="#f6f3ef" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -42,18 +43,55 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
       )
     }
   </head>
-  <body data-page-punch={pagePunch} class={bodyClass}>
+  <body data-page-stamp={pageStamp} class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
     <script>
-      import { wirePunches } from "../lib/ridepass";
-      import { dayCount } from "../lib/network";
+      import { dayCount } from "../lib/exhibition";
+      import { STAMPS, STAMP_EVENT, readPassport, wireStamps, type StampId } from "../lib/passport";
 
-      wirePunches();
+      const renderPassport = (fresh?: StampId) => {
+        const passport = readPassport();
+        for (const slot of document.querySelectorAll<HTMLElement>("[data-stamp-slot]")) {
+          const id = slot.dataset.stampSlot as StampId;
+          const at = passport[id];
+          slot.classList.toggle("is-stamped", Boolean(at));
+          slot.classList.toggle("just-stamped", id === fresh);
+          const date = slot.querySelector("[data-stamp-date]");
+          if (date && at) {
+            date.textContent = new Date(at)
+              .toLocaleDateString("en-US", { day: "numeric", month: "short" })
+              .toUpperCase();
+          }
+        }
+        const total = Object.keys(passport).length;
+        const count = document.querySelector("[data-passport-count]");
+        if (count) count.textContent = `${total} of ${STAMPS.length} stamps`;
+        const tally = document.querySelector("[data-passport-tally]");
+        if (tally) tally.textContent = String(total);
+        document.querySelector("[data-passport-indicator]")?.classList.toggle("has-stamps", total > 0);
+      };
+
+      const indicator = document.querySelector<HTMLElement>("[data-passport-indicator]");
+      const flash = indicator?.querySelector("[data-passport-flash]");
+      let flashTimer = 0;
+      window.addEventListener(STAMP_EVENT, (event) => {
+        const id = (event as CustomEvent<{ id: StampId }>).detail.id;
+        renderPassport(id);
+        const name = STAMPS.find((s) => s.id === id)?.name;
+        if (!indicator || !flash || !name) return;
+        flash.textContent = `Stamped: ${name}`;
+        indicator.classList.add("is-flashing");
+        window.clearTimeout(flashTimer);
+        flashTimer = window.setTimeout(() => indicator.classList.remove("is-flashing"), 3800);
+      });
+
+      renderPassport();
+      wireStamps();
       for (const el of document.querySelectorAll<HTMLElement>("[data-since]")) {
-        const days = dayCount(Number(el.dataset.since), Date.now());
-        el.textContent = `Day ${days.toLocaleString("en-US")}`;
+        el.textContent = `Day ${dayCount(Number(el.dataset.since), Date.now()).toLocaleString("en-US")}`;
       }
     </script>
   </body>
 </html>
+

@@ -1,0 +1,267 @@
+---
+import type { Room, Work } from "../lib/exhibition";
+import Drawing from "./Drawing.astro";
+import Icon from "./Icon.astro";
+
+interface Props {
+  work: Work;
+  room: Room;
+}
+
+const { work, room } = Astro.props;
+const labelId = `${work.id}-label`;
+const range = room.role ? `${room.start.year}–${room.end ? room.end.year : "now"}` : String(room.start.year);
+---
+
+<li
+  class:list={["work", `work--${work.drawing.kind}`, { "work--featured": work.featured }]}
+  id={work.id}
+  data-work={work.id}
+  data-room={room.id}
+  data-title={work.title}
+  data-when={work.date?.label ?? range}
+>
+  <button type="button" class="work__frame" aria-pressed="false" aria-describedby={labelId} data-light={work.id}>
+    <span class="work__mat">
+      <Drawing drawing={work.drawing} date={work.date} />
+    </span>
+    <span class="visually-hidden">Light {work.title}</span>
+  </button>
+  <div class="work__label" id={labelId}>
+    {
+      work.metric && (
+        <p class="work__figure">
+          <span class="work__metric tabular">{work.metric.replace("-", "−")}</span>
+          <span class="work__measure">{work.metricLabel}</span>
+        </p>
+      )
+    }
+    <h3 class="work__title">
+      <cite>{work.title}</cite>{work.date && <>, <time datetime={work.date.iso}>{work.date.label}</time></>}
+    </h3>
+    <p class="work__detail">{work.detail}</p>
+    {work.skills.length > 0 && <p class="work__medium">{work.skills.join(", ")}</p>}
+    <p class="work__foot">
+      {room.org}, {range} · No. <span class="tabular">{work.number}</span>
+    </p>
+    {
+      work.link && (
+        <a class="work__link" href={work.link.href} rel="noopener">
+          {work.link.label}
+          <Icon name="external" />
+        </a>
+      )
+    }
+  </div>
+</li>
+
+<style>
+  .work {
+    position: relative;
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: var(--space-5);
+    align-content: start;
+  }
+
+  /* The light pool a lit work stands in. */
+  .work::before {
+    content: "";
+    position: absolute;
+    inset: -3rem -2.5rem -1rem;
+    z-index: 0;
+    background: radial-gradient(closest-side, color-mix(in oklch, var(--light) 44%, transparent), transparent);
+    opacity: 0.28;
+    pointer-events: none;
+    transition: opacity var(--slow) var(--ease);
+  }
+
+  .work__frame {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    justify-self: start;
+    display: block;
+    width: min(100%, var(--frame, 15rem));
+    padding: 0;
+    border: 0.3rem solid var(--moulding);
+    background: var(--mat);
+    box-shadow: var(--hung);
+    cursor: zoom-in;
+    transition:
+      transform var(--slow) var(--ease),
+      box-shadow var(--slow) var(--ease);
+  }
+
+  .work__frame:hover {
+    transform: translateY(-2px);
+  }
+
+  .work__frame:focus-visible {
+    outline-offset: 6px;
+  }
+
+  .work__mat {
+    display: block;
+    padding: 14%;
+  }
+
+  .work--count .work__mat,
+  .work--text .work__mat {
+    padding: 12% 11%;
+  }
+
+  .work--reduction {
+    --frame: 14rem;
+  }
+
+  .work--increase {
+    --frame: 12.5rem;
+  }
+
+  .work--count {
+    --frame: 16rem;
+  }
+
+  .work--document {
+    --frame: 12rem;
+  }
+
+  .work--text {
+    --frame: 16rem;
+  }
+
+  .work--featured {
+    --frame: 18.5rem;
+  }
+
+  .work--featured.work--increase {
+    --frame: 16rem;
+  }
+
+  /* Phones: each work hangs beside its label, so a room reads as a list. */
+  @media (max-width: 40rem) {
+    .work {
+      grid-row: auto;
+      grid-template-rows: none;
+      grid-template-columns: 7.25rem minmax(0, 1fr);
+      column-gap: var(--space-5);
+      align-items: start;
+    }
+
+    .work__frame {
+      align-self: start;
+      width: 100%;
+      border-width: 0.2rem;
+    }
+
+    .work::before {
+      inset: -1.5rem -1rem;
+    }
+
+    .work__metric {
+      font-size: var(--step-2);
+    }
+  }
+
+  .work__label {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    max-width: 24rem;
+    transition: opacity var(--slow) var(--ease);
+  }
+
+  .work__figure {
+    display: grid;
+    gap: var(--space-1);
+    margin-bottom: var(--space-1);
+  }
+
+  .work__metric {
+    font-size: var(--step-3);
+    font-weight: 750;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+
+  .work__measure {
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .work__title {
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  .work__title cite {
+    font-style: italic;
+  }
+
+  .work__title time {
+    font-weight: 400;
+  }
+
+  .work__detail {
+    color: var(--vinyl-soft);
+    line-height: 1.5;
+  }
+
+  .work__medium,
+  .work__foot {
+    font-size: var(--step--1);
+    color: var(--vinyl-quiet);
+  }
+
+  .work__medium {
+    font-weight: 600;
+    color: var(--vinyl-soft);
+  }
+
+  .work__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    justify-self: start;
+    font-size: var(--step--1);
+    font-weight: 650;
+  }
+
+  .work__link :global(.icon) {
+    width: 1em;
+    height: 1em;
+  }
+
+  /* Lit and dimmed: the only state change in the rooms is light. */
+  .work.is-lit::before,
+  :global(html:not(.js)) .work:target::before {
+    opacity: 1;
+  }
+
+  .work.is-lit .work__frame {
+    transform: translateY(-3px) scale(1.015);
+    box-shadow:
+      0 1px 1px oklch(0% 0 0 / 0.2),
+      0 22px 40px -12px oklch(0% 0 0 / 0.5);
+    cursor: zoom-out;
+  }
+
+  :global([data-lit]) .work:not(.is-lit)::before {
+    opacity: 0;
+  }
+
+  :global([data-lit]) .work:not(.is-lit) .work__frame {
+    box-shadow: 0 1px 1px oklch(0% 0 0 / 0.3);
+  }
+
+  :global([data-lit]) .work:not(.is-lit) .work__label {
+    opacity: 0.5;
+  }
+</style>

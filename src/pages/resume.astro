@@ -1,33 +1,27 @@
 ---
 import Icon from "../components/Icon.astro";
 import Base from "../layouts/Base.astro";
-import { allStations, lineRange } from "../lib/network";
+import { mediaIndex, roomRange } from "../lib/exhibition";
 import { loadTimeline } from "../lib/timeline";
 
-const timeline = loadTimeline();
-const { profile, origin } = timeline;
-const lines = [...timeline.lines].sort((a, b) => b.start.time - a.start.time);
-const stations = allStations(timeline);
-const certifications = stations.filter((s) => s.tag === "certification").sort((a, b) => b.key - a.key);
-const education = stations.filter((s) => s.tag === "education");
-const skills = [...new Set(stations.flatMap((s) => s.skills))].sort((a, b) =>
-  a.localeCompare(b, "en", { sensitivity: "base" }),
-);
+const exhibition = loadTimeline();
+const { profile, rooms, firstYear, lastYear } = exhibition;
+const skills = mediaIndex(exhibition).map((m) => m.skill);
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 ---
 
 <Base
   title={`${profile.name} · Resume`}
-  description={`Resume of ${profile.name}: ${profile.headline}.`}
-  pagePunch="timetable"
-  bodyClass="resume-page"
+  description={`Resume of ${profile.name}, set as the checklist of works: ${profile.headline}.`}
+  pageStamp="checklist"
+  bodyClass="checklist-page"
 >
-  <div class="toolbar wrap">
+  <div class="toolbar">
     <a class="toolbar__back" href="/">
       <Icon name="left" />
-      Back to the map
+      Back to the exhibition
     </a>
-    <button type="button" class="toolbar__print" data-print>
+    <button type="button" class="button toolbar__print" data-print>
       <Icon name="print" />
       Print or save as PDF
     </button>
@@ -43,77 +37,56 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
         <li><a href={profile.links.github}>{bare(profile.links.github)}</a></li>
         <li>{profile.location}</li>
       </ul>
+      <p class="sheet__show">
+        Resume, set as the checklist of works for <cite>Selected Work, {firstYear}–{lastYear}</cite>
+      </p>
     </header>
 
-    <section aria-labelledby="experience">
-      <h2 id="experience">Experience</h2>
-      {
-        lines.map((line) => (
-          <article class="role" data-color={line.color}>
-            <header class="role__head">
-              <span class="bullet" aria-hidden="true">
-                {line.code}
-              </span>
-              <h3>
-                {line.title}, {line.org}
-              </h3>
-              <p class="role__when data">{lineRange(line)}</p>
-            </header>
-            <p class="role__summary">{line.summary}</p>
-            <ul class="role__points">
-              {line.stations
-                .filter((s) => s.kind === "achievement")
-                .map((s) => (
-                  <li>{s.detail}</li>
-                ))}
-            </ul>
-          </article>
-        ))
-      }
-    </section>
-
     {
-      (education.length > 0 || origin) && (
-        <section aria-labelledby="education">
-          <h2 id="education">Education</h2>
-          {(education.length ? education : [origin!]).map((s) => (
-            <div class="row">
-              <p>
-                <strong>{s.name}</strong>
-                {s.org && <>, {s.org}</>}. {s.detail}
-              </p>
-              {s.date && <p class="row__when data">{s.date.label}</p>}
-            </div>
-          ))}
+      rooms.map((room) => (
+        <section class="room" aria-labelledby={`c-${room.id}`}>
+          <header class="room__head">
+            <h2 id={`c-${room.id}`}>
+              {room.role ? `${room.role}, ${room.org}` : room.org}
+            </h2>
+            <p class="room__when tabular">{roomRange(room)}</p>
+          </header>
+          {room.summary && <p class="room__summary">{room.summary}</p>}
+          <ol class="works" role="list">
+            {room.works.map((work) => (
+              <li class="entry">
+                <span class="entry__number tabular">{work.number}</span>
+                <p class="entry__text">
+                  {work.metric ? (
+                    <strong>
+                      {work.metric} {work.metricLabel}.
+                    </strong>
+                  ) : (
+                    work.kind === "event" && <strong>{work.title}.</strong>
+                  )}{" "}
+                  {work.detail}
+                  {work.kind === "achievement" && (
+                    <span class="entry__title">
+                      {" "}
+                      <cite>{work.title}</cite>
+                    </span>
+                  )}
+                </p>
+                {work.date && <span class="entry__when tabular">{work.date.label}</span>}
+              </li>
+            ))}
+          </ol>
         </section>
-      )
-    }
-
-    {
-      certifications.length > 0 && (
-        <section aria-labelledby="certifications">
-          <h2 id="certifications">Certifications</h2>
-          {certifications.map((s) => (
-            <div class="row">
-              <p>
-                <strong>{s.name}</strong>
-              </p>
-              {s.date && <p class="row__when data">{s.date.label}</p>}
-            </div>
-          ))}
-        </section>
-      )
+      ))
     }
 
     {
       skills.length > 0 && (
-        <section aria-labelledby="skills">
-          <h2 id="skills">Skills</h2>
-          <ul class="skills" role="list">
-            {skills.map((skill) => (
-              <li>{skill}</li>
-            ))}
-          </ul>
+        <section class="room" aria-labelledby="c-skills">
+          <header class="room__head">
+            <h2 id="c-skills">Skills</h2>
+          </header>
+          <p class="skills">{skills.join(" · ")}</p>
         </section>
       )
     }
@@ -125,8 +98,8 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 </script>
 
 <style is:global>
-  .resume-page {
-    background: var(--paper-sunk);
+  .checklist-page {
+    background: var(--wall-sunk);
   }
 </style>
 
@@ -138,57 +111,52 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     align-items: center;
     gap: var(--space-3);
     max-width: 54rem;
-    padding-block: var(--space-5);
+    margin-inline: auto;
+    padding: var(--space-5) var(--gutter);
   }
 
   .toolbar__back {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    font-weight: 700;
+    gap: var(--space-1);
+    font-weight: 650;
+  }
+
+  .toolbar :global(.icon) {
+    width: 1.15rem;
+    height: 1.15rem;
   }
 
   .toolbar__print {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
     min-height: 2.75rem;
-    padding: 0.5rem 1.1rem 0.45rem 0.9rem;
-    border: 0;
-    border-radius: 0.25rem;
-    background: var(--sign);
-    color: var(--sign-ink);
-    font-weight: 800;
-    cursor: pointer;
-  }
-
-  .toolbar .icon {
-    width: 1.15rem;
-    height: 1.15rem;
+    font-size: var(--step--1);
   }
 
   .sheet {
     max-width: 54rem;
     margin: 0 auto var(--space-8);
     padding: clamp(1.5rem, 1rem + 3vw, 4rem);
-    background: #fff;
-    border: 1px solid var(--rule);
+    background: var(--mat);
+    box-shadow: var(--hung);
     font-size: 1rem;
     line-height: 1.45;
   }
 
   .sheet__head {
-    padding-bottom: var(--space-4);
-    border-bottom: 4px solid var(--ink);
+    display: grid;
+    gap: var(--space-2);
+    padding-bottom: var(--space-5);
+    border-bottom: 2px solid var(--ink);
   }
 
   .sheet__head h1 {
-    font-size: var(--step-3);
-    font-weight: 800;
+    font-size: var(--step-4);
+    font-weight: 850;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
   }
 
   .sheet__headline {
-    margin-top: var(--space-1);
     font-size: var(--step-1);
     font-weight: 600;
   }
@@ -197,94 +165,77 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-1) var(--space-5);
-    margin: var(--space-3) 0 0;
-    padding: 0;
-    list-style: none;
-    color: var(--ink-soft);
     font-size: var(--step--1);
     font-weight: 600;
+    color: var(--ink-soft);
   }
 
   .sheet__contact a {
     color: var(--ink);
   }
 
-  .sheet section {
-    margin-top: var(--space-6);
-  }
-
-  .sheet h2 {
-    padding-bottom: var(--space-2);
-    border-bottom: 1.5px solid var(--ink);
-    font-size: var(--step-1);
-    font-weight: 800;
-  }
-
-  .role {
-    margin-top: var(--space-4);
-    break-inside: avoid;
-  }
-
-  .role__head {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .role__head .bullet {
-    --size: 1.6rem;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-
-  .role__head h3 {
-    font-size: 1.0625rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  .role__when,
-  .row__when {
-    color: var(--ink-soft);
+  .sheet__show {
     font-size: var(--step--1);
-    white-space: nowrap;
+    color: var(--ink-quiet);
   }
 
-  .role__summary {
-    margin-top: var(--space-2);
-    color: var(--ink-soft);
+  .room {
+    margin-top: var(--space-6);
+    break-inside: avoid-page;
   }
 
-  .role__points {
-    margin: var(--space-2) 0 0;
-    padding-left: 1.2rem;
-  }
-
-  .role__points li + li {
-    margin-top: 0.2rem;
-  }
-
-  .row {
+  .room__head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .room__head h2 {
+    font-size: var(--step-1);
+    font-weight: 750;
+  }
+
+  .room__when {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .room__summary {
     margin-top: var(--space-3);
+    color: var(--ink-soft);
   }
 
-  .sheet .skills {
-    display: flex;
-    flex-wrap: wrap;
-    margin: var(--space-3) 0 0;
-    padding: 0;
-    list-style: none;
+  .works {
+    margin-top: var(--space-2);
   }
 
-  .skills li + li::before {
-    content: "·";
-    margin-inline: 0.5em;
+  .entry {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--rule);
+    break-inside: avoid;
+  }
+
+  .entry__number,
+  .entry__when {
+    font-size: var(--step--1);
     color: var(--ink-quiet);
+  }
+
+  .entry__title {
+    font-size: var(--step--1);
+    color: var(--ink-quiet);
+  }
+
+  .skills {
+    margin-top: var(--space-3);
   }
 
   @page {
@@ -295,10 +246,10 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
   @media print {
     :global(.skip-link),
     .toolbar {
-      display: none;
+      display: none !important;
     }
 
-    :global(.resume-page) {
+    :global(.checklist-page) {
       background: #fff;
     }
 
@@ -306,8 +257,12 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
       max-width: none;
       margin: 0;
       padding: 0;
-      border: 0;
-      font-size: 10.5pt;
+      box-shadow: none;
+      font-size: 10pt;
+    }
+
+    .sheet__head h1 {
+      font-size: 28pt;
     }
 
     .sheet a {

@@ -1,40 +1,46 @@
+/* The Retrospective: gallery walls, painted rooms, vinyl lettering, framed works. */
+
 :root {
-  color-scheme: light;
+  /* Walls and ink */
+  --wall: oklch(96.6% 0.006 85);
+  --wall-sunk: oklch(93.4% 0.008 85);
+  --ink: oklch(19% 0.006 60);
+  --ink-soft: oklch(38% 0.008 60);
+  --ink-quiet: oklch(49% 0.008 60);
+  --rule: oklch(84% 0.008 80);
 
-  /* Ground and ink: paper-white map stock, signage black. */
-  --paper: oklch(98.6% 0.002 100);
-  --paper-sunk: oklch(95.8% 0.003 100);
-  --ink: oklch(18% 0.004 100);
-  --ink-soft: oklch(38% 0.006 100);
-  --ink-quiet: oklch(50% 0.006 100);
-  --rule: oklch(86% 0.004 100);
-  --sign: oklch(16.5% 0.003 100);
-  --sign-ink: oklch(99% 0 0);
-  --sign-ink-soft: oklch(84% 0.004 100);
+  /* Framing */
+  --mat: oklch(99.3% 0.003 85);
+  --moulding: oklch(17% 0.005 60);
+  --gilt: oklch(72% 0.11 78);
+  --hung:
+    0 1px 1px oklch(0% 0 0 / 0.22),
+    0 14px 28px -10px oklch(0% 0 0 / 0.38);
 
-  /* Information yellow: contact only. */
-  --info: #fccc0a;
-  --info-ink: oklch(18% 0.004 100);
+  /* Light, ink for stamps, and the lift of floating signage (the tour bar) */
+  --light: oklch(97% 0.05 85);
+  --stamp-ink: oklch(66% 0.17 30);
+  --ghost: oklch(62% 0.006 60);
+  --float: 0 18px 40px -12px oklch(0% 0 0 / 0.55);
 
-  /* Line colors. */
-  --line-red: #e8322b;
-  --line-blue: #0039a6;
-  --line-green: #00873b;
-  --line-orange: #f25c19;
-  --line-purple: #a52fa0;
-  --line-brown: #8f5f2f;
-  --line-teal: #00829a;
+  /* The wall a region is painted; rooms override these. */
+  --paint: var(--wall);
+  --vinyl: var(--ink);
+  --vinyl-soft: var(--ink-soft);
+  --vinyl-quiet: var(--ink-quiet);
+  --vinyl-rule: var(--rule);
 
-  --font-sign: "Overpass Variable", "Overpass", sans-serif;
-  --font-data: "Overpass Mono Variable", "Overpass Mono", ui-monospace, monospace;
-
+  /* Type */
+  --font: "Libre Franklin Variable", "Libre Franklin", "Franklin Gothic", sans-serif;
   --step--1: 0.875rem;
   --step-0: 1.0625rem;
   --step-1: 1.25rem;
   --step-2: 1.625rem;
-  --step-3: 2.25rem;
-  --step-4: clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem);
+  --step-3: clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem);
+  --step-4: clamp(2.5rem, 1.7rem + 3vw, 4.5rem);
+  --step-5: clamp(3rem, 1.6rem + 5vw, 6rem);
 
+  /* Space */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -45,9 +51,77 @@
   --space-8: 4.5rem;
   --space-9: 7rem;
 
-  --page-max: 88rem;
-  --gutter: clamp(1.25rem, 0.6rem + 2.8vw, 3rem);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 0.6rem + 3vw, 3.5rem);
+  --masthead: 3.75rem;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --fast: 180ms;
+  --slow: 520ms;
+
+  color-scheme: light;
+  scrollbar-color: var(--ink-quiet) var(--wall-sunk);
+}
+
+[data-paint="oxblood"] {
+  --paint: oklch(33% 0.09 22);
+  --vinyl: oklch(97.5% 0.012 40);
+  --vinyl-soft: oklch(87% 0.03 30);
+  --vinyl-quiet: oklch(78% 0.04 28);
+  --vinyl-rule: oklch(46% 0.08 22);
+}
+
+[data-paint="green"] {
+  --paint: oklch(34% 0.05 162);
+  --vinyl: oklch(97.5% 0.01 140);
+  --vinyl-soft: oklch(87% 0.03 150);
+  --vinyl-quiet: oklch(78% 0.035 152);
+  --vinyl-rule: oklch(46% 0.05 160);
+}
+
+[data-paint="slate"] {
+  --paint: oklch(35% 0.04 250);
+  --vinyl: oklch(97.5% 0.008 250);
+  --vinyl-soft: oklch(87% 0.02 250);
+  --vinyl-quiet: oklch(78% 0.03 250);
+  --vinyl-rule: oklch(47% 0.04 250);
+}
+
+[data-paint="plum"] {
+  --paint: oklch(32% 0.07 330);
+  --vinyl: oklch(97.5% 0.01 330);
+  --vinyl-soft: oklch(87% 0.03 330);
+  --vinyl-quiet: oklch(78% 0.04 330);
+  --vinyl-rule: oklch(45% 0.07 330);
+}
+
+[data-paint="ochre"] {
+  --paint: oklch(78% 0.1 80);
+  --vinyl: var(--ink);
+  --vinyl-soft: oklch(30% 0.03 70);
+  --vinyl-quiet: oklch(38% 0.04 70);
+  --vinyl-rule: oklch(66% 0.09 78);
+}
+
+[data-paint="stone"] {
+  --paint: oklch(90.5% 0.014 80);
+  --vinyl: var(--ink);
+  --vinyl-soft: oklch(34% 0.01 70);
+  --vinyl-quiet: oklch(43% 0.012 70);
+  --vinyl-rule: oklch(79% 0.014 80);
+}
+
+[data-paint="ink"] {
+  --paint: oklch(17% 0.005 60);
+  --vinyl: oklch(97.5% 0.006 85);
+  --vinyl-soft: oklch(84% 0.008 85);
+  --vinyl-quiet: oklch(72% 0.01 85);
+  --vinyl-rule: oklch(32% 0.006 60);
+}
+
+[data-paint] {
+  background: var(--paint);
+  color: var(--vinyl);
 }
 
 *,
@@ -59,27 +133,26 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scrollbar-color: var(--ink) var(--paper-sunk);
-  scrollbar-width: thin;
+  scroll-padding-top: calc(var(--masthead) + var(--space-5));
 }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--wall);
   color: var(--ink);
-  font-family: var(--font-sign);
+  font-family: var(--font);
   font-size: var(--step-0);
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.55;
   font-optical-sizing: auto;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: lining-nums;
   caret-color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--info);
-  color: var(--info-ink);
+  background: var(--gilt);
+  color: var(--ink);
 }
 
 h1,
@@ -97,10 +170,12 @@ figure {
 
 h1,
 h2,
-h3 {
-  line-height: 1.05;
+h3,
+h4 {
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
   text-wrap: balance;
-  letter-spacing: -0.02em;
 }
 
 p {
@@ -119,57 +194,59 @@ svg {
   max-width: 100%;
 }
 
-a {
-  color: inherit;
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.2em;
-}
-
-a:hover {
-  text-decoration-thickness: 0.14em;
-}
-
 button {
   font: inherit;
   color: inherit;
 }
 
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in oklch, currentColor 45%, transparent);
+  transition: text-decoration-color var(--fast) var(--ease);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
 :focus-visible {
-  outline: 3px solid var(--ink);
+  outline: 2px solid var(--vinyl);
   outline-offset: 3px;
 }
 
-.on-sign :focus-visible {
-  outline-color: var(--info);
+@media (max-width: 40rem) {
+  :root {
+    --masthead: 5.6rem;
+  }
 }
 
-time,
-.data {
-  font-family: var(--font-data);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0;
+.wrap {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
 .visually-hidden {
-  position: absolute;
+  position: absolute !important;
   width: 1px;
   height: 1px;
-  margin: -1px;
-  padding: 0;
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
-  border: 0;
 }
 
 .skip-link {
   position: absolute;
-  left: var(--space-4);
-  top: var(--space-4);
+  top: var(--space-2);
+  left: var(--space-2);
   z-index: 100;
   padding: var(--space-2) var(--space-4);
-  background: var(--info);
-  color: var(--info-ink);
+  background: var(--ink);
+  color: var(--wall);
   font-weight: 700;
   transform: translateY(-200%);
 }
@@ -178,82 +255,49 @@ time,
   transform: none;
 }
 
-.wrap {
-  width: 100%;
-  max-width: var(--page-max);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* The yellow information sign: the one contact action. */
-.info-sign {
+/* Buttons: printed like the gallery's own signage. */
+.button {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  min-height: 3rem;
-  padding: 0.7rem 1.25rem 0.6rem;
-  background: var(--info);
-  color: var(--info-ink);
-  font-weight: 800;
-  font-size: var(--step-1);
-  line-height: 1;
-  letter-spacing: -0.01em;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  transition: background-color 160ms var(--ease-out);
-}
-
-.info-sign:hover {
-  background: color-mix(in oklch, var(--info) 86%, white);
-}
-
-.info-sign svg {
-  flex: none;
-  width: 1.25em;
-  height: 1.25em;
-  margin-top: -0.1em;
-}
-
-/* Route bullet: a line's code in a filled circle. */
-.bullet {
-  --size: 2.25rem;
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: var(--bullet-color, var(--ink));
-  color: #fff;
-  font-weight: 800;
-  font-size: calc(var(--size) * 0.56);
-  line-height: 1;
-  padding-top: 0.12em;
-  text-decoration: none;
-}
-
-[data-color="red"] { --bullet-color: var(--line-red); --line-color: var(--line-red); }
-[data-color="blue"] { --bullet-color: var(--line-blue); --line-color: var(--line-blue); }
-[data-color="green"] { --bullet-color: var(--line-green); --line-color: var(--line-green); }
-[data-color="orange"] { --bullet-color: var(--line-orange); --line-color: var(--line-orange); }
-[data-color="purple"] { --bullet-color: var(--line-purple); --line-color: var(--line-purple); }
-[data-color="brown"] { --bullet-color: var(--line-brown); --line-color: var(--line-brown); }
-[data-color="teal"] { --bullet-color: var(--line-teal); --line-color: var(--line-teal); }
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2);
+  min-height: 3rem;
+  padding: 0 var(--space-5);
+  border: 2px solid var(--vinyl);
+  border-radius: 0;
+  background: var(--vinyl);
+  color: var(--paint);
+  font-size: var(--step-0);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--fast) var(--ease),
+    color var(--fast) var(--ease);
 }
 
-.tag {
-  display: inline-block;
-  padding: 0.2rem 0.55rem 0.1rem;
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
-  font-size: var(--step--1);
-  font-weight: 600;
-  line-height: 1.4;
+.button:hover {
+  background: color-mix(in oklch, var(--vinyl) 86%, var(--paint));
+}
+
+.button--quiet {
+  background: transparent;
+  color: var(--vinyl);
+}
+
+.button--quiet:hover {
+  background: color-mix(in oklch, var(--vinyl) 10%, transparent);
+}
+
+.button .icon {
+  width: 1.2em;
+  height: 1.2em;
+  flex: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -262,12 +306,6 @@ time,
   *::after {
     transition-duration: 1ms !important;
     animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
-}
-
-.icon {
-  flex: none;
-  width: 1em;
-  height: 1em;
 }

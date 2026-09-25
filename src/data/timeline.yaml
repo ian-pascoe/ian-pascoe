@@ -72,7 +72,8 @@ entries:
     end: present
     summary: >-
       Platform and automation engineering for PTC Windchill on AWS:
-      self-service provisioning, CI/CD, test automation, and Kubernetes.
+      Terraform, self-service provisioning, CI/CD, test automation, Docker,
+      and Kubernetes.
       Technical lead for the team since 2026.
     achievements:
       - name: Suite Speedrun
@@ -129,7 +130,9 @@ entries:
         detail: >-
           Led RTX's deployment for Industry Øne, the Department of the Air
           Force program run by Istari Digital that connects engineering data
-          across the defense industrial base without centralizing it.
+          across the defense industrial base without centralizing it. Built on
+          AWS with Terraform.
+        skills: [AWS, Terraform]
         featured: true
         link:
           href: https://www.prnewswire.com/news-releases/department-of-the-air-force-and-istari-digital-unveil-industry-one-the-arpanet-for-engineering-302777297.html
@@ -138,8 +141,10 @@ entries:
         date: 2026-09
         subject: Windchill on EKS
         status: in-progress
-        detail: Leading the move of the program's Windchill environments from virtual machines to containers on AWS EKS.
-        skills: [Kubernetes, AWS, Windchill]
+        detail: >-
+          Leading the move of the program's Windchill environments from virtual
+          machines to Docker containers on AWS EKS, provisioned with Terraform.
+        skills: [Docker, Kubernetes, AWS, Terraform, Windchill]
 
   - kind: event
     id: safe-scrum-master

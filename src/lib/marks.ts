@@ -4,11 +4,12 @@
  *
  * Sources: the RTX burst, the PTC symbol and the University of Rhode Island wordmark from
  * Wikimedia Commons (public domain); the Spirit-Led Software dove traced from
- * spiritledsoftware.com/icon.svg; GitHub, Cucumber, Kubernetes, Jenkins, Solid, AWS Lambda,
- * Rust, Model Context Protocol and Stripe from Simple Icons (CC0); the Step Functions,
- * EventBridge and Systems Manager glyphs from the AWS service icons in SVG Logos (CC0),
- * without their coloured tiles; AWS, LinkedIn and the generic skill glyphs from Material
- * Design Icons (Apache-2.0). Logos are trademarks of their owners and are used only to name them.
+ * spiritledsoftware.com/icon.svg; GitHub, Cucumber, Kubernetes, Docker, Terraform, Jenkins,
+ * Solid, AWS Lambda, Rust, Model Context Protocol and Stripe from Simple Icons (CC0); the
+ * Step Functions, EventBridge and Systems Manager glyphs from the AWS service icons in SVG
+ * Logos (CC0), without their coloured tiles; AWS, LinkedIn and the generic skill glyphs from
+ * Material Design Icons (Apache-2.0). Logos are trademarks of their owners and are used only
+ * to name them.
  */
 
 export interface Mark {
@@ -193,6 +194,20 @@ export const MARKS = {
     viewBox: "0 0 24 24",
     body: "<path d=\"M9 2v6h2v3H5c-1.11 0-2 .89-2 2v3H1v6h6v-6H5v-3h6v3H9v6h6v-6h-2v-3h6v3h-2v6h6v-6h-2v-3c0-1.11-.89-2-2-2h-6V8h2V2z\"/>",
     skills: ["Software Architecture"],
+  },
+  docker: {
+    label: "Docker",
+    shape: "symbol",
+    viewBox: "0 0 24 24",
+    body: "<path d=\"M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51q-.508.001-1.01.087c-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199l-.226.327c-.284.438-.49.922-.612 1.43c-.23.97-.09 1.882.403 2.661c-.595.332-1.55.413-1.744.42H.751a.75.75 0 0 0-.75.748a11.4 11.4 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124c1.18.723 3.1 1.137 5.275 1.137a15.7 15.7 0 0 0 2.93-.266a12.3 12.3 0 0 0 3.823-1.389a10.5 10.5 0 0 0 2.61-2.136c1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009c.309-.293.55-.65.707-1.046l.098-.288Z\"/>",
+    skills: ["Docker"],
+  },
+  terraform: {
+    label: "Terraform",
+    shape: "symbol",
+    viewBox: "0 0 24 24",
+    body: "<path d=\"M1.44 0v7.575l6.561 3.79V3.787zm21.12 4.227l-6.561 3.791v7.574l6.56-3.787zM8.72 4.23v7.575l6.561 3.787V8.018zm0 8.405v7.575L15.28 24v-7.578z\"/>",
+    skills: ["Terraform"],
   },
 } as const satisfies Record<string, Mark>;
 

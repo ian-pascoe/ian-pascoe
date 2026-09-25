@@ -12,6 +12,7 @@ web
 - Deployed with alchemy v2 (beta, pinned to an exact version, lockfile committed) to Cloudflare via `Cloudflare.Website.Astro`, static assets only.
 - Production domain: `ianpascoe.dev` (Cloudflare Registrar and Cloudflare DNS), with `www` redirecting to the apex.
 - Bun as package manager and runtime.
+- Images: the assets-only deploy has no `/_image` endpoint (alchemy's Cloudflare adapter uses Astro's passthrough image service), so never use `astro:assets` `<Image>`/`<Picture>`/`getImage`. Import the file and render `<img src={asset.src}>`, sizing the source file itself.
 - Deploys: GitHub Actions deploys stage `prod` on push to `main`; each pull request deploys stage `pr-<n>` to a workers.dev preview URL, posted on the PR and destroyed when the PR closes. Alchemy state lives in the Cloudflare account (`Cloudflare.state()`).
 - CI credentials: a scoped Cloudflare user API token ("ianpascoe.dev deploy (alchemy + GitHub Actions)") plus account ID, stored as the repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`; the local alchemy `default` profile uses the same token. Account permissions: Workers Scripts Write, Secrets Store Write, Account Settings Read and Write (Web Analytics requires Read explicitly), Email Routing Addresses Write. Zone `ianpascoe.dev` permissions: Zone Read, Zone Settings Write, Email Routing Rules Write, Dynamic URL Redirects Write, Workers Routes Write, DNS Write.
 - Email: `hi@ianpascoe.dev`, forwarded to Ian's Gmail by Cloudflare Email Routing and managed in the same alchemy stack.

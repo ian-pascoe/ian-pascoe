@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import portrait from "../assets/portrait.jpg";
 import type { Line, Profile } from "../lib/network";
 import Icon from "./Icon.astro";
@@ -16,14 +15,15 @@ const firstName = profile.name.split(" ")[0];
 
 <header class="sign on-sign">
   <div class="sign__inner wrap">
-    <Image
+    <img
       class="sign__portrait"
-      src={portrait}
+      src={portrait.src}
       alt={`Portrait of ${profile.name}`}
-      width={264}
-      height={264}
+      width={portrait.width}
+      height={portrait.height}
       loading="eager"
       fetchpriority="high"
+      decoding="async"
     />
     <div class="sign__id">
       <h1 class="sign__name">{profile.name}</h1>

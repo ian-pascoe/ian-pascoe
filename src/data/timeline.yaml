@@ -79,8 +79,12 @@ entries:
       - name: Suite Speedrun
         metric: 75%
         metricLabel: shorter test runs
-        detail: Built a custom test automation solution on Cucumber that cut test duration by 75%.
-        skills: [Cucumber, CI/CD]
+        detail: >-
+          Built a test automation framework from scratch in Java: Cucumber
+          scenarios drive Selenium through a complete page object model, with
+          Spring for dependency injection and ReportPortal for results. It cut
+          test duration by 75%.
+        skills: [Java, Cucumber, Selenium, Spring, ReportPortal, CI/CD]
       - name: Hands-Free Deploys
         metric: 60%
         metricLabel: faster deployments

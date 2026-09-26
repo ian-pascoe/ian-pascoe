@@ -152,13 +152,14 @@ import Icon from "./Icon.astro";
     height: 1rem;
   }
 
-  /* Phones: the angle control sits at the top of the disk's window, and only while the disk is in view at arrival. */
+  /* Phones: the angle control sits at the top of the disk's window, and only at arrival. */
   @media (max-width: 52rem) {
     .viewpoints {
       top: calc(var(--masthead) + var(--space-3));
       bottom: auto;
-      right: 50%;
-      translate: 50% 0;
+      right: auto;
+      left: calc(var(--window-w) / 2);
+      translate: -50% 0;
     }
 
     .viewpoints__label {

@@ -157,6 +157,31 @@ cite {
   }
 }
 
+/*
+ * Phones: the disk shows through a fixed window under the masthead, and the page scrolls beneath it. Upright, the
+ * window spans the width above the text; on its side, it takes the left of the screen beside the text. The disk
+ * clips to the window, the page reserves its space, and the script centres the hole in it.
+ */
+@media (max-width: 52rem) {
+  :root {
+    --window-w: 100vw;
+    --window-h: clamp(10rem, 42svh, 100vw);
+    --window-bottom: calc(var(--masthead) + var(--window-h));
+    --reserve-top: var(--window-bottom);
+    --reserve-left: 0px;
+  }
+}
+
+@media (max-width: 52rem) and (orientation: landscape) {
+  :root {
+    --window-w: 44vw;
+    --window-h: calc(100svh - var(--masthead));
+    --window-bottom: 100%;
+    --reserve-top: var(--masthead);
+    --reserve-left: var(--window-w);
+  }
+}
+
 .wrap {
   width: 100%;
   max-width: 90rem;

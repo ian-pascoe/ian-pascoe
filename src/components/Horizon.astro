@@ -148,4 +148,16 @@ const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
     color: var(--bone-quiet);
     max-width: 52ch;
   }
+
+  /* Short screens (phones on their side): tighter spacing keeps the ask and the foot on one screen. */
+  @media (max-height: 28rem) {
+    .horizon__centre {
+      gap: var(--space-2);
+    }
+
+    .horizon__foot {
+      gap: var(--space-1);
+      padding-block: var(--space-2) var(--space-3);
+    }
+  }
 </style>

@@ -22,6 +22,7 @@ const brightest = fall.fragments.filter((f) => f.work.featured);
   aria-hidden="true"
 >
   <canvas class="disk__canvas" data-disk-canvas></canvas>
+  <div class="disk__window" data-disk-window></div>
   <svg class="disk__overlay" data-disk-overlay>
     <path class="disk__leader" data-leader></path>
     <circle class="disk__marker" data-marker r="14"></circle>
@@ -80,11 +81,48 @@ const brightest = fall.fragments.filter((f) => f.work.featured);
     opacity: 0.55;
   }
 
+  .disk__window {
+    display: none;
+  }
+
+  /*
+   * Phones: the disk sits above the page, clipped to its window, which opens to the whole screen as the fall
+   * reaches the horizon (the script sets --open, 0 to 1). The window's hairline edge fades as it opens.
+   */
   @media (max-width: 52rem) {
+    .disk {
+      z-index: 2;
+      clip-path: inset(
+        0 calc((100% - var(--window-w)) * (1 - var(--open, 0))) calc((100% - var(--window-bottom)) * (1 - var(--open, 0)))
+          0
+      );
+    }
+
+    .disk__window {
+      display: block;
+      position: absolute;
+      top: var(--masthead);
+      left: 0;
+      width: var(--window-w);
+      height: var(--window-h);
+      border-bottom: 1px solid var(--rule);
+      opacity: calc(1 - 4 * var(--open, 0));
+    }
+
+    /* The still, scaled and placed so its hole sits centred in the window. The disk covers the page here, so it
+       stays opaque. */
     :global(html:is(.no-disk, :not(.js))) .disk {
-      background-position: 70% calc(var(--masthead) - 4svh);
-      background-size: auto 46svh;
-      opacity: 0.8;
+      background-position: calc(var(--window-w) / 2 - var(--window-h) * 1.578)
+        calc(var(--masthead) - var(--window-h) * 0.1625);
+      background-size: auto calc(var(--window-h) * 1.25);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 52rem) and (orientation: landscape) {
+    .disk__window {
+      border-bottom: 0;
+      border-right: 1px solid var(--rule);
     }
   }
 

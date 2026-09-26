@@ -44,4 +44,15 @@ const { profile, works, firstYear, lastYear } = exhibition;
     position: relative;
     z-index: 1;
   }
+
+  /* Phones: the page scrolls beneath the disk's window; the closing screen rises above it once the window opens. */
+  @media (max-width: 52rem) {
+    main {
+      padding: var(--reserve-top) 0 0 var(--reserve-left);
+    }
+
+    :global(.horizon) {
+      z-index: 3;
+    }
+  }
 </style>

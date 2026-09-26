@@ -299,21 +299,14 @@ const round = (n: number) => n.toFixed(4);
     color: var(--gold);
   }
 
-  /* Phones: the disk shows between plates; each plate sits on the void so every line reads. */
+  /* Phones: one header or plate per screen of text below the disk's window, divided by hairlines. */
   @media (max-width: 52rem) {
-    .band {
-      gap: 30svh;
-      padding-block: 15svh;
-    }
-
     .orbit,
     .plate {
-      min-height: 0;
-      padding: var(--space-6) var(--gutter);
-      margin-inline: calc(var(--gutter) * -1);
+      min-height: calc(100svh - var(--reserve-top));
       max-width: none;
-      background: var(--void-deep);
-      border-block: 1px solid var(--rule);
+      padding-block: var(--space-7);
+      border-top: 1px solid var(--rule);
     }
   }
 </style>

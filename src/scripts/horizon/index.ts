@@ -11,6 +11,8 @@ import { FRAGMENT, MAX_FRAGMENTS, MAX_YEARS, VERTEX } from "./shader";
 
 /** Where the current fragment turns to: front-left of the hole, beside the plates. */
 const PHI_READ = -2.3;
+/** Phones bring the camera closer, so the hole fills the disk's window rather than floating small in it. */
+const PHONE_ZOOM = 0.72;
 const TAU = Math.PI * 2;
 const VIEWPOINTS = { observer: null, edge: 0.035, face: 1.2 } as const;
 type Viewpoint = keyof typeof VIEWPOINTS;
@@ -25,8 +27,6 @@ interface Station {
   anchor: number;
   /** Index into the fragment list, for fragment stations. */
   fragment: number;
-  /** Phones: where the hole sits on screen at this station, in viewport px from the top. */
-  holeY: number;
 }
 
 interface State extends View {
@@ -36,6 +36,7 @@ interface State extends View {
 
 const root = document.querySelector<HTMLElement>("[data-disk]")!;
 const canvas = root.querySelector<HTMLCanvasElement>("[data-disk-canvas]")!;
+const diskWindow = root.querySelector<HTMLElement>("[data-disk-window]")!;
 const marker = root.querySelector<SVGCircleElement>("[data-marker]")!;
 const leader = root.querySelector<SVGPathElement>("[data-leader]")!;
 const core = root.querySelector<SVGCircleElement>("[data-core]")!;
@@ -67,7 +68,6 @@ for (const el of document.querySelectorAll<HTMLElement>("[data-station]")) {
     time: kind === "band" || kind === "fragment" ? Number(el.dataset.time) : now,
     anchor: 0,
     fragment: kind === "fragment" ? fragmentCount++ : -1,
-    holeY: 0,
   });
 }
 const fragments = stations.filter((s) => s.kind === "fragment");
@@ -88,9 +88,14 @@ let viewpoint: Viewpoint = "observer";
 
 /**
  * Where the page's text sits, measured, so the disk is framed around it rather than by screen fractions:
- * the reading column's right edge on wide screens, and the circle the closing ask must fit inside.
+ * the reading column's right edge on wide screens, the disk's window on phones (CSS owns its geometry), and the
+ * circle the closing ask must fit inside.
  */
-const layout = { columnRight: 0, horizon: { x: 0, y: 0, radius: 0 } };
+const layout = {
+  columnRight: 0,
+  window: { x: 0, y: 0, right: 0, bottom: 0 },
+  horizon: { x: 0, y: 0, radius: 0 },
+};
 const leadColumn = document.querySelector<HTMLElement>("[data-column]")!;
 const horizonCentre = document.querySelector<HTMLElement>("[data-horizon-centre]")!;
 
@@ -113,21 +118,22 @@ function distForShadow(radius: number): number {
 function stationView(s: Station): View {
   const narrow = narrowQuery.matches;
   const u = unit();
-  // Wide: the hole sits midway between the reading column and the right edge. Phones: centred in the window of
-  // void the page leaves open at this station.
-  const shiftX = narrow ? 0 : layout.columnRight / (2 * u);
-  const shiftY = narrow ? (innerHeight / 2 - s.holeY) / u : -0.04;
+  // Wide: the hole sits midway between the reading column and the right edge. Phones: centred in the disk's window,
+  // and closer, so the hole fills it.
+  const shiftX = narrow ? (layout.window.x - innerWidth / 2) / u : layout.columnRight / (2 * u);
+  const shiftY = narrow ? (innerHeight / 2 - layout.window.y) / u : -0.04;
+  const zoom = narrow ? PHONE_ZOOM : 1;
   const override = VIEWPOINTS[viewpoint];
   switch (s.kind) {
     case "arrival":
-      return { dist: 19, incl: override ?? 0.2, spin: arrivalSpin, shiftX, shiftY };
+      return { dist: 19 * zoom, incl: override ?? 0.2, spin: arrivalSpin, shiftX, shiftY };
     case "band":
-      return { dist: 8 + 1.35 * s.r, incl: override ?? 0.26, spin: spinOf(s), shiftX, shiftY };
+      return { dist: (8 + 1.35 * s.r) * zoom, incl: override ?? 0.26, spin: spinOf(s), shiftX, shiftY };
     case "fragment":
-      return { dist: 7.5 + 1.35 * s.r, incl: override ?? 0.2, spin: spinOf(s), shiftX, shiftY };
+      return { dist: (7.5 + 1.35 * s.r) * zoom, incl: override ?? 0.2, spin: spinOf(s), shiftX, shiftY };
     case "quiet":
       // After the last fragment the view pulls back and holds, so the closing sections read on the void.
-      return { dist: 24, incl: override ?? 0.34, spin: lastSpin + 0.6, shiftX, shiftY };
+      return { dist: 24 * zoom, incl: override ?? 0.34, spin: lastSpin + 0.6, shiftX, shiftY };
     case "horizon": {
       // The closing ask sits inside the hole's shadow: the camera comes as close as the text needs.
       const { x, y, radius } = layout.horizon;
@@ -145,22 +151,22 @@ function stationView(s: Station): View {
 /** Anchors: the scroll position at which each station's view is exact. */
 function measure(): void {
   const narrow = narrowQuery.matches;
-  const readingLine = innerHeight * (narrow ? 0.62 : 0.46);
-  const maxScroll = document.documentElement.scrollHeight - innerHeight;
+  const win = diskWindow.getBoundingClientRect();
+  layout.window = { x: win.left + win.width / 2, y: win.top + win.height / 2, right: win.right, bottom: win.bottom };
   const masthead = document.querySelector(".masthead")?.getBoundingClientRect().bottom ?? 0;
+  // Phones read in the screen the window leaves: below it when upright, beside it on its side. A plate taller than
+  // that screen is read from its top.
+  const areaTop = !narrow ? 0 : win.right >= innerWidth - 1 ? win.bottom : masthead;
+  const readingLine = narrow ? (areaTop + innerHeight) / 2 : innerHeight * 0.46;
+  const maxScroll = document.documentElement.scrollHeight - innerHeight;
   let previous = -Infinity;
-  let previousBottom = masthead;
   for (const s of stations) {
     const rect = s.el.getBoundingClientRect();
     const top = rect.top + scrollY;
-    const anchor = s.kind === "arrival" ? 0 : s.kind === "horizon" ? maxScroll : top + rect.height / 2 - readingLine;
+    let anchor = s.kind === "arrival" ? 0 : s.kind === "horizon" ? maxScroll : top + rect.height / 2 - readingLine;
+    if (narrow && s.kind !== "arrival" && s.kind !== "horizon") anchor = Math.min(anchor, top - areaTop);
     s.anchor = Math.max(Math.min(anchor, maxScroll), previous + 1);
     previous = s.anchor;
-    // Phones: the void between the previous block and this one, as it stands when this station is exact.
-    const windowTop = Math.max(masthead, previousBottom - s.anchor);
-    const windowBottom = s.kind === "arrival" ? leadColumn.getBoundingClientRect().top + scrollY : top - s.anchor;
-    s.holeY = (windowTop + Math.max(windowTop + 1, windowBottom)) / 2;
-    previousBottom = top + rect.height;
   }
   layout.columnRight = leadColumn.getBoundingClientRect().right;
   const centre = horizonCentre.getBoundingClientRect();
@@ -197,8 +203,15 @@ function targetState(): State {
 
 // ---------------------------------------------------------------- WebGL
 
+/** The part of the screen the disk shows through, in CSS px from the top left; the rest is clipped away. */
+interface Visible {
+  right: number;
+  bottom: number;
+}
+
 interface Renderer {
-  draw(state: State, emphasis: Float32Array): void;
+  /** Draws the whole canvas, or only what shows through `visible` (phones trace the window, not the screen). */
+  draw(state: State, emphasis: Float32Array, visible?: Visible): void;
   resize(): void;
 }
 
@@ -266,8 +279,16 @@ function createRenderer(): Renderer | null {
       canvas.height = Math.max(1, Math.round(innerHeight * scale));
       gl.viewport(0, 0, canvas.width, canvas.height);
     },
-    draw(state, emphasis) {
+    draw(state, emphasis, visible) {
       const cam = camera(state);
+      if (visible) {
+        const s = canvas.width / innerWidth;
+        const y = Math.max(0, Math.floor((innerHeight - visible.bottom) * s) - 1);
+        gl.enable(gl.SCISSOR_TEST);
+        gl.scissor(0, y, Math.min(canvas.width, Math.ceil(visible.right * s) + 1), canvas.height - y);
+      } else {
+        gl.disable(gl.SCISSOR_TEST);
+      }
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform3fv(uCam, cam.pos);
       gl.uniform3fv(uRight, cam.right);
@@ -519,6 +540,23 @@ function emphasisFor(state: State): Float32Array {
   return out;
 }
 
+let open = -1;
+
+/**
+ * Phones: how far the disk's window has opened, 0 to 1, as the fall moves from the last closing section to the
+ * horizon, where the hole fills the screen around the ask. Returns what shows through, for the renderer to trace.
+ */
+function phoneWindow(state: State): Visible | undefined {
+  const next = narrowQuery.matches && renderer ? smooth(Math.min(1, Math.max(0, state.at - (stations.length - 2)))) : 0;
+  if (Math.abs(next - open) > 1e-3) {
+    open = next;
+    root.style.setProperty("--open", next.toFixed(3));
+  }
+  if (!narrowQuery.matches) return undefined;
+  const { right, bottom } = layout.window;
+  return { right: right + (innerWidth - right) * open, bottom: bottom + (innerHeight - bottom) * open };
+}
+
 function tick(time: number): void {
   frame = 0;
   const target = targetState();
@@ -539,7 +577,7 @@ function tick(time: number): void {
     shown = settled ? target : next;
   }
   const emphasis = emphasisFor(shown);
-  renderer?.draw(shown, emphasis);
+  renderer?.draw(shown, emphasis, phoneWindow(shown));
   updateOverlays(shown, emphasis, Boolean(renderer), settled);
   updatePage(shown);
   if (!settled) request();

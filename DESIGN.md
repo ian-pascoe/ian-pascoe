@@ -178,7 +178,7 @@ The site is a black hole seen from a patient observer's seat. A full-bleed accre
 
 Everything that is not the disk is lettering on the void. There are no surfaces to lift, no panels, no cards: structure comes from rings, 1px hairlines, generous void and a single variable family pulled from hairline extended caps down to plain reading text. Light belongs to the disk. The interface borrows it exactly twice: the Doppler gradient that rings the primary button, and the gold that marks whatever is current, focused, or the way to email Ian.
 
-The world is still until the visitor acts. The disk renders only on scroll, resize or input; nothing orbits by itself, and the replay of the whole fall runs only when "Replay 2019 → now" is pressed. Without WebGL the disk hangs as a pre-rendered still at 55% opacity; with reduced motion the camera jumps instead of easing; in print the resume is black on white. Every fact is live text in every one of those states.
+The world is still until the visitor acts. The disk renders only on scroll, resize or input; nothing orbits by itself, and the replay of the whole fall runs only when "Replay 2019 → now" is pressed. Without WebGL the disk hangs as a pre-rendered still at 55% opacity (opaque, centred in the window, on phones); with reduced motion the camera jumps instead of easing; in print the resume is black on white. Every fact is live text in every one of those states.
 
 **Key Characteristics:**
 - Void black ground; the disk is the only large source of light.
@@ -204,11 +204,11 @@ A near-black violet void carrying warm bone lettering, with all chroma reserved 
 
 ### Neutral
 - **Void** (`void`): The interior of the primary button, where the Doppler ring encloses darkness.
-- **Deep Void** (`void-deep`): Page ground, masthead, the no-WebGL disk backing, phone plate backgrounds, the horizon foot, the viewpoint selector and replay bar fills, and the 3px knockout stroke behind etched disk lettering.
+- **Deep Void** (`void-deep`): Page ground, masthead, the no-WebGL disk backing, the horizon foot, the viewpoint selector and replay bar fills, and the 3px knockout stroke behind etched disk lettering.
 - **Bone** (`bone`): Primary lettering: names, headlines, plate titles, lit figures.
 - **Bone Soft** (`bone-soft`): Secondary reading text: facts, summaries, measures, link rows, unlit figures while another fragment is current.
 - **Bone Quiet** (`bone-quiet`): Metadata, year numerals on the rail and disk, colophon, unpressed viewpoint labels.
-- **Rule** (`rule`): Default 1px hairlines: masthead base, list dividers, phone plate edges, the horizon foot.
+- **Rule** (`rule`): Default 1px hairlines: masthead base, list dividers, the phone disk window's edge and plate dividers, the horizon foot.
 - **Rule Strong** (`rule-strong`): Instrument outlines (button, viewpoint selector, replay stop), the time rail, link underlines at rest, dashed orbits.
 
 ### Named Rules
@@ -251,7 +251,7 @@ The page is two layers: a fixed full-viewport disk canvas at z-index 0 and the r
 
 The flow is a sequence of stations, each a camera position: the arrival (100svh; name, headline, portrait, current roles, actions, the address with Copy, three highlights newest first), one band per role or event (an orbit header at 88svh min, then one plate per fragment at 72svh min), the quiet closing sections, and the horizon (100svh, centred, three rows). The camera eases between station anchors with a hold: it stays still for the first 18% of the scroll between stations and settles over the middle 64%, so each plate is read against a stationary disk. The reading line is 46% of viewport height on wide screens, 62% on phones.
 
-Breakpoint `52rem` is the one structural switch. Below it the rail disappears, the viewpoint selector moves to the top of the arrival window (shown only there), the disk recentres above the text (vertical shift, no veil), the arrival shows the disk in a 38svh window and sets everything below it on deep void, and plates become full-bleed slabs of deep void with top and bottom hairlines separated by 30svh gaps. At each station the hole is centred in the gap above the plate at the reading line, so every window frames the disk. Spacing follows the 9-step scale (0.25rem to 7rem); horizontal padding is always `gutter`.
+Breakpoint `52rem` is the one structural switch. Below it the rail disappears and the disk moves into a fixed window under the masthead that stays in view for the whole fall: full width and `clamp(10rem, 42svh, 100vw)` tall when upright, the left 44vw beside the text on its side (tokens `--window-w`, `--window-h`, with `--reserve-top`/`--reserve-left` for the page). The disk sits above the page, clipped to the window, with a 1px `rule` edge; the page scrolls beneath it on void, and the hole is centred in the window with the camera 0.72x as far away, so it fills the frame (no veil). Each orbit header and plate is at least one screen of the text area tall, divided by top hairlines, and is read centred in it (from its top when taller). As the fall reaches the horizon the window opens to the whole screen and the closing ask rises above the disk into the hole. The viewpoint selector sits at the top of the window, at arrival only. Spacing follows the 9-step scale (0.25rem to 7rem); horizontal padding is always `gutter`.
 
 ## Elevation & Depth
 
@@ -296,7 +296,7 @@ One per band: brand mark (2.5rem), the organisation in headline extended caps, t
 The fixed WebGL canvas, rendered at `min(devicePixelRatio, 1.5) × quality`, where quality (0.4–1) is calibrated at load so a full frame costs about 12ms; renderers too slow even at 0.4 get the still. The shader draws the disk between radii 3 and 14.5, turbulent filaments turning faster toward the hole, faint bone year rings, every fragment as a point of light (larger and gold as it becomes current, with a gold halo), a gold photon ring hugging the shadow, and a sparse bone starfield. A CPU copy of the same integrator places the SVG overlay: a gold marker and core on the current fragment with a leader, year numerals on the near side of their rings, and the three featured fragments' labels set along their own orbits as `textPath` (gold figure, bone-soft title). Viewpoints: observer (per-station inclination), edge-on, face-on.
 
 ### Viewpoint Selector and Replay Bar
-Capsule instrument groups, placed after the content in the DOM so keyboard order reaches them last, fixed bottom right (viewpoints, led by a micro "Angle" label on screens over 72rem; hidden at the horizon, where the camera looks straight down) and bottom centre (replay). Viewpoint options are micro caps at `bone-quiet`, bone on hover, gold text with an inset gold ring when pressed. The replay bar has a 1px gold border, a gold tabular year, the fragment title, and an instrument "Stop the replay" button, and a separate polite live region announcing "year, title" (an undated fragment announces its organisation, never an inferred year); while it shows, the viewpoint selector hides. Both are hidden without JavaScript and under 52rem (viewpoints).
+Capsule instrument groups, placed after the content in the DOM so keyboard order reaches them last, fixed bottom right (viewpoints, led by a micro "Angle" label on screens over 72rem; hidden at the horizon, where the camera looks straight down) and bottom centre (replay). Viewpoint options are micro caps at `bone-quiet`, bone on hover, gold text with an inset gold ring when pressed. The replay bar has a 1px gold border, a gold tabular year, the fragment title, and an instrument "Stop the replay" button, and a separate polite live region announcing "year, title" (an undated fragment announces its organisation, never an inferred year); while it shows, the viewpoint selector hides. Both are hidden without JavaScript; under 52rem the viewpoints sit at the top of the disk's window at arrival only.
 
 ### Observations
 A grid of ring badges: a dashed `rule-strong` orbit, a gold arc that draws closed over 900ms when logged, and a core that fills gold. Name at 500/112% width, how-to at meta size, timestamp in gold micro caps. A transient capsule notice ("Observed: …") drops under the masthead for 3.8s.
@@ -307,12 +307,12 @@ The closing station. The portrait in its gold hairline orbit, the ask, the email
 ## Do's and Don'ts
 
 ### Do:
-- **Do** put all reading text on void: the left column over the veiled sky on wide screens, full-bleed deep-void plates with hairline edges on phones.
+- **Do** put all reading text on void: the left column over the veiled sky on wide screens, the page below or beside the disk's window on phones.
 - **Do** keep gold for the current fragment, dates, focus, logged state and the email; everything else is bone at one of three strengths.
 - **Do** set names, figures and disk labels in extended hairline caps (125% width, 180–250 weight, 0.06–0.16em tracking) and reading text at 100% width, 380 weight.
 - **Do** make every number lining, and tabular wherever it aligns or counts.
 - **Do** render the disk only in response to scroll, resize or input, and hold it still while a plate is being read.
-- **Do** keep every fact as live text for no-WebGL, no JavaScript and a lost GPU context (all show the still, `disk-still.jpg`, at 55%), reduced motion (jumps, 1ms transitions) and print (`print-ink` on `paper`; the home page prints plates only).
+- **Do** keep every fact as live text for no-WebGL, no JavaScript and a lost GPU context (all show the still, `disk-still.jpg`, at 55%; opaque in the phone window), reduced motion (jumps, 1ms transitions) and print (`print-ink` on `paper`; the home page prints plates only).
 - **Do** show the address as text, with a Copy control, wherever the email action appears first on a screen (arrival, horizon).
 - **Do** give etched disk lettering a 3px deep-void halo so it reads over bright matter.
 

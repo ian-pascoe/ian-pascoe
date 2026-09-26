@@ -276,27 +276,22 @@ const firstYear = new Date(fall.firstTime).getUTCFullYear();
     color: var(--gold);
   }
 
-  /* Phones: the disk shows in a window above; everything below it sits on the void, like the plates. */
+  /* Phones: the disk's window sits above; the lead and highlights read below it on the void. */
   @media (max-width: 52rem) {
     .arrival {
+      min-height: 0;
       gap: 0;
-      padding: calc(var(--masthead) + 38svh) 0 0;
+      padding: 0;
     }
 
     .arrival__lead,
     .arrival__brightest {
       max-width: none;
       padding: var(--space-6) var(--gutter);
-      background: var(--void-deep);
-    }
-
-    .arrival__lead {
-      border-top: 1px solid var(--rule);
     }
 
     .arrival__brightest {
       padding-top: 0;
-      border-bottom: 1px solid var(--rule);
     }
   }
 </style>

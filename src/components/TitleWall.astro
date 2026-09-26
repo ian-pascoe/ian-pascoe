@@ -13,6 +13,7 @@ interface Props {
 const { exhibition } = Astro.props;
 const { profile, rooms, works, firstYear, lastYear } = exhibition;
 const firstName = profile.name.split(" ")[0];
+const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
 const current = rooms.filter((r) => r.role && !r.end);
 const roomById = new Map(rooms.map((r) => [r.id, r]));
 const featured = works
@@ -49,6 +50,9 @@ const featured = works
         </li>
         <li>
           <a class="title-wall__social" href={profile.links.linkedin} rel="noopener"><Mark name="linkedin" />LinkedIn</a>
+        </li>
+        <li>
+          <a class="title-wall__social" href={profile.links.x} rel="noopener" aria-label={`X: ${xHandle}`}><Mark name="x" />{xHandle}</a>
         </li>
       </ul>
     </div>

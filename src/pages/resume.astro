@@ -43,6 +43,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
         <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
         <li><a href={profile.links.linkedin}><Mark name="linkedin" />{bare(profile.links.linkedin)}</a></li>
         <li><a href={profile.links.github}><Mark name="github" />{bare(profile.links.github)}</a></li>
+        <li><a href={profile.links.x}><Mark name="x" />{bare(profile.links.x)}</a></li>
         <li>{profile.location}</li>
       </ul>
       <p class="sheet__show">

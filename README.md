@@ -15,4 +15,4 @@ I build full-stack products and AI-agent developer tools — open-source SDKs, M
 Principal Specialist of Business Information Systems and Transformation — Windchill test/performance frameworks, Kubernetes-scale automation, and event-driven AWS provisioning.
 
 ### Links
-- [spiritledsoftware.com](https://spiritledsoftware.com) · [LinkedIn](https://www.linkedin.com/in/ian-pascoe) · [GitHub org](https://github.com/spiritledsoftware)
+- [spiritledsoftware.com](https://spiritledsoftware.com) · [LinkedIn](https://www.linkedin.com/in/ian-pascoe) · [X](https://x.com/ianpascoe_) · [GitHub org](https://github.com/spiritledsoftware)

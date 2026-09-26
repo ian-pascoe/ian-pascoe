@@ -36,7 +36,7 @@ const ProfileSchema = z
     headline: z.string().min(1),
     location: z.string().min(1),
     email: z.email(),
-    links: z.object({ github: z.url(), linkedin: z.url() }).strict(),
+    links: z.object({ github: z.url(), linkedin: z.url(), x: z.url() }).strict(),
   })
   .strict();
 

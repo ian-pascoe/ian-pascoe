@@ -11,6 +11,7 @@ interface Props {
 
 const { profile, year } = Astro.props;
 const firstName = profile.name.split(" ")[0];
+const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
 const EMBLEMS: Record<StampId, IconName> = {
   "first-look": "look",
   "two-rooms": "rooms",
@@ -34,6 +35,9 @@ const EMBLEMS: Record<StampId, IconName> = {
         </li>
         <li>
           <a href={profile.links.linkedin} rel="noopener"><Mark name="linkedin" />LinkedIn</a>
+        </li>
+        <li>
+          <a href={profile.links.x} rel="noopener" aria-label={`X: ${xHandle}`}><Mark name="x" />{xHandle}</a>
         </li>
         <li>{profile.location}</li>
       </ul>

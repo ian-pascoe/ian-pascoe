@@ -28,7 +28,7 @@ export interface Profile {
   headline: string;
   location: string;
   email: string;
-  links: { github: string; linkedin: string };
+  links: { github: string; linkedin: string; x: string };
 }
 
 /**

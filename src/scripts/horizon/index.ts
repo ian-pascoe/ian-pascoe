@@ -256,8 +256,8 @@ function createRenderer(): Renderer | null {
   gl.uniform1fv(u("uYear"), new Float32Array([...yearRadii, ...Array(MAX_YEARS - yearRadii.length).fill(0)]));
   gl.uniform1i(u("uYearCount"), yearRadii.length);
 
-  // Render below device resolution and let the browser scale up; the disk is soft light, not hairlines.
-  let quality = 0.8;
+  // Render at or below device resolution (capped at 1.5x) and let the browser scale up; calibration picks the scale.
+  let quality = 1;
 
   const renderer: Renderer = {
     resize() {
@@ -285,23 +285,35 @@ function createRenderer(): Renderer | null {
     },
   };
 
-  // Calibrate on a small probe, not a full frame: time a few thousand pixels, then pick the render scale that keeps
-  // a full frame near 12ms. A renderer too slow even at the lowest scale (software WebGL) gets no disk at all.
+  // Calibrate on growing probes rather than a full frame up front. A tiny probe measures nothing on phones: browsers
+  // coarsen performance.now to 0.1-1ms and reading a pixel back has a fixed cost, which together pinned phones to the
+  // lowest scale. So subtract that fixed cost and double the probe until it takes long enough to measure (or reaches
+  // the largest frame we would draw), then pick the scale that keeps a full frame near 12ms. A renderer too slow
+  // even at the lowest scale (software WebGL) gets no disk at all.
   const probe = new Uint8Array(4);
-  const timeProbe = () => {
+  const timeAt = (w: number, h: number) => {
+    canvas.width = w;
+    canvas.height = h;
+    gl.viewport(0, 0, w, h);
     const started = performance.now();
     renderer.draw(targetState(), new Float32Array(fragments.length));
     gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, probe);
     return performance.now() - started;
   };
-  canvas.width = 96;
-  canvas.height = 54;
-  gl.viewport(0, 0, 96, 54);
-  timeProbe(); // the first draw also pays for compiling the program
-  const perPixel = Math.max(timeProbe(), 0.05) / (96 * 54);
   const fullPixels = innerWidth * innerHeight * Math.min(devicePixelRatio, 1.5) ** 2;
+  timeAt(1, 1); // the first draw also pays for compiling the program
+  const overhead = timeAt(1, 1);
+  let w = 64;
+  let h = 36;
+  let spent = timeAt(w, h) - overhead;
+  while (spent < 8 && w * h * 4 <= fullPixels) {
+    w *= 2;
+    h *= 2;
+    spent = timeAt(w, h) - overhead;
+  }
+  const perPixel = Math.max(spent, 0.05) / (w * h);
   if (perPixel * fullPixels * 0.4 ** 2 > 40) return null;
-  quality = Math.min(0.8, Math.max(0.4, Math.sqrt(12 / (perPixel * fullPixels))));
+  quality = Math.min(1, Math.max(0.4, Math.sqrt(12 / (perPixel * fullPixels))));
   renderer.resize();
   return renderer;
 }

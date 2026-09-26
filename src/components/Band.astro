@@ -1,0 +1,319 @@
+---
+import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
+import { STATUSES } from "../lib/exhibition";
+import type { Band } from "../lib/fall";
+import { skillMark, symbolMark } from "../lib/marks";
+
+interface Props {
+  band: Band;
+}
+
+const { band } = Astro.props;
+const { room } = band;
+const round = (n: number) => n.toFixed(4);
+---
+
+<section class="band" aria-labelledby={`band-${room.id}`}>
+  <header
+    class="orbit"
+    data-station="band"
+    data-r={round(band.r)}
+    data-phi={round(band.phi)}
+    data-time={room.start.time}
+    data-role={room.role ? "" : undefined}
+  >
+    <Mark name={symbolMark(room.mark)} class="orbit__mark" />
+    <h2 id={`band-${room.id}`} class="orbit__name caps">{room.org}</h2>
+    {room.role && <p class="orbit__role">{room.role}</p>}
+    <p class="orbit__when tabular">
+      {room.role && `${room.startLabel} `}
+      <time datetime={room.start.iso}>{room.start.label}</time>
+      {room.role && !room.end && " – now"}
+    </p>
+    {
+      band.alongside.length > 0 && (
+        <p class="orbit__alongside">
+          Running alongside {band.alongside.join(" and ")}: the record steps back to {room.start.year} here.
+        </p>
+      )
+    }
+    {room.summary && <p class="orbit__summary">{room.summary}</p>}
+    {
+      room.link && (
+        <a class="orbit__link" href={room.link.href} rel="noopener">
+          {room.link.label}
+          <Icon name="external" />
+        </a>
+      )
+    }
+  </header>
+
+  {
+    band.fragments.map(({ id, work, r, phi }) => (
+      <article
+        class:list={["plate", `plate--${work.kind}`]}
+        id={id}
+        data-station="fragment"
+        data-r={round(r)}
+        data-phi={round(phi)}
+        data-state={work.status ?? "orbiting"}
+        data-band={room.id}
+        data-time={work.key}
+        data-featured={work.featured ? "" : undefined}
+        data-label={work.metric ?? (work.drawing.kind === "text" ? work.drawing.subject : work.title)}
+        aria-labelledby={`${id}-title`}
+      >
+        {work.metric ? (
+          <p class="plate__figure" data-figure>
+            <span class="plate__value tabular">{work.metric}</span>
+            <span class="plate__measure">{work.metricLabel}</span>
+          </p>
+        ) : (
+          work.drawing.kind === "text" && (
+            <p class="plate__figure plate__figure--subject" data-figure>
+              <span class="plate__value">{work.drawing.subject}</span>
+            </p>
+          )
+        )}
+        <h3 id={`${id}-title`} class="plate__title" data-figure={work.kind === "event" ? "" : undefined}>
+          <cite>{work.title}</cite>
+        </h3>
+        <p class="plate__meta tabular">
+          <Mark name={symbolMark(work.drawing.kind === "document" ? work.drawing.mark : undefined) ?? symbolMark(room.mark)} />
+          <span data-org>{room.org.replace(/,?\s+LLC$/, "")}</span>
+          {work.date && <time datetime={work.date.iso}>{work.date.label}</time>}
+          {work.status && <span class="plate__status">{STATUSES[work.status]}</span>}
+        </p>
+        {work.detail && <p class="plate__fact">{work.detail}</p>}
+        {work.skills.length > 0 && (
+          <ul class="plate__medium" role="list" aria-label="Skills">
+            {work.skills.map((skill) => (
+              <li>
+                <Mark name={skillMark(skill)} />
+                {skill}
+              </li>
+            ))}
+          </ul>
+        )}
+        {work.link && (
+          <a class="plate__link" href={work.link.href} rel="noopener">
+            {work.link.label}
+            <Icon name="external" />
+          </a>
+        )}
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .band {
+    display: grid;
+    padding-inline: var(--gutter);
+  }
+
+  .orbit,
+  .plate {
+    position: relative;
+    display: grid;
+    align-content: center;
+    max-width: var(--column);
+    min-height: 72svh;
+    padding-block: var(--space-8);
+  }
+
+  .orbit {
+    gap: var(--space-3);
+    min-height: 88svh;
+  }
+
+  .orbit :global(.orbit__mark) {
+    height: 2.5rem;
+    margin-bottom: var(--space-3);
+    color: var(--bone);
+  }
+
+  .orbit__name {
+    font-size: var(--step-4);
+    font-weight: 200;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .orbit__role {
+    font-size: var(--step-1);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--bone);
+    max-width: 34ch;
+  }
+
+  .orbit__when {
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--gold);
+  }
+
+  .orbit__alongside {
+    max-width: 44ch;
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--gold);
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  .orbit__summary {
+    max-width: var(--measure);
+    color: var(--bone-soft);
+  }
+
+  .orbit__link,
+  .plate__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-self: start;
+    min-height: 2.75rem;
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  :is(.orbit__link, .plate__link) :global(.icon) {
+    width: 1em;
+    height: 1em;
+  }
+
+  .plate {
+    gap: var(--space-3);
+    transition: opacity var(--slow) var(--ease);
+  }
+
+  .plate__figure {
+    display: grid;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .plate__value {
+    font-size: var(--step-5);
+    font-weight: 180;
+    font-stretch: 125%;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    color: var(--bone);
+    transition: color var(--slow) var(--ease);
+  }
+
+  .plate__figure--subject .plate__value {
+    font-size: var(--step-3);
+    font-weight: 250;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .plate__measure {
+    font-size: var(--step-1);
+    line-height: 1.35;
+    color: var(--bone-soft);
+    max-width: 30ch;
+  }
+
+  .plate__title {
+    font-size: var(--step-1);
+    font-weight: 500;
+    font-stretch: 112%;
+    letter-spacing: 0.02em;
+  }
+
+  .plate--event .plate__title {
+    font-size: var(--step-3);
+    font-weight: 250;
+    font-stretch: 125%;
+    letter-spacing: 0.01em;
+    margin-bottom: var(--space-1);
+  }
+
+  .plate__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    font-size: var(--step--1);
+    letter-spacing: 0.03em;
+    color: var(--bone-quiet);
+  }
+
+  .plate__meta :global(.mark) {
+    height: 1.05rem;
+    color: var(--bone-soft);
+  }
+
+  .plate__meta time {
+    color: var(--gold);
+  }
+
+  .plate__status {
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--rule-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.6875rem;
+    color: var(--bone-soft);
+  }
+
+  .plate__fact {
+    max-width: var(--measure);
+    color: var(--bone-soft);
+  }
+
+  .plate__medium {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+    font-size: var(--step--1);
+    color: var(--bone-quiet);
+  }
+
+  .plate__medium li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .plate__medium :global(.mark) {
+    height: 1em;
+  }
+
+  /* The fragment at the reading line is the one the disk has lit gold. */
+  :global(.js) .plate:not(.is-current) .plate__value {
+    color: var(--bone-soft);
+  }
+
+  .plate.is-current .plate__value {
+    color: var(--gold);
+  }
+
+  .plate:target .plate__value {
+    color: var(--gold);
+  }
+
+  /* Phones: the disk shows between plates; each plate sits on the void so every line reads. */
+  @media (max-width: 52rem) {
+    .band {
+      gap: 30svh;
+      padding-block: 15svh;
+    }
+
+    .orbit,
+    .plate {
+      min-height: 0;
+      padding: var(--space-6) var(--gutter);
+      margin-inline: calc(var(--gutter) * -1);
+      max-width: none;
+      background: var(--void-deep);
+      border-block: 1px solid var(--rule);
+    }
+  }
+</style>

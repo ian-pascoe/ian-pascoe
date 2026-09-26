@@ -1,30 +1,47 @@
 ---
+import Arrival from "../components/Arrival.astro";
+import Band from "../components/Band.astro";
+import Composition from "../components/Composition.astro";
+import Controls from "../components/Controls.astro";
+import Disk from "../components/Disk.astro";
+import Horizon from "../components/Horizon.astro";
 import Masthead from "../components/Masthead.astro";
-import MediaIndex from "../components/MediaIndex.astro";
-import Room from "../components/Room.astro";
-import TitleWall from "../components/TitleWall.astro";
-import TourBar from "../components/TourBar.astro";
-import VisitorDesk from "../components/VisitorDesk.astro";
+import Observations from "../components/Observations.astro";
 import Base from "../layouts/Base.astro";
+import { buildFall } from "../lib/fall";
 import { loadTimeline } from "../lib/timeline";
 
 const exhibition = loadTimeline();
-const { profile, rooms, works, firstYear, lastYear } = exhibition;
+const fall = buildFall(exhibition);
+const { profile, works, firstYear, lastYear } = exhibition;
 ---
 
 <Base
   title={`${profile.name} · ${profile.headline}`}
-  description={`${profile.name}: Selected Work, ${firstYear}–${lastYear}. ${profile.headline}; ${works.length} works, each drawn exactly from its fact.`}
+  description={`${profile.name}, ${firstYear}–${lastYear}. ${profile.headline}. ${works.length} achievements, each a dated fact from his own record.`}
 >
-  <Masthead exhibition={exhibition} />
+  <Disk fall={fall} />
+  <Masthead profile={profile} fall={fall} />
   <main id="main">
-    <TitleWall exhibition={exhibition} />
-    {rooms.map((room) => <Room room={room} />)}
-    <MediaIndex exhibition={exhibition} />
+    <Arrival exhibition={exhibition} fall={fall} />
+    <div class="fall">
+      <h2 class="visually-hidden">The record, {firstYear} to now</h2>
+      {fall.bands.map((band) => <Band band={band} />)}
+    </div>
+    <Composition exhibition={exhibition} />
+    <Observations />
   </main>
-  <VisitorDesk profile={profile} year={new Date(exhibition.builtAt).getUTCFullYear()} />
-  <TourBar />
+  <Horizon profile={profile} year={new Date(exhibition.builtAt).getUTCFullYear()} />
+  <Controls />
   <script>
-    import "../scripts/gallery";
+    import "../scripts/horizon";
   </script>
 </Base>
+
+<style>
+  main,
+  :global(.horizon) {
+    position: relative;
+    z-index: 1;
+  }
+</style>

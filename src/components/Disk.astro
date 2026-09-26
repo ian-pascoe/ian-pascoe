@@ -1,0 +1,179 @@
+---
+import { MAX_FRAGMENTS } from "../scripts/horizon/shader";
+import type { Fall } from "../lib/fall";
+
+interface Props {
+  fall: Fall;
+}
+
+const { fall } = Astro.props;
+if (fall.fragments.length > MAX_FRAGMENTS) {
+  throw new Error(`The disk draws at most ${MAX_FRAGMENTS} fragments; the record has ${fall.fragments.length}.`);
+}
+const brightest = fall.fragments.filter((f) => f.work.featured);
+---
+
+<div
+  class="disk"
+  data-disk
+  data-years={fall.years.map((y) => y.r.toFixed(4)).join(" ")}
+  data-first-time={fall.firstTime}
+  data-now={fall.now}
+  aria-hidden="true"
+>
+  <canvas class="disk__canvas" data-disk-canvas></canvas>
+  <svg class="disk__overlay" data-disk-overlay>
+    <path class="disk__leader" data-leader></path>
+    <circle class="disk__marker" data-marker r="14"></circle>
+    <circle class="disk__core" data-core r="3.5"></circle>
+    {
+      fall.years.map(({ year, r }) => (
+        <g class="disk__year" data-year-label data-r={r.toFixed(4)}>
+          <line x1="0" y1="0" x2="10" y2="0" />
+          <text x="14" y="3.5" class="tabular">
+            {year}
+          </text>
+        </g>
+      ))
+    }
+    {
+      brightest.map((f) => (
+        <g class="disk__label" data-disk-label={f.id}>
+          <path id={`orbit-${f.id}`} data-label-path />
+          <path class="disk__tick" data-label-tick />
+          <text>
+            <textPath href={`#orbit-${f.id}`}>
+              <tspan class="disk__label-figure">{f.work.metric ?? f.work.title}</tspan>
+              <tspan class="disk__label-title" data-label-title>
+                {" "}
+                · {f.work.title}
+              </tspan>
+            </textPath>
+          </text>
+        </g>
+      ))
+    }
+  </svg>
+</div>
+
+<style>
+  .disk {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--void-deep);
+  }
+
+  .disk__canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Without WebGL the disk hangs as a still, rendered by this same shader; every fact is still on the page. */
+  :global(html.no-disk) .disk__canvas {
+    display: none;
+  }
+
+  :global(html:is(.no-disk, :not(.js))) .disk {
+    background: var(--void-deep) url("/disk-still.jpg") 72% 50% / cover no-repeat;
+    opacity: 0.55;
+  }
+
+  @media (max-width: 52rem) {
+    :global(html:is(.no-disk, :not(.js))) .disk {
+      background-position: 70% calc(var(--masthead) - 4svh);
+      background-size: auto 46svh;
+      opacity: 0.8;
+    }
+  }
+
+  .disk__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: none;
+  }
+
+  .disk__marker {
+    stroke: var(--gold);
+    stroke-width: 1;
+    opacity: 0;
+    transition: opacity var(--fast) var(--ease);
+  }
+
+  .disk__core {
+    fill: var(--gold);
+    opacity: 0;
+    transition: opacity var(--fast) var(--ease);
+  }
+
+  .disk__leader {
+    stroke: color-mix(in oklch, var(--gold) 70%, transparent);
+    stroke-width: 1;
+    opacity: 0;
+    transition: opacity var(--fast) var(--ease);
+  }
+
+  .disk__overlay :global(.is-shown) {
+    opacity: 1;
+  }
+
+  /* Labels are etched on the disk: figures set along their own orbit, year numerals down the rings. */
+  .disk__label,
+  .disk__year {
+    opacity: 0;
+    transition: opacity var(--fast) var(--ease);
+  }
+
+  .disk__label:global(.is-shown),
+  .disk__year:global(.is-shown) {
+    opacity: 1;
+  }
+
+  /* A hairline of void behind etched lettering keeps it legible over bright matter. */
+  .disk__label text,
+  .disk__year text {
+    paint-order: stroke;
+    stroke: var(--void-deep);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+
+  .disk__label text {
+    fill: var(--bone);
+    font-size: 11.5px;
+    font-stretch: 125%;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .disk__label-figure {
+    fill: var(--gold);
+    font-weight: 500;
+  }
+
+  .disk__label-title {
+    fill: var(--bone-soft);
+  }
+
+  .disk__tick {
+    stroke: var(--gold);
+    stroke-width: 1;
+  }
+
+  .disk__year line {
+    stroke: var(--bone-quiet);
+    stroke-width: 1;
+  }
+
+  .disk__year text {
+    fill: var(--bone-quiet);
+    font-size: 0.6875rem;
+    font-stretch: 118%;
+    letter-spacing: 0.12em;
+  }
+
+</style>

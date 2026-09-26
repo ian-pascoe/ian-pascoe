@@ -15,9 +15,6 @@ export interface PartialDate {
   iso: string;
 }
 
-export const PAINTS = ["oxblood", "blue", "slate", "ochre", "plum", "stone"] as const;
-export type Paint = (typeof PAINTS)[number];
-
 export interface Link {
   href: string;
   label: string;
@@ -67,15 +64,10 @@ export interface Work {
   status?: Status;
   /** Ordering key in epoch ms; interpolated inside the room when undated. */
   key: number;
-  /** Catalogue number: the room's opening year and the work's place in it. */
-  number: string;
 }
 
 export interface Room {
   id: string;
-  /** Room number in walking order, from 1. */
-  number: number;
-  paint: Paint;
   org: string;
   /** The org's mark, lettered on the room sign. */
   mark?: MarkName;
@@ -99,11 +91,6 @@ export interface Exhibition {
   firstYear: number;
   lastYear: number;
   builtAt: number;
-}
-
-/** Whole days elapsed since a date, counting the first day as day 1. */
-export function dayCount(fromTime: number, now: number): number {
-  return Math.max(1, Math.floor((now - fromTime) / 86_400_000) + 1);
 }
 
 export function roomRange(room: Room): string {

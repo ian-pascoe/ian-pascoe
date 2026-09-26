@@ -1,7 +1,7 @@
 import { parse } from "yaml";
 import { z } from "zod";
 import raw from "../data/timeline.yaml?raw";
-import { PAINTS, STATUSES, type Drawing, type Exhibition, type PartialDate, type Room, type Status, type Work } from "./exhibition";
+import { STATUSES, type Drawing, type Exhibition, type PartialDate, type Room, type Status, type Work } from "./exhibition";
 import { MARK_NAMES } from "./marks";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -68,7 +68,6 @@ const SpanSchema = z
   .object({
     kind: z.literal("span"),
     id: z.string().regex(/^[a-z0-9-]+$/, "ids use lowercase letters, digits, and dashes"),
-    paint: z.enum(PAINTS),
     title: z.string().min(1),
     org: z.string().min(1),
     mark: z.enum(MARK_NAMES).optional(),
@@ -172,8 +171,6 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
 
     rooms.push({
       id: claim(span.id),
-      number: 0,
-      paint: span.paint,
       org: span.org,
       mark: span.mark,
       role: span.title,
@@ -197,7 +194,6 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
         link: a.link,
         status: a.status,
         key: keys[index]!,
-        number: "",
       })),
     });
   }
@@ -216,7 +212,6 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
       featured: event.featured,
       link: event.link,
       key: event.date.time,
-      number: "",
     };
     if (event.on) {
       const room = roomById.get(event.on) ?? fail(`event "${event.id}" is on unknown span "${event.on}"`);
@@ -228,7 +223,7 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
     const room =
       roomById.get(roomId) ??
       (() => {
-        const created: Room = { id: claim(roomId), number: 0, paint: "stone", org: event.org ?? event.title, start: event.date, end: event.date, works: [] };
+        const created: Room = { id: claim(roomId), org: event.org ?? event.title, start: event.date, end: event.date, works: [] };
         rooms.push(created);
         roomById.set(roomId, created);
         return created;
@@ -246,11 +241,7 @@ export function loadTimeline(source: string = raw, now: number = Date.now()): Ex
     if (rank(a) === 0) return a.start.time - b.start.time;
     return (b.end?.time ?? now) - (a.end?.time ?? now);
   });
-  rooms.forEach((room, index) => {
-    room.number = index + 1;
-    room.works.sort((a, b) => a.key - b.key);
-    room.works.forEach((work, i) => (work.number = `${room.start.year}.${i + 1}`));
-  });
+  for (const room of rooms) room.works.sort((a, b) => a.key - b.key);
 
   const works = rooms.flatMap((r) => r.works).sort((a, b) => a.key - b.key);
   const years = [...rooms.map((r) => r.start.year), ...works.flatMap((w) => (w.date ? [w.date.year] : []))];

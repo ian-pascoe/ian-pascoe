@@ -1,364 +1,326 @@
 ---
 name: Ian Pascoe
-description: A career hung as a museum retrospective; warm gallery walls, painted rooms, vinyl lettering, and framed data drawings.
+description: A career as matter falling toward the present around a black hole; void black, Doppler disk light, one gold photon ring.
 colors:
-  wall: "oklch(96.6% 0.006 85)"
-  wall-sunk: "oklch(93.4% 0.008 85)"
-  ink: "oklch(19% 0.006 60)"
-  ink-soft: "oklch(38% 0.008 60)"
-  ink-quiet: "oklch(49% 0.008 60)"
-  rule: "oklch(84% 0.008 80)"
-  mat: "oklch(99.3% 0.003 85)"
-  moulding: "oklch(17% 0.005 60)"
-  gilt: "oklch(72% 0.11 78)"
-  gilt-edge: "oklch(52% 0.1 75)"
-  light: "oklch(97% 0.05 85)"
-  stamp-ink: "oklch(66% 0.17 30)"
-  ghost: "oklch(62% 0.006 60)"
-  paint-oxblood: "oklch(33% 0.09 22)"
-  paint-oxblood-lit: "oklch(26% 0.068 22)"
-  vinyl-oxblood: "oklch(97.5% 0.012 40)"
-  paint-blue: "oklch(35.1% 0.079 255)"
-  paint-blue-lit: "oklch(27.5% 0.06 255)"
-  vinyl-blue: "oklch(98.2% 0.006 248)"
-  paint-slate: "oklch(35% 0.04 250)"
-  paint-slate-lit: "oklch(27.4% 0.032 250)"
-  vinyl-slate: "oklch(97.5% 0.008 250)"
-  paint-plum: "oklch(32% 0.07 330)"
-  paint-plum-lit: "oklch(25.3% 0.053 330)"
-  vinyl-plum: "oklch(97.5% 0.01 330)"
-  paint-ochre: "oklch(78% 0.1 80)"
-  paint-ochre-lit: "oklch(68% 0.09 80)"
-  paint-stone: "oklch(90.5% 0.014 80)"
-  paint-stone-lit: "oklch(80% 0.016 80)"
-  paint-ink: "oklch(17% 0.005 60)"
-  vinyl-ink: "oklch(97.5% 0.006 85)"
+  void: "oklch(12.5% 0.008 280)"
+  void-deep: "oklch(8.5% 0.006 280)"
+  bone: "oklch(94% 0.012 85)"
+  bone-soft: "oklch(82% 0.012 85)"
+  bone-quiet: "oklch(68% 0.012 85)"
+  rule: "oklch(32% 0.012 280)"
+  rule-strong: "oklch(46% 0.014 280)"
+  gold: "oklch(84% 0.135 80)"
+  approach: "oklch(91% 0.045 255)"
+  disk-blue: "oklch(62% 0.11 255)"
+  ember: "oklch(66% 0.2 36)"
+  void-raised: "oklch(20% 0.01 280)"
+  paper: "#fff"
+  print-ink: "#111"
 typography:
   display:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "clamp(3rem, 1.6rem + 5vw, 6rem)"
-    fontWeight: 850
-    lineHeight: 0.92
-    letterSpacing: "-0.035em"
-  display-show:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "0.56em"
-    fontWeight: 300
-    lineHeight: 1.05
-    letterSpacing: "-0.03em"
-  room-sign:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "clamp(2.5rem, 1.7rem + 3vw, 4.5rem)"
-    fontWeight: 800
-    lineHeight: 0.95
-    letterSpacing: "-0.03em"
-  room-numeral:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "clamp(2.5rem, 1.7rem + 3vw, 4.5rem)"
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "clamp(3rem, 1.2rem + 6vw, 6rem)"
     fontWeight: 200
+    lineHeight: 0.98
+    letterSpacing: "0.06em"
+    fontVariation: "'wdth' 125"
+  figure:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "clamp(3rem, 1.2rem + 6vw, 6rem)"
+    fontWeight: 180
     lineHeight: 0.95
-    letterSpacing: "-0.03em"
-    fontFeature: "tnum"
+    letterSpacing: "0.01em"
+    fontFeature: "'tnum' 1, 'lnum' 1"
+    fontVariation: "'wdth' 125"
   headline:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem)"
-    fontWeight: 750
-    lineHeight: 1.08
-    letterSpacing: "-0.025em"
-  metric:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem)"
-    fontWeight: 750
-    lineHeight: 0.95
-    letterSpacing: "-0.025em"
-    fontFeature: "tnum"
-  lead:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "1.625rem"
-    fontWeight: 650
-    lineHeight: 1.22
-    letterSpacing: "-0.012em"
-  title:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 700
-    lineHeight: 1.3
-  body:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 400
-    lineHeight: 1.55
-  work-title:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 600
-    lineHeight: 1.35
-    letterSpacing: "0"
-  label:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 650
-    lineHeight: 1.4
-  desk-address:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "clamp(1.5rem, 0.9rem + 2.4vw, 2.75rem)"
-    fontWeight: 300
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "clamp(2.75rem, 1.8rem + 3.4vw, 4.75rem)"
+    fontWeight: 200
+    lineHeight: 1
+    letterSpacing: "0.06em"
+    fontVariation: "'wdth' 125"
+  section:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem)"
+    fontWeight: 200
     lineHeight: 1.1
-    letterSpacing: "-0.02em"
-  checklist-body:
-    fontFamily: "Libre Franklin Variable, Libre Franklin, Franklin Gothic, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 400
+    letterSpacing: "0.08em"
+    fontVariation: "'wdth' 125"
+  lede:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem)"
+    fontWeight: 330
+    lineHeight: 1.3
+  title:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 500
+    lineHeight: 1.1
+    letterSpacing: "0.02em"
+    fontVariation: "'wdth' 112"
+  body:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "1.0625rem"
+    fontWeight: 380
+    lineHeight: 1.6
+    fontFeature: "'lnum' 1"
+  meta:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 380
     lineHeight: 1.45
+    letterSpacing: "0.03em"
+    fontFeature: "'tnum' 1, 'lnum' 1"
+  label:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 450
+    lineHeight: 1
+    letterSpacing: "0.16em"
+    fontVariation: "'wdth' 125"
+  micro:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "0.6875rem"
+    fontWeight: 380
+    lineHeight: 1
+    letterSpacing: "0.14em"
+    fontVariation: "'wdth' 118"
+  compact-label:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "0.75rem"
+    fontWeight: 450
+    lineHeight: 1
+    letterSpacing: "0.16em"
+    fontVariation: "'wdth' 125"
+  email:
+    fontFamily: "Saira Variable, Saira, Eurostile, sans-serif"
+    fontSize: "clamp(1.25rem, 0.9rem + 1.4vw, 2rem)"
+    fontWeight: 250
+    lineHeight: 1.2
+    letterSpacing: "0.02em"
+    fontVariation: "'wdth' 112"
 rounded:
-  none: "0px"
+  hairline: "2px"
+  capsule: "999px"
+  orbit: "50%"
 spacing:
-  space-1: "0.25rem"
-  space-2: "0.5rem"
-  space-3: "0.75rem"
-  space-4: "1rem"
-  space-5: "1.5rem"
-  space-6: "2rem"
-  space-7: "3rem"
-  space-8: "4.5rem"
-  space-9: "7rem"
+  "1": "0.25rem"
+  "2": "0.5rem"
+  "3": "0.75rem"
+  "4": "1rem"
+  "5": "1.5rem"
+  "6": "2rem"
+  "7": "3rem"
+  "8": "4.5rem"
+  "9": "7rem"
   gutter: "clamp(1.25rem, 0.6rem + 3vw, 3.5rem)"
-  measure: "62ch"
+  column: "min(100%, 36rem)"
+  measure: "60ch"
+  masthead: "3.5rem"
 components:
-  button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.wall}"
-    rounded: "{rounded.none}"
-    padding: "0 1.5rem"
-    height: "3rem"
-  button-primary-large:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.wall}"
-    typography: "{typography.title}"
-    rounded: "{rounded.none}"
-    padding: "0 2rem"
-    height: "3.5rem"
-  button-quiet:
+  button-instrument:
     backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
+    textColor: "{colors.bone}"
+    typography: "{typography.label}"
+    rounded: "{rounded.capsule}"
     padding: "0 1.5rem"
     height: "3rem"
-  button-masthead:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.wall}"
-    rounded: "{rounded.none}"
-    padding: "0 1rem"
-    height: "2.5rem"
-  work-frame:
-    backgroundColor: "{colors.mat}"
-    rounded: "{rounded.none}"
-    padding: "14%"
-    width: "15rem"
-  plan-room:
-    backgroundColor: "{colors.wall}"
-    textColor: "{colors.ink}"
+  button-instrument-hover:
+    backgroundColor: "oklch(94% 0.012 85 / 0.06)"
+    textColor: "{colors.bone}"
+  button-primary:
+    backgroundColor: "{colors.void}"
+    textColor: "{colors.bone}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "0 0.5rem"
+    rounded: "{rounded.capsule}"
+    padding: "0 1.5rem"
+    height: "3rem"
+  button-primary-hover:
+    backgroundColor: "oklch(20% 0.01 280)"
+  viewpoint-selector:
+    backgroundColor: "{colors.void-deep}"
+    textColor: "{colors.bone-quiet}"
+    typography: "{typography.micro}"
+    rounded: "{rounded.capsule}"
+    padding: "3px"
+  viewpoint-option-pressed:
+    textColor: "{colors.gold}"
+    rounded: "{rounded.capsule}"
     height: "2.25rem"
-  plan-room-current:
-    backgroundColor: "{colors.paint-oxblood}"
-    textColor: "{colors.vinyl-oxblood}"
-  tour-bar:
-    backgroundColor: "{colors.paint-ink}"
-    textColor: "{colors.vinyl-ink}"
-    rounded: "{rounded.none}"
-    padding: "0.75rem 0.75rem 0.75rem 1.5rem"
-    width: "44rem"
-  tour-button-next:
-    backgroundColor: "{colors.vinyl-ink}"
-    textColor: "{colors.paint-ink}"
-    rounded: "{rounded.none}"
     padding: "0 1rem"
-    height: "2.75rem"
-  checklist-sheet:
-    backgroundColor: "{colors.mat}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "clamp(1.5rem, 1rem + 3vw, 4rem)"
-    width: "54rem"
+  masthead:
+    backgroundColor: "{colors.void-deep}"
+    textColor: "{colors.bone}"
+    height: "{spacing.masthead}"
+    padding: "0 {spacing.gutter}"
+  plate:
+    textColor: "{colors.bone}"
+    width: "{spacing.column}"
+    padding: "4.5rem 0"
+  plate-figure-current:
+    textColor: "{colors.gold}"
+    typography: "{typography.figure}"
+  horizon-email:
+    textColor: "{colors.gold}"
+    padding: "0.75rem 0.5rem"
+  portrait-orbit:
+    rounded: "{rounded.orbit}"
+    size: "3.5rem"
 ---
 
 # Design System: Ian Pascoe
 
 ## Overview
 
-**Creative North Star: "The Retrospective"**
+**Creative North Star: "The Event Horizon"**
 
-The site is a museum retrospective of one engineer's career. The visitor stands in front of a title wall, walks through one painted room per role, reads a museum label beside every framed work, and leaves a question at the visitor desk. Every achievement is a *work*: an exact geometric drawing of its own fact (a reduction, an increase, a count, a seal, a text piece), matted in white, framed in thin black moulding, and hung on one line at eye level. The words are all live text in one family, Libre Franklin, set like vinyl lettering on a gallery wall.
+The site is a black hole seen from a patient observer's seat. A full-bleed accretion disk, ray-traced per pixel through curved space in one WebGL fragment shader, fills the fixed background; the career is matter on that disk, each dated fragment a point of light on the ring of its year. The past sits on the outer rim and burns ember where it recedes; the present sits on the photon ring and burns gold. Scrolling is the fall: the camera spirals inward station by station, the disk turns so the fragment being read rotates to the reading position and lights gold, and the page closes at the horizon, where the only thing left is the email address.
 
-The mood is calm, generous and exact, the house style of a serious modern-art museum rather than a developer template. Walls are warm gallery white; rooms are painted deep, saturated colours with white vinyl lettering on them. Nothing is decorated. Depth comes from real objects hanging on a wall (a two-layer hung shadow) and from light: a warm picture-light pool behind each work that brightens when the work is opened while the rest of its room goes dark. Light is the only state change the rooms have.
+Everything that is not the disk is lettering on the void. There are no surfaces to lift, no panels, no cards: structure comes from rings, 1px hairlines, generous void and a single variable family pulled from hairline extended caps down to plain reading text. Light belongs to the disk. The interface borrows it exactly twice: the Doppler gradient that rings the primary button, and the gold that marks whatever is current, focused, or the way to email Ian.
 
-Structure comes from the voids between rooms, not from boxes. There are no cards, no rounded corners, no gradients as fill, no glass and no badges. Motion is slow and settled (a 520ms ease-out for light, 180ms for small feedback) and nothing ever moves on its own: the guided tour starts only when the visitor asks for it.
+The world is still until the visitor acts. The disk renders only on scroll, resize or input; nothing orbits by itself, and the replay of the whole fall runs only when "Replay 2019 → now" is pressed. Without WebGL the disk hangs as a pre-rendered still at 55% opacity; with reduced motion the camera jumps instead of easing; in print the resume is black on white. Every fact is live text in every one of those states.
 
 **Key Characteristics:**
-- Warm gallery-white walls with painted rooms; vinyl lettering flips from ink-on-white to white-on-paint via one token set.
-- One family (Libre Franklin Variable, weights 200–850, true italic); titles of works always italic.
-- Works are exact SVG drawings of their facts, framed with a black moulding border, a white mat, and a hung shadow.
-- The museum label is the unit of content: figure, italic title with date, a one-sentence detail only when the figure and title leave something unsaid, medium, catalogue number.
-- Light is the only state: lit pool up, room darkened, other labels dimmed; deep-linkable by `#work-id`.
-- Square corners everywhere; rules are 1px hairlines in the room's own rule colour.
+- Void black ground; the disk is the only large source of light.
+- Doppler grading: approaching matter blue-white, receding matter ember, the photon ring gold.
+- One family, Saira Variable, used across its width axis: 125% extended hairline caps for names and figures, 100% for reading.
+- Hairlines (1px) and rings as the only structural devices; capsules only on instrument controls.
+- Scroll-driven camera with a hold-then-move easing so plates are read on a still disk.
+- Labels etched onto the disk along their own orbits, haloed in void for legibility.
 
 ## Colors
 
-A warm, low-chroma gallery neutral set carries the site; saturated colour lives only in the paint of rooms, the gilt of increases, and the red of passport stamps.
+A near-black violet void carrying warm bone lettering, with all chroma reserved for the disk's physical light: blue-white approach, ember recession, and one gold ring.
 
 ### Primary
-- **Gallery Ink** (ink): the vinyl lettering on white walls, solid button fill on walls, the 2px rule that opens the visitor desk, and the lit edge of the floor plan's Entrance and Desk.
-- **Moulding Black** (moulding): the frame border around every work, the portrait, and the 404 frame, and the ink of every data drawing inside the mat.
+- **Photon-Ring Gold** (`gold`): The one active accent. The current fragment's figure, dates on plates and orbits, the "Now" end of the time rail and its marker, the pressed viewpoint, focus outlines, text selection, the disk labels' figures and ticks, logged observations, and the horizon email address. If it is not current, focused, logged, dated, or the way to email Ian, it is not gold.
 
-### Secondary (room paints)
-Each room is painted by `data-paint`, which sets five tokens at once: `--paint` (the wall), `--vinyl` (lettering), `--vinyl-soft` (secondary text), `--vinyl-quiet` (credits, meta), `--vinyl-rule` (hairlines). Components read only these five, so the same label, button and rule render correctly on any paint.
-- **Oxblood** (paint-oxblood, lettered in vinyl-oxblood): the RTX room.
-- **Spirit-Led Navy** (paint-blue, lettered in vinyl-blue): the Spirit-Led Software room, in the navy of spiritledsoftware.com.
-- **Stone** (paint-stone, lettered in ink): the default paint for rooms made from events alone (the University of Rhode Island room).
-- **Slate**, **Plum** (dark, white vinyl) and **Ochre** (light, ink vinyl): available paints in the schema, unused by the current data.
-- **Night** (paint-ink, lettered in vinyl-ink): the guided-tour bar; floating signage, never a room.
+### Secondary
+- **Approach Blue-White** (`approach`): Matter moving toward the observer. Lives in the shader and at the start of the Doppler border on the primary button.
+- **Disk Blue** (`disk-blue`): The deeper tone of the approaching side; available for disk-derived illustration, not for UI chrome.
 
 ### Tertiary
-- **Gilt** (gilt): the added rows of an increase drawing, the gilded dot of a ranking, and the text-selection highlight, each gilt shape edged in **Gilt Edge** (gilt-edge) so it holds 3:1 on the mat. Nothing else.
-- **Stamp Red** (stamp-ink): passport stamps once earned, and the masthead passport mark after the first stamp.
-- **Picture Light** (light): the warm pool behind works, mixed at 44% into a radial gradient.
+- **Ember** (`ember`): Receding, redshifted matter and retired work. The end of the Doppler border; the lone fragment on the 404 drawing. Never used for text or for error states.
 
 ### Neutral
-- **Gallery White** (wall): the page wall, the masthead background, and every unlit floor-plan room.
-- **Sunk Wall** (wall-sunk): the wall behind the resume sheet, floor-plan hover, scrollbar track.
-- **Mat White** (mat): the mat inside every frame and the resume sheet itself.
-- **Ink Soft** (ink-soft) and **Ink Quiet** (ink-quiet): secondary and tertiary text on walls; wall defaults of `--vinyl-soft` / `--vinyl-quiet`.
-- **Wall Rule** (rule): 1px hairlines on white walls; the dashed empty mat on the 404 frame.
-- **Ghost** (ghost): the thin outlines of the squares a reduction has taken away.
+- **Void** (`void`): The interior of the primary button, where the Doppler ring encloses darkness.
+- **Deep Void** (`void-deep`): Page ground, masthead, the no-WebGL disk backing, phone plate backgrounds, the horizon foot, the viewpoint selector and replay bar fills, and the 3px knockout stroke behind etched disk lettering.
+- **Bone** (`bone`): Primary lettering: names, headlines, plate titles, lit figures.
+- **Bone Soft** (`bone-soft`): Secondary reading text: facts, summaries, measures, link rows, unlit figures while another fragment is current.
+- **Bone Quiet** (`bone-quiet`): Metadata, year numerals on the rail and disk, colophon, unpressed viewpoint labels.
+- **Rule** (`rule`): Default 1px hairlines: masthead base, list dividers, phone plate edges, the horizon foot.
+- **Rule Strong** (`rule-strong`): Instrument outlines (button, viewpoint selector, replay stop), the time rail, link underlines at rest, dashed orbits.
 
 ### Named Rules
-**The Paint Carries Its Lettering Rule.** Never set a colour on text inside a room directly; read `--vinyl`, `--vinyl-soft`, `--vinyl-quiet`, `--vinyl-rule`, and let `data-paint` decide. A new paint must supply all five.
+**The Doppler Rule.** Chroma is physical. Blue-white means approaching, ember means receding or retired, gold means the photon ring: the present. No hue is used for decoration or for status semantics outside that physics.
 
-**The Gilt Is Growth Rule.** Gilt means "more than before": increase squares and selection only. It is never a button, a link, or a heading colour.
+**The One Ring Rule.** Gold is the only accent in the interface layer and marks exactly one kind of thing at a time: what is current, focused, dated, logged, or the email. A screen with gold on something that is none of those is wrong.
 
-**The Red Is Earned Rule.** Stamp red appears only once a visitor has earned a stamp. Unearned stamps are dashed, quiet vinyl.
+**The Borrowed Light Rule.** The Doppler gradient (approach → gold at 55% → ember) appears in the UI only as the 1px border of the primary button. It never fills a surface and never colours text.
 
 ## Typography
 
-**Display Font:** Libre Franklin Variable (with Libre Franklin, Franklin Gothic, sans-serif)
-**Body Font:** Libre Franklin Variable, the same family
-**Label/Mono Font:** none; numerals use `tabular-nums lining-nums` via `.tabular`
+**Display Font:** Saira Variable (with Saira, Eurostile, sans-serif)
+**Body Font:** Saira Variable
+**Label/Mono Font:** Saira Variable; numerals set lining, and tabular wherever figures align or count.
 
-**Character:** One Franklin Gothic–lineage grotesque does everything, as in a museum's own signage: very heavy for names on the wall, feather-light for numerals and the show title, true italic for titles of works. Hierarchy comes from weight and size contrast, never from a second family.
+**Character:** A single squarish technical grotesque stretched across its width axis. At 125% width and weight 180–250 with open tracking it reads as instrument engraving; at 100% width and 380 it is calm, legible reading text. The pairing is one voice at two distances.
 
 ### Hierarchy
-- **Display** (850, `--step-5`, 0.92): the exhibition title on the title wall (the name).
-- **Display Show** (300 italic, 0.56em of display, 1.05): "Selected Work, 2019–2026" beneath the name.
-- **Room Sign** (800, `--step-4`, 0.95, −0.03em) with **Room Numeral** (200, same size, `--vinyl-quiet`): the room's number set light beside its name. Page titles on the resume and 404 use `--step-4` at 850.
-- **Headline** (750, `--step-3`): the visitor-desk question and the Index of media heading.
-- **Metric** (750, `--step-3`, 0.95, tabular): the figure that heads a museum label ("75%"); drops to `--step-2` on phones.
-- **Lead** (650, `--step-2`, 1.22): the headline sentence on the title wall.
-- **Title** (700, `--step-1`, 1.3): room role, section headings (Highlights, passport).
-- **Body** (400, `--step-0`, 1.55): wall text and label detail, capped at `--measure` (62ch) or 38rem on the title wall.
-- **Work Title** (600 italic `cite`, `--step-0`, 1.35): the title of a work, followed by its date in roman 400.
-- **Label** (600–650, `--step--1`): medium and catalogue-number lines, floor plan, tour step, passport note.
-
-Base headings are 750 at line-height 1.08 and −0.015em, with `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
+- **Display** (200, `step-5`, 0.98, 0.06em, extended caps): Ian's name at arrival. One per page.
+- **Figure** (180, `step-5`, 0.95, 125% width, tabular lining): The headline metric on each plate ("75%", "1st of 15"). Bone-soft when unlit, gold when current or targeted. Text subjects without a metric drop to `step-3` at 250.
+- **Headline** (200, `step-4`, 1.0, 0.06em, extended caps): Organisation names on orbit headers; the 404 title; the resume name.
+- **Section** (200, `step-3`, 0.08em, extended caps): Closing section headings (Skills, Your observations). Event plates use the same scale at 250 for their title.
+- **Lede** (330, `step-2`, 1.3): The arrival headline and the horizon ask; max 36ch.
+- **Title** (500, `step-1`, 112% width, 0.02em): Plate titles, set as `<cite>`; resume entry titles.
+- **Body** (380, `step-0` 1.0625rem, 1.6): Facts and summaries at `bone-soft`, max 60ch.
+- **Meta** (`step--1` 0.8125rem, 0.03–0.04em, tabular): Plate meta rows, orbit dates, link rows, skill lists.
+- **Label** (450, `step--1`, 0.16em, 125% width, uppercase): Button text. The masthead wordmark uses 450 at 0.24em.
+- **Micro** (`0.6875rem`, 0.08–0.16em, 112–125% width): Rail years, viewpoint options, plate status, observation timestamps, disk lettering (11–11.5px SVG).
 
 ### Named Rules
-**The Italic Is a Title Rule.** Italic marks the title of a work (`<cite>`), the show line and the email address at the desk. Never italicise for emphasis.
+**The One Family Rule.** Saira Variable only. Hierarchy comes from width (100/112/118/125%), weight (180–500) and tracking, never from a second family.
 
-**The One Family Rule.** Libre Franklin is the only family, including inside SVG drawings and stamps (`font-family: var(--font)`). Weight is the only voice change.
+**The Extended Caps Rule.** Uppercase is always paired with 118–125% width and at least 0.06em tracking. Uppercase at normal width does not exist in this system.
+
+**The Lining Numerals Rule.** All numerals are lining; any number in a column, a rail, a count or a figure is also tabular.
 
 ## Layout
 
-The page is a sequence of full-bleed walls, each holding a centred `.wrap` (max 90rem, `--gutter` side padding). Order: sticky masthead, title wall, one painted room per role, index of media, visitor desk. Rooms are separated by paint and by generous vertical space (`--space-9` above, `--space-9 + --space-4` below), not by dividers.
+The page is two layers: a fixed full-viewport disk canvas at z-index 0 and the reading flow above it at z-index 1. On wide screens the disk's framing is measured from the page, not from screen fractions: the hole sits midway between the reading column's right edge and the viewport's, and the shader darkens the sky fully up to the column's edge, clearing 200px past it, so all text sits in a single left column (`column`, max 36rem) against void while the disk occupies the right. The masthead is fixed, `masthead` tall (3.25rem under 40rem), on deep void with a bottom hairline.
 
-- **Title wall:** 7fr / 4fr grid; title, headline, actions and links left (no explanatory wall text; the drawings explain themselves); the framed portrait with its label right; three highlights hang small below on one line.
-- **Room wall text:** 5fr / 6fr grid, room sign left, role, dates and summary right, closed by a 1px `--vinyl-rule` line.
-- **The hang line:** works fill `repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr))`; each work spans two subgrid rows, frame then label, and every frame centres vertically in the first row so all frames in a row share one eye level and all labels start on one line. Frame widths vary by drawing kind (12–16rem; featured 16–18.5rem).
-- **Compact rooms** (one or two works, above 52rem) hang the works beside the wall text in the same 5fr / 6fr grid.
-- **Visitor desk:** 7fr / 5fr, contact left and leading, the smaller passport right; one column below 56rem.
-- **Breakpoints:** 60rem (plan drops room names to numerals), 56rem (title wall and desk stack; the headline follows the title, then the portrait, then the actions), 52rem (rooms stack, tighter padding), 40rem (masthead grows to two rows, 6.5rem, every target 2.75rem; the plan names its rooms by first word; works and highlights hang beside their labels in a 7.25rem column, so a room reads as a list), 36rem (tour bar keeps one row, arrow-only buttons), 22.5rem (plan falls back to numerals).
-- **Rhythm:** a 0.25rem-based scale (`--space-1`..`--space-9`: 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4.5, 7rem). Label internals use `--space-1`/`--space-2`; room and wall gaps use `--space-7`/`--space-8`.
+The flow is a sequence of stations, each a camera position: the arrival (100svh; name, headline, portrait, current roles, actions, the address with Copy, three highlights newest first), one band per role or event (an orbit header at 88svh min, then one plate per fragment at 72svh min), the quiet closing sections, and the horizon (100svh, centred, three rows). The camera eases between station anchors with a hold: it stays still for the first 18% of the scroll between stations and settles over the middle 64%, so each plate is read against a stationary disk. The reading line is 46% of viewport height on wide screens, 62% on phones.
+
+Breakpoint `52rem` is the one structural switch. Below it the rail disappears, the viewpoint selector moves to the top of the arrival window (shown only there), the disk recentres above the text (vertical shift, no veil), the arrival shows the disk in a 38svh window and sets everything below it on deep void, and plates become full-bleed slabs of deep void with top and bottom hairlines separated by 30svh gaps. At each station the hole is centred in the gap above the plate at the reading line, so every window frames the disk. Spacing follows the 9-step scale (0.25rem to 7rem); horizontal padding is always `gutter`.
 
 ## Elevation & Depth
 
-Depth is physical and sparse. The wall is flat; only objects that really hang or float cast shadows, and light is the only thing that changes elevation.
+Flat. There are no drop shadows, no glass, no blur and no tonal surface stack. All depth is optical: it comes from the ray-traced disk itself (gravitational lensing arcs the far side over the shadow; Doppler beaming brightens one side), from the camera's distance and inclination, and from the veil that dims the sky behind reading text. UI layers separate from the disk only by sitting on deep void with a 1px hairline.
 
 ### Shadow Vocabulary
-- **Hung** (`--hung`: `0 1px 1px oklch(0% 0 0 / 0.22), 0 14px 28px -10px oklch(0% 0 0 / 0.38)`): every frame, the portrait, the resume sheet and the 404 frame.
-- **Float** (`--float`: `0 18px 40px -12px oklch(0% 0 0 / 0.55)`): the guided-tour bar, the only thing that floats over the rooms.
-- **Lit**: the opened work lifts (`translateY(-3px) scale(1.015)`) and its shadow deepens; its siblings flatten to a 1px contact shadow and dim to `brightness(0.8)`.
+- **Knockout ring** (`box-shadow: 0 0 0 3px var(--void-deep)`): The time-rail marker, cutting it cleanly out of the rail line. Not a glow.
+- **Etched halo** (SVG `paint-order: stroke; stroke: void-deep; stroke-width: 3px`): Behind every disk label and year numeral, so lettering reads over bright matter.
+- **Pressed ring** (`box-shadow: inset 0 0 0 1px var(--gold)`): The pressed viewpoint option.
 
 ### Named Rules
-**The Light Is the State Rule.** Opening a work raises its picture-light pool from 0.28 to full opacity, turns its room to the paint's own lit value (`--paint-lit`: the same hue, about 72% of the lightness; light paints also re-letter their soft and quiet vinyl one step darker), removes the other pools, dims the other frames, and drops the other labels to `--vinyl-quiet`. Every lettering step keeps 4.5:1 on every lit paint. No outlines, no hue shifts, no overlays (forced-colors mode alone outlines the lit frame in `Highlight`). The state is a `#work-id` hash, so it is linkable; without JavaScript a `:target` work still gets its full pool.
-
-**The Hanging Things Only Rule.** Shadows belong to hung objects and the tour bar. Text, rules, buttons and panels sit flat on the wall.
+**The Light Comes From The Disk Rule.** Glow is physics, rendered in the shader. UI elements never emit light: no outer glows, no coloured shadows, no bloom on buttons or text.
 
 ## Shapes
 
-Every corner is square (`border-radius: 0`); the only curves are circles in the drawings: count dots, the document seal, passport stamps. Frames are a solid moulding border (0.3rem on works, 0.35rem on portrait and 404 frame, 0.25rem on highlights, 0.2rem on phones) around a white mat padded 12–14%. Hairlines are 1px in the room's rule colour; floor-plan rooms are 1.5px ink boxes sharing walls, with 1.5px doorways cut between them. Icons are 24px line drawings, stroke 1.75, square caps and mitred joins (`src/lib/icons.ts`); marks are flat filled silhouettes (see Marks).
+Three forms only. **Hairlines**: 1px rules, underlines (1px, offset 0.28em) and 1–1.5px strokes. **Rings**: circles for the portrait (with a 1px gold outline offset 3px), the observation badges (dashed orbit, gold progress arc, core), the log indicator, the 404 drawing, the rail marker and the disk overlay marker. **Capsules** (999px): reserved for instrument controls: buttons, the viewpoint selector and its options, the replay bar and its stop button, and the transient "Observed" notice under the masthead. Focus outlines take a 2px corner. Everything else is square-edged and borderless: text directly on void.
+
+Icons are 24-unit line drawings at 1.5px stroke with round caps and joins, matching the disk's etched rings; brand and skill marks are filled SVG symbols from one sprite, sized by height.
 
 ## Components
 
 ### Buttons
-Printed like the gallery's own signage: flat, square, heavy.
-- **Shape:** square (0px), 2px border in `--vinyl`.
-- **Primary:** `--vinyl` fill, `--paint` text, 700 weight, 3rem min height, `0 --space-5` padding, optional leading 1.2em icon. On a white wall this is ink on gallery white; inside a room it inverts to the room's vinyl.
-- **Hover:** fill mixes toward the paint (`color-mix(in oklch, var(--vinyl) 86%, var(--paint))`), 180ms.
-- **Quiet:** transparent with vinyl border and text; hover adds a 10% vinyl wash.
-- **Sizes:** the title-wall email is 3.5rem tall with `--space-6` padding at `--step-1`; the masthead email is 2.5rem at `--step--1`. The desk has no button: its display-size italic address is the action.
-- **Focus:** 2px `--vinyl` outline, 3px offset (6px on frames).
+Small instrument controls, set in extended caps.
+- **Shape:** Capsule (`rounded.capsule`), minimum height 3rem (3.25rem for the arrival email, 2.75rem in the masthead, where the label is `compact-label`), icon at 1.35em.
+- **Instrument (default):** Transparent with a 1px `rule-strong` border and bone label; hover raises the border to `bone-soft` and adds a 6% bone wash.
+- **Primary:** Void interior inside a 1px Doppler border (approach → gold → ember), bone label, gold orbit icon. Hover lightens the interior to `void-raised`. There is one primary per view, and it is Email Ian (Back to the site on the 404).
+- **Hover / Focus:** 180ms colour transitions on `ease` (cubic-bezier(0.16, 1, 0.3, 1)); focus is a 2px gold outline offset 4px.
 
-### Framed Work (signature)
-A button that is a picture: moulding border, white mat, and an exact SVG drawing of the fact, `cursor: zoom-in`.
-- **Reduction:** 100 ink squares on a 10×10 grid; the squares taken away remain as thin `--ghost` outlines.
-- **Increase:** 100 ink squares plus the added percent as extra gilt rows.
-- **Count:** one ink dot per unit (large dots up to 16; a 10- or 20-column dot field beyond, with an open ring for "+"). A ranking ("1st of 15") is a count whose dot at that place is gilt.
-- **Document:** a seal with the tag set twice around a circle on a text path and the year in the centre. When the event names an issuer whose mark is a symbol, the mark fills the centre and the year sits small beneath it.
-- **Text piece:** the subject set in 800 weight, sized to the largest size whose wrapped lines fit the 4:3 mat in both width and height.
-- Hover lifts the frame 2px; opening it lights it (see Elevation). Each drawing carries an `aria-label` that states the fact in words ("Drawing: 15 dots, the 1st in gold: 1st of 15 Industry Øne organisations to deploy."). The frame is a toggle named "Light {title}" and described by its drawing.
+### Links
+Inherit colour, 1px underline in `rule-strong` offset 0.28em, turning gold on hover. Link rows (Resume, GitHub, LinkedIn, X) set a brand mark before the label at `bone-soft`, each at least 2.75rem tall.
 
-### Museum Label
-Sits under its frame, max 24rem. A room's grid gives every hang three shared rows (frame, figure, text), so frames share an eye line and titles share a line even when a neighbour has no figure: figure (metric + measure) → italic title, date → optional one-sentence detail in `--vinyl-soft` (omitted when the figure says it all) → status ("In progress", "Retired"; uppercase label, no box) → medium (a list of skills, 600, `--step--1`, each led by its 1.25em mark) → catalogue number ("No. 2019.1", `--vinyl-quiet`; the room already names the org and years) → optional external link with a 1em arrow.
+### Navigation (Masthead)
+Fixed, deep void, 1px `rule` base. Left: the wordmark in extended caps (450, 0.24em). Centre: the time rail, one etched `rule-strong` line from the first year to Now, with tick marks, tabular year links (hover and current in gold), a gold "Now" and a gold 0.5rem marker whose position is the fall's depth. Right: the observation tally (a dashed ring that turns solid gold once anything is logged) and a compact primary Email Ian. Under 52rem the rail is removed.
 
-### Room Sign
-Room number in weight 200 and `--vinyl-quiet`, set beside the room name in 800 at `--step-4`; the org's mark is lettered in vinyl above the name (1.6em for a symbol, 1.1em for a wordmark). Role, dates ("Joined Jun 2019 · Day 2,674") and summary on the right.
+### Plates
+The unit of the record: one fragment, read on the void at the reading line. Figure (metric in extended hairline, or subject), title as a citation, a meta row (mark, organisation, gold date, status after a hairline divider in micro caps), the fact at `bone-soft`, the medium (skills, each with its mark), and an optional external link. The plate at the reading line is `.is-current` and its figure turns gold; every other figure rests at `bone-soft`. States come from the record: orbiting, redshifted, in progress, lost; retired fragments cool to ember on the disk. Each plate has an id and is deep-linkable; a targeted plate's figure is gold.
 
-### Navigation (floor plan)
-The sticky masthead (`--masthead` 3.75rem, gallery white, 1px rule below) holds the wordmark (name 800, "Selected Work" italic), a floor plan of the rooms, the passport tally and the email button. The plan is a row of 2.25rem boxes sized by each room's work count and never narrower than its own name: Entrance, numbered rooms, Desk. The room the visitor is in gets `aria-current="location"` and fills with that room's paint and vinyl (Entrance and Desk fill ink; the index of media counts as the Desk). The plan's focus ring is always gallery ink, whatever the swatch's paint. Below 60rem rooms show numerals only; below 40rem the plan takes its own full-width row, 2.75rem tall, naming each room by its first word ("Spirit-Led"), and below 22.5rem it falls back to numerals.
+### Orbit Headers
+One per band: brand mark (2.5rem), the organisation in headline extended caps, the role, a gold dated line ("Joined Jun 2019 – now"), a gold-ruled note when the role runs alongside an earlier one (the fall steps back in time there, and says so), an optional summary and link.
 
-### Guided Tour Bar
-A fixed bar painted `ink`, centred at the bottom (max 44rem) with the float shadow: the room and step ("Room 1 · RTX · 3 of 11") above the italic title and its date, then Previous, Next/Finish (solid vinyl) and a square close; on phones one 64px row of arrow-only buttons. The tour walks the rooms in their hanging order, each room's works in time order, so the light only ever moves forward through the building. Enters with a 520ms rise; arrow keys step, Escape ends and leaves focus on the frame where the tour stopped. It never starts on its own and earns only its own stamp.
+### The Disk (signature)
+The fixed WebGL canvas, rendered at `min(devicePixelRatio, 1.5) × quality` (quality calibrated down from 0.8 if a frame is slow). The shader draws the disk between radii 3 and 14.5, turbulent filaments turning faster toward the hole, faint bone year rings, every fragment as a point of light (larger and gold as it becomes current, with a gold halo), a gold photon ring hugging the shadow, and a sparse bone starfield. A CPU copy of the same integrator places the SVG overlay: a gold marker and core on the current fragment with a leader, year numerals on the near side of their rings, and the three featured fragments' labels set along their own orbits as `textPath` (gold figure, bone-soft title). Viewpoints: observer (per-station inclination), edge-on, face-on.
 
-### Gallery Passport
-A 1px-ruled panel at the desk with a grid of 4.25rem circular stamps. Each stamp carries a line-icon emblem of what earns it (an eye, two rooms, a framed mat, the picture light, the checklist, a frame on its wire, a letter). Unearned: dashed, quiet outlines with name and hint. Earned: solid `--stamp-ink`, rotated by a per-stamp tilt, ring text and date shown (the date also in words for screen readers), with a 520ms press-in. Only what the visitor opens counts toward the looking stamps; the tour and deep links don't, and "Every wall" needs a room of two or more works. The masthead tally shows a dashed ring that turns stamp red after the first stamp; a new stamp's name hangs under the masthead as a small ink ticket for 3.8s (out of flow, so the plan never moves), and one status line announces it to screen readers. Without JavaScript the passport and the tour don't hang.
+### Viewpoint Selector and Replay Bar
+Capsule instrument groups, placed after the content in the DOM so keyboard order reaches them last, fixed bottom right (viewpoints, led by a micro "Angle" label on screens over 72rem; hidden at the horizon, where the camera looks straight down) and bottom centre (replay). Viewpoint options are micro caps at `bone-quiet`, bone on hover, gold text with an inset gold ring when pressed. The replay bar has a 1px gold border, a gold tabular year, the fragment title, and an instrument "Stop the replay" button, and a separate polite live region announcing "year, title" (an undated fragment announces its organisation, never an inferred year); while it shows, the viewpoint selector hides. Both are hidden without JavaScript and under 52rem (viewpoints).
 
-### Marks
-Organisation logos and skill glyphs live in `src/lib/marks.ts`, are published once as the `/marks.svg` sprite (`src/pages/marks.svg.ts`), and render through `Mark.astro` as a `<use>` of their symbol: one flat silhouette filled with `currentColor`, so every mark takes the vinyl of the wall it sits on, like the lettering around it. Never set a mark in its brand colours. A **symbol** (RTX burst, Spirit-Led dove, AWS, GitHub, LinkedIn, the tool logos, and generic glyphs for skills without one) may sit inside a line of text or a seal; a **wordmark** (the University of Rhode Island) appears only on its room sign. Marks appear on room signs, before skills on the medium line and in the index of media (1.25em, one wrapped line of skills, each linking to its latest work), before the org on the portrait label, highlights and resume headings, before GitHub and LinkedIn links, and before "Source on GitHub". Marks beside text that names them are `aria-hidden`.
+### Observations
+A grid of ring badges: a dashed `rule-strong` orbit, a gold arc that draws closed over 900ms when logged, and a core that fills gold. Name at 500/112% width, how-to at meta size, timestamp in gold micro caps. A transient capsule notice ("Observed: …") drops under the masthead for 3.8s.
 
-### Checklist Sheet (resume)
-The resume is a checklist of works: a mat-white sheet (max 54rem) hung with `--hung` on the sunk wall; name at `--step-4` 850 over a 2px ink rule, rooms as 1px-ruled sections, works as rows (fact, a quiet line of media, and the date on the right where a resume keeps it; catalogue numbers stay in the exhibition), prose capped at 38em (about 75 characters). Prints to letter at 10pt with no shadow and no toolbar.
-
-### Closed for Installation (404)
-An empty frame (dashed-rule mat) hung from an SVG wire: a thin `--ink-quiet` line from one ink hook to the frame's corners, with a room-sign-scale heading and primary/quiet buttons.
-
-### Motion
-`--ease` is `cubic-bezier(0.16, 1, 0.3, 1)`; `--fast` 180ms for link underlines, button fills and tour buttons; `--slow` 520ms for light, frames, room darkening and plan fills. Under `prefers-reduced-motion` every transition and animation collapses to 1ms and tour scrolling jumps instead of gliding.
+### Horizon
+The closing station. The portrait in its gold hairline orbit, the ask, the email address in gold (`email`, underline at 45% gold) and a "Copy address" instrument form one centred group, and the camera's distance and offset are solved from that group's measured size so the whole group sits inside the hole's shadow at every viewport. Without the live disk the horizon is plain deep void. A foot band of deep void carrying the link row, location and colophon.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** turn every new achievement into a framed work with an exact drawing of its fact and a full museum label; the drawing's `aria-label` must say the fact in words.
-- **Do** paint a new room with `data-paint` and let components read `--paint` and the four vinyl tokens; the button, label, rule and focus ring follow automatically.
-- **Do** keep all frames in a row on one hang line with the two-row subgrid (frame centred, label top-aligned).
-- **Do** express state as light: pool opacity, room darkening, label dimming, 520ms `--ease`.
-- **Do** italicise titles of works with `<cite>` and keep dates roman.
-- **Do** use square corners, 1px vinyl hairlines, and the `--space-*` scale.
+- **Do** put all reading text on void: the left column over the veiled sky on wide screens, full-bleed deep-void plates with hairline edges on phones.
+- **Do** keep gold for the current fragment, dates, focus, logged state and the email; everything else is bone at one of three strengths.
+- **Do** set names, figures and disk labels in extended hairline caps (125% width, 180–250 weight, 0.06–0.16em tracking) and reading text at 100% width, 380 weight.
+- **Do** make every number lining, and tabular wherever it aligns or counts.
+- **Do** render the disk only in response to scroll, resize or input, and hold it still while a plate is being read.
+- **Do** keep every fact as live text for no-WebGL, no JavaScript and a lost GPU context (all show the still, `disk-still.jpg`, at 55%), reduced motion (jumps, 1ms transitions) and print (`print-ink` on `paper`; the home page prints plates only).
+- **Do** show the address as text, with a Copy control, wherever the email action appears first on a screen (arrival, horizon).
+- **Do** give etched disk lettering a 3px deep-void halo so it reads over bright matter.
 
 ### Don't:
-- **Don't** add a second typeface, including for code or numerals; use `.tabular` instead.
-- **Don't** box content in rounded, shadowed cards; only hung objects (frames, the checklist sheet) and the floating tour bar cast shadows.
-- **Don't** use gradients as fill; the only gradient is the radial picture-light pool behind a work.
-- **Don't** use gilt or stamp red outside increases, selection and earned stamps.
-- **Don't** animate anything on page load or start the tour automatically; nothing moves or plays on its own.
-- **Don't** put glass, blur, badges or pill shapes on the walls.
+- **Don't** use cards, panels, glass, blur or drop shadows; structure is rings, hairlines and void.
+- **Don't** use gradient text, and don't use the Doppler gradient anywhere but the primary button's border.
+- **Don't** make UI glow; light is rendered by the disk, not emitted by controls.
+- **Don't** use capsules for tags, badges or skill chips; the capsule belongs to instrument controls and the transient observation notice.
+- **Don't** add a second typeface or set uppercase at normal width.
+- **Don't** animate anything on its own: no idle orbiting, no autoplay replay, no looping motion.
+- **Don't** use ember or disk blue as status or error colours; they mean receding and approaching matter.

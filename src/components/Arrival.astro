@@ -1,0 +1,302 @@
+---
+import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
+import type { Exhibition } from "../lib/exhibition";
+import type { Fall } from "../lib/fall";
+import { symbolMark } from "../lib/marks";
+import portrait from "../assets/portrait.webp";
+
+interface Props {
+  exhibition: Exhibition;
+  fall: Fall;
+}
+
+const { exhibition, fall } = Astro.props;
+const { profile, rooms } = exhibition;
+const current = rooms.filter((r) => r.role && !r.end);
+// Newest first: the lead figure is the most recent proof.
+const brightest = fall.fragments.filter((f) => f.work.featured).sort((a, b) => b.work.key - a.work.key);
+const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
+const firstYear = new Date(fall.firstTime).getUTCFullYear();
+---
+
+<section class="arrival" data-station="arrival" aria-labelledby="arrival-name">
+  <div class="arrival__lead" data-column>
+    <h1 id="arrival-name" class="arrival__name caps">{profile.name}</h1>
+    <p class="arrival__headline">{profile.headline}</p>
+    <div class="arrival__now-row">
+      <img class="arrival__portrait" src={portrait.src} width="168" height="210" alt={`Portrait of ${profile.name}`} />
+      <ul class="arrival__now" role="list" aria-label="Now">
+        {
+          current.map((room) => (
+            <li>
+              <Mark name={symbolMark(room.mark)} />
+              <span>
+                <a href={`#band-${room.id}`}>
+                  {room.role}, {room.org}
+                </a>
+                <span class="arrival__since tabular"> · since {room.start.year}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="arrival__actions">
+      <a class="button button--primary arrival__email" href={`mailto:${profile.email}`} data-observe="say-hello">
+        <Icon name="orbit" />
+        Email Ian
+      </a>
+      <button type="button" class="button" data-replay>
+        <Icon name="fall" />
+        Replay {firstYear} → now
+      </button>
+    </div>
+    <p class="arrival__address">
+      <a href={`mailto:${profile.email}`} data-observe="say-hello">{profile.email}</a>
+      <button type="button" class="arrival__copy" data-copy={profile.email}>
+        <span data-copy-label>Copy</span>
+      </button>
+    </p>
+    <ul class="arrival__links" role="list">
+      <li><a href="/resume">Resume</a></li>
+      <li><a href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a></li>
+      <li><a href={profile.links.linkedin} rel="noopener"><Mark name="linkedin" />LinkedIn</a></li>
+      <li>
+        <a href={profile.links.x} rel="noopener" aria-label={`X: ${xHandle}`}><Mark name="x" />{xHandle}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="arrival__brightest">
+    <h2 class="arrival__h">Highlights</h2>
+    <ol class="arrival__list" role="list">
+      {
+        brightest.map((f) => (
+          <li>
+            <a href={`#${f.id}`}>
+              <span class="arrival__figure tabular">{f.work.metric ?? f.work.title}</span>
+              <span class="arrival__measure">{f.work.metricLabel ?? f.work.detail}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .arrival {
+    display: grid;
+    align-content: space-between;
+    gap: var(--space-6);
+    min-height: 100svh;
+    padding: calc(var(--masthead) + clamp(var(--space-6), 7vh, var(--space-8))) var(--gutter) var(--space-6);
+  }
+
+  .arrival__lead {
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--column);
+  }
+
+  .arrival__name {
+    font-size: var(--step-5);
+    font-weight: 200;
+    letter-spacing: 0.06em;
+    line-height: 0.98;
+  }
+
+  .arrival__headline {
+    font-size: var(--step-2);
+    font-weight: 330;
+    line-height: 1.3;
+    color: var(--bone);
+    max-width: 36ch;
+  }
+
+  /* The portrait sits in its own orbit: a circle, one gold hairline around it. */
+  .arrival__now-row {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .arrival__portrait {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    outline: 1px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .arrival__now {
+    display: grid;
+    gap: var(--space-2);
+    color: var(--bone-soft);
+    font-size: var(--step--1);
+    line-height: 1.45;
+  }
+
+  .arrival__now li {
+    display: grid;
+    grid-template-columns: 1.1rem minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+  }
+
+  .arrival__now :global(.mark) {
+    height: 1.1rem;
+    margin-top: 0.05rem;
+    justify-self: center;
+    color: var(--bone);
+  }
+
+  .arrival__now a {
+    color: var(--bone);
+  }
+
+  .arrival__since {
+    color: var(--bone-quiet);
+  }
+
+  /* The address itself, for anyone whose mail link opens nothing. */
+  .arrival__address {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    font-size: var(--step-0);
+    font-stretch: 112%;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+  }
+
+  .arrival__address a {
+    text-decoration-color: color-mix(in oklch, var(--gold) 45%, transparent);
+  }
+
+  .arrival__copy {
+    min-height: 2.75rem;
+    padding: 0 var(--space-3);
+    border: 0;
+    background: transparent;
+    color: var(--bone-soft);
+    font-size: 0.6875rem;
+    font-stretch: 118%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .arrival__copy:hover {
+    color: var(--bone);
+  }
+
+  .arrival__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .arrival__email {
+    min-height: 3.25rem;
+    padding-inline: var(--space-6);
+  }
+
+  .arrival__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  .arrival__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+  }
+
+  .arrival__brightest {
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--column);
+  }
+
+  .arrival__h {
+    font-size: var(--step--1);
+    font-weight: 500;
+    font-stretch: 112%;
+    letter-spacing: 0.04em;
+    color: var(--bone-quiet);
+  }
+
+  /* Figures share one column as wide as the widest, so each label starts on one line. */
+  .arrival__list {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: var(--space-5);
+    border-top: 1px solid var(--rule);
+  }
+
+  .arrival__list li {
+    display: contents;
+  }
+
+  .arrival__list a {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+  }
+
+  .arrival__figure {
+    font-size: var(--step-2);
+    font-weight: 250;
+    font-stretch: 125%;
+    color: var(--bone);
+    white-space: nowrap;
+  }
+
+  .arrival__measure {
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  .arrival__list a:hover .arrival__figure {
+    color: var(--gold);
+  }
+
+  /* Phones: the disk shows in a window above; everything below it sits on the void, like the plates. */
+  @media (max-width: 52rem) {
+    .arrival {
+      gap: 0;
+      padding: calc(var(--masthead) + 38svh) 0 0;
+    }
+
+    .arrival__lead,
+    .arrival__brightest {
+      max-width: none;
+      padding: var(--space-6) var(--gutter);
+      background: var(--void-deep);
+    }
+
+    .arrival__lead {
+      border-top: 1px solid var(--rule);
+    }
+
+    .arrival__brightest {
+      padding-top: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+</style>

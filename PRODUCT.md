@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-- Astro with static output; no UI framework. The exhibition's light, floor plan, and guided tour are one small vanilla TypeScript module.
+- Astro with static output; no UI framework. The accretion disk is one WebGL fragment shader plus a small vanilla TypeScript controller (`src/scripts/horizon/`); without WebGL the page shows a pre-rendered still and every fact stays live text.
 - Deployed with alchemy v2 (beta, pinned to an exact version, lockfile committed) to Cloudflare via `Cloudflare.Website.Astro`, static assets only.
 - Production domain: `ianpascoe.dev` (Cloudflare Registrar and Cloudflare DNS), with `www` redirecting to the apex.
 - Bun as package manager and runtime.

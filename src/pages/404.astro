@@ -1,4 +1,5 @@
 ---
+import Icon from "../components/Icon.astro";
 import Base from "../layouts/Base.astro";
 import { loadTimeline } from "../lib/timeline";
 
@@ -7,38 +8,35 @@ const firstName = profile.name.split(" ")[0];
 ---
 
 <Base
-  title={`Closed for installation · ${profile.name}`}
-  description="This room is closed for installation."
-  pageStamp="backstage"
+  title={`Lost past the horizon · ${profile.name}`}
+  description="Nothing orbits at this address."
+  pageObservation="lost-signal"
 >
-  <main id="main" class="closed wrap">
-    <figure class="closed__work">
-      <svg class="closed__wire" viewBox="0 0 200 40" aria-hidden="true">
-        <path d="M2 40 100 3l98 37" />
-        <circle cx="100" cy="3" r="2.6" />
-      </svg>
-      <div class="closed__frame">
-        <div class="closed__mat"></div>
-      </div>
-    </figure>
-    <div class="closed__label">
-      <h1>Gallery closed for installation</h1>
-      <p class="closed__detail">
-        Nothing hangs at this address (error 404). It may have moved, or it was never part of the exhibition.
+  <main id="main" class="lost wrap">
+    <svg class="lost__hole" viewBox="0 0 240 240" aria-hidden="true">
+      <circle class="lost__orbit" cx="120" cy="120" r="104" />
+      <circle class="lost__orbit" cx="120" cy="120" r="78" />
+      <circle class="lost__shadow" cx="120" cy="120" r="46" />
+      <path class="lost__ring" d="M74 120a46 46 0 0 1 92 0" />
+      <circle class="lost__fragment" cx="198" cy="120" r="3" />
+    </svg>
+    <div class="lost__text">
+      <h1 class="lost__title caps">Lost past the horizon</h1>
+      <p class="lost__detail">
+        Nothing orbits at this address (error 404). It may have moved, or it was never part of the record.
       </p>
-      <p class="closed__note">
-        You found the room that's closed, so your gallery passport has a stamp for it.
-      </p>
-      <div class="closed__actions">
-        <a class="button" href="/">Return to the exhibition</a>
-        <a class="button button--quiet" href={`mailto:${profile.email}`} data-stamp="say-hello">Email {firstName}</a>
+      <p class="lost__note">You found the missing page, so it's logged in your observations.</p>
+      <div class="lost__actions">
+        <a class="button button--primary" href="/"><Icon name="orbit" />Back to the site</a>
+        <a class="button" href={`mailto:${profile.email}`} data-observe="say-hello">Email {firstName}</a>
+        <a class="button" href="/resume">Read the resume</a>
       </div>
     </div>
   </main>
 </Base>
 
 <style>
-  .closed {
+  .lost {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     gap: var(--space-8);
@@ -47,63 +45,56 @@ const firstName = profile.name.split(" ")[0];
     padding-block: var(--space-8);
   }
 
-  .closed__work {
-    display: grid;
-    justify-items: center;
-  }
-
-  /* The hanging wire, taut from one hook to the frame's corners. */
-  .closed__wire {
-    width: min(64%, 14rem);
-    overflow: visible;
-  }
-
-  .closed__wire path {
+  .lost__hole {
+    justify-self: center;
+    width: min(100%, 20rem);
     fill: none;
-    stroke: var(--ink-quiet);
+  }
+
+  .lost__orbit {
+    stroke: var(--rule-strong);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+  }
+
+  .lost__shadow {
+    fill: var(--void-deep);
+    stroke: var(--rule-strong);
+    stroke-width: 1;
+  }
+
+  .lost__ring {
+    stroke: var(--gold);
     stroke-width: 1.5;
   }
 
-  .closed__wire circle {
-    fill: var(--ink);
+  .lost__fragment {
+    fill: var(--ember);
   }
 
-  .closed__frame {
-    width: min(100%, 22rem);
-    border: 0.35rem solid var(--moulding);
-    background: var(--mat);
-    box-shadow: var(--hung);
-  }
-
-  .closed__mat {
-    aspect-ratio: 4 / 5;
-    margin: 12%;
-    border: 1px dashed var(--rule);
-  }
-
-  .closed__label {
+  .lost__text {
     display: grid;
     gap: var(--space-4);
     max-width: 34rem;
   }
 
-  .closed__label h1 {
+  .lost__title {
     font-size: var(--step-4);
-    font-weight: 850;
-    letter-spacing: -0.035em;
-    line-height: 0.95;
+    font-weight: 200;
+    letter-spacing: 0.06em;
+    line-height: 1;
   }
 
-  .closed__detail {
+  .lost__detail {
     font-size: var(--step-1);
-    color: var(--ink-soft);
+    color: var(--bone-soft);
   }
 
-  .closed__note {
-    color: var(--ink-quiet);
+  .lost__note {
+    color: var(--bone-quiet);
   }
 
-  .closed__actions {
+  .lost__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
@@ -111,14 +102,14 @@ const firstName = profile.name.split(" ")[0];
   }
 
   @media (max-width: 52rem) {
-    .closed {
+    .lost {
       grid-template-columns: 1fr;
       gap: var(--space-6);
       align-content: center;
     }
 
-    .closed__frame {
-      width: min(70%, 16rem);
+    .lost__hole {
+      width: min(60%, 14rem);
     }
   }
 </style>

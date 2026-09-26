@@ -1,0 +1,151 @@
+---
+import Mark from "./Mark.astro";
+import portrait from "../assets/portrait.webp";
+import type { Profile } from "../lib/exhibition";
+
+interface Props {
+  profile: Profile;
+  year: number;
+}
+
+const { profile, year } = Astro.props;
+const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
+---
+
+<footer class="horizon" data-station="horizon" aria-labelledby="horizon-heading">
+  <!-- The ask and the address sit together inside the hole's shadow; the camera frames the shadow around them. -->
+  <div class="horizon__centre" data-horizon-centre>
+    <img class="horizon__portrait" src={portrait.src} width="168" height="210" alt="" loading="lazy" decoding="async" />
+    <h2 id="horizon-heading" class="horizon__heading">Questions about the work? Ask Ian.</h2>
+    <a class="horizon__email" href={`mailto:${profile.email}`} data-observe="say-hello">{profile.email}</a>
+    <button type="button" class="horizon__copy" data-copy={profile.email}>
+      <span data-copy-label>Copy address</span>
+    </button>
+  </div>
+  <div class="horizon__foot">
+    <ul class="horizon__links" role="list">
+      <li><a href="/resume">Resume</a></li>
+      <li><a href={profile.links.github} rel="noopener"><Mark name="github" />GitHub</a></li>
+      <li><a href={profile.links.linkedin} rel="noopener"><Mark name="linkedin" />LinkedIn</a></li>
+      <li>
+        <a href={profile.links.x} rel="noopener" aria-label={`X: ${xHandle}`}><Mark name="x" />{xHandle}</a>
+      </li>
+      <li>{profile.location}</li>
+    </ul>
+    <p class="horizon__colophon">
+      © {year} {profile.name}. The disk is traced live in your browser from the same record as the resume.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .horizon {
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100svh;
+    padding: var(--masthead) var(--gutter) var(--space-6);
+    text-align: center;
+  }
+
+  .horizon__centre {
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-3);
+    max-width: min(100%, 22rem);
+  }
+
+  .horizon__portrait {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    outline: 1px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .horizon__heading {
+    font-size: var(--step-1);
+    font-weight: 350;
+    line-height: 1.3;
+  }
+
+  .horizon__email {
+    font-size: clamp(1.25rem, 0.9rem + 1.4vw, 2rem);
+    font-weight: 250;
+    font-stretch: 112%;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+    text-decoration-color: color-mix(in oklch, var(--gold) 45%, transparent);
+    text-underline-offset: 0.35em;
+    padding: var(--space-1) var(--space-2);
+    white-space: nowrap;
+  }
+
+  .horizon__email:hover {
+    text-decoration-color: var(--gold);
+  }
+
+  .horizon__copy {
+    min-height: 2.75rem;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--bone-soft);
+    font-size: 0.6875rem;
+    font-stretch: 118%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .horizon__copy:hover {
+    border-color: var(--bone-soft);
+    color: var(--bone);
+  }
+
+  /* Without the live disk there is no shadow to sit in; the closing screen is plain void. */
+  :global(html:is(.no-disk, :not(.js))) .horizon {
+    background: var(--void-deep);
+  }
+
+  /* The foot sits on a band of void below the disk, so every line reads. */
+  .horizon__foot {
+    align-self: end;
+    display: grid;
+    gap: var(--space-3);
+    justify-items: center;
+    width: calc(100% + 2 * var(--gutter));
+    margin: 0 calc(var(--gutter) * -1) calc(var(--space-6) * -1);
+    padding: var(--space-4) var(--gutter) var(--space-5);
+    background: var(--void-deep);
+    border-top: 1px solid var(--rule);
+  }
+
+  .horizon__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-1) var(--space-5);
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  .horizon__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+  }
+
+  .horizon__colophon {
+    font-size: var(--step--1);
+    color: var(--bone-quiet);
+    max-width: 52ch;
+  }
+</style>

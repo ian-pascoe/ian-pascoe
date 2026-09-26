@@ -1,369 +1,271 @@
 ---
-import { shortOrg, type Exhibition } from "../lib/exhibition";
-import { STAMPS } from "../lib/passport";
 import Icon from "./Icon.astro";
+import type { Profile } from "../lib/exhibition";
+import type { Fall } from "../lib/fall";
+import { OBSERVATIONS } from "../lib/observations";
 
 interface Props {
-  exhibition: Exhibition;
+  profile: Profile;
+  fall: Fall;
 }
 
-const { exhibition } = Astro.props;
-const { profile, rooms } = exhibition;
+const { profile, fall } = Astro.props;
+const span = fall.now - fall.firstTime;
+// Each year on the rail links to the first plate of that year, in reading order.
+const years = fall.years.map(({ year }) => ({
+  year,
+  at: ((Date.UTC(year, 0, 1) - fall.firstTime) / span) * 100,
+  first: fall.fragments.find((f) => new Date(f.work.key).getUTCFullYear() === year),
+}));
 ---
 
 <header class="masthead">
-  <div class="masthead__inner wrap">
-    <a class="masthead__mark" href="#top">
-      <span class="masthead__name">{profile.name}</span>
-      <span class="masthead__show">Selected Work</span>
-    </a>
-
-    <nav class="plan" aria-label="Floor plan">
-      <ol role="list">
-        <li style="--grow: 2">
-          <a class="plan__room plan__room--entrance plan__room--edge" href="#top" data-plan="top">
-            <span class="plan__label">Entrance</span>
-          </a>
-        </li>
-        {
-          rooms.map((room) => {
-            // Phones keep only the first word of a room's name ("Spirit-Led").
-            const [first, ...rest] = shortOrg(room.org).split(" ");
-            return (
-              <li style={`--grow: ${Math.max(2, room.works.length)}`}>
-                <a class="plan__room" href={`#room-${room.id}`} data-plan={room.id} data-paint={room.paint}>
-                  <span class="plan__number tabular" aria-hidden="true">{room.number}</span>
-                  <span class="plan__label" aria-hidden="true">
-                    {first}
-                    {rest.length > 0 && <span class="plan__rest"> {rest.join(" ")}</span>}
-                  </span>
-                  <span class="visually-hidden">Room {room.number}: {room.org}</span>
-                </a>
-              </li>
-            );
-          })
-        }
-        <li style="--grow: 2">
-          <a class="plan__room plan__room--edge" href="#desk" data-plan="desk">
-            <span class="plan__label">Desk</span>
-          </a>
-        </li>
-      </ol>
-    </nav>
-
-    <a class="masthead__passport" href="#passport" data-passport-indicator>
-      <svg class="masthead__stamp" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="50" r="42" />
-        <circle cx="50" cy="50" r="24" />
-      </svg>
-      <span class="masthead__tally tabular">
-        <span class="visually-hidden">Gallery passport: </span><span data-passport-tally>0</span>/{STAMPS.length}
-      </span>
-    </a>
-    {/* A new stamp hangs its name under the masthead for a moment; the status line tells screen readers once. */}
-    <p class="masthead__flash" data-passport-flash aria-hidden="true"></p>
-    <p class="visually-hidden" role="status" data-passport-status></p>
-
-    <a class="button masthead__email" href={`mailto:${profile.email}`} data-stamp="say-hello">
-      <Icon name="mail" />
-      <span>Email <span class="masthead__long">{profile.name.split(" ")[0]}</span></span>
-    </a>
-  </div>
+  <a class="masthead__name caps" href="#main">{profile.name}</a>
+  <nav class="rail" aria-label="The record by year">
+    <ol class="rail__years" role="list">
+      {
+        years.map(({ year, at, first }) => (
+          <li style={`--at: ${at}%`}>
+            {first ? (
+              <a class="tabular" href={`#${first.id}`} data-rail-year={year}>
+                {year}
+              </a>
+            ) : (
+              <span class="tabular">{year}</span>
+            )}
+          </li>
+        ))
+      }
+      <li class="rail__now" style="--at: 100%">Now</li>
+    </ol>
+    <span class="rail__marker" data-rail-marker aria-hidden="true"></span>
+  </nav>
+  <a class="masthead__log" href="#observations" data-log-indicator>
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"></circle><circle cx="10" cy="10" r="2.2"></circle></svg>
+    <span class="tabular"><span data-log-tally>0</span><span class="masthead__log-total">/{OBSERVATIONS.length}</span></span>
+    <span class="masthead__log-word">observed</span>
+    <span class="visually-hidden">: your observations</span>
+  </a>
+  <a class="button button--primary masthead__email" href={`mailto:${profile.email}`} data-observe="say-hello">
+    <Icon name="orbit" />
+    Email Ian
+  </a>
+  <p class="masthead__flash" data-log-flash aria-hidden="true"></p>
+  <p class="visually-hidden" role="status" data-log-status></p>
 </header>
 
 <style>
   .masthead {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    inset: 0 0 auto;
     z-index: 20;
-    background: var(--wall);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .masthead__inner {
-    position: relative;
     display: grid;
-    grid-template-areas: "mark plan passport email";
     grid-template-columns: auto minmax(0, 1fr) auto auto;
     align-items: center;
     gap: var(--space-6);
     height: var(--masthead);
-  }
-
-  .masthead__mark {
-    grid-area: mark;
-    display: grid;
-    line-height: 1.05;
-    text-decoration: none;
+    padding-inline: var(--gutter);
+    background: var(--void-deep);
+    border-bottom: 1px solid var(--rule);
   }
 
   .masthead__name {
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  .masthead__show {
     font-size: var(--step--1);
-    font-style: italic;
-    color: var(--ink-soft);
-  }
-
-  /* The floor plan: rooms drawn as boxes sharing walls, doorways cut between them. */
-  .plan {
-    grid-area: plan;
-    justify-self: center;
-    width: min(100%, 50rem);
-  }
-
-  .plan ol {
-    display: flex;
-    height: 2.25rem;
-  }
-
-  /* Each room is as wide as its hang, and never narrower than its own name. */
-  .plan li {
-    flex: var(--grow) 1 0;
-    min-width: max-content;
-  }
-
-  .plan li:first-child,
-  .plan li:last-child {
-    flex: 0 0 auto;
-  }
-
-  .plan__room {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    height: 100%;
-    margin-left: -1.5px;
-    padding: 0 var(--space-2);
-    border: 1.5px solid var(--ink);
-    font-size: var(--step--1);
-    font-weight: 650;
-    line-height: 1;
-    white-space: nowrap;
-    overflow: hidden;
+    font-weight: 450;
+    letter-spacing: 0.24em;
     text-decoration: none;
-    transition:
-      background-color var(--slow) var(--ease),
-      color var(--slow) var(--ease);
+    white-space: nowrap;
   }
 
-  .plan__room[data-paint] {
-    background: var(--wall);
-    color: var(--ink);
+  .rail {
+    container-type: inline-size;
+    position: relative;
+    justify-self: center;
+    width: min(100%, 34rem);
+    height: 100%;
   }
 
-  .plan__room::before {
+  .rail__years {
+    position: absolute;
+    inset: 0 2.75rem 0 0.75rem;
+  }
+
+  /* The rail itself: one etched line from the first year to now. */
+  .rail__years::before {
     content: "";
     position: absolute;
-    left: -1.5px;
-    top: 28%;
-    width: 1.5px;
-    height: 44%;
-    background: inherit;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 1px solid var(--rule-strong);
   }
 
-  .plan li:first-child .plan__room {
-    margin-left: 0;
+  .rail__years li {
+    position: absolute;
+    left: var(--at);
+    top: 50%;
+    translate: -50% 0;
+    font-size: 0.6875rem;
+    font-stretch: 112%;
+    letter-spacing: 0.08em;
+    color: var(--bone-quiet);
   }
 
-  .plan li:first-child .plan__room::before {
-    left: 30%;
-    top: auto;
-    bottom: -1.5px;
-    width: 40%;
-    height: 1.5px;
+  .rail__years li::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -0.45rem;
+    height: 0.45rem;
+    border-left: 1px solid var(--rule-strong);
   }
 
-  .plan__room--entrance {
-    background: var(--wall);
-    color: var(--ink-soft);
-    font-weight: 500;
+  .rail__years a,
+  .rail__years span {
+    display: block;
+    padding: 0.2rem 0.25rem;
+    text-decoration: none;
   }
 
-  .plan__room:hover {
-    background: var(--wall-sunk);
+  .rail__years a:hover,
+  .rail__years a[aria-current] {
+    color: var(--gold);
   }
 
-  .plan__room[aria-current="location"] {
-    background: var(--paint);
-    color: var(--vinyl);
+  /* "Now" hangs to the right of its tick, clear of the current year's label. */
+  .rail__years .rail__now {
+    translate: 0 0;
+    padding: 0.2rem 0 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
   }
 
-  .plan__room--edge[aria-current="location"] {
-    background: var(--ink);
-    color: var(--wall);
+  .rail__marker {
+    position: absolute;
+    top: 50%;
+    left: calc(0.75rem + var(--depth, 0) * (100% - 3.5rem));
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: -0.25rem 0 0 -0.25rem;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 3px var(--void-deep);
+    opacity: 0;
+    transition: opacity var(--fast) var(--ease);
   }
 
-  .plan__label {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .rail__marker.is-shown {
+    opacity: 1;
   }
 
-  /* The room swatches carry their paint's lettering; the focus ring stays gallery ink on the masthead wall. */
-  .plan__room:focus-visible {
-    outline-color: var(--ink);
-  }
-
-  .masthead__passport {
-    grid-area: passport;
+  .masthead__log {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    min-height: 2.5rem;
+    min-height: 2.75rem;
+    padding-inline: var(--space-2);
+    color: var(--bone-soft);
     font-size: var(--step--1);
-    font-weight: 650;
     text-decoration: none;
-    color: var(--ink-soft);
   }
 
-  .masthead__stamp {
-    width: 1.35rem;
-    height: 1.35rem;
-    transform: rotate(-8deg);
-  }
-
-  .masthead__stamp circle {
+  .masthead__log svg {
+    width: 1.25rem;
+    height: 1.25rem;
     fill: none;
-    stroke: var(--ink-quiet);
-    stroke-width: 6;
-    stroke-dasharray: 9 7;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-dasharray: 2 2;
     transition: stroke var(--slow) var(--ease);
   }
 
-  .masthead__stamp circle + circle {
-    stroke-width: 4;
-  }
-
-  .masthead__passport.has-stamps .masthead__stamp circle {
-    stroke: var(--stamp-ink);
+  .masthead__log.has-logged svg {
+    stroke: var(--gold);
     stroke-dasharray: none;
   }
 
-  /* A new stamp's name hangs under the masthead like a ticket, then goes; nothing in the bar moves. */
-  .masthead__flash {
-    position: absolute;
-    grid-area: passport;
-    top: calc(100% + 1px + var(--space-2));
-    right: 0;
-    width: max-content;
-    padding: var(--space-2) var(--space-3);
-    background: var(--ink);
-    color: var(--wall);
-    box-shadow: var(--float);
-    font-size: var(--step--1);
-    font-weight: 650;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(calc(-1 * var(--space-2)));
-    transition:
-      opacity var(--slow) var(--ease),
-      transform var(--slow) var(--ease),
-      visibility 0s linear var(--slow);
+  .rail__years .rail__now::before {
+    left: 0;
   }
 
-  .masthead__flash.is-shown {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    transition:
-      opacity var(--slow) var(--ease),
-      transform var(--slow) var(--ease);
+  /* When labels no longer fit (a narrow rail, or text enlarged), alternate years keep only their ticks. */
+  @container (max-width: 30rem) {
+    .rail__years li:nth-child(even):not(.rail__now) :is(a, span) {
+      visibility: hidden;
+    }
+  }
+
+  @container (max-width: 16rem) {
+    .rail__years li:not(:first-child, .rail__now) :is(a, span) {
+      visibility: hidden;
+    }
+  }
+
+  .masthead__log-word {
+    color: var(--bone-quiet);
   }
 
   .masthead__email {
-    grid-area: email;
-    justify-self: end;
-    min-height: 2.5rem;
+    min-height: 2.75rem;
     padding-inline: var(--space-4);
+    font-size: 0.75rem;
+  }
+
+  /* A new observation hangs under the masthead for a moment, out of flow. */
+  .masthead__flash {
+    position: absolute;
+    right: var(--gutter);
+    top: calc(100% + var(--space-3));
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    background: var(--void-deep);
+    color: var(--gold);
     font-size: var(--step--1);
+    font-stretch: 112%;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    translate: 0 -0.35rem;
+    pointer-events: none;
+    transition:
+      opacity var(--slow) var(--ease),
+      translate var(--slow) var(--ease);
   }
 
-  @media (max-width: 60rem) {
-    .masthead__show {
-      display: none;
-    }
-
-    .plan__room:not(.plan__room--edge) .plan__label {
-      display: none;
-    }
-
-    .plan__room {
-      justify-content: center;
-      min-width: 2.25rem;
-    }
+  .masthead__flash:global(.is-shown) {
+    opacity: 1;
+    translate: 0 0;
   }
 
-  /* Phones: the plan takes its own row under the name and the email button. Every target is thumb-sized. */
-  @media (max-width: 40rem) {
-    .masthead__inner {
-      grid-template-areas:
-        "mark passport email"
-        "plan plan plan";
+  @media (max-width: 52rem) {
+    .masthead {
       grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: var(--space-1) var(--space-3);
-      height: auto;
-      padding-block: var(--space-1) var(--space-2);
+      gap: var(--space-3);
     }
 
-    .masthead__mark,
-    .masthead__passport,
+    .rail {
+      display: none;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .masthead__log-word,
+    .masthead__log-total {
+      display: none;
+    }
+  }
+
+  @media (max-width: 24rem) {
+    .masthead__name {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      line-height: 1.25;
+      white-space: normal;
+    }
+
     .masthead__email {
-      min-height: 2.75rem;
-    }
-
-    .masthead__mark {
-      align-content: center;
-    }
-
-    .masthead__flash {
-      grid-area: plan;
-      top: calc(100% + var(--space-2) + 1px + var(--space-2));
-    }
-
-    .plan {
-      width: 100%;
-    }
-
-    .plan ol {
-      height: 2.75rem;
-    }
-
-    /* Rooms are named, not numbered, where the plan has the whole row. */
-    .plan__room {
-      padding-inline: var(--space-2);
-    }
-
-    .plan__room:not(.plan__room--edge) .plan__label {
-      display: inline;
-    }
-
-    .plan__number,
-    .plan__rest {
-      display: none;
-    }
-  }
-
-  /* The narrowest phones fall back to room numbers. */
-  @media (max-width: 22.5rem) {
-    .plan__room:not(.plan__room--edge) .plan__label {
-      display: none;
-    }
-
-    .plan__number {
-      display: inline;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .plan__room[aria-current="location"] {
-      background: Highlight;
-      color: HighlightText;
+      padding-inline: var(--space-3);
     }
   }
 </style>

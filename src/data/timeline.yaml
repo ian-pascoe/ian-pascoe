@@ -1,4 +1,5 @@
-# Ian Pascoe's career, hung as a museum retrospective. This file is the only
+# Ian Pascoe's career, laid out as matter on an accretion disk: every
+# achievement is a fragment on the ring of its date. This file is the only
 # source for the site and for /resume. Achievement names are playful titles;
 # the detail beside each one is the plain fact.
 #
@@ -10,38 +11,39 @@
 # message if something is missing or misspelled.
 #
 # entries:
-#   - kind: span            a role, company, or degree; hung as its own room
+#   - kind: span            a role, company, or degree; one band of the fall
 #     id, title, org, start, end, summary
-#     paint                 the room's wall color: oxblood, blue, slate,
-#                           ochre, plum, or stone
-#     mark                  optional logo lettered on the room sign; one of
+#     mark                  optional logo set at the band's head; one of
 #                           the names in src/lib/marks.ts (rtx, spirit-led, uri, ...)
-#     startLabel            verb for how the room opens, e.g. "Founded" (default "Joined")
+#     startLabel            verb for how the band opens, e.g. "Founded" (default "Joined")
 #     link                  optional { href, label }
-#     achievements:         the works hung in the room (YAML order = hanging order)
-#       - name              the work's title (playful)
+#     achievements:         the band's fragments (YAML order = reading order
+#                           among undated ones)
+#       - name              the achievement's title (playful)
 #         detail            optional; the plain fact the figure and title don't
 #                           already say, in one sentence
-#         metric            optional figure; it decides the drawing:
-#                             "75%"  drawn as a reduction (100 squares, 75 taken away)
-#                             "+30%" drawn as an increase (100 squares plus 30)
-#                             "5", "300+"  drawn as a count of dots
-#                             "1st of 15"  drawn as 15 dots, the 1st in gold
+#         metric            optional figure, one of:
+#                             "75%"        a reduction
+#                             "+30%"       an increase
+#                             "5", "300+"  a count
+#                             "1st of 15"  a ranking
 #         metricLabel       what the figure measures, e.g. "shorter test runs"
 #         subject           short plain name of what was made; without a
-#                           metric the work is this phrase set as a text piece
-#         date              optional; undated works hang within their room
-#         skills            optional list of skill tags (the work's medium);
+#                           metric it is set as the plate's headline
+#         date              optional; undated fragments fall between their
+#                           band's start and its first dated fragment, with no
+#                           date shown
+#         skills            optional list of skill tags (the medium);
 #                           tags named in src/lib/marks.ts get their glyph
-#         featured          optional; featured works hang on the title wall too
+#         featured          optional; featured fragments are the brightest on
+#                           the first screen
 #         link              optional { href, label }
-#         status            optional: in-progress or retired, shown on the label
+#         status            optional: in-progress or retired, shown on the plate
 #   - kind: event           a single dated moment: certification, launch, degree
 #     id, title, date, org, detail, tag, skills, featured, link
-#     mark                  optional issuer logo, set in the middle of the
-#                           seal; in an event's own room, also on the room sign
-#     on                    optional span id to hang the event in that room;
-#                           without it the event gets a room of its own, named
+#     mark                  optional issuer logo, shown on the plate
+#     on                    optional span id to set the event in that band;
+#                           without it the event gets a band of its own, named
 #                           after its org
 
 profile:
@@ -66,7 +68,6 @@ entries:
 
   - kind: span
     id: rtx
-    paint: oxblood
     mark: rtx
     title: Principal Specialist of Business Information Systems and Transformation
     org: RTX
@@ -148,7 +149,6 @@ entries:
 
   - kind: span
     id: spirit-led
-    paint: blue
     mark: spirit-led
     title: Owner
     org: Spirit-Led Software LLC

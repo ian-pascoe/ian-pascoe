@@ -1,0 +1,178 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<!-- The disk's instrument controls come after the content in reading and tab order; they are fixed on screen. -->
+<div class="viewpoints" data-viewpoints role="group" aria-labelledby="viewpoints-label">
+  <span id="viewpoints-label" class="viewpoints__label">Angle</span>
+  <button type="button" data-viewpoint="observer" aria-pressed="true">Observer</button>
+  <button type="button" data-viewpoint="edge" aria-pressed="false">Edge-on</button>
+  <button type="button" data-viewpoint="face" aria-pressed="false">Face-on</button>
+</div>
+
+<p class="visually-hidden" aria-live="polite" data-replay-status></p>
+<div class="replay-bar" data-replay-bar hidden>
+  <p class="replay-bar__status" aria-hidden="true">
+    <span class="replay-bar__year tabular" data-replay-year></span>
+    <span class="replay-bar__title" data-replay-title></span>
+  </p>
+  <button type="button" class="replay-bar__stop" data-replay-stop>
+    <Icon name="close" />
+    Stop the replay
+  </button>
+</div>
+
+<style>
+  .viewpoints {
+    position: fixed;
+    right: var(--gutter);
+    bottom: var(--space-5);
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    background: var(--void-deep);
+    transition:
+      opacity var(--fast) var(--ease),
+      visibility var(--fast);
+  }
+
+  .viewpoints__label {
+    padding: 0 var(--space-3) 0 var(--space-4);
+    font-size: 0.6875rem;
+    font-stretch: 118%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bone-quiet);
+  }
+
+  .viewpoints button {
+    min-height: 2.5rem;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--bone-soft);
+    font-size: 0.6875rem;
+    font-stretch: 118%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color var(--fast) var(--ease),
+      background-color var(--fast) var(--ease);
+  }
+
+  @media (max-width: 72rem) {
+    .viewpoints__label {
+      display: none;
+    }
+  }
+
+  .viewpoints button:hover {
+    color: var(--bone);
+  }
+
+  .viewpoints button[aria-pressed="true"] {
+    color: var(--gold);
+    box-shadow: inset 0 0 0 1px var(--gold);
+  }
+
+  /* The closing view looks straight down into the hole; the angle does not apply there. */
+  :global(html[data-at="horizon"]) .viewpoints,
+  :global(html.no-disk) .viewpoints,
+  :global(body:has(.replay-bar:not([hidden]))) .viewpoints {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .replay-bar {
+    position: fixed;
+    left: 50%;
+    bottom: var(--space-5);
+    z-index: 16;
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    width: min(calc(100% - 2 * var(--gutter)), 36rem);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    background: var(--void-deep);
+    translate: -50% 0;
+  }
+
+  .replay-bar[hidden] {
+    display: none;
+  }
+
+  .replay-bar__status {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    min-width: 0;
+    flex: 1;
+    font-size: var(--step--1);
+  }
+
+  .replay-bar__year {
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .replay-bar__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--bone-soft);
+  }
+
+  .replay-bar__stop {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    background: transparent;
+    font-size: 0.6875rem;
+    font-stretch: 118%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .replay-bar__stop :global(.icon) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Phones: the angle control sits at the top of the disk's window, and only while the disk is in view at arrival. */
+  @media (max-width: 52rem) {
+    .viewpoints {
+      top: calc(var(--masthead) + var(--space-3));
+      bottom: auto;
+      right: 50%;
+      translate: 50% 0;
+    }
+
+    .viewpoints__label {
+      display: none;
+    }
+
+    .viewpoints button {
+      min-height: 2.75rem;
+      padding: 0 var(--space-3);
+    }
+
+    :global(html:not([data-at="arrival"])) .viewpoints {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+</style>

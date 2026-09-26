@@ -1,0 +1,127 @@
+---
+import { OBSERVATIONS } from "../lib/observations";
+---
+
+<section class="observations" id="observations" data-station="quiet" aria-labelledby="observations-heading">
+  <h2 id="observations-heading" class="observations__heading caps">Your observations</h2>
+  <p class="observations__lede">
+    <span data-log-count>0 of {OBSERVATIONS.length} logged</span>. Kept only in this browser; nothing on the site is
+    locked behind them.
+  </p>
+  <ol class="observations__list" role="list">
+    {
+      OBSERVATIONS.map(({ id, name, how }) => (
+        <li class="observation" data-obs-slot={id}>
+          <svg class="observation__ring" viewBox="0 0 40 40" aria-hidden="true">
+            <circle class="observation__orbit" cx="20" cy="20" r="17" />
+            <circle class="observation__arc" cx="20" cy="20" r="17" pathLength="100" />
+            <circle class="observation__core" cx="20" cy="20" r="5" />
+          </svg>
+          <p class="observation__name">{name}</p>
+          <p class="observation__how">{how}</p>
+          <p class="observation__when tabular" data-obs-when />
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .observations {
+    display: grid;
+    gap: var(--space-4);
+    max-width: calc(var(--column) + 2 * var(--gutter));
+    padding: var(--space-8) var(--gutter) var(--space-9);
+  }
+
+  .observations__heading {
+    font-size: var(--step-3);
+    font-weight: 200;
+    letter-spacing: 0.08em;
+  }
+
+  .observations__lede {
+    color: var(--bone-soft);
+    max-width: 48ch;
+  }
+
+  .observations__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: var(--space-5) var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  .observation {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+    align-items: start;
+  }
+
+  .observation__ring {
+    grid-row: span 3;
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: none;
+    rotate: -90deg;
+  }
+
+  .observation__orbit {
+    stroke: var(--rule-strong);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+  }
+
+  .observation__arc {
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 900ms var(--ease);
+  }
+
+  .observation__core {
+    fill: var(--rule);
+    transition: fill var(--slow) var(--ease);
+  }
+
+  .observation.is-logged .observation__arc {
+    stroke-dashoffset: 0;
+  }
+
+  .observation.is-logged .observation__core {
+    fill: var(--gold);
+  }
+
+  .observation__name {
+    font-weight: 500;
+    font-stretch: 112%;
+    letter-spacing: 0.02em;
+    color: var(--bone-soft);
+  }
+
+  .observation.is-logged .observation__name {
+    color: var(--bone);
+  }
+
+  .observation__how {
+    font-size: var(--step--1);
+    color: var(--bone-quiet);
+    line-height: 1.45;
+  }
+
+  .observation__when {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  @media (max-width: 52rem) {
+    .observations {
+      max-width: none;
+      background: var(--void-deep);
+    }
+  }
+</style>

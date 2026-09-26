@@ -1,682 +1,425 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-25T11:48:48.597Z",
+  "generatedAt": "2026-09-26T10:31:34.484306Z",
   "title": "Design System: Ian Pascoe",
   "extensions": {
     "colorMeta": {
-      "wall": {
+      "void": {
         "role": "neutral",
-        "displayName": "Gallery White",
-        "canonical": "oklch(96.6% 0.006 85)",
+        "displayName": "Void",
+        "canonical": "oklch(12.5% 0.008 280)",
         "tonalRamp": [
-          "oklch(15% 0.006 85)",
-          "oklch(25% 0.006 85)",
-          "oklch(35% 0.006 85)",
-          "oklch(45% 0.006 85)",
-          "oklch(55% 0.006 85)",
-          "oklch(65% 0.006 85)",
-          "oklch(80% 0.006 85)",
-          "oklch(95% 0.006 85)"
+          "oklch(15% 0.008 280)",
+          "oklch(25% 0.008 280)",
+          "oklch(35% 0.008 280)",
+          "oklch(45% 0.008 280)",
+          "oklch(55% 0.008 280)",
+          "oklch(65% 0.008 280)",
+          "oklch(80% 0.008 280)",
+          "oklch(95% 0.008 280)"
         ]
       },
-      "wall-sunk": {
+      "void-deep": {
         "role": "neutral",
-        "displayName": "Sunk Wall",
-        "canonical": "oklch(93.4% 0.008 85)",
+        "displayName": "Deep Void",
+        "canonical": "oklch(8.5% 0.006 280)",
         "tonalRamp": [
-          "oklch(15% 0.008 85)",
-          "oklch(25% 0.008 85)",
-          "oklch(35% 0.008 85)",
-          "oklch(45% 0.008 85)",
-          "oklch(55% 0.008 85)",
-          "oklch(65% 0.008 85)",
-          "oklch(80% 0.008 85)",
-          "oklch(95% 0.008 85)"
+          "oklch(15% 0.006 280)",
+          "oklch(25% 0.006 280)",
+          "oklch(35% 0.006 280)",
+          "oklch(45% 0.006 280)",
+          "oklch(55% 0.006 280)",
+          "oklch(65% 0.006 280)",
+          "oklch(80% 0.006 280)",
+          "oklch(95% 0.006 280)"
         ]
       },
-      "ink": {
-        "role": "primary",
-        "displayName": "Gallery Ink",
-        "canonical": "oklch(19% 0.006 60)",
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "oklch(94% 0.012 85)",
         "tonalRamp": [
-          "oklch(15% 0.006 60)",
-          "oklch(25% 0.006 60)",
-          "oklch(35% 0.006 60)",
-          "oklch(45% 0.006 60)",
-          "oklch(55% 0.006 60)",
-          "oklch(65% 0.006 60)",
-          "oklch(80% 0.006 60)",
-          "oklch(95% 0.006 60)"
+          "oklch(15% 0.012 85)",
+          "oklch(25% 0.012 85)",
+          "oklch(35% 0.012 85)",
+          "oklch(45% 0.012 85)",
+          "oklch(55% 0.012 85)",
+          "oklch(65% 0.012 85)",
+          "oklch(80% 0.012 85)",
+          "oklch(95% 0.012 85)"
         ]
       },
-      "ink-soft": {
+      "bone-soft": {
         "role": "neutral",
-        "displayName": "Ink Soft",
-        "canonical": "oklch(38% 0.008 60)",
+        "displayName": "Bone Soft",
+        "canonical": "oklch(82% 0.012 85)",
         "tonalRamp": [
-          "oklch(15% 0.008 60)",
-          "oklch(25% 0.008 60)",
-          "oklch(35% 0.008 60)",
-          "oklch(45% 0.008 60)",
-          "oklch(55% 0.008 60)",
-          "oklch(65% 0.008 60)",
-          "oklch(80% 0.008 60)",
-          "oklch(95% 0.008 60)"
+          "oklch(15% 0.012 85)",
+          "oklch(25% 0.012 85)",
+          "oklch(35% 0.012 85)",
+          "oklch(45% 0.012 85)",
+          "oklch(55% 0.012 85)",
+          "oklch(65% 0.012 85)",
+          "oklch(80% 0.012 85)",
+          "oklch(95% 0.012 85)"
         ]
       },
-      "ink-quiet": {
+      "bone-quiet": {
         "role": "neutral",
-        "displayName": "Ink Quiet",
-        "canonical": "oklch(49% 0.008 60)",
+        "displayName": "Bone Quiet",
+        "canonical": "oklch(68% 0.012 85)",
         "tonalRamp": [
-          "oklch(15% 0.008 60)",
-          "oklch(25% 0.008 60)",
-          "oklch(35% 0.008 60)",
-          "oklch(45% 0.008 60)",
-          "oklch(55% 0.008 60)",
-          "oklch(65% 0.008 60)",
-          "oklch(80% 0.008 60)",
-          "oklch(95% 0.008 60)"
+          "oklch(15% 0.012 85)",
+          "oklch(25% 0.012 85)",
+          "oklch(35% 0.012 85)",
+          "oklch(45% 0.012 85)",
+          "oklch(55% 0.012 85)",
+          "oklch(65% 0.012 85)",
+          "oklch(80% 0.012 85)",
+          "oklch(95% 0.012 85)"
         ]
       },
       "rule": {
         "role": "neutral",
-        "displayName": "Wall Rule",
-        "canonical": "oklch(84% 0.008 80)",
+        "displayName": "Rule",
+        "canonical": "oklch(32% 0.012 280)",
         "tonalRamp": [
-          "oklch(15% 0.008 80)",
-          "oklch(25% 0.008 80)",
-          "oklch(35% 0.008 80)",
-          "oklch(45% 0.008 80)",
-          "oklch(55% 0.008 80)",
-          "oklch(65% 0.008 80)",
-          "oklch(80% 0.008 80)",
-          "oklch(95% 0.008 80)"
+          "oklch(15% 0.012 280)",
+          "oklch(25% 0.012 280)",
+          "oklch(35% 0.012 280)",
+          "oklch(45% 0.012 280)",
+          "oklch(55% 0.012 280)",
+          "oklch(65% 0.012 280)",
+          "oklch(80% 0.012 280)",
+          "oklch(95% 0.012 280)"
         ]
       },
-      "mat": {
+      "rule-strong": {
         "role": "neutral",
-        "displayName": "Mat White",
-        "canonical": "oklch(99.3% 0.003 85)",
+        "displayName": "Rule Strong",
+        "canonical": "oklch(46% 0.014 280)",
         "tonalRamp": [
-          "oklch(15% 0.003 85)",
-          "oklch(25% 0.003 85)",
-          "oklch(35% 0.003 85)",
-          "oklch(45% 0.003 85)",
-          "oklch(55% 0.003 85)",
-          "oklch(65% 0.003 85)",
-          "oklch(80% 0.003 85)",
-          "oklch(95% 0.003 85)"
+          "oklch(15% 0.014 280)",
+          "oklch(25% 0.014 280)",
+          "oklch(35% 0.014 280)",
+          "oklch(45% 0.014 280)",
+          "oklch(55% 0.014 280)",
+          "oklch(65% 0.014 280)",
+          "oklch(80% 0.014 280)",
+          "oklch(95% 0.014 280)"
         ]
       },
-      "moulding": {
+      "gold": {
         "role": "primary",
-        "displayName": "Moulding Black",
-        "canonical": "oklch(17% 0.005 60)",
+        "displayName": "Photon-Ring Gold",
+        "canonical": "oklch(84% 0.135 80)",
         "tonalRamp": [
-          "oklch(15% 0.005 60)",
-          "oklch(25% 0.005 60)",
-          "oklch(35% 0.005 60)",
-          "oklch(45% 0.005 60)",
-          "oklch(55% 0.005 60)",
-          "oklch(65% 0.005 60)",
-          "oklch(80% 0.005 60)",
-          "oklch(95% 0.005 60)"
+          "oklch(15% 0.135 80)",
+          "oklch(25% 0.135 80)",
+          "oklch(35% 0.135 80)",
+          "oklch(45% 0.135 80)",
+          "oklch(55% 0.135 80)",
+          "oklch(65% 0.135 80)",
+          "oklch(80% 0.135 80)",
+          "oklch(95% 0.135 80)"
         ]
       },
-      "gilt": {
+      "approach": {
+        "role": "secondary",
+        "displayName": "Approach Blue-White",
+        "canonical": "oklch(91% 0.045 255)",
+        "tonalRamp": [
+          "oklch(15% 0.045 255)",
+          "oklch(25% 0.045 255)",
+          "oklch(35% 0.045 255)",
+          "oklch(45% 0.045 255)",
+          "oklch(55% 0.045 255)",
+          "oklch(65% 0.045 255)",
+          "oklch(80% 0.045 255)",
+          "oklch(95% 0.045 255)"
+        ]
+      },
+      "disk-blue": {
+        "role": "secondary",
+        "displayName": "Disk Blue",
+        "canonical": "oklch(62% 0.11 255)",
+        "tonalRamp": [
+          "oklch(15% 0.11 255)",
+          "oklch(25% 0.11 255)",
+          "oklch(35% 0.11 255)",
+          "oklch(45% 0.11 255)",
+          "oklch(55% 0.11 255)",
+          "oklch(65% 0.11 255)",
+          "oklch(80% 0.11 255)",
+          "oklch(95% 0.11 255)"
+        ]
+      },
+      "ember": {
         "role": "tertiary",
-        "displayName": "Gilt",
-        "canonical": "oklch(72% 0.11 78)",
+        "displayName": "Ember",
+        "canonical": "oklch(66% 0.2 36)",
         "tonalRamp": [
-          "oklch(15% 0.11 78)",
-          "oklch(25% 0.11 78)",
-          "oklch(35% 0.11 78)",
-          "oklch(45% 0.11 78)",
-          "oklch(55% 0.11 78)",
-          "oklch(65% 0.11 78)",
-          "oklch(80% 0.11 78)",
-          "oklch(95% 0.11 78)"
-        ]
-      },
-      "light": {
-        "role": "tertiary",
-        "displayName": "Picture Light",
-        "canonical": "oklch(97% 0.05 85)",
-        "tonalRamp": [
-          "oklch(15% 0.05 85)",
-          "oklch(25% 0.05 85)",
-          "oklch(35% 0.05 85)",
-          "oklch(45% 0.05 85)",
-          "oklch(55% 0.05 85)",
-          "oklch(65% 0.05 85)",
-          "oklch(80% 0.05 85)",
-          "oklch(95% 0.05 85)"
-        ]
-      },
-      "stamp-ink": {
-        "role": "tertiary",
-        "displayName": "Stamp Red",
-        "canonical": "oklch(66% 0.17 30)",
-        "tonalRamp": [
-          "oklch(15% 0.17 30)",
-          "oklch(25% 0.17 30)",
-          "oklch(35% 0.17 30)",
-          "oklch(45% 0.17 30)",
-          "oklch(55% 0.17 30)",
-          "oklch(65% 0.17 30)",
-          "oklch(80% 0.17 30)",
-          "oklch(95% 0.17 30)"
-        ]
-      },
-      "ghost": {
-        "role": "neutral",
-        "displayName": "Ghost",
-        "canonical": "oklch(62% 0.006 60)",
-        "tonalRamp": [
-          "oklch(15% 0.006 60)",
-          "oklch(25% 0.006 60)",
-          "oklch(35% 0.006 60)",
-          "oklch(45% 0.006 60)",
-          "oklch(55% 0.006 60)",
-          "oklch(65% 0.006 60)",
-          "oklch(80% 0.006 60)",
-          "oklch(95% 0.006 60)"
-        ]
-      },
-      "paint-oxblood": {
-        "role": "secondary",
-        "displayName": "Oxblood",
-        "canonical": "oklch(33% 0.09 22)",
-        "tonalRamp": [
-          "oklch(15% 0.09 22)",
-          "oklch(25% 0.09 22)",
-          "oklch(35% 0.09 22)",
-          "oklch(45% 0.09 22)",
-          "oklch(55% 0.09 22)",
-          "oklch(65% 0.09 22)",
-          "oklch(80% 0.09 22)",
-          "oklch(95% 0.09 22)"
-        ]
-      },
-      "vinyl-oxblood": {
-        "role": "secondary",
-        "displayName": "Oxblood Vinyl",
-        "canonical": "oklch(97.5% 0.012 40)",
-        "tonalRamp": [
-          "oklch(15% 0.012 40)",
-          "oklch(25% 0.012 40)",
-          "oklch(35% 0.012 40)",
-          "oklch(45% 0.012 40)",
-          "oklch(55% 0.012 40)",
-          "oklch(65% 0.012 40)",
-          "oklch(80% 0.012 40)",
-          "oklch(95% 0.012 40)"
-        ]
-      },
-      "paint-blue": {
-        "role": "secondary",
-        "displayName": "Spirit-Led Navy",
-        "canonical": "oklch(35.1% 0.079 255)",
-        "tonalRamp": [
-          "oklch(15% 0.079 255)",
-          "oklch(25% 0.079 255)",
-          "oklch(35% 0.079 255)",
-          "oklch(45% 0.079 255)",
-          "oklch(55% 0.079 255)",
-          "oklch(65% 0.079 255)",
-          "oklch(80% 0.079 255)",
-          "oklch(95% 0.079 255)"
-        ]
-      },
-      "vinyl-blue": {
-        "role": "secondary",
-        "displayName": "Navy Vinyl",
-        "canonical": "oklch(98.2% 0.006 248)",
-        "tonalRamp": [
-          "oklch(15% 0.006 248)",
-          "oklch(25% 0.006 248)",
-          "oklch(35% 0.006 248)",
-          "oklch(45% 0.006 248)",
-          "oklch(55% 0.006 248)",
-          "oklch(65% 0.006 248)",
-          "oklch(80% 0.006 248)",
-          "oklch(95% 0.006 248)"
-        ]
-      },
-      "paint-slate": {
-        "role": "secondary",
-        "displayName": "Slate",
-        "canonical": "oklch(35% 0.04 250)",
-        "tonalRamp": [
-          "oklch(15% 0.04 250)",
-          "oklch(25% 0.04 250)",
-          "oklch(35% 0.04 250)",
-          "oklch(45% 0.04 250)",
-          "oklch(55% 0.04 250)",
-          "oklch(65% 0.04 250)",
-          "oklch(80% 0.04 250)",
-          "oklch(95% 0.04 250)"
-        ]
-      },
-      "vinyl-slate": {
-        "role": "secondary",
-        "displayName": "Slate Vinyl",
-        "canonical": "oklch(97.5% 0.008 250)",
-        "tonalRamp": [
-          "oklch(15% 0.008 250)",
-          "oklch(25% 0.008 250)",
-          "oklch(35% 0.008 250)",
-          "oklch(45% 0.008 250)",
-          "oklch(55% 0.008 250)",
-          "oklch(65% 0.008 250)",
-          "oklch(80% 0.008 250)",
-          "oklch(95% 0.008 250)"
-        ]
-      },
-      "paint-plum": {
-        "role": "secondary",
-        "displayName": "Plum",
-        "canonical": "oklch(32% 0.07 330)",
-        "tonalRamp": [
-          "oklch(15% 0.07 330)",
-          "oklch(25% 0.07 330)",
-          "oklch(35% 0.07 330)",
-          "oklch(45% 0.07 330)",
-          "oklch(55% 0.07 330)",
-          "oklch(65% 0.07 330)",
-          "oklch(80% 0.07 330)",
-          "oklch(95% 0.07 330)"
-        ]
-      },
-      "vinyl-plum": {
-        "role": "secondary",
-        "displayName": "Plum Vinyl",
-        "canonical": "oklch(97.5% 0.01 330)",
-        "tonalRamp": [
-          "oklch(15% 0.01 330)",
-          "oklch(25% 0.01 330)",
-          "oklch(35% 0.01 330)",
-          "oklch(45% 0.01 330)",
-          "oklch(55% 0.01 330)",
-          "oklch(65% 0.01 330)",
-          "oklch(80% 0.01 330)",
-          "oklch(95% 0.01 330)"
-        ]
-      },
-      "paint-ochre": {
-        "role": "secondary",
-        "displayName": "Ochre",
-        "canonical": "oklch(78% 0.1 80)",
-        "tonalRamp": [
-          "oklch(15% 0.1 80)",
-          "oklch(25% 0.1 80)",
-          "oklch(35% 0.1 80)",
-          "oklch(45% 0.1 80)",
-          "oklch(55% 0.1 80)",
-          "oklch(65% 0.1 80)",
-          "oklch(80% 0.1 80)",
-          "oklch(95% 0.1 80)"
-        ]
-      },
-      "paint-stone": {
-        "role": "secondary",
-        "displayName": "Stone",
-        "canonical": "oklch(90.5% 0.014 80)",
-        "tonalRamp": [
-          "oklch(15% 0.014 80)",
-          "oklch(25% 0.014 80)",
-          "oklch(35% 0.014 80)",
-          "oklch(45% 0.014 80)",
-          "oklch(55% 0.014 80)",
-          "oklch(65% 0.014 80)",
-          "oklch(80% 0.014 80)",
-          "oklch(95% 0.014 80)"
-        ]
-      },
-      "paint-ink": {
-        "role": "secondary",
-        "displayName": "Night",
-        "canonical": "oklch(17% 0.005 60)",
-        "tonalRamp": [
-          "oklch(15% 0.005 60)",
-          "oklch(25% 0.005 60)",
-          "oklch(35% 0.005 60)",
-          "oklch(45% 0.005 60)",
-          "oklch(55% 0.005 60)",
-          "oklch(65% 0.005 60)",
-          "oklch(80% 0.005 60)",
-          "oklch(95% 0.005 60)"
-        ]
-      },
-      "vinyl-ink": {
-        "role": "secondary",
-        "displayName": "Night Vinyl",
-        "canonical": "oklch(97.5% 0.006 85)",
-        "tonalRamp": [
-          "oklch(15% 0.006 85)",
-          "oklch(25% 0.006 85)",
-          "oklch(35% 0.006 85)",
-          "oklch(45% 0.006 85)",
-          "oklch(55% 0.006 85)",
-          "oklch(65% 0.006 85)",
-          "oklch(80% 0.006 85)",
-          "oklch(95% 0.006 85)"
+          "oklch(15% 0.2 36)",
+          "oklch(25% 0.2 36)",
+          "oklch(35% 0.2 36)",
+          "oklch(45% 0.2 36)",
+          "oklch(55% 0.2 36)",
+          "oklch(65% 0.2 36)",
+          "oklch(80% 0.2 36)",
+          "oklch(95% 0.2 36)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Exhibition Title",
-        "purpose": "The name on the title wall; nowhere else."
+        "displayName": "Display",
+        "purpose": "Ian's name at arrival; one per page."
       },
-      "display-show": {
-        "displayName": "Show Line",
-        "purpose": "Italic light \"Selected Work, 2019–2026\" beneath the name, sized 0.56em of display."
-      },
-      "room-sign": {
-        "displayName": "Room Sign",
-        "purpose": "Room names; also page titles on the resume and 404 (at 850)."
-      },
-      "room-numeral": {
-        "displayName": "Room Numeral",
-        "purpose": "The light number set beside a room name, in --vinyl-quiet."
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Headline metric on each plate; gold when current."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Visitor desk question, Index of media heading."
+        "purpose": "Organisation names on orbit headers; 404 and resume titles."
       },
-      "metric": {
-        "displayName": "Label Figure",
-        "purpose": "The figure heading a museum label; --step-2 on phones."
+      "section": {
+        "displayName": "Section",
+        "purpose": "Closing section headings; event plate titles."
       },
-      "lead": {
-        "displayName": "Lead",
-        "purpose": "The headline sentence on the title wall."
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Arrival headline and the horizon ask."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Room role, section headings, large buttons."
+        "purpose": "Plate and resume entry titles, set as citations."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Wall text and label detail, max 62ch."
+        "purpose": "Facts and summaries, max 60ch."
       },
-      "work-title": {
-        "displayName": "Work Title",
-        "purpose": "Italic cite for the title of a work; date follows in roman 400."
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Plate meta rows, dates, link rows, skill lists."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Medium, credit lines, floor plan, tour step, passport notes (600–650)."
-      }
-    },
-    "paints": {
-      "oxblood": {
-        "paint": "oklch(33% 0.09 22)",
-        "vinyl": "oklch(97.5% 0.012 40)",
-        "vinyl-soft": "oklch(87% 0.03 30)",
-        "vinyl-quiet": "oklch(78% 0.04 28)",
-        "vinyl-rule": "oklch(46% 0.08 22)",
-        "use": "RTX room"
+        "purpose": "Button text in extended caps."
       },
-      "blue": {
-        "paint": "oklch(35.1% 0.079 255)",
-        "vinyl": "oklch(98.2% 0.006 248)",
-        "vinyl-soft": "oklch(87% 0.03 250)",
-        "vinyl-quiet": "oklch(78% 0.04 252)",
-        "vinyl-rule": "oklch(47% 0.075 255)",
-        "use": "Spirit-Led Software room"
-      },
-      "slate": {
-        "paint": "oklch(35% 0.04 250)",
-        "vinyl": "oklch(97.5% 0.008 250)",
-        "vinyl-soft": "oklch(87% 0.02 250)",
-        "vinyl-quiet": "oklch(78% 0.03 250)",
-        "vinyl-rule": "oklch(47% 0.04 250)",
-        "use": "available, unused"
-      },
-      "plum": {
-        "paint": "oklch(32% 0.07 330)",
-        "vinyl": "oklch(97.5% 0.01 330)",
-        "vinyl-soft": "oklch(87% 0.03 330)",
-        "vinyl-quiet": "oklch(78% 0.04 330)",
-        "vinyl-rule": "oklch(45% 0.07 330)",
-        "use": "available, unused"
-      },
-      "ochre": {
-        "paint": "oklch(78% 0.1 80)",
-        "vinyl": "var(--ink)",
-        "vinyl-soft": "oklch(30% 0.03 70)",
-        "vinyl-quiet": "oklch(38% 0.04 70)",
-        "vinyl-rule": "oklch(66% 0.09 78)",
-        "use": "available, unused"
-      },
-      "stone": {
-        "paint": "oklch(90.5% 0.014 80)",
-        "vinyl": "var(--ink)",
-        "vinyl-soft": "oklch(34% 0.01 70)",
-        "vinyl-quiet": "oklch(43% 0.012 70)",
-        "vinyl-rule": "oklch(79% 0.014 80)",
-        "use": "default for event-only rooms (University of Rhode Island)"
-      },
-      "ink": {
-        "paint": "oklch(17% 0.005 60)",
-        "vinyl": "oklch(97.5% 0.006 85)",
-        "vinyl-soft": "oklch(84% 0.008 85)",
-        "vinyl-quiet": "oklch(72% 0.01 85)",
-        "vinyl-rule": "oklch(32% 0.006 60)",
-        "use": "guided-tour bar only"
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Rail years, viewpoint options, status, timestamps, disk lettering."
       }
     },
     "shadows": [
       {
-        "name": "hung",
-        "value": "0 1px 1px oklch(0% 0 0 / 0.22), 0 14px 28px -10px oklch(0% 0 0 / 0.38)",
-        "purpose": "Every hung object: work frames, portrait, highlights, resume sheet, 404 frame."
+        "name": "knockout-ring",
+        "value": "0 0 0 3px var(--void-deep)",
+        "purpose": "Cuts the time-rail marker out of the rail line. Not a glow."
       },
       {
-        "name": "float",
-        "value": "0 18px 40px -12px oklch(0% 0 0 / 0.55)",
-        "purpose": "The guided-tour bar, the only floating surface."
+        "name": "pressed-ring",
+        "value": "inset 0 0 0 1px var(--gold)",
+        "purpose": "The pressed viewpoint option."
       },
       {
-        "name": "lit",
-        "value": "0 1px 1px oklch(0% 0 0 / 0.2), 0 22px 40px -12px oklch(0% 0 0 / 0.5)",
-        "purpose": "An opened work (with translateY(-3px) scale(1.015)); literal in Work.astro, not a token."
-      },
-      {
-        "name": "dimmed",
-        "value": "0 1px 1px oklch(0% 0 0 / 0.3)",
-        "purpose": "Unlit works while another work in the room is lit."
+        "name": "etched-halo",
+        "value": "paint-order: stroke; stroke: var(--void-deep); stroke-width: 3px; stroke-linejoin: round",
+        "purpose": "SVG halo behind disk labels and year numerals so they read over bright matter."
       }
     ],
-    "light": {
-      "pool": "radial-gradient(closest-side, color-mix(in oklch, var(--light) 44%, transparent), transparent)",
-      "atRest": 0.28,
-      "lit": 1,
-      "roomDarkened": "color-mix(in oklch, var(--paint) 72%, oklch(8% 0.01 60))",
-      "dimmedLabelOpacity": 0.5
-    },
+    "gradients": [
+      {
+        "name": "doppler",
+        "value": "linear-gradient(90deg, var(--approach), var(--gold) 55%, var(--ember))",
+        "purpose": "The primary button's 1px border only."
+      }
+    ],
     "motion": [
       {
         "name": "ease",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "The single ease-out for every transition."
+        "purpose": "All UI transitions."
       },
       {
         "name": "fast",
         "value": "180ms",
-        "purpose": "Link underlines, button fills, tour buttons."
+        "purpose": "Hover, underline, overlay show/hide."
       },
       {
         "name": "slow",
         "value": "520ms",
-        "purpose": "Light pools, frame lift, room darkening, plan fills, stamp press, tour entry."
+        "purpose": "Figure lighting, log indicator, observation notice."
+      },
+      {
+        "name": "observation-arc",
+        "value": "900ms",
+        "purpose": "The gold arc drawing closed on a logged observation."
+      },
+      {
+        "name": "camera-hold",
+        "value": "smoothstep over (t - 0.18) / 0.64 between station anchors",
+        "purpose": "The disk holds still while a plate is read and moves between plates; log-interpolated distance."
+      },
+      {
+        "name": "replay-pause",
+        "value": "2600ms per station",
+        "purpose": "The pressed-only replay of the fall; never autoplays."
       },
       {
         "name": "reduced-motion",
-        "value": "1ms",
-        "purpose": "prefers-reduced-motion collapses all transitions and animations; tour scroll jumps."
+        "value": "transitions 1ms; camera jumps; replay scrolls instantly",
+        "purpose": "prefers-reduced-motion."
       }
     ],
     "breakpoints": [
       {
-        "name": "plan-numerals",
-        "value": "60rem"
+        "name": "narrow",
+        "value": "52rem",
+        "purpose": "Disk recentres above text, rail and viewpoints hide, plates become full-bleed deep-void slabs."
       },
       {
-        "name": "stack-title-and-desk",
-        "value": "56rem"
+        "name": "compact-masthead",
+        "value": "40rem",
+        "purpose": "Masthead height 3.25rem."
       },
       {
-        "name": "stack-rooms",
-        "value": "52rem"
-      },
-      {
-        "name": "phone",
-        "value": "40rem"
-      },
-      {
-        "name": "tour-wrap",
-        "value": "36rem"
+        "name": "tiny",
+        "value": "24rem",
+        "purpose": "Wordmark tracking and masthead email padding tighten."
       }
-    ],
-    "layout": {
-      "wrapMax": "90rem",
-      "masthead": "3.75rem (5.6rem below 40rem)",
-      "hangLine": "repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr)); each work spans two subgrid rows"
-    }
+    ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Primary Button (Email Ian)",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Solid signage button in the wall's vinyl; the main Email action. Inverts inside painted rooms.",
-      "html": "<a class=\"ds-btn\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M3.5 6.5h17v11h-17Zm0 .5 8.5 6.5L20.5 7\"/></svg>Email Ian</a>",
-      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 3rem; padding: 0 var(--space-5); border: 2px solid var(--vinyl, var(--ink)); border-radius: 0; font-family: var(--font); font-size: var(--step-0); font-weight: 700; line-height: 1; text-decoration: none; cursor: pointer; transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease); background: var(--vinyl, var(--ink)); color: var(--paint, var(--wall)); } .ds-btn:hover { background: color-mix(in oklch, var(--vinyl, var(--ink)) 86%, var(--paint, var(--wall))); } .ds-btn:focus-visible { outline: 2px solid var(--vinyl, var(--ink)); outline-offset: 3px; } .ds-btn svg { width: 1.2em; height: 1.2em; flex: none; }"
+      "description": "The one primary action per view: a void capsule ringed in the disk's Doppler light, gold orbit icon.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"mailto:hi@ianpascoe.dev\"><svg class=\"ds-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3.5a8.5 8.5 0 1 1 0 17 8.5 8.5 0 0 1 0-17ZM12 9.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z\"/></svg>Email Ian</a>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;min-height:3rem;padding:0 1.5rem;border:1px solid var(--rule-strong);border-radius:999px;background:transparent;color:var(--bone);font-family:var(--font);font-size:0.8125rem;font-stretch:125%;font-weight:450;letter-spacing:0.16em;text-transform:uppercase;line-height:1;text-decoration:none;cursor:pointer;transition:border-color 180ms var(--ease),background-color 180ms var(--ease),color 180ms var(--ease)} .ds-btn:focus-visible{outline:2px solid var(--gold);outline-offset:4px} .ds-icon{width:1.35em;height:1.35em;flex:none} .ds-btn-primary{border-color:transparent;background:linear-gradient(var(--void),var(--void)) padding-box,var(--doppler) border-box} .ds-btn-primary:hover{background:linear-gradient(oklch(20% 0.01 280),oklch(20% 0.01 280)) padding-box,var(--doppler) border-box} .ds-btn-primary .ds-icon{color:var(--gold)}"
     },
     {
-      "name": "Quiet Button",
+      "name": "Instrument Button",
       "kind": "button",
-      "refersTo": "button-quiet",
-      "description": "Outlined companion to the primary button: the tour start, the checklist link, secondary 404 action.",
-      "html": "<button type=\"button\" class=\"ds-btn-quiet\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><path d=\"M12 3v3M5.6 5.6l2.1 2.1M18.4 5.6l-2.1 2.1M7.5 14a4.5 4.5 0 1 1 9 0c0 1.9-1.3 2.8-1.8 4.5h-5.4C8.8 16.8 7.5 15.9 7.5 14ZM9.5 21h5\"/></svg>Take the tour from 2019</button>",
-      "css": ".ds-btn-quiet { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 3rem; padding: 0 var(--space-5); border: 2px solid var(--vinyl, var(--ink)); border-radius: 0; font-family: var(--font); font-size: var(--step-0); font-weight: 700; line-height: 1; text-decoration: none; cursor: pointer; transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease); background: transparent; color: var(--vinyl, var(--ink)); } .ds-btn-quiet:hover { background: color-mix(in oklch, var(--vinyl, var(--ink)) 10%, transparent); } .ds-btn-quiet:focus-visible { outline: 2px solid var(--vinyl, var(--ink)); outline-offset: 3px; } .ds-btn-quiet svg { width: 1.2em; height: 1.2em; flex: none; }"
+      "refersTo": "button-instrument",
+      "description": "Secondary instrument control (Replay 2019 → now, Print): hairline capsule in extended caps.",
+      "html": "<button type=\"button\" class=\"ds-btn ds-btn-instrument\"><svg class=\"ds-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg>Stop the fall</button>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;min-height:3rem;padding:0 1.5rem;border:1px solid var(--rule-strong);border-radius:999px;background:transparent;color:var(--bone);font-family:var(--font);font-size:0.8125rem;font-stretch:125%;font-weight:450;letter-spacing:0.16em;text-transform:uppercase;line-height:1;text-decoration:none;cursor:pointer;transition:border-color 180ms var(--ease),background-color 180ms var(--ease),color 180ms var(--ease)} .ds-btn:focus-visible{outline:2px solid var(--gold);outline-offset:4px} .ds-icon{width:1.35em;height:1.35em;flex:none} .ds-btn-instrument:hover{border-color:var(--bone-soft);background:oklch(94% 0.012 85 / 0.06)}"
     },
     {
-      "name": "Framed Work",
-      "kind": "custom",
-      "refersTo": "work-frame",
-      "description": "A work: moulding border, white mat, exact SVG drawing of its fact (here a 75% reduction), hung shadow, light pool behind. Hover lifts; pressed = lit.",
-      "html": "<div class=\"ds-work\"><button type=\"button\" class=\"ds-work__frame\" aria-pressed=\"false\"><span class=\"ds-work__mat\"><svg viewBox=\"0 0 122.5 122.5\" role=\"img\" aria-label=\"Drawing: 100 squares, 75 taken away, 25 remain.\" style=\"display:block;width:100%;height:auto\"><rect x=\"0\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"12.5\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"25\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"37.5\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"50\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"62.5\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"75\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"87.5\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"100\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"112.5\" y=\"0\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"0\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"12.5\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"25\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"37.5\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"50\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"62.5\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"75\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"87.5\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"100\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"112.5\" y=\"12.5\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"0\" y=\"25\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"12.5\" y=\"25\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"25\" y=\"25\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"37.5\" y=\"25\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"50\" y=\"25\" width=\"10\" height=\"10\" fill=\"currentColor\"/><rect x=\"63\" y=\"25.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"25.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"25.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"25.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"25.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"38\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"50.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"63\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"75.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"88\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"100.5\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"0.5\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"13\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"25.5\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"38\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"50.5\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"63\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"75.5\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"88\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"100.5\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/><rect x=\"113\" y=\"113\" width=\"9\" height=\"9\" fill=\"none\" stroke=\"var(--ghost)\" stroke-width=\"0.9\"/></svg></span></button></div>",
-      "css": ".ds-work { position: relative; display: inline-block; padding: 3rem 2.5rem 1rem; } .ds-work::before { content: \"\"; position: absolute; inset: 0; background: radial-gradient(closest-side, color-mix(in oklch, var(--light) 44%, transparent), transparent); opacity: 0.28; pointer-events: none; transition: opacity var(--slow) var(--ease); } .ds-work:has([aria-pressed=\"true\"])::before { opacity: 1; } .ds-work__frame { position: relative; display: block; width: 14rem; padding: 0; border: 0.3rem solid var(--moulding); background: var(--mat); color: var(--moulding); box-shadow: var(--hung); cursor: zoom-in; transition: transform var(--slow) var(--ease), box-shadow var(--slow) var(--ease); } .ds-work__frame:hover { transform: translateY(-2px); } .ds-work__frame:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; } .ds-work__mat { display: block; padding: 14%; } .ds-work__frame[aria-pressed=\"true\"] { transform: translateY(-3px) scale(1.015); box-shadow: 0 1px 1px oklch(0% 0 0 / 0.2), 0 22px 40px -12px oklch(0% 0 0 / 0.5); cursor: zoom-out; }"
+      "name": "Viewpoint Selector",
+      "kind": "chip",
+      "refersTo": "viewpoint-selector",
+      "description": "Segmented capsule instrument for the camera: observer, edge-on, face-on; pressed option in gold with an inset gold ring.",
+      "html": "<div class=\"ds-viewpoints\" role=\"group\" aria-label=\"Viewpoint\"><button type=\"button\" aria-pressed=\"true\">Observer</button><button type=\"button\" aria-pressed=\"false\">Edge-on</button><button type=\"button\" aria-pressed=\"false\">Face-on</button></div>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-viewpoints{display:inline-flex;padding:3px;border:1px solid var(--rule-strong);border-radius:999px;background:var(--void-deep)} .ds-viewpoints button{min-height:2.25rem;padding:0 1rem;border:0;border-radius:999px;background:transparent;color:var(--bone-quiet);font-family:var(--font);font-size:0.6875rem;font-stretch:118%;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:color 180ms var(--ease)} .ds-viewpoints button:hover{color:var(--bone)} .ds-viewpoints button:focus-visible{outline:2px solid var(--gold);outline-offset:4px} .ds-viewpoints button[aria-pressed=\"true\"]{color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}"
     },
     {
-      "name": "Museum Label",
-      "kind": "custom",
-      "refersTo": "work-title",
-      "description": "The label beside every work: figure, italic title with roman date, detail, medium, credit line.",
-      "html": "<div class=\"ds-label\"><p class=\"ds-label__figure\"><span class=\"ds-label__metric\">75%</span><span class=\"ds-label__measure\">shorter test runs</span></p><h3 class=\"ds-label__title\"><cite>Suite Speedrun</cite>, <time>2021</time></h3><p class=\"ds-label__detail\">Built a custom test automation solution on Cucumber that cut test duration by 75%.</p><p class=\"ds-label__medium\">Cucumber, CI/CD</p><p class=\"ds-label__foot\">RTX, 2019–now · No. 2019.1</p></div>",
-      "css": ".ds-label { display: grid; gap: var(--space-2); max-width: 24rem; font-family: var(--font); color: var(--vinyl, var(--ink)); } .ds-label p, .ds-label h3 { margin: 0; } .ds-label__figure { display: grid; gap: var(--space-1); margin-bottom: var(--space-1); } .ds-label__metric { font-size: var(--step-3); font-weight: 750; line-height: 0.95; letter-spacing: -0.025em; font-variant-numeric: tabular-nums lining-nums; } .ds-label__measure { font-size: var(--step-0); font-weight: 600; line-height: 1.3; } .ds-label__title { font-size: var(--step-0); font-weight: 600; line-height: 1.35; } .ds-label__title cite { font-style: italic; } .ds-label__title time { font-weight: 400; } .ds-label__detail { color: var(--vinyl-soft, var(--ink-soft)); line-height: 1.5; } .ds-label__medium, .ds-label__foot { font-size: var(--step--1); } .ds-label__medium { font-weight: 600; color: var(--vinyl-soft, var(--ink-soft)); } .ds-label__foot { color: var(--vinyl-quiet, var(--ink-quiet)); }"
-    },
-    {
-      "name": "Room Sign",
-      "kind": "custom",
-      "refersTo": "room-sign",
-      "description": "A painted room's wall text: light numeral beside a heavy name, white vinyl on oxblood, role and dates, closed by a vinyl rule.",
-      "html": "<header class=\"ds-room\"><h2 class=\"ds-room__name\"><span class=\"ds-room__number\">1</span><span>RTX</span></h2><p class=\"ds-room__role\">Principal Software Engineer<span class=\"ds-room__range\">Joined Jun 2019 · Day 2,674</span></p></header>",
-      "css": ".ds-room { --paint: oklch(33% 0.09 22); --vinyl: oklch(97.5% 0.012 40); --vinyl-soft: oklch(87% 0.03 30); --vinyl-quiet: oklch(78% 0.04 28); --vinyl-rule: oklch(46% 0.08 22); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-6) var(--space-8); align-items: end; padding: var(--space-8) var(--gutter) var(--space-7); background: var(--paint); color: var(--vinyl); border-bottom: 1px solid var(--vinyl-rule); font-family: var(--font); } .ds-room h2, .ds-room p { margin: 0; } .ds-room__name { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-5); align-items: baseline; font-size: var(--step-4); font-weight: 800; letter-spacing: -0.03em; line-height: 0.95; } .ds-room__number { font-weight: 200; color: var(--vinyl-quiet); font-variant-numeric: tabular-nums lining-nums; } .ds-room__role { display: grid; gap: var(--space-1); font-size: var(--step-1); font-weight: 700; line-height: 1.3; } .ds-room__range { font-size: var(--step-0); font-weight: 500; color: var(--vinyl-soft); }"
-    },
-    {
-      "name": "Floor Plan",
+      "name": "Masthead with Time Rail",
       "kind": "nav",
-      "refersTo": "plan-room",
-      "description": "Masthead navigation drawn as rooms sharing walls with doorways cut between them; the current room fills with its paint.",
-      "html": "<nav class=\"ds-plan\" aria-label=\"Floor plan\"><a class=\"ds-plan__room ds-plan__room--edge\" href=\"#\">Entrance</a><a class=\"ds-plan__room ds-plan__room--ox\" href=\"#\" aria-current=\"location\" style=\"flex-grow:4\"><b>1</b> RTX</a><a class=\"ds-plan__room\" href=\"#\" style=\"flex-grow:3\"><b>2</b> Spirit-Led Software</a><a class=\"ds-plan__room\" href=\"#\" style=\"flex-grow:2\"><b>3</b> URI</a><a class=\"ds-plan__room ds-plan__room--edge\" href=\"#\">Desk</a></nav>",
-      "css": ".ds-plan { display: flex; height: 2.25rem; width: min(100%, 50rem); font-family: var(--font); } .ds-plan__room { position: relative; flex: 2 1 0; display: flex; align-items: center; gap: var(--space-2); margin-left: -1.5px; padding: 0 var(--space-2); border: 1.5px solid var(--ink); background: var(--wall); color: var(--ink); font-size: var(--step--1); font-weight: 650; line-height: 1; white-space: nowrap; overflow: hidden; text-decoration: none; transition: background-color var(--slow) var(--ease), color var(--slow) var(--ease); } .ds-plan__room::before { content: \"\"; position: absolute; left: -1.5px; top: 28%; width: 1.5px; height: 44%; background: inherit; } .ds-plan__room--edge { flex: 0 0 auto; } .ds-plan__room:first-child { margin-left: 0; color: var(--ink-soft); font-weight: 500; } .ds-plan__room:hover { background: var(--wall-sunk); } .ds-plan__room--ox[aria-current=\"location\"] { background: oklch(33% 0.09 22); color: oklch(97.5% 0.012 40); } .ds-plan__room--edge[aria-current=\"location\"] { background: var(--ink); color: var(--wall); } .ds-plan__room:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }"
+      "refersTo": "masthead",
+      "description": "Fixed deep-void bar: extended-caps wordmark, the etched 2019–Now rail with a gold depth marker, compact primary email.",
+      "html": "<header class=\"ds-mast\"><a class=\"ds-mast-name\" href=\"#\">Ian Pascoe</a><nav class=\"ds-rail\" aria-label=\"By year\"><ol><li style=\"--at:0%\"><a href=\"#\">2019</a></li><li style=\"--at:33%\"><a href=\"#\">2021</a></li><li style=\"--at:66%\"><a href=\"#\" aria-current=\"true\">2023</a></li><li class=\"ds-now\" style=\"--at:100%\">Now</li></ol><span class=\"ds-marker\" style=\"--depth:0.7\"></span></nav><a class=\"ds-mast-email\" href=\"mailto:hi@ianpascoe.dev\">Email Ian</a></header>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-mast{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:2rem;height:3.5rem;padding-inline:1.5rem;background:var(--void-deep);border-bottom:1px solid var(--rule);color:var(--bone);font-family:var(--font)} .ds-mast-name{font-size:0.8125rem;font-stretch:125%;font-weight:450;letter-spacing:0.24em;text-transform:uppercase;text-decoration:none;color:inherit;white-space:nowrap} .ds-rail{position:relative;height:100%;justify-self:center;width:min(100%,28rem)} .ds-rail ol{position:absolute;inset:0 1.5rem 0 0.75rem;margin:0;padding:0;list-style:none} .ds-rail ol::before{content:'';position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--rule-strong)} .ds-rail li{position:absolute;left:var(--at);top:50%;translate:-50% 0;font-size:0.6875rem;font-stretch:112%;letter-spacing:0.08em;color:var(--bone-quiet);font-variant-numeric:tabular-nums lining-nums} .ds-rail a{display:block;padding:0.2rem 0.25rem;color:inherit;text-decoration:none} .ds-rail a:hover,.ds-rail a[aria-current]{color:var(--gold)} .ds-rail .ds-now{padding:0.2rem 0 0 0.4rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--gold)} .ds-marker{position:absolute;top:50%;left:calc(0.75rem + var(--depth) * (100% - 2.25rem));width:0.5rem;height:0.5rem;margin:-0.25rem 0 0 -0.25rem;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px var(--void-deep)} .ds-mast-email{display:inline-flex;align-items:center;min-height:2.5rem;padding:0 1rem;border:1px solid transparent;border-radius:999px;background:linear-gradient(var(--void),var(--void)) padding-box,var(--doppler) border-box;color:var(--bone);font-size:0.75rem;font-stretch:125%;font-weight:450;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none} .ds-mast a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}"
     },
     {
-      "name": "Guided Tour Bar",
-      "kind": "custom",
-      "refersTo": "tour-bar",
-      "description": "Fixed ink-painted signage that steps the light through every work in time order; only appears when the visitor starts the tour.",
-      "html": "<div class=\"ds-tour\" role=\"region\" aria-label=\"Guided tour\"><div class=\"ds-tour__now\"><p class=\"ds-tour__step\">3 of 13 · 2021</p><p class=\"ds-tour__title\"><cite>Suite Speedrun</cite></p></div><div class=\"ds-tour__controls\"><button type=\"button\" class=\"ds-tour__btn\">Previous</button><button type=\"button\" class=\"ds-tour__btn ds-tour__btn--next\">Next</button><button type=\"button\" class=\"ds-tour__btn ds-tour__btn--end\" aria-label=\"End the tour\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg></button></div></div>",
-      "css": ".ds-tour { --paint: oklch(17% 0.005 60); --vinyl: oklch(97.5% 0.006 85); --vinyl-soft: oklch(84% 0.008 85); --vinyl-quiet: oklch(72% 0.01 85); --vinyl-rule: oklch(32% 0.006 60); display: flex; align-items: center; gap: var(--space-5); width: min(100%, 44rem); padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5); background: var(--paint); color: var(--vinyl); box-shadow: var(--float); font-family: var(--font); } .ds-tour p { margin: 0; } .ds-tour__now { display: grid; flex: 1; min-width: 0; } .ds-tour__step { font-size: var(--step--1); color: var(--vinyl-quiet); } .ds-tour__title { font-weight: 700; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; } .ds-tour__title cite { font-style: italic; } .ds-tour__controls { display: flex; gap: var(--space-2); } .ds-tour__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 2.75rem; padding: 0 var(--space-4); border: 1.5px solid var(--vinyl-rule); border-radius: 0; background: transparent; color: var(--vinyl); font: inherit; font-size: var(--step--1); font-weight: 700; cursor: pointer; transition: background-color var(--fast) var(--ease); } .ds-tour__btn:hover { background: oklch(100% 0 0 / 0.08); } .ds-tour__btn:focus-visible { outline: 2px solid var(--vinyl); outline-offset: 3px; } .ds-tour__btn--next { border-color: var(--vinyl); background: var(--vinyl); color: var(--paint); } .ds-tour__btn--next:hover { background: var(--vinyl-soft); } .ds-tour__btn--end { width: 2.75rem; padding: 0; }"
+      "name": "Fragment Plate",
+      "kind": "card",
+      "refersTo": "plate",
+      "description": "One dated fragment read on the void: extended hairline figure (gold when current), cited title, meta row with gold date, fact, medium. No box.",
+      "html": "<article class=\"ds-plate is-current\"><p class=\"ds-fig\"><span class=\"ds-val\">75%</span><span class=\"ds-measure\">less time to a ready Windchill environment</span></p><h3 class=\"ds-title\"><cite>Windchill environment automation</cite></h3><p class=\"ds-meta\"><span>RTX</span><time>Mar 2024</time><span class=\"ds-status\">Orbiting</span></p><p class=\"ds-fact\">Provisioning that took weeks now runs from one pipeline.</p></article>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-plate{display:grid;gap:0.75rem;max-width:36rem;padding-block:2rem;color:var(--bone);font-family:var(--font);font-size:1.0625rem;font-weight:380;line-height:1.6} .ds-plate p,.ds-plate h3{margin:0} .ds-fig{display:grid;gap:0.5rem;margin-bottom:0.5rem} .ds-val{font-size:clamp(3rem,1.2rem + 6vw,6rem);font-weight:180;font-stretch:125%;letter-spacing:0.01em;line-height:0.95;color:var(--bone-soft);font-variant-numeric:tabular-nums lining-nums;transition:color 520ms var(--ease)} .ds-plate.is-current .ds-val,.ds-plate:hover .ds-val{color:var(--gold)} .ds-measure{font-size:1.25rem;line-height:1.35;color:var(--bone-soft);max-width:30ch} .ds-title{font-size:1.25rem;font-weight:500;font-stretch:112%;letter-spacing:0.02em;line-height:1.1} .ds-title cite{font-style:normal} .ds-meta{display:flex;flex-wrap:wrap;align-items:center;gap:0.25rem 0.75rem;font-size:0.8125rem;letter-spacing:0.03em;color:var(--bone-quiet);font-variant-numeric:tabular-nums lining-nums} .ds-meta time{color:var(--gold)} .ds-status{padding-left:0.75rem;border-left:1px solid var(--rule-strong);text-transform:uppercase;letter-spacing:0.16em;font-size:0.6875rem;color:var(--bone-soft)} .ds-fact{max-width:60ch;color:var(--bone-soft)}"
     },
     {
-      "name": "Passport Stamp",
+      "name": "Link Row",
       "kind": "custom",
-      "refersTo": "stamp-ink",
-      "description": "A gallery-passport stamp: dashed and quiet until earned, then solid stamp red, tilted, with ring text and date.",
-      "html": "<ol class=\"ds-stamps\"><li class=\"ds-stamp\"><svg class=\"ds-stamp__mark\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><circle class=\"o\" cx=\"50\" cy=\"50\" r=\"46\"/><circle class=\"i\" cx=\"50\" cy=\"50\" r=\"27\"/></svg><p class=\"ds-stamp__name\">The full tour</p><p class=\"ds-stamp__how\">Take the tour from the first work to the last.</p></li><li class=\"ds-stamp is-stamped\"><svg class=\"ds-stamp__mark\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><defs><path id=\"ds-ring\" d=\"M50 50m-35 0a35 35 0 1 1 70 0a35 35 0 1 1 -70 0\"/></defs><circle class=\"o\" cx=\"50\" cy=\"50\" r=\"46\"/><circle class=\"i\" cx=\"50\" cy=\"50\" r=\"27\"/><text class=\"t\"><textPath href=\"#ds-ring\" textLength=\"218\" lengthAdjust=\"spacing\">FIRST LOOK · FIRST LOOK · </textPath></text><text class=\"d\" x=\"50\" y=\"55\" text-anchor=\"middle\">SEP 25</text></svg><p class=\"ds-stamp__name\">First look</p><p class=\"ds-stamp__how\">Open any work.</p></li></ol>",
-      "css": ".ds-stamps { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: var(--space-5) var(--space-4); margin: 0; padding: 0; list-style: none; font-family: var(--font); } .ds-stamp p { margin: 0; } .ds-stamp__mark { display: block; width: 5.25rem; height: 5.25rem; margin-bottom: var(--space-2); color: var(--ink-quiet); transition: transform var(--slow) var(--ease), color var(--slow) var(--ease); } .ds-stamp__mark circle { fill: none; stroke: currentColor; } .ds-stamp__mark .o { stroke-width: 1.5; stroke-dasharray: 3 4; opacity: 0.7; } .ds-stamp__mark .i { stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.45; } .ds-stamp__mark text { font-family: var(--font); fill: currentColor; } .ds-stamp__mark .t { font-size: 9px; font-weight: 750; } .ds-stamp__mark .d { font-size: 13px; font-weight: 800; } .ds-stamp.is-stamped .ds-stamp__mark { color: var(--stamp-ink); transform: rotate(-6deg); } .ds-stamp.is-stamped .o { stroke-width: 3.5; stroke-dasharray: none; opacity: 1; } .ds-stamp.is-stamped .i { stroke-width: 1.5; stroke-dasharray: none; opacity: 1; } .ds-stamp__name { font-weight: 700; line-height: 1.25; } .ds-stamp__how { font-size: var(--step--1); line-height: 1.4; color: var(--ink-quiet); }"
+      "description": "Hairline-underlined secondary links (Resume, GitHub, LinkedIn, X) at bone-soft; underline turns gold on hover.",
+      "html": "<ul class=\"ds-links\"><li><a href=\"/resume\">Resume</a></li><li><a href=\"#\">GitHub</a></li><li><a href=\"#\">LinkedIn</a></li><li><a href=\"#\">@ianpascoe</a></li></ul>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-links{display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;margin:0;padding:0;list-style:none;font-family:var(--font);font-size:0.8125rem;color:var(--bone-soft)} .ds-links a{display:inline-flex;align-items:center;min-height:2.75rem;color:inherit;text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:0.28em;text-decoration-color:var(--rule-strong);transition:text-decoration-color 180ms var(--ease)} .ds-links a:hover{text-decoration-color:var(--gold)} .ds-links a:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}"
+    },
+    {
+      "name": "Observation Ring",
+      "kind": "custom",
+      "description": "Visitor observation badge: dashed orbit, gold arc drawn closed when logged, gold core.",
+      "html": "<div class=\"ds-obs is-logged\"><svg class=\"ds-ring\" viewBox=\"0 0 40 40\" aria-hidden=\"true\"><circle class=\"ds-orbit\" cx=\"20\" cy=\"20\" r=\"17\"/><circle class=\"ds-arc\" cx=\"20\" cy=\"20\" r=\"17\" pathLength=\"100\"/><circle class=\"ds-core\" cx=\"20\" cy=\"20\" r=\"5\"/></svg><p class=\"ds-name\">Fell to the horizon</p><p class=\"ds-how\">Reach the end of the record.</p><p class=\"ds-when\">Logged 26 Sep</p></div>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-obs{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:1rem;font-family:var(--font);max-width:18rem} .ds-obs p{margin:0} .ds-ring{grid-row:span 3;width:2.5rem;height:2.5rem;fill:none;rotate:-90deg} .ds-orbit{stroke:var(--rule-strong);stroke-width:1;stroke-dasharray:2 3} .ds-arc{stroke:var(--gold);stroke-width:1.5;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 900ms var(--ease)} .ds-core{fill:var(--rule);transition:fill 520ms var(--ease)} .ds-obs.is-logged .ds-arc,.ds-obs:hover .ds-arc{stroke-dashoffset:0} .ds-obs.is-logged .ds-core{fill:var(--gold)} .ds-name{font-weight:500;font-stretch:112%;letter-spacing:0.02em;color:var(--bone)} .ds-how{font-size:0.8125rem;line-height:1.45;color:var(--bone-quiet)} .ds-when{font-size:0.6875rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)}"
+    },
+    {
+      "name": "Horizon Email",
+      "kind": "custom",
+      "refersTo": "horizon-email",
+      "description": "The closing ask: portrait in its gold hairline orbit, the lede, and the address large in gold.",
+      "html": "<div class=\"ds-horizon\"><span class=\"ds-portrait\" aria-hidden=\"true\"></span><h2 class=\"ds-ask\">Questions about the work? Ask Ian.</h2><a class=\"ds-email\" href=\"mailto:hi@ianpascoe.dev\">hi@ianpascoe.dev</a></div>",
+      "css": ":host{--void:oklch(12.5% 0.008 280);--void-deep:oklch(8.5% 0.006 280);--bone:oklch(94% 0.012 85);--bone-soft:oklch(82% 0.012 85);--bone-quiet:oklch(68% 0.012 85);--rule:oklch(32% 0.012 280);--rule-strong:oklch(46% 0.014 280);--approach:oklch(91% 0.045 255);--ember:oklch(66% 0.2 36);--gold:oklch(84% 0.135 80);--doppler:linear-gradient(90deg,var(--approach),var(--gold) 55%,var(--ember));--ease:cubic-bezier(0.16,1,0.3,1);--font:'Saira Variable','Saira','Eurostile',sans-serif} .ds-horizon{display:grid;justify-items:center;gap:0.75rem;text-align:center;padding:2rem;background:var(--void-deep);color:var(--bone);font-family:var(--font)} .ds-portrait{width:3.5rem;height:3.5rem;border-radius:50%;background:var(--void);outline:1px solid var(--gold);outline-offset:3px} .ds-ask{margin:0;font-size:clamp(1.375rem,1.2rem + 0.6vw,1.75rem);font-weight:330;line-height:1.3;max-width:22ch} .ds-email{font-size:clamp(1.25rem,0.8rem + 2.2vw,2.5rem);font-weight:250;font-stretch:118%;letter-spacing:0.04em;color:var(--gold);text-decoration-line:underline;text-decoration-thickness:1px;text-decoration-color:color-mix(in oklch,var(--gold) 45%,transparent);text-underline-offset:0.35em;padding:0.75rem 0.5rem;transition:text-decoration-color 180ms var(--ease)} .ds-email:hover{text-decoration-color:var(--gold)} .ds-email:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}"
     }
   ],
   "narrative": {
-    "northStar": "The Retrospective",
-    "overview": "The site is a museum retrospective of one engineer's career. The visitor stands in front of a title wall, walks through one painted room per role, reads a museum label beside every framed work, and leaves a question at the visitor desk. Every achievement is a *work*: an exact geometric drawing of its own fact (a reduction, an increase, a count, a seal, a text piece), matted in white, framed in thin black moulding, and hung on one line at eye level. The words are all live text in one family, Libre Franklin, set like vinyl lettering on a gallery wall.\n\nThe mood is calm, generous and exact, the house style of a serious modern-art museum rather than a developer template. Walls are warm gallery white; rooms are painted deep, saturated colours with white vinyl lettering on them. Nothing is decorated. Depth comes from real objects hanging on a wall (a two-layer hung shadow) and from light: a warm picture-light pool behind each work that brightens when the work is opened while the rest of its room goes dark. Light is the only state change the rooms have.\n\nStructure comes from the voids between rooms, not from boxes. There are no cards, no rounded corners, no gradients as fill, no glass and no badges. Motion is slow and settled (a 520ms ease-out for light, 180ms for small feedback) and nothing ever moves on its own: the guided tour starts only when the visitor asks for it.",
+    "northStar": "The Event Horizon",
+    "overview": "The site is a black hole seen from a patient observer's seat. A full-bleed accretion disk, ray-traced per pixel through curved space in one WebGL fragment shader, fills the fixed background; the career is matter on that disk, each dated fragment a point of light on the ring of its year. The past sits on the outer rim and burns ember where it recedes; the present sits on the photon ring and burns gold. Scrolling is the fall: the camera spirals inward station by station, the disk turns so the fragment being read rotates to the reading position and lights gold, and the page closes at the horizon, where the only thing left is the email address.\n\nEverything that is not the disk is lettering on the void. There are no surfaces to lift, no panels, no cards: structure comes from rings, 1px hairlines, generous void and a single variable family pulled from hairline extended caps down to plain reading text. Light belongs to the disk. The interface borrows it exactly twice: the Doppler gradient that rings the primary button, and the gold that marks whatever is current, focused, or the way to email Ian.\n\nThe world is still until the visitor acts. The disk renders only on scroll, resize or input; nothing orbits by itself, and the replay of the whole fall runs only when \"Fall from 2019\" is pressed. Without WebGL the disk hangs as a pre-rendered still at 55% opacity; with reduced motion the camera jumps instead of easing; in print the resume is black on white. Every fact is live text in every one of those states.",
     "keyCharacteristics": [
-      "Warm gallery-white walls with painted rooms; vinyl lettering flips from ink-on-white to white-on-paint via one token set.",
-      "One family (Libre Franklin Variable, weights 200–850, true italic); titles of works always italic.",
-      "Works are exact SVG drawings of their facts, framed with a black moulding border, a white mat, and a hung shadow.",
-      "The museum label is the unit of content: figure, italic title with date, detail, medium, credit line.",
-      "Light is the only state: lit pool up, room darkened, other labels dimmed; deep-linkable by `#work-id`.",
-      "Square corners everywhere; rules are 1px hairlines in the room's own rule colour."
+      "Void black ground; the disk is the only large source of light.",
+      "Doppler grading: approaching matter blue-white, receding matter ember, the photon ring gold.",
+      "One family, Saira Variable, used across its width axis: 125% extended hairline caps for names and figures, 100% for reading.",
+      "Hairlines (1px) and rings as the only structural devices; capsules only on instrument controls.",
+      "Scroll-driven camera with a hold-then-move easing so plates are read on a still disk.",
+      "Labels etched onto the disk along their own orbits, haloed in void for legibility."
     ],
     "rules": [
       {
-        "name": "The Paint Carries Its Lettering Rule",
-        "body": "Never set a colour on text inside a room directly; read `--vinyl`, `--vinyl-soft`, `--vinyl-quiet`, `--vinyl-rule`, and let `data-paint` decide. A new paint must supply all five.",
+        "name": "The Doppler Rule",
+        "body": "Chroma is physical. Blue-white means approaching, ember means receding or retired, gold means the photon ring: the present. No hue is used for decoration or for status semantics outside that physics.",
         "section": "colors"
       },
       {
-        "name": "The Gilt Is Growth Rule",
-        "body": "Gilt means \"more than before\": increase squares and selection only. It is never a button, a link, or a heading colour.",
+        "name": "The One Ring Rule",
+        "body": "Gold is the only accent in the interface layer and marks exactly one kind of thing at a time: what is current, focused, dated, logged, or the email. A screen with gold on something that is none of those is wrong.",
         "section": "colors"
       },
       {
-        "name": "The Red Is Earned Rule",
-        "body": "Stamp red appears only once a visitor has earned a stamp. Unearned stamps are dashed, quiet vinyl.",
+        "name": "The Borrowed Light Rule",
+        "body": "The Doppler gradient (approach → gold at 55% → ember) appears in the UI only as the 1px border of the primary button. It never fills a surface and never colours text.",
         "section": "colors"
-      },
-      {
-        "name": "The Italic Is a Title Rule",
-        "body": "Italic marks the title of a work (`<cite>`), the show line and the email address at the desk. Never italicise for emphasis.",
-        "section": "typography"
       },
       {
         "name": "The One Family Rule",
-        "body": "Libre Franklin is the only family, including inside SVG drawings and stamps (`font-family: var(--font)`). Weight is the only voice change.",
+        "body": "Saira Variable only. Hierarchy comes from width (100/112/118/125%), weight (180–500) and tracking, never from a second family.",
         "section": "typography"
       },
       {
-        "name": "The Light Is the State Rule",
-        "body": "Opening a work raises its picture-light pool from 0.28 to full opacity, darkens its room (`color-mix(in oklch, var(--paint) 72%, oklch(8% 0.01 60))`), removes the other pools, and drops the other labels to 0.5 opacity. No outlines, no colour swaps, no overlays. The state is a `#work-id` hash, so it is linkable; without JavaScript a `:target` work still gets its full pool.",
-        "section": "elevation"
+        "name": "The Extended Caps Rule",
+        "body": "Uppercase is always paired with 118–125% width and at least 0.06em tracking. Uppercase at normal width does not exist in this system.",
+        "section": "typography"
       },
       {
-        "name": "The Hanging Things Only Rule",
-        "body": "Shadows belong to hung objects and the tour bar. Text, rules, buttons and panels sit flat on the wall.",
+        "name": "The Lining Numerals Rule",
+        "body": "All numerals are lining; any number in a column, a rail, a count or a figure is also tabular.",
+        "section": "typography"
+      },
+      {
+        "name": "The Light Comes From The Disk Rule",
+        "body": "Glow is physics, rendered in the shader. UI elements never emit light: no outer glows, no coloured shadows, no bloom on buttons or text.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** turn every new achievement into a framed work with an exact drawing of its fact and a full museum label; the drawing's `aria-label` must say the fact in words.",
-      "**Do** paint a new room with `data-paint` and let components read `--paint` and the four vinyl tokens; the button, label, rule and focus ring follow automatically.",
-      "**Do** keep all frames in a row on one hang line with the two-row subgrid (frame centred, label top-aligned).",
-      "**Do** express state as light: pool opacity, room darkening, label dimming, 520ms `--ease`.",
-      "**Do** italicise titles of works with `<cite>` and keep dates roman.",
-      "**Do** use square corners, 1px vinyl hairlines, and the `--space-*` scale."
+      "Do put all reading text on void: the left column over the veiled sky on wide screens, full-bleed deep-void plates with hairline edges on phones.",
+      "Do keep gold for the current fragment, dates, focus, logged state and the email; everything else is bone at one of three strengths.",
+      "Do set names, figures and disk labels in extended hairline caps (125% width, 180–250 weight, 0.06–0.16em tracking) and reading text at 100% width, 380 weight.",
+      "Do make every number lining, and tabular wherever it aligns or counts.",
+      "Do render the disk only in response to scroll, resize or input, and hold it still while a plate is being read.",
+      "Do keep every fact as live text for no-WebGL (the still at 55%), reduced motion (jumps, 1ms transitions) and print (black on white).",
+      "Do give etched disk lettering a 3px deep-void halo so it reads over bright matter."
     ],
     "donts": [
-      "**Don't** add a second typeface, including for code or numerals; use `.tabular` instead.",
-      "**Don't** box content in rounded, shadowed cards; only hung objects (frames, the checklist sheet) and the floating tour bar cast shadows.",
-      "**Don't** use gradients as fill; the only gradient is the radial picture-light pool behind a work.",
-      "**Don't** use gilt or stamp red outside increases, selection and earned stamps.",
-      "**Don't** animate anything on page load or start the tour automatically; nothing moves or plays on its own.",
-      "**Don't** put glass, blur, badges or pill shapes on the walls."
+      "Don't use cards, panels, glass, blur or drop shadows; structure is rings, hairlines and void.",
+      "Don't use gradient text, and don't use the Doppler gradient anywhere but the primary button's border.",
+      "Don't make UI glow; light is rendered by the disk, not emitted by controls.",
+      "Don't use capsules for tags, badges or skill chips; the capsule belongs to instrument controls and the transient observation notice.",
+      "Don't add a second typeface or set uppercase at normal width.",
+      "Don't animate anything on its own: no idle orbiting, no autoplay replay, no looping motion.",
+      "Don't use ember or disk blue as status or error colours; they mean receding and approaching matter."
     ]
   }
 }

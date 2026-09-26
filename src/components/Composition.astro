@@ -1,0 +1,97 @@
+---
+import Mark from "./Mark.astro";
+import { mediaIndex, type Exhibition } from "../lib/exhibition";
+import { skillMark } from "../lib/marks";
+
+interface Props {
+  exhibition: Exhibition;
+}
+
+const { exhibition } = Astro.props;
+const skills = mediaIndex(exhibition).map(({ skill, works }) => ({
+  skill,
+  count: works.length,
+  latest: works.reduce((a, b) => (b.key > a.key ? b : a)),
+}));
+---
+
+<section class="composition" data-station="quiet" aria-labelledby="composition-heading">
+  <h2 id="composition-heading" class="composition__heading caps">Skills</h2>
+  <p class="composition__lede">
+    Every skill in the record, each linked to the latest achievement that proves it.
+  </p>
+  <ul class="composition__list" role="list">
+    {
+      skills.map(({ skill, count, latest }) => (
+        <li>
+          <a href={`#${latest.id}`} title={`Latest: ${latest.title}`}>
+            <Mark name={skillMark(skill)} />
+            <span>{skill}</span>
+            {count > 1 && <span class="composition__count tabular">{count}</span>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .composition {
+    display: grid;
+    gap: var(--space-4);
+    max-width: calc(var(--column) + 2 * var(--gutter));
+    padding: var(--space-9) var(--gutter);
+  }
+
+  .composition__heading {
+    font-size: var(--step-3);
+    font-weight: 200;
+    letter-spacing: 0.08em;
+  }
+
+  .composition__lede {
+    color: var(--bone-soft);
+    max-width: 44ch;
+  }
+
+  .composition__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+    margin-top: var(--space-3);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-3);
+  }
+
+  .composition__list a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+    text-decoration: none;
+  }
+
+  .composition__list a:hover {
+    color: var(--gold);
+  }
+
+  .composition__list :global(.mark) {
+    height: 1.05em;
+  }
+
+  .composition__count {
+    font-size: 0.6875rem;
+    color: var(--bone-quiet);
+  }
+
+  @media (max-width: 52rem) {
+    .composition {
+      max-width: none;
+      margin-top: 30svh;
+      background: var(--void-deep);
+      border-top: 1px solid var(--rule);
+    }
+  }
+</style>

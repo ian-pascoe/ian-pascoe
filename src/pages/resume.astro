@@ -9,7 +9,7 @@ import { loadTimeline } from "../lib/timeline";
 const exhibition = loadTimeline();
 const { profile, rooms, firstYear, lastYear } = exhibition;
 const skills = mediaIndex(exhibition).map((m) => m.skill);
-// Certifications read as one line at the foot of the resume, not as works in their rooms.
+// Certifications read as one line at the foot of the resume, not as entries in their roles.
 const isCertification = (w: Work) => w.drawing.kind === "document" && w.drawing.tag === "certification";
 const certifications = exhibition.works.filter(isCertification);
 const sections = rooms
@@ -20,14 +20,14 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 
 <Base
   title={`${profile.name} · Resume`}
-  description={`Resume of ${profile.name}, set as the checklist of works: ${profile.headline}.`}
-  pageStamp="checklist"
-  bodyClass="checklist-page"
+  description={`Resume of ${profile.name}: ${profile.headline}.`}
+  pageObservation="the-log"
+  bodyClass="log-page"
 >
   <div class="toolbar">
     <a class="toolbar__back" href="/">
       <Icon name="left" />
-      Back to the exhibition
+      Back to the site
     </a>
     <button type="button" class="button toolbar__print" data-print>
       <Icon name="print" />
@@ -46,9 +46,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
         <li><a href={profile.links.x}><Mark name="x" />{bare(profile.links.x)}</a></li>
         <li>{profile.location}</li>
       </ul>
-      <p class="sheet__show">
-        Resume, set as the checklist of works for <cite>Selected Work, {firstYear}–{lastYear}</cite>
-      </p>
+      <p class="sheet__show">{firstYear}–{lastYear} · also at <a href="https://ianpascoe.dev/">ianpascoe.dev</a></p>
     </header>
 
     {
@@ -132,8 +130,26 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 </script>
 
 <style is:global>
-  .checklist-page {
-    background: var(--wall-sunk);
+  .log-page {
+    --ink: var(--bone);
+    --ink-soft: var(--bone-soft);
+    --ink-quiet: var(--bone-quiet);
+    --line: var(--rule);
+    --line-strong: var(--rule-strong);
+    --accent: var(--gold);
+  }
+
+  @media print {
+    .log-page {
+      --ink: #111;
+      --ink-soft: #333;
+      --ink-quiet: #555;
+      --line: #ccc;
+      --line-strong: #111;
+      --accent: #111;
+      background: #fff !important;
+      color: #111;
+    }
   }
 </style>
 
@@ -153,7 +169,8 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    font-weight: 650;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
   }
 
   .toolbar :global(.icon) {
@@ -163,36 +180,36 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 
   .toolbar__print {
     min-height: 2.75rem;
-    font-size: var(--step--1);
   }
 
   .sheet {
     max-width: 54rem;
     margin: 0 auto var(--space-8);
-    padding: clamp(1.5rem, 1rem + 3vw, 4rem);
-    background: var(--mat);
-    box-shadow: var(--hung);
-    font-size: 1rem;
-    line-height: 1.45;
+    padding: var(--space-6) var(--gutter) 0;
+    color: var(--ink);
+    font-size: var(--step-0);
+    line-height: 1.5;
   }
 
   .sheet__head {
     display: grid;
-    gap: var(--space-2);
+    gap: var(--space-3);
     padding-bottom: var(--space-5);
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 1px solid var(--line-strong);
   }
 
   .sheet__head h1 {
     font-size: var(--step-4);
-    font-weight: 850;
-    letter-spacing: -0.035em;
-    line-height: 0.95;
+    font-weight: 200;
+    font-stretch: 125%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
   }
 
   .sheet__headline {
     font-size: var(--step-1);
-    font-weight: 600;
+    font-weight: 400;
   }
 
   .sheet__contact {
@@ -200,7 +217,6 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     flex-wrap: wrap;
     gap: var(--space-1) var(--space-5);
     font-size: var(--step--1);
-    font-weight: 600;
     color: var(--ink-soft);
   }
 
@@ -219,9 +235,9 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     color: var(--ink-quiet);
   }
 
+  /* Sections may break across pages; single entries never do, and a heading never ends a page. */
   .room {
-    margin-top: var(--space-6);
-    break-inside: avoid-page;
+    margin-top: var(--space-7);
   }
 
   .room__head {
@@ -230,12 +246,15 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     align-items: baseline;
     gap: var(--space-4);
     padding-bottom: var(--space-2);
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    break-after: avoid;
   }
 
   .room__head h2 {
     font-size: var(--step-1);
-    font-weight: 750;
+    font-weight: 500;
+    font-stretch: 112%;
+    letter-spacing: 0.02em;
   }
 
   .room__head :global(.mark) {
@@ -246,7 +265,7 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 
   .room__when {
     font-size: var(--step--1);
-    color: var(--ink-soft);
+    color: var(--accent);
     white-space: nowrap;
   }
 
@@ -260,14 +279,14 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     margin-top: var(--space-2);
   }
 
-  /* A row is the work, then its date where a resume keeps dates: on the right. */
+  /* A row is the entry, then its date where a resume keeps dates: on the right. */
   .entry {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: var(--space-5);
     align-items: baseline;
-    padding-block: var(--space-2);
-    border-bottom: 1px solid var(--rule);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--line);
     break-inside: avoid;
   }
 
@@ -275,9 +294,13 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
     max-width: 38em;
   }
 
+  .entry__text strong {
+    font-weight: 550;
+  }
+
   .entry__when {
     font-size: var(--step--1);
-    color: var(--ink-quiet);
+    color: var(--accent);
   }
 
   .entry__title {
@@ -292,19 +315,27 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
   }
 
   .skills {
+    max-width: 38em;
     margin-top: var(--space-3);
+    color: var(--ink-soft);
+  }
+
+  /* Links keep a 44px target without adding space to the sheet. */
+  .sheet__contact a {
+    display: inline-block;
+  }
+
+  .sheet__contact a,
+  .toolbar__back {
+    padding-block: 0.7rem;
+    margin-block: -0.7rem;
   }
 
   @media (max-width: 40rem) {
-    .sheet__contact a {
-      display: inline-block;
-      padding-block: 0.7rem;
-      margin-block: -0.7rem;
-    }
-
-    .toolbar__back {
-      padding-block: 0.7rem;
-      margin-block: -0.7rem;
+    .room__head {
+      flex-direction: column;
+      align-items: start;
+      gap: var(--space-1);
     }
   }
 
@@ -319,20 +350,15 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
       display: none !important;
     }
 
-    :global(.checklist-page) {
-      background: #fff;
-    }
-
     .sheet {
       max-width: none;
       margin: 0;
       padding: 0;
-      box-shadow: none;
       font-size: 10pt;
     }
 
     .sheet__head h1 {
-      font-size: 28pt;
+      font-size: 26pt;
     }
 
     .sheet a {

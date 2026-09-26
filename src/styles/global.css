@@ -1,45 +1,32 @@
-/* The Retrospective: gallery walls, painted rooms, vinyl lettering, framed works. */
+/* Event Horizon: a career as matter falling toward the present. Void, disk light, one gold ring. */
 
 :root {
-  /* Walls and ink */
-  --wall: oklch(96.6% 0.006 85);
-  --wall-sunk: oklch(93.4% 0.008 85);
-  --ink: oklch(19% 0.006 60);
-  --ink-soft: oklch(38% 0.008 60);
-  --ink-quiet: oklch(49% 0.008 60);
-  --rule: oklch(84% 0.008 80);
+  /* The void and the lettering on it */
+  --void: oklch(12.5% 0.008 280);
+  --void-deep: oklch(8.5% 0.006 280);
+  --bone: oklch(94% 0.012 85);
+  --bone-soft: oklch(82% 0.012 85);
+  --bone-quiet: oklch(68% 0.012 85);
+  --rule: oklch(32% 0.012 280);
+  --rule-strong: oklch(46% 0.014 280);
+  --void-raised: oklch(20% 0.01 280);
 
-  /* Framing */
-  --mat: oklch(99.3% 0.003 85);
-  --moulding: oklch(17% 0.005 60);
-  --gilt: oklch(72% 0.11 78);
-  --gilt-edge: oklch(52% 0.1 75);
-  --hung:
-    0 1px 1px oklch(0% 0 0 / 0.22),
-    0 14px 28px -10px oklch(0% 0 0 / 0.38);
+  /* Disk light: approaching matter burns blue-white, receding matter ember; the photon ring is gold. */
+  --approach: oklch(91% 0.045 255);
+  --disk-blue: oklch(62% 0.11 255);
+  --ember: oklch(66% 0.2 36);
+  --gold: oklch(84% 0.135 80);
+  --doppler: linear-gradient(90deg, var(--approach), var(--gold) 55%, var(--ember));
 
-  /* Light, ink for stamps, and the lift of floating signage (the tour bar) */
-  --light: oklch(97% 0.05 85);
-  --stamp-ink: oklch(66% 0.17 30);
-  --ghost: oklch(62% 0.006 60);
-  --float: 0 18px 40px -12px oklch(0% 0 0 / 0.55);
-
-  /* The wall a region is painted; rooms override these. */
-  --paint: var(--wall);
-  --vinyl: var(--ink);
-  --vinyl-soft: var(--ink-soft);
-  --vinyl-quiet: var(--ink-quiet);
-  --vinyl-rule: var(--rule);
-
-  /* Type */
-  --font: "Libre Franklin Variable", "Libre Franklin", "Franklin Gothic", sans-serif;
-  --step--1: 0.875rem;
+  /* Type: one family, Saira, from hairline extended caps to plain reading text. */
+  --font: "Saira Variable", "Saira", "Eurostile", sans-serif;
+  --step--1: 0.8125rem;
   --step-0: 1.0625rem;
   --step-1: 1.25rem;
-  --step-2: 1.625rem;
-  --step-3: clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem);
-  --step-4: clamp(2.5rem, 1.7rem + 3vw, 4.5rem);
-  --step-5: clamp(3rem, 1.6rem + 5vw, 6rem);
+  --step-2: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --step-3: clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem);
+  --step-4: clamp(2.75rem, 1.8rem + 3.4vw, 4.75rem);
+  --step-5: clamp(3rem, 1.2rem + 6vw, 6rem);
 
   /* Space */
   --space-1: 0.25rem;
@@ -52,102 +39,17 @@
   --space-8: 4.5rem;
   --space-9: 7rem;
 
-  --measure: 62ch;
+  --measure: 60ch;
   --gutter: clamp(1.25rem, 0.6rem + 3vw, 3.5rem);
-  --masthead: 3.75rem;
+  --masthead: 3.5rem;
+  --column: min(100%, 36rem);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --fast: 180ms;
   --slow: 520ms;
 
-  color-scheme: light;
-  scrollbar-color: var(--ink-quiet) var(--wall-sunk);
-}
-
-[data-paint="oxblood"] {
-  --paint: oklch(33% 0.09 22);
-  --paint-lit: oklch(26% 0.068 22);
-  --vinyl: oklch(97.5% 0.012 40);
-  --vinyl-soft: oklch(87% 0.03 30);
-  --vinyl-quiet: oklch(78% 0.04 28);
-  --vinyl-rule: oklch(46% 0.08 22);
-}
-
-/* Spirit-Led Software's own navy, --primary on spiritledsoftware.com. */
-[data-paint="blue"] {
-  --paint: oklch(35.1% 0.079 255);
-  --paint-lit: oklch(27.5% 0.06 255);
-  --vinyl: oklch(98.2% 0.006 248);
-  --vinyl-soft: oklch(87% 0.03 250);
-  --vinyl-quiet: oklch(78% 0.04 252);
-  --vinyl-rule: oklch(47% 0.075 255);
-}
-
-[data-paint="slate"] {
-  --paint: oklch(35% 0.04 250);
-  --paint-lit: oklch(27.4% 0.032 250);
-  --vinyl: oklch(97.5% 0.008 250);
-  --vinyl-soft: oklch(87% 0.02 250);
-  --vinyl-quiet: oklch(78% 0.03 250);
-  --vinyl-rule: oklch(47% 0.04 250);
-}
-
-[data-paint="plum"] {
-  --paint: oklch(32% 0.07 330);
-  --paint-lit: oklch(25.3% 0.053 330);
-  --vinyl: oklch(97.5% 0.01 330);
-  --vinyl-soft: oklch(87% 0.03 330);
-  --vinyl-quiet: oklch(78% 0.04 330);
-  --vinyl-rule: oklch(45% 0.07 330);
-}
-
-[data-paint="ochre"] {
-  --paint: oklch(78% 0.1 80);
-  --paint-lit: oklch(68% 0.09 80);
-  --vinyl: var(--ink);
-  --vinyl-soft: oklch(30% 0.03 70);
-  --vinyl-quiet: oklch(38% 0.04 70);
-  --vinyl-rule: oklch(66% 0.09 78);
-}
-
-[data-paint="stone"] {
-  --paint: oklch(90.5% 0.014 80);
-  --paint-lit: oklch(80% 0.016 80);
-  --vinyl: var(--ink);
-  --vinyl-soft: oklch(34% 0.01 70);
-  --vinyl-quiet: oklch(43% 0.012 70);
-  --vinyl-rule: oklch(79% 0.014 80);
-}
-
-[data-paint="ink"] {
-  --paint: oklch(17% 0.005 60);
-  --vinyl: oklch(97.5% 0.006 85);
-  --vinyl-soft: oklch(84% 0.008 85);
-  --vinyl-quiet: oklch(72% 0.01 85);
-  --vinyl-rule: oklch(32% 0.006 60);
-}
-
-[data-paint] {
-  background: var(--paint);
-  color: var(--vinyl);
-}
-
-/* House lights down: a lit room darkens around its one lit work, keeping its own hue.
-   Dark paints keep their lettering; light paints re-letter one step darker so every line still reads. */
-[data-paint][data-lit] {
-  --paint: var(--paint-lit);
-}
-
-[data-paint="ochre"][data-lit] {
-  --vinyl-soft: oklch(22% 0.03 70);
-  --vinyl-quiet: oklch(26% 0.035 70);
-  --vinyl-rule: oklch(58% 0.08 78);
-}
-
-[data-paint="stone"][data-lit] {
-  --vinyl-soft: oklch(28% 0.01 70);
-  --vinyl-quiet: oklch(33% 0.012 70);
-  --vinyl-rule: oklch(70% 0.014 80);
+  color-scheme: dark;
+  scrollbar-color: var(--rule-strong) var(--void-deep);
 }
 
 *,
@@ -159,26 +61,27 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: calc(var(--masthead) + var(--space-5));
+  scroll-padding-top: calc(var(--masthead) + var(--space-6));
+  background: var(--void-deep);
 }
 
 body {
   margin: 0;
-  background: var(--wall);
-  color: var(--ink);
+  background: var(--void-deep);
+  color: var(--bone);
   font-family: var(--font);
   font-size: var(--step-0);
-  font-weight: 400;
-  line-height: 1.55;
-  font-optical-sizing: auto;
+  font-weight: 380;
+  font-stretch: 100%;
+  line-height: 1.6;
   font-variant-numeric: lining-nums;
-  caret-color: var(--ink);
+  caret-color: var(--gold);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--gilt);
-  color: var(--ink);
+  background: var(--gold);
+  color: var(--void-deep);
 }
 
 h1,
@@ -198,9 +101,9 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 750;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 
@@ -228,24 +131,29 @@ button {
 a {
   color: inherit;
   text-decoration-line: underline;
-  text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.2em;
-  text-decoration-color: color-mix(in oklch, currentColor 45%, transparent);
-  transition: text-decoration-color var(--fast) var(--ease);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+  text-decoration-color: var(--rule-strong);
+  transition: text-decoration-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 
 a:hover {
-  text-decoration-color: currentColor;
+  text-decoration-color: var(--gold);
 }
 
 :focus-visible {
-  outline: 2px solid var(--vinyl);
-  outline-offset: 3px;
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+cite {
+  font-style: normal;
 }
 
 @media (max-width: 40rem) {
   :root {
-    --masthead: 6.5rem;
+    --masthead: 3.25rem;
   }
 }
 
@@ -265,8 +173,8 @@ a:hover {
   white-space: nowrap;
 }
 
-/* Without JavaScript the tour and the passport can't run, so they don't hang. */
-html:not(.js) :is([data-tour-start], [data-passport-indicator], .passport) {
+/* Without JavaScript the replay, the viewpoints and the observation log can't run, so they don't show. */
+html:not(.js) :is([data-replay], [data-viewpoints], [data-log-indicator], .observations) {
   display: none;
 }
 
@@ -276,9 +184,9 @@ html:not(.js) :is([data-tour-start], [data-passport-indicator], .passport) {
   left: var(--space-2);
   z-index: 100;
   padding: var(--space-2) var(--space-4);
-  background: var(--ink);
-  color: var(--wall);
-  font-weight: 700;
+  background: var(--bone);
+  color: var(--void-deep);
+  font-weight: 600;
   transform: translateY(-200%);
 }
 
@@ -290,45 +198,67 @@ html:not(.js) :is([data-tour-start], [data-passport-indicator], .passport) {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Buttons: printed like the gallery's own signage. */
+/* Extended hairline caps: names, figures, ring labels. */
+.caps {
+  font-stretch: 125%;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Buttons: small instrument controls. The primary is ringed in the disk's own Doppler light. */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   min-height: 3rem;
   padding: 0 var(--space-5);
-  border: 2px solid var(--vinyl);
-  border-radius: 0;
-  background: var(--vinyl);
-  color: var(--paint);
-  font-size: var(--step-0);
-  font-weight: 700;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--bone);
+  font-size: var(--step--1);
+  font-stretch: 125%;
+  font-weight: 450;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
   transition:
+    border-color var(--fast) var(--ease),
     background-color var(--fast) var(--ease),
     color var(--fast) var(--ease);
 }
 
 .button:hover {
-  background: color-mix(in oklch, var(--vinyl) 86%, var(--paint));
+  border-color: var(--bone-soft);
+  background: color-mix(in oklch, var(--bone) 6%, transparent);
 }
 
-.button--quiet {
-  background: transparent;
-  color: var(--vinyl);
+.button--primary {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--void), var(--void)) padding-box,
+    var(--doppler) border-box;
 }
 
-.button--quiet:hover {
-  background: color-mix(in oklch, var(--vinyl) 10%, transparent);
+.button--primary:hover {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--void-raised), var(--void-raised)) padding-box,
+    var(--doppler) border-box;
 }
 
 .button .icon {
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.35em;
+  height: 1.35em;
   flex: none;
+}
+
+.button--primary .icon {
+  color: var(--gold);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -338,5 +268,58 @@ html:not(.js) :is([data-tour-start], [data-passport-indicator], .passport) {
     transition-duration: 1ms !important;
     animation-duration: 1ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Printing the home page gives the record as plain ink; the printable resume is at /resume. */
+@media print {
+  :root {
+    color-scheme: light;
+    --void: #fff;
+    --void-deep: #fff;
+    --bone: #111;
+    --bone-soft: #333;
+    --bone-quiet: #555;
+    --gold: #111;
+    --rule: #ccc;
+    --rule-strong: #999;
+  }
+
+  html,
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  .disk,
+  .viewpoints,
+  .replay-bar,
+  .masthead,
+  .observations,
+  .skip-link {
+    display: none !important;
+  }
+
+  .plate,
+  .orbit {
+    min-height: 0 !important;
+    padding-block: 0.6rem !important;
+    break-inside: avoid;
+  }
+
+  .band,
+  .arrival,
+  .composition,
+  .horizon {
+    gap: 0 !important;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+    padding-block: 1rem !important;
+  }
+
+  .arrival__actions,
+  .horizon__copy,
+  .arrival__copy {
+    display: none !important;
   }
 }

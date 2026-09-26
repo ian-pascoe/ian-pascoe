@@ -1,17 +1,16 @@
 ---
-import "@fontsource-variable/libre-franklin/wght.css";
-import "@fontsource-variable/libre-franklin/wght-italic.css";
+import "@fontsource-variable/saira/wdth.css";
 import "../styles/global.css";
-import type { StampId } from "../lib/passport";
+import type { ObservationId } from "../lib/observations";
 
 interface Props {
   title: string;
   description: string;
-  pageStamp?: StampId;
+  pageObservation?: ObservationId;
   bodyClass?: string;
 }
 
-const { title, description, pageStamp, bodyClass } = Astro.props;
+const { title, description, pageObservation, bodyClass } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 ---
@@ -26,7 +25,7 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#f6f3ef" />
+    <meta name="theme-color" content="#020203" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -43,47 +42,44 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
       )
     }
   </head>
-  <body data-page-stamp={pageStamp} class={bodyClass}>
+  <body data-page-observation={pageObservation} class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
     <script>
-      import { dayCount } from "../lib/exhibition";
-      import { STAMPS, STAMP_EVENT, readPassport, wireStamps, type StampId } from "../lib/passport";
+      import { OBSERVATIONS, OBSERVED_EVENT, readLog, wireObservations, type ObservationId } from "../lib/observations";
 
-      const renderPassport = (fresh?: StampId) => {
-        const passport = readPassport();
-        for (const slot of document.querySelectorAll<HTMLElement>("[data-stamp-slot]")) {
-          const id = slot.dataset.stampSlot as StampId;
-          const at = passport[id];
-          slot.classList.toggle("is-stamped", Boolean(at));
-          slot.classList.toggle("just-stamped", id === fresh);
-          const date = slot.querySelector("[data-stamp-date]");
-          const when = slot.querySelector("[data-stamp-when]");
-          if (at) {
+      const renderLog = (fresh?: ObservationId) => {
+        const log = readLog();
+        for (const slot of document.querySelectorAll<HTMLElement>("[data-obs-slot]")) {
+          const id = slot.dataset.obsSlot as ObservationId;
+          const at = log[id];
+          slot.classList.toggle("is-logged", Boolean(at));
+          slot.classList.toggle("just-logged", id === fresh);
+          const when = slot.querySelector("[data-obs-when]");
+          if (at && when) {
             const day = new Date(at).toLocaleDateString("en-US", { day: "numeric", month: "short" });
-            if (date) date.textContent = day.toUpperCase();
-            if (when) when.textContent = `, stamped ${day}`;
+            when.textContent = `Logged ${day}`;
           }
         }
-        const total = Object.keys(passport).length;
-        const count = document.querySelector("[data-passport-count]");
-        if (count) count.textContent = `${total} of ${STAMPS.length} stamps`;
-        const tally = document.querySelector("[data-passport-tally]");
+        const total = Object.keys(log).length;
+        const count = document.querySelector("[data-log-count]");
+        if (count) count.textContent = `${total} of ${OBSERVATIONS.length} logged`;
+        const tally = document.querySelector("[data-log-tally]");
         if (tally) tally.textContent = String(total);
-        document.querySelector("[data-passport-indicator]")?.classList.toggle("has-stamps", total > 0);
+        document.querySelector("[data-log-indicator]")?.classList.toggle("has-logged", total > 0);
       };
 
-      const flash = document.querySelector<HTMLElement>("[data-passport-flash]");
-      const status = document.querySelector<HTMLElement>("[data-passport-status]");
+      const flash = document.querySelector<HTMLElement>("[data-log-flash]");
+      const status = document.querySelector<HTMLElement>("[data-log-status]");
       let flashTimer = 0;
-      window.addEventListener(STAMP_EVENT, (event) => {
-        const id = (event as CustomEvent<{ id: StampId }>).detail.id;
-        renderPassport(id);
-        const name = STAMPS.find((s) => s.id === id)?.name;
+      window.addEventListener(OBSERVED_EVENT, (event) => {
+        const id = (event as CustomEvent<{ id: ObservationId }>).detail.id;
+        renderLog(id);
+        const name = OBSERVATIONS.find((o) => o.id === id)?.name;
         if (!flash || !status || !name) return;
-        const total = Object.keys(readPassport()).length;
-        flash.textContent = `Stamped: ${name}`;
-        status.textContent = `Stamped: ${name}. ${total} of ${STAMPS.length} stamps.`;
+        const total = Object.keys(readLog()).length;
+        flash.textContent = `Observed: ${name}`;
+        status.textContent = `Observed: ${name}. ${total} of ${OBSERVATIONS.length} logged.`;
         flash.classList.add("is-shown");
         window.clearTimeout(flashTimer);
         flashTimer = window.setTimeout(() => {
@@ -92,12 +88,24 @@ const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
         }, 3800);
       });
 
-      renderPassport();
-      wireStamps();
-      for (const el of document.querySelectorAll<HTMLElement>("[data-since]")) {
-        el.textContent = `Day ${dayCount(Number(el.dataset.since), Date.now()).toLocaleString("en-US")}`;
-      }
+      renderLog();
+      wireObservations();
+
+      // Copy the address, for visitors whose mail link opens nothing.
+      document.addEventListener("click", async (event) => {
+        const button = (event.target as Element | null)?.closest<HTMLButtonElement>("[data-copy]");
+        const label = button?.querySelector("[data-copy-label]");
+        if (!button || !label) return;
+        const idle = label.textContent;
+        try {
+          await navigator.clipboard.writeText(button.dataset.copy!);
+          label.textContent = "Copied";
+        } catch {
+          label.textContent = "Select and copy";
+        }
+        if (status) status.textContent = label.textContent === "Copied" ? "Address copied." : "";
+        window.setTimeout(() => (label.textContent = idle), 2400);
+      });
     </script>
   </body>
 </html>
-

@@ -32,9 +32,16 @@ const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
       </li>
       <li>{profile.location}</li>
     </ul>
-    <p class="horizon__colophon">
-      © {year} {profile.name}. The disk is traced live in your browser from the same record as the resume.
-    </p>
+    <div class="horizon__fine">
+      <p class="horizon__colophon">
+        © {year} {profile.name}.
+        <span class="horizon__aside">The disk is traced live in your browser from the same record as the resume.</span>
+      </p>
+      <ul class="horizon__legal" role="list">
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
   </div>
 </footer>
 
@@ -149,6 +156,27 @@ const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
     max-width: 52ch;
   }
 
+  .horizon__fine {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: center;
+  }
+
+  /* Small print under the colophon; the links keep a 44px target without adding height to the foot. */
+  .horizon__legal {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-5);
+    font-size: var(--step--1);
+    color: var(--bone-quiet);
+  }
+
+  .horizon__legal a {
+    display: inline-block;
+    padding-block: 0.7rem;
+    margin-block: -0.7rem;
+  }
+
   /* Short screens (phones on their side): tighter spacing keeps the ask and the foot on one screen. */
   @media (max-height: 28rem) {
     .horizon__centre {
@@ -158,6 +186,26 @@ const xHandle = `@${new URL(profile.links.x).pathname.slice(1)}`;
     .horizon__foot {
       gap: var(--space-1);
       padding-block: var(--space-2) var(--space-3);
+    }
+
+    /* The legal links join the colophon's line instead of adding a row. */
+    .horizon__fine {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: var(--space-1) var(--space-5);
+    }
+
+    .horizon__colophon {
+      max-width: none;
+    }
+  }
+
+  /* Short and narrow: the colophon can't share a line with the legal links, so it keeps only the copyright. */
+  @media (max-height: 28rem) and (max-width: 50rem) {
+    .horizon__aside {
+      display: none;
     }
   }
 </style>

@@ -1,0 +1,89 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { loadTimeline } from "../lib/timeline";
+
+const { profile } = loadTimeline();
+---
+
+<Legal
+  title="Privacy"
+  description={`What ${profile.name}'s site collects, and what it doesn't: no cookies, no accounts, no tracking across sites.`}
+  effective="2026-10-22"
+>
+  <p>
+    This is a personal site. It has no accounts, no forms, no cookies and no advertising, and it never sells or shares
+    anything about you. This page explains the little that does happen when you visit.
+  </p>
+
+  <h2>Who is responsible</h2>
+  <p>
+    {profile.name}, {profile.location}. Questions or requests go to <a href={`mailto:${profile.email}`}
+      >{profile.email}</a
+    >.
+  </p>
+
+  <h2>Hosting</h2>
+  <p>
+    The site is a set of static files served by Cloudflare. Like any web host, Cloudflare receives the technical details
+    every browser sends with a request (your IP address, browser type, the page requested and the referring page) and
+    uses them to deliver the site and protect it from abuse. Cloudflare handles that data under the <a
+      href="https://www.cloudflare.com/privacypolicy/"
+      rel="noopener">Cloudflare privacy policy</a
+    >. The site itself runs no server code and stores none of it.
+  </p>
+
+  <h2>Analytics</h2>
+  <p>
+    The site uses Cloudflare Web Analytics to count visits. It sets no cookies, does not use local storage, and does not
+    fingerprint you or follow you to other sites. It reports aggregate figures such as page views, referring sites,
+    browser and device type, country, and page load times. The script loads from <code>static.cloudflareinsights.com</code
+    >, and a content blocker that stops it does not change anything about the site.
+  </p>
+
+  <h2>Storage in your browser</h2>
+  <p>
+    The observations you earn by exploring are saved in your browser's local storage under the key <code
+      >ianpascoe.observations.v1</code
+    >: which observations you logged and when. That record never leaves your device; it is not sent to the site,
+    Cloudflare or anyone else. Clearing this site's data in your browser erases it.
+  </p>
+
+  <h2>Clipboard</h2>
+  <p>
+    The "Copy address" button writes the email address to your clipboard when you press it. The site never reads your
+    clipboard.
+  </p>
+
+  <h2>Email</h2>
+  <p>
+    If you write to {profile.email}, Cloudflare Email Routing forwards your message to {profile.name.split(" ")[0]}'s
+    personal Google (Gmail) mailbox. Your name, address and whatever you write are kept there so the conversation can
+    continue, and are used only to reply to you. Ask and they will be deleted.
+  </p>
+
+  <h2>Fonts and other services</h2>
+  <p>
+    Fonts and images are served from this site, not from third-party font or image services. Links to GitHub, LinkedIn,
+    X and other sites take you to services with their own privacy policies; nothing about your visit is passed to them
+    beyond what your browser sends when you follow a link.
+  </p>
+
+  <h2>Your choices and rights</h2>
+  <ul>
+    <li>Block the analytics script or use your browser's privacy features; the site works the same.</li>
+    <li>Clear this site's data to erase your observations.</li>
+    <li>
+      Email <a href={`mailto:${profile.email}`}>{profile.email}</a> to ask what correspondence is held about you, to correct
+      it, or to have it deleted.
+    </li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>The site is meant for a professional audience and does not knowingly collect anything from children.</p>
+
+  <h2>Changes</h2>
+  <p>
+    If this policy changes, the new version will be posted here with a new effective date. The history of every change is
+    public in the site's <a href="https://github.com/ian-pascoe/ian-pascoe" rel="noopener">source repository</a>.
+  </p>
+</Legal>

@@ -1,0 +1,189 @@
+---
+import Icon from "../components/Icon.astro";
+import Base from "./Base.astro";
+import { loadTimeline } from "../lib/timeline";
+
+interface Props {
+  title: string;
+  description: string;
+  /** ISO date the document took effect, e.g. "2026-10-22". */
+  effective: string;
+}
+
+const { title, description, effective } = Astro.props;
+const { profile } = loadTimeline();
+const effectiveLabel = new Date(`${effective}T00:00:00Z`).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+const path = Astro.url.pathname.replace(/\/$/, "");
+---
+
+<Base title={`${title} · ${profile.name}`} description={description}>
+  <div class="toolbar">
+    <a class="toolbar__back" href="/">
+      <Icon name="left" />
+      Back to the site
+    </a>
+  </div>
+
+  <main id="main" class="doc">
+    <header class="doc__head">
+      <h1 class="caps">{title}</h1>
+      <p class="doc__effective tabular">
+        Effective <time datetime={effective}>{effectiveLabel}</time>
+      </p>
+    </header>
+
+    <div class="doc__body">
+      <slot />
+    </div>
+
+    <footer class="doc__foot">
+      <ul role="list">
+        <li><a href="/privacy" aria-current={path === "/privacy" ? "page" : undefined}>Privacy</a></li>
+        <li><a href="/terms" aria-current={path === "/terms" ? "page" : undefined}>Terms</a></li>
+        <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+      </ul>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .toolbar {
+    max-width: 54rem;
+    margin-inline: auto;
+    padding: var(--space-5) var(--gutter);
+  }
+
+  .toolbar__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding-block: 0.7rem;
+    margin-block: -0.7rem;
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  .toolbar :global(.icon) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .doc {
+    max-width: 54rem;
+    margin: 0 auto var(--space-8);
+    padding: var(--space-6) var(--gutter) 0;
+  }
+
+  .doc__head {
+    display: grid;
+    gap: var(--space-3);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .doc__head h1 {
+    font-size: var(--step-4);
+    font-weight: 200;
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+
+  .doc__effective {
+    font-size: var(--step--1);
+    letter-spacing: 0.03em;
+    color: var(--gold);
+  }
+
+  /* Section rules run the width of the document, like the header's; text keeps the reading measure. */
+  .doc__body {
+    color: var(--bone-soft);
+  }
+
+  .doc__body :global(:is(p, ul)) {
+    max-width: var(--measure);
+  }
+
+  .doc__body :global(> p:first-child) {
+    margin-top: var(--space-6);
+    font-size: var(--step-1);
+    color: var(--bone);
+    line-height: 1.45;
+  }
+
+  .doc__body :global(h2) {
+    margin-top: var(--space-7);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--step-1);
+    font-weight: 500;
+    font-stretch: 112%;
+    letter-spacing: 0.02em;
+    color: var(--bone);
+  }
+
+  .doc__body :global(:is(p, ul)) {
+    margin-top: var(--space-4);
+  }
+
+  .doc__body :global(ul) {
+    padding-left: 1.25em;
+  }
+
+  .doc__body :global(li + li) {
+    margin-top: var(--space-2);
+  }
+
+  .doc__body :global(strong) {
+    font-weight: 550;
+    color: var(--bone);
+  }
+
+  .doc__body :global(code) {
+    font: inherit;
+    color: var(--bone);
+  }
+
+  .doc__foot {
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule);
+  }
+
+  .doc__foot ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    font-size: var(--step--1);
+    color: var(--bone-soft);
+  }
+
+  .doc__foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .doc__foot a[aria-current="page"] {
+    color: var(--bone);
+    text-decoration-color: var(--bone-soft);
+  }
+
+  @media print {
+    :global(.skip-link),
+    .toolbar,
+    .doc__foot {
+      display: none !important;
+    }
+
+    .doc {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+</style>

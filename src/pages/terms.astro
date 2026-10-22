@@ -1,0 +1,86 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { loadTimeline } from "../lib/timeline";
+
+const { profile } = loadTimeline();
+---
+
+<Legal
+  title="Terms"
+  description={`Terms of use for ${profile.name}'s personal site.`}
+  effective="2026-10-22"
+>
+  <p>
+    These terms cover your use of ianpascoe.dev, {profile.name}'s personal site. By using the site you agree to them. If
+    you don't, please don't use it.
+  </p>
+
+  <h2>What the site is</h2>
+  <p>
+    The site presents {profile.name.split(" ")[0]}'s career and work for information only. Nothing on it is an offer,
+    a contract, professional advice, or a statement on behalf of any employer, client or organisation named on it.
+    Views are {profile.name.split(" ")[0]}'s own.
+  </p>
+
+  <h2>Accuracy</h2>
+  <p>
+    The record is kept carefully, but it is provided as is and may contain errors or fall out of date. Figures such as
+    percentages, rankings and counts describe specific past work in the context given and are not guarantees of future
+    results.
+  </p>
+
+  <h2>Ownership</h2>
+  <p>
+    The text, portrait, design and the rendering of the disk are © {profile.name}. You may link to any page, quote
+    short passages with attribution, and print or save the resume for evaluating {profile.name.split(" ")[0]} for a role.
+    Anything beyond that needs written permission.
+  </p>
+  <p>
+    The site's source code is published for reference on <a
+      href="https://github.com/ian-pascoe/ian-pascoe"
+      rel="noopener">GitHub</a
+    >. Publishing it does not grant a licence to reuse it unless a licence file in the repository says
+    otherwise.
+  </p>
+  <p>
+    Company names, product names and logos (for example RTX, AWS, GitHub and LinkedIn) belong to their owners. They
+    appear only to identify where work was done or which tools were used, and do not imply endorsement.
+  </p>
+
+  <h2>Acceptable use</h2>
+  <p>
+    Don't attempt to disrupt, overload or gain unauthorised access to the site or its hosting, and don't use its content
+    to impersonate {profile.name.split(" ")[0]} or misrepresent his work.
+  </p>
+
+  <h2>Links to other sites</h2>
+  <p>
+    The site links to services run by others, such as GitHub, LinkedIn, X and project sites. Their content and terms
+    are their own responsibility.
+  </p>
+
+  <h2>No warranty and limitation of liability</h2>
+  <p>
+    The site is provided as is and as available, without warranties of any kind, express or implied. To the fullest
+    extent the law allows, {profile.name} is not liable for any loss or damage arising from your use of the site or
+    reliance on its content.
+  </p>
+
+  <h2>Privacy</h2>
+  <p>What the site collects, and what it doesn't, is described in the <a href="/privacy">privacy policy</a>.</p>
+
+  <h2>Governing law</h2>
+  <p>
+    These terms are governed by the laws of the State of Florida, United States, without regard to its conflict of law
+    rules.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    These terms may be updated; the current version is always posted here with its effective date. Continuing to use
+    the site after a change means you accept the updated terms.
+  </p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms go to <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
+</Legal>
